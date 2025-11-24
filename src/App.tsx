@@ -5,6 +5,8 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import { ProtectedRoute } from "./components/ProtectedRoute";
+import { AdminRoute } from "./components/AdminRoute";
+import { AdminLayout } from "./components/admin/AdminLayout";
 import Layout from "./components/layout/Layout";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -24,6 +26,8 @@ import JobDetail from "./pages/JobDetail";
 import NotFound from "./pages/NotFound";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsConditions from "./pages/TermsConditions";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminUsers from "./pages/admin/AdminUsers";
 
 const App = () => (
   <>
@@ -52,6 +56,28 @@ const App = () => (
           <Route path="/job/:id" element={<Layout><ProtectedRoute><JobDetail /></ProtectedRoute></Layout>} />
           <Route path="/privacy-policy" element={<Layout><PrivacyPolicy /></Layout>} />
           <Route path="/terms-conditions" element={<Layout><TermsConditions /></Layout>} />
+          
+          {/* Admin routes - require admin role */}
+          <Route path="/admin" element={<AdminRoute><AdminLayout><AdminDashboard /></AdminLayout></AdminRoute>} />
+          <Route path="/admin/users" element={<AdminRoute><AdminLayout><AdminUsers /></AdminLayout></AdminRoute>} />
+          <Route path="/admin/buy-sell" element={<AdminRoute><AdminLayout><div>Buy & Sell Management</div></AdminLayout></AdminRoute>} />
+          <Route path="/admin/crude-feedstock" element={<AdminRoute><AdminLayout><div>Crude & Feedstock Management</div></AdminLayout></AdminRoute>} />
+          <Route path="/admin/global-bazaar" element={<AdminRoute><AdminLayout><div>Global Bazaar Management</div></AdminLayout></AdminRoute>} />
+          <Route path="/admin/indian-bazaar" element={<AdminRoute><AdminLayout><div>Indian Bazaar Management</div></AdminLayout></AdminRoute>} />
+          <Route path="/admin/historical-data" element={<AdminRoute><AdminLayout><div>Historical Data Management</div></AdminLayout></AdminRoute>} />
+          <Route path="/admin/future-trend" element={<AdminRoute><AdminLayout><div>Future Trend Management</div></AdminLayout></AdminRoute>} />
+          <Route path="/admin/plant-news" element={<AdminRoute><AdminLayout><div>Plant News Management</div></AdminLayout></AdminRoute>} />
+          <Route path="/admin/vip-delegation" element={<AdminRoute><AdminLayout><div>VIP Delegation Management</div></AdminLayout></AdminRoute>} />
+          <Route path="/admin/press-release" element={<AdminRoute><AdminLayout><div>Press Release Management</div></AdminLayout></AdminRoute>} />
+          <Route path="/admin/events" element={<AdminRoute><AdminLayout><div>Events Management</div></AdminLayout></AdminRoute>} />
+          <Route path="/admin/whatsapp-bot" element={<AdminRoute><AdminLayout><div>WhatsApp Bot Management</div></AdminLayout></AdminRoute>} />
+          <Route path="/admin/subscriptions" element={<AdminRoute><AdminLayout><div>Subscription Management</div></AdminLayout></AdminRoute>} />
+          <Route path="/admin/user-management" element={<AdminRoute><AdminLayout><div>User Management</div></AdminLayout></AdminRoute>} />
+          <Route path="/admin/media" element={<AdminRoute><AdminLayout><div>Media Library</div></AdminLayout></AdminRoute>} />
+          <Route path="/admin/cms-pages" element={<AdminRoute><AdminLayout><div>CMS Pages</div></AdminLayout></AdminRoute>} />
+          <Route path="/admin/notifications" element={<AdminRoute><AdminLayout><div>Notifications</div></AdminLayout></AdminRoute>} />
+          <Route path="/admin/settings" element={<AdminRoute><AdminLayout><div>Settings</div></AdminLayout></AdminRoute>} />
+          
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

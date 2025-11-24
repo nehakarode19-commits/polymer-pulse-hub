@@ -11,11 +11,14 @@ import {
 import { Menu, User, ChevronDown } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { SubscriptionModal } from "@/components/SubscriptionModal";
+import { useUserRole } from "@/hooks/useUserRole";
+import { Shield } from "lucide-react";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showSubscriptionModal, setShowSubscriptionModal] = useState(false);
   const { user, signOut, hasActiveSubscription } = useAuth();
+  const { isAdmin } = useUserRole();
   const navigate = useNavigate();
 
   const mainMenuItems = [
@@ -249,6 +252,16 @@ const Header = () => {
 
         {/* Right Side Actions */}
         <div className="flex items-center space-x-4">
+          {/* Admin Button - Only visible to admins */}
+          {isAdmin && (
+            <Button asChild variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+              <Link to="/admin">
+                <Shield className="h-4 w-4 mr-2" />
+                Admin Panel
+              </Link>
+            </Button>
+          )}
+
           {user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
