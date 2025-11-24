@@ -97,12 +97,12 @@ const Home = () => {
   };
 
   const polymers = [
-    { name: "Polypropylene (PP)", code: "PP", description: "High-performance thermoplastic polymer for packaging, automotive, and textile applications" },
-    { name: "High Density Polyethylene", code: "HDPE", description: "Strong plastic for bottles, pipes, and industrial containers with excellent chemical resistance" },
-    { name: "Low Density Polyethylene", code: "LDPE", description: "Flexible plastic ideal for film, bags, and packaging applications" },
-    { name: "Linear Low Density PE", code: "LLDPE", description: "Enhanced strength polyethylene for stretch film and flexible packaging" },
-    { name: "Polyvinyl Chloride", code: "PVC", description: "Versatile polymer for pipes, cables, and construction applications" },
-    { name: "Polyethylene Terephthalate", code: "PET", description: "Clear, strong plastic for bottles, containers, and textile fibers" },
+    { name: "Polypropylene (PP)", code: "PP", description: "• Packaging & automotive\n• Textile applications\n• High-performance thermoplastic" },
+    { name: "High Density Polyethylene", code: "HDPE", description: "• Bottles & pipes\n• Industrial containers\n• Excellent chemical resistance" },
+    { name: "Low Density Polyethylene", code: "LDPE", description: "• Flexible film & bags\n• Packaging applications\n• Soft & flexible" },
+    { name: "Linear Low Density PE", code: "LLDPE", description: "• Stretch film\n• Flexible packaging\n• Enhanced strength" },
+    { name: "Polyvinyl Chloride", code: "PVC", description: "• Pipes & cables\n• Construction applications\n• Versatile polymer" },
+    { name: "Polyethylene Terephthalate", code: "PET", description: "• Bottles & containers\n• Textile fibers\n• Clear & strong" },
   ];
 
   const whyPolymerBazaar = [
@@ -696,7 +696,7 @@ const Home = () => {
                   </div>
                   <CardContent className="p-6">
                     <h3 className="font-bold text-xl mb-3 group-hover:text-primary transition-colors">{polymer.name}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed">{polymer.description}</p>
+                    <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">{polymer.description}</p>
                   </CardContent>
                 </Card>
               </motion.div>
