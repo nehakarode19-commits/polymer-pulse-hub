@@ -87,7 +87,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const signUp = async (email: string, password: string, fullName: string, phone: string, city: string) => {
-    const redirectUrl = `${window.location.origin}/`;
+    const redirectUrl = `${window.location.origin}/pricing`;
     
     const { data, error } = await supabase.auth.signUp({
       email,
@@ -112,7 +112,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         .eq("id", data.user.id);
     }
 
-    // Redirect to pricing page
+    // Redirect to pricing page to choose a plan
     navigate("/pricing");
   };
 
