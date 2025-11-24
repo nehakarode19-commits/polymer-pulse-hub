@@ -88,14 +88,17 @@ const Pricing = () => {
     setLoading(planType);
 
     try {
-      // Create subscription
-      const { error } = await supabase.from("subscriptions").upsert({
-        user_id: user.id,
-        plan_type: planType,
-        status: "active",
-        start_date: new Date().toISOString(),
-        end_date: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(), // 1 year from now
-      });
+      // Create or update subscription for this user
+      const { error } = await supabase.from("subscriptions").upsert(
+        {
+          user_id: user.id,
+          plan_type: planType,
+          status: "active",
+          start_date: new Date().toISOString(),
+          end_date: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(), // 1 year from now
+        },
+        { onConflict: "user_id" }
+      );
 
       if (error) throw error;
 
