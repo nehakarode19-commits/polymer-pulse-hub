@@ -1,8 +1,11 @@
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Download } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Download, TrendingUp, Calendar, FileText, Target } from "lucide-react";
+import { motion } from "framer-motion";
+import futureTrendsImg from "@/assets/future-trends.jpg";
+import marketAnalysisImg from "@/assets/market-analysis.jpg";
 
 const FutureTrend = () => {
   const [selectedPolymer, setSelectedPolymer] = useState("PP");

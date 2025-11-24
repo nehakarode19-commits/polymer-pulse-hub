@@ -1,7 +1,12 @@
 import { useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import { TrendingUp, Calendar, BarChart3 } from "lucide-react";
+import { motion } from "framer-motion";
+import marketAnalysisImg from "@/assets/market-analysis.jpg";
+import refineryHeroImg from "@/assets/refinery-hero.jpg";
 
 const HistoricalData = () => {
   const [selectedYear, setSelectedYear] = useState("2025");

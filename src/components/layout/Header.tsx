@@ -114,21 +114,21 @@ const Header = () => {
   const showNavigation = user && hasActiveSubscription();
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-20 items-center justify-between px-4">
+    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm">
+      <div className="container flex h-16 items-center justify-between px-4">
         {/* Logo */}
         <Link to="/" className="flex items-center">
-          <img src={logo} alt="Polymer Bazaar" className="h-14 w-auto" />
+          <img src={logo} alt="Polymer Bazaar" className="h-12 w-auto" />
         </Link>
 
-        {/* Desktop Navigation - Only show if subscribed */}
+        {/* Desktop Navigation - Centered and cleaner */}
         {showNavigation && (
-          <nav className="hidden lg:flex items-center space-x-1">
+          <nav className="hidden lg:flex items-center justify-center flex-1 space-x-6 mx-8">
             {mainMenuItems.map((item) => (
               <Link
                 key={item.path}
                 to={item.path}
-                className="px-3 py-2 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-muted rounded-md transition-colors"
+                className="px-4 py-2 text-sm font-semibold text-foreground/90 hover:text-primary transition-colors relative after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary after:scale-x-0 hover:after:scale-x-100 after:transition-transform"
               >
                 {item.label}
               </Link>
@@ -137,12 +137,12 @@ const Header = () => {
             {/* Crude & Feedstock Dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="px-3 py-2 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-muted">
+                <Button variant="ghost" className="px-4 py-2 text-sm font-semibold text-foreground/90 hover:text-primary transition-colors h-auto">
                   Crude & Feedstock
                   <ChevronDown className="ml-1 h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56 bg-background">
+              <DropdownMenuContent className="w-56 bg-background shadow-lg z-50">
                 {crudeFeedstockItems.map((item) => (
                   <DropdownMenuItem key={item.label} asChild>
                     <Link to={item.path} className="cursor-pointer">
