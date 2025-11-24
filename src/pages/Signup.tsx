@@ -137,7 +137,7 @@ const Signup = () => {
               disabled={loading}
               className="w-full bg-primary hover:bg-primary-dark"
             >
-              {loading ? "Creating Account..." : "Continue to Plans"}
+              {loading ? "Creating Account..." : "Sign Up"}
             </Button>
           </form>
 
