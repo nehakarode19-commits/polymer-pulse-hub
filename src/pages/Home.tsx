@@ -7,6 +7,9 @@ import { ArrowRight, Calculator, TrendingUp, Globe, BarChart3, Users, ChevronLef
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import worldMapImage from "@/assets/world-map-analytics.jpg";
+import polymerPelletsImage from "@/assets/polymer-pellets-1.jpg";
+import polymerWarehouseImage from "@/assets/polymer-warehouse.jpg";
 
 const Home = () => {
   const [activeInsightTab, setActiveInsightTab] = useState("blog");
@@ -485,93 +488,61 @@ const Home = () => {
         
         <div className="container max-w-7xl mx-auto relative z-10">
           <div className="grid lg:grid-cols-2 gap-20 items-center">
-            <motion.div
+             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
               className="relative h-[600px] rounded-3xl overflow-hidden shadow-2xl group"
             >
-              {/* Main Globe Container */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-accent-red/20 to-accent-orange/20 backdrop-blur-sm">
-                {/* Rotating Globe */}
+              {/* World Map Image */}
+              <img
+                src={worldMapImage}
+                alt="Global Polymer Market Coverage"
+                className="w-full h-full object-cover"
+              />
+              
+              {/* Overlay gradient for better marker visibility */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/30" />
+              
+              {/* Animated Markers */}
+              {[
+                { top: "35%", left: "18%", delay: 0, label: "USA" },
+                { top: "28%", left: "48%", delay: 0.5, label: "Europe" },
+                { top: "42%", left: "72%", delay: 1, label: "China" },
+                { top: "48%", left: "52%", delay: 1.5, label: "Middle East" },
+                { bottom: "32%", left: "68%", delay: 2, label: "India" },
+              ].map((position, i) => (
                 <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 80, repeat: Infinity, ease: "linear" }}
-                  className="absolute inset-0 opacity-30"
+                  key={i}
+                  className="absolute group/marker z-10"
+                  style={{ ...position }}
+                  initial={{ scale: 0, opacity: 0 }}
+                  whileInView={{ scale: 1, opacity: 1 }}
+                  transition={{ delay: position.delay, duration: 0.5 }}
                 >
-                  <Globe className="h-full w-full text-primary" />
+                  <motion.div
+                    animate={{
+                      scale: [1, 1.5, 1],
+                      opacity: [0.7, 1, 0.7],
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      delay: position.delay,
+                    }}
+                    className="w-4 h-4 rounded-full bg-primary shadow-lg shadow-primary/50 relative cursor-pointer border-2 border-white"
+                  >
+                    {/* Ping Effect */}
+                    <span className="absolute inset-0 rounded-full bg-primary animate-ping opacity-75"></span>
+                  </motion.div>
+                  
+                  {/* Tooltip */}
+                  <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 bg-primary text-white text-xs font-semibold rounded-lg opacity-0 group-hover/marker:opacity-100 transition-opacity whitespace-nowrap shadow-xl">
+                    {position.label}
+                  </div>
                 </motion.div>
-                
-                {/* Center Globe */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <motion.div
-                    animate={{ scale: [1, 1.05, 1] }}
-                    transition={{ duration: 4, repeat: Infinity }}
-                  >
-                    <Globe className="h-48 w-48 text-primary/40" />
-                  </motion.div>
-                </div>
-                
-                {/* Animated Markers */}
-                {[
-                  { top: "20%", left: "20%", delay: 0, label: "USA" },
-                  { top: "25%", right: "25%", delay: 0.5, label: "Europe" },
-                  { bottom: "30%", left: "45%", delay: 1, label: "Asia" },
-                  { top: "45%", right: "15%", delay: 1.5, label: "Middle East" },
-                  { bottom: "20%", right: "35%", delay: 2, label: "India" },
-                ].map((position, i) => (
-                  <motion.div
-                    key={i}
-                    className="absolute group/marker"
-                    style={{ top: position.top, left: position.left, right: position.right, bottom: position.bottom }}
-                    initial={{ scale: 0, opacity: 0 }}
-                    whileInView={{ scale: 1, opacity: 1 }}
-                    transition={{ delay: position.delay, duration: 0.5 }}
-                  >
-                    <motion.div
-                      animate={{
-                        scale: [1, 1.5, 1],
-                        opacity: [0.5, 1, 0.5],
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        delay: position.delay,
-                      }}
-                      className="w-5 h-5 rounded-full bg-primary shadow-lg shadow-primary/50 relative cursor-pointer"
-                    >
-                      {/* Ping Effect */}
-                      <span className="absolute inset-0 rounded-full bg-primary animate-ping"></span>
-                    </motion.div>
-                    
-                    {/* Tooltip */}
-                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1 bg-black/80 text-white text-xs rounded-lg opacity-0 group-hover/marker:opacity-100 transition-opacity whitespace-nowrap">
-                      {position.label}
-                    </div>
-                  </motion.div>
-                ))}
-                
-                {/* Connection Lines */}
-                <svg className="absolute inset-0 w-full h-full opacity-20">
-                  <motion.line
-                    x1="20%" y1="20%" x2="45%" y2="45%"
-                    stroke="hsl(var(--primary))"
-                    strokeWidth="2"
-                    initial={{ pathLength: 0 }}
-                    whileInView={{ pathLength: 1 }}
-                    transition={{ duration: 2, delay: 0.5 }}
-                  />
-                  <motion.line
-                    x1="75%" y1="25%" x2="45%" y2="45%"
-                    stroke="hsl(var(--primary))"
-                    strokeWidth="2"
-                    initial={{ pathLength: 0 }}
-                    whileInView={{ pathLength: 1 }}
-                    transition={{ duration: 2, delay: 1 }}
-                  />
-                </svg>
-              </div>
+              ))}
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: 30 }}
@@ -661,6 +632,42 @@ const Home = () => {
             <p className="text-lg text-muted-foreground">
               Complete bazaar intelligence across the polymer spectrum
             </p>
+          </motion.div>
+
+          {/* Polymer Visual Gallery */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16"
+          >
+            <div className="md:col-span-2 relative h-80 rounded-2xl overflow-hidden shadow-2xl group">
+              <img
+                src={polymerPelletsImage}
+                alt="Polymer Pellets"
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex items-end p-8">
+                <div>
+                  <h3 className="text-white text-3xl font-bold mb-2">Premium Quality Polymers</h3>
+                  <p className="text-white/90">Certified materials from global suppliers</p>
+                </div>
+              </div>
+            </div>
+            <div className="relative h-80 rounded-2xl overflow-hidden shadow-2xl group">
+              <img
+                src={polymerWarehouseImage}
+                alt="Polymer Warehouse"
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex items-end p-6">
+                <div>
+                  <h3 className="text-white text-2xl font-bold mb-2">Global Distribution</h3>
+                  <p className="text-white/90 text-sm">Reliable logistics network</p>
+                </div>
+              </div>
+            </div>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
