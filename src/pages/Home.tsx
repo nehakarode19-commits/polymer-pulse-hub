@@ -24,6 +24,7 @@ import insightVideoImg from "@/assets/insight-video.jpg";
 import polymerWhy1Img from "@/assets/polymer-why-1.jpg";
 import polymerWhy2Img from "@/assets/polymer-why-2.jpg";
 import polymerWhy3Img from "@/assets/polymer-why-3.jpg";
+import heroPolymerMotionImg from "@/assets/hero-polymer-motion.jpg";
 
 const Home = () => {
   const [activeInsightTab, setActiveInsightTab] = useState("blog");
@@ -185,8 +186,24 @@ const Home = () => {
     <div className="min-h-screen bg-gradient-to-b from-background via-secondary/20 to-background">
       {/* Hero Banner Section */}
       <section className="relative gradient-hero text-white min-h-[90vh] flex items-center px-4 overflow-hidden">
+        {/* Background Image with Motion Effect */}
+        <motion.div 
+          className="absolute inset-0 z-0"
+          initial={{ scale: 1.1 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 20, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
+        >
+          <img 
+            src={heroPolymerMotionImg} 
+            alt="Polymer Manufacturing" 
+            className="w-full h-full object-cover"
+          />
+          {/* Gradient Overlay for better text readability */}
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/70 to-accent-orange/80" />
+        </motion.div>
+
         {/* Advanced Animated background */}
-        <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden z-10">
           {/* Grid Pattern */}
           <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.05)_1px,transparent_1px)] bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_50%,black,transparent)]"></div>
           
@@ -259,7 +276,7 @@ const Home = () => {
           />
         </div>
 
-        <div className="container max-w-7xl mx-auto relative z-10">
+        <div className="container max-w-7xl mx-auto relative z-20">
           <motion.div
             style={{ opacity, scale }}
             className="text-center space-y-10"
