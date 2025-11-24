@@ -16,6 +16,11 @@ import eventLondonImg from "@/assets/event-london.jpg";
 import polymerPpImg from "@/assets/polymer-pellets-pp.jpg";
 import polymerHdpeImg from "@/assets/polymer-pellets-hdpe.jpg";
 import polymerLdpeImg from "@/assets/polymer-pellets-ldpe.jpg";
+import insightNewsImg from "@/assets/insight-news.jpg";
+import insightBlogImg from "@/assets/insight-blog.jpg";
+import insightPapersImg from "@/assets/insight-papers.jpg";
+import insightWebinarImg from "@/assets/insight-webinar.jpg";
+import insightVideoImg from "@/assets/insight-video.jpg";
 import polymerWhy1Img from "@/assets/polymer-why-1.jpg";
 import polymerWhy2Img from "@/assets/polymer-why-2.jpg";
 import polymerWhy3Img from "@/assets/polymer-why-3.jpg";
@@ -39,24 +44,28 @@ const Home = () => {
         title: "Polypropylene",
         date: "MARCH 16, 2022",
         excerpt: "Korem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulpuKorem",
+        image: insightBlogImg,
       },
       {
         type: "BLOG",
         title: "PVC Suspension",
         date: "MARCH 16, 2022",
         excerpt: "Korem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulpuKorem",
+        image: insightBlogImg,
       },
       {
         type: "BLOG",
         title: "LDPE Film CFR",
         date: "MARCH 16, 2022",
         excerpt: "Korem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulpuKorem",
+        image: insightBlogImg,
       },
       {
         type: "BLOG",
         title: "HDPE",
         date: "MARCH 16, 2022",
         excerpt: "Korem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulpuKorem",
+        image: insightBlogImg,
       },
     ],
     news: [
@@ -65,12 +74,14 @@ const Home = () => {
         title: "Global PP Markets Rise",
         date: "MARCH 18, 2022",
         excerpt: "Korem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulpuKorem",
+        image: insightNewsImg,
       },
       {
         type: "NEWS",
         title: "Asian HDPE Prices Surge",
         date: "MARCH 17, 2022",
         excerpt: "Korem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulpuKorem",
+        image: insightNewsImg,
       },
     ],
     insightPapers: [
@@ -79,6 +90,7 @@ const Home = () => {
         title: "Q1 2024 Market Analysis",
         date: "MARCH 15, 2022",
         excerpt: "Korem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulpuKorem",
+        image: insightPapersImg,
       },
     ],
     webinars: [
@@ -87,6 +99,7 @@ const Home = () => {
         title: "Polymer Trading Strategies",
         date: "MARCH 14, 2022",
         excerpt: "Korem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulpuKorem",
+        image: insightWebinarImg,
       },
     ],
     videoInsights: [
@@ -95,6 +108,37 @@ const Home = () => {
         title: "Market Update Weekly",
         date: "MARCH 13, 2022",
         excerpt: "Korem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulpuKorem",
+        image: insightVideoImg,
+      },
+    ],
+    select: [
+      {
+        type: "SELECT",
+        title: "Featured Insights",
+        date: "MARCH 20, 2022",
+        excerpt: "Korem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulpuKorem",
+        image: insightNewsImg,
+      },
+      {
+        type: "SELECT",
+        title: "Industry Trends 2024",
+        date: "MARCH 19, 2022",
+        excerpt: "Korem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulpuKorem",
+        image: insightPapersImg,
+      },
+      {
+        type: "SELECT",
+        title: "Polymer Market Analysis",
+        date: "MARCH 18, 2022",
+        excerpt: "Korem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulpuKorem",
+        image: insightBlogImg,
+      },
+      {
+        type: "SELECT",
+        title: "Supply Chain Updates",
+        date: "MARCH 17, 2022",
+        excerpt: "Korem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulpuKorem",
+        image: insightWebinarImg,
       },
     ],
   };
@@ -103,6 +147,9 @@ const Home = () => {
     { name: "Polypropylene (PP)", code: "PP", description: "• Packaging & automotive\n• Textile applications\n• High-performance thermoplastic", image: polymerPpImg },
     { name: "High Density Polyethylene", code: "HDPE", description: "• Bottles & pipes\n• Industrial containers\n• Excellent chemical resistance", image: polymerHdpeImg },
     { name: "Low Density Polyethylene", code: "LDPE", description: "• Flexible film & bags\n• Packaging applications\n• Soft & flexible", image: polymerLdpeImg },
+    { name: "Linear Low Density PE", code: "LLDPE", description: "• Stretch film\n• Flexible packaging\n• Enhanced strength", image: polymerPpImg },
+    { name: "Polyvinyl Chloride", code: "PVC", description: "• Pipes & cables\n• Construction applications\n• Versatile polymer", image: polymerHdpeImg },
+    { name: "Polyethylene Terephthalate", code: "PET", description: "• Bottles & containers\n• Textile fibers\n• Clear & strong", image: polymerLdpeImg },
   ];
 
   const whyPolymerBazaar = [
@@ -428,7 +475,12 @@ const Home = () => {
                 className="h-full"
               >
                 <Card className="group hover:shadow-2xl transition-all duration-500 overflow-hidden border-2 hover:border-primary/50 h-full bg-gradient-to-b from-card to-card/50 backdrop-blur-sm">
-                  <div className="h-56 bg-gradient-to-br from-primary via-accent-red to-accent-orange relative overflow-hidden">
+                  <div className="h-56 relative overflow-hidden">
+                    <img 
+                      src={insight.image} 
+                      alt={insight.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
                     {/* Animated Overlay */}
                     <motion.div
                       className="absolute inset-0"
@@ -685,14 +737,21 @@ const Home = () => {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
               >
-                <Card className="group hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:border-primary/50 overflow-hidden h-full">
-                  <div className="h-40 relative overflow-hidden">
+                <Card className="group hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:border-primary/50 overflow-hidden h-full bg-gradient-to-br from-card to-accent-pink/10 border-2">
+                  <div className="relative overflow-hidden">
+                    {/* Gradient Overlay on Image */}
+                    <div className="absolute inset-0 z-10 bg-gradient-to-br from-primary/60 via-accent-red/50 to-accent-orange/40 mix-blend-multiply"></div>
                     <img 
                       src={polymer.image} 
                       alt={polymer.name}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+                    {/* Polymer Code Badge */}
+                    <div className="absolute bottom-4 left-4 z-20">
+                      <Badge className="bg-white/90 text-primary text-lg px-4 py-2 font-bold shadow-lg">
+                        {polymer.code}
+                      </Badge>
+                    </div>
                   </div>
                   <CardContent className="p-6">
                     <h3 className="font-bold text-xl mb-3 group-hover:text-primary transition-colors">{polymer.name}</h3>
