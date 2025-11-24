@@ -251,40 +251,51 @@ const Header = () => {
         )}
 
         {/* Right Side Actions */}
-        <div className="flex items-center space-x-4">
-          {/* Admin Button - Only visible to admins */}
-          {isAdmin && (
-            <Button asChild variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
-              <Link to="/admin">
-                <Shield className="h-4 w-4 mr-2" />
-                Admin Panel
-              </Link>
-            </Button>
-          )}
-
+        <div className="flex items-center space-x-2">
           {user ? (
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="flex items-center space-x-2">
-                  <User className="h-4 w-4" />
-                  <span className="hidden md:inline">{user.email?.split('@')[0]}</span>
-                  <ChevronDown className="h-4 w-4" />
+            <>
+              {/* Admin Button - Only visible to admins */}
+              {isAdmin && (
+                <Button asChild variant="outline" size="sm" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+                  <Link to="/admin">
+                    <Shield className="h-4 w-4 mr-2" />
+                    <span className="hidden sm:inline">Admin</span>
+                  </Link>
                 </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-48">
-                <DropdownMenuItem asChild>
-                  <Link to="/profile">My Profile</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link to="/pricing">My Subscription</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={signOut}>Logout</DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+              )}
+              
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="flex items-center space-x-2">
+                    <User className="h-4 w-4" />
+                    <span className="hidden md:inline">{user.email?.split('@')[0]}</span>
+                    <ChevronDown className="h-4 w-4" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-48">
+                  <DropdownMenuItem asChild>
+                    <Link to="/profile">My Profile</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link to="/pricing">My Subscription</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={signOut}>Logout</DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </>
           ) : (
-            <Button asChild className="bg-primary hover:bg-primary-dark">
-              <Link to="/login">Login</Link>
-            </Button>
+            <>
+              {isAdmin && (
+                <Button asChild variant="outline" size="sm" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+                  <Link to="/admin">
+                    <Shield className="h-4 w-4" />
+                  </Link>
+                </Button>
+              )}
+              <Button asChild className="bg-primary hover:bg-primary-dark">
+                <Link to="/login">Login</Link>
+              </Button>
+            </>
           )}
 
           {/* Mobile Menu Toggle */}
