@@ -13,6 +13,9 @@ import polymerWarehouseImage from "@/assets/polymer-warehouse.jpg";
 import expertConsultationImg from "@/assets/expert-consultation.jpg";
 import eventSeoulImg from "@/assets/event-seoul.jpg";
 import eventLondonImg from "@/assets/event-london.jpg";
+import polymerPpImg from "@/assets/polymer-pellets-pp.jpg";
+import polymerHdpeImg from "@/assets/polymer-pellets-hdpe.jpg";
+import polymerLdpeImg from "@/assets/polymer-pellets-ldpe.jpg";
 import polymerWhy1Img from "@/assets/polymer-why-1.jpg";
 import polymerWhy2Img from "@/assets/polymer-why-2.jpg";
 import polymerWhy3Img from "@/assets/polymer-why-3.jpg";
@@ -97,9 +100,9 @@ const Home = () => {
   };
 
   const polymers = [
-    { name: "Polypropylene (PP)", code: "PP", description: "• Packaging & automotive\n• Textile applications\n• High-performance thermoplastic" },
-    { name: "High Density Polyethylene", code: "HDPE", description: "• Bottles & pipes\n• Industrial containers\n• Excellent chemical resistance" },
-    { name: "Low Density Polyethylene", code: "LDPE", description: "• Flexible film & bags\n• Packaging applications\n• Soft & flexible" },
+    { name: "Polypropylene (PP)", code: "PP", description: "• Packaging & automotive\n• Textile applications\n• High-performance thermoplastic", image: polymerPpImg },
+    { name: "High Density Polyethylene", code: "HDPE", description: "• Bottles & pipes\n• Industrial containers\n• Excellent chemical resistance", image: polymerHdpeImg },
+    { name: "Low Density Polyethylene", code: "LDPE", description: "• Flexible film & bags\n• Packaging applications\n• Soft & flexible", image: polymerLdpeImg },
   ];
 
   const whyPolymerBazaar = [
@@ -683,13 +686,13 @@ const Home = () => {
                 transition={{ delay: index * 0.1, duration: 0.5 }}
               >
                 <Card className="group hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:border-primary/50 overflow-hidden h-full">
-                  <div className="h-40 bg-gradient-to-br from-primary via-accent-red to-accent-orange flex items-center justify-center relative overflow-hidden">
-                    <motion.div
-                      className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"
-                      whileHover={{ scale: 1.1 }}
-                      transition={{ duration: 0.3 }}
+                  <div className="h-40 relative overflow-hidden">
+                    <img 
+                      src={polymer.image} 
+                      alt={polymer.name}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                     />
-                    <span className="text-5xl font-bold text-white relative z-10 drop-shadow-lg">{polymer.code}</span>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
                   </div>
                   <CardContent className="p-6">
                     <h3 className="font-bold text-xl mb-3 group-hover:text-primary transition-colors">{polymer.name}</h3>
