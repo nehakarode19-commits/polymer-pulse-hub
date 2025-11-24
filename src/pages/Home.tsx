@@ -24,7 +24,11 @@ import insightVideoImg from "@/assets/insight-video.jpg";
 import polymerWhy1Img from "@/assets/polymer-why-1.jpg";
 import polymerWhy2Img from "@/assets/polymer-why-2.jpg";
 import polymerWhy3Img from "@/assets/polymer-why-3.jpg";
-import heroPolymerMotionImg from "@/assets/hero-polymer-motion.jpg";
+import heroBackgroundMotionImg from "@/assets/hero-background-motion.jpg";
+import globalCoverageModernImg from "@/assets/global-coverage-modern.jpg";
+import consultationModernImg from "@/assets/consultation-modern.jpg";
+import whyPolymerModernImg from "@/assets/why-polymer-modern.jpg";
+import newsletterModernImg from "@/assets/newsletter-modern.jpg";
 
 const Home = () => {
   const [activeInsightTab, setActiveInsightTab] = useState("blog");
@@ -185,24 +189,25 @@ const Home = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-background via-secondary/20 to-background">
       {/* Hero Banner Section */}
-      <section className="relative gradient-hero text-white min-h-[90vh] flex items-center px-4 overflow-hidden">
-        {/* Background Image with Motion Effect */}
+      <section className="relative text-white min-h-[95vh] flex items-center px-4 overflow-hidden">
+        {/* Background Image with Parallax Motion Effect */}
         <motion.div 
           className="absolute inset-0 z-0"
-          initial={{ scale: 1.1 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 20, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
         >
-          <img 
-            src={heroPolymerMotionImg} 
-            alt="Polymer Manufacturing" 
+          <motion.img 
+            src={heroBackgroundMotionImg} 
+            alt="Polymer Manufacturing in Motion" 
             className="w-full h-full object-cover"
+            initial={{ scale: 1.05 }}
+            animate={{ scale: 1.1 }}
+            transition={{ duration: 25, repeat: Infinity, repeatType: "reverse", ease: "linear" }}
           />
-          {/* Gradient Overlay for better text readability */}
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/70 to-accent-orange/80" />
+          {/* Multi-layer Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/95 via-accent-red/85 to-accent-orange/90" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
         </motion.div>
 
-        {/* Advanced Animated background */}
+        {/* Floating Animated Elements */}
         <div className="absolute inset-0 overflow-hidden z-10">
           {/* Grid Pattern */}
           <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.05)_1px,transparent_1px)] bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_50%,black,transparent)]"></div>
@@ -572,9 +577,9 @@ const Home = () => {
             >
               {/* World Map Image */}
               <img
-                src={worldMapImage}
+                src={globalCoverageModernImg}
                 alt="Global Polymer Market Coverage"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
               
               {/* Overlay gradient for better marker visibility */}
@@ -719,27 +724,27 @@ const Home = () => {
           >
             <div className="md:col-span-2 relative h-80 rounded-2xl overflow-hidden shadow-2xl group">
               <img
-                src={polymerPelletsImage}
-                alt="Polymer Pellets"
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                src={whyPolymerModernImg}
+                alt="Polymer Manufacturing"
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex items-end p-8">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex items-end p-8">
                 <div>
                   <h3 className="text-white text-3xl font-bold mb-2">Premium Quality Polymers</h3>
-                  <p className="text-white/90">Certified materials from global suppliers</p>
+                  <p className="text-white/90 text-lg">State-of-the-art manufacturing facilities worldwide</p>
                 </div>
               </div>
             </div>
             <div className="relative h-80 rounded-2xl overflow-hidden shadow-2xl group">
               <img
-                src={polymerWarehouseImage}
-                alt="Polymer Warehouse"
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                src={heroBackgroundMotionImg}
+                alt="Polymer Innovation"
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent flex items-end p-6">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex items-end p-6">
                 <div>
-                  <h3 className="text-white text-2xl font-bold mb-2">Global Distribution</h3>
-                  <p className="text-white/90 text-sm">Reliable logistics network</p>
+                  <h3 className="text-white text-2xl font-bold mb-2">Innovation & Quality</h3>
+                  <p className="text-white/90 text-sm">Leading the future of polymer markets</p>
                 </div>
               </div>
             </div>
@@ -879,7 +884,7 @@ const Home = () => {
           <div className="relative max-w-6xl mx-auto">
             <div className="flex items-center justify-center gap-10 overflow-hidden px-20">
               {whyPolymerBazaar.slice(carouselIndex, carouselIndex + 3).map((item, index) => {
-                const images = [polymerWhy1Img, polymerWhy2Img, polymerWhy3Img];
+                const images = [whyPolymerModernImg, whyPolymerModernImg, whyPolymerModernImg];
                 const imageIndex = (carouselIndex + index) % images.length;
                 
                 return (
@@ -1004,13 +1009,14 @@ const Home = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="h-[500px] rounded-2xl shadow-2xl relative overflow-hidden"
+              className="h-[500px] rounded-2xl shadow-2xl relative overflow-hidden group"
             >
               <img 
-                src={expertConsultationImg} 
+                src={consultationModernImg} 
                 alt="Professional business consultation" 
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent-orange/20" />
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: 30 }}
@@ -1044,7 +1050,18 @@ const Home = () => {
       </section>
 
       {/* Newsletter Strip */}
-      <section className="py-16 px-4 bg-gradient-to-r from-primary via-accent-red to-accent-orange text-white relative overflow-hidden">
+      <section className="py-20 px-4 relative overflow-hidden">
+        {/* Background Image with Overlay */}
+        <div className="absolute inset-0">
+          <img 
+            src={newsletterModernImg} 
+            alt="Newsletter signup" 
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/95 via-accent-red/95 to-accent-orange/95" />
+        </div>
+        
+        {/* Animated Overlay */}
         <motion.div
           className="absolute inset-0 opacity-20"
           animate={{
@@ -1060,7 +1077,8 @@ const Home = () => {
             backgroundSize: "200% 100%",
           }}
         />
-        <div className="container max-w-5xl mx-auto relative z-10">
+        
+        <div className="container max-w-5xl mx-auto relative z-10 text-white">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
