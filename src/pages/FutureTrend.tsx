@@ -131,17 +131,10 @@ const FutureTrend = () => {
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
             >
-              <Card 
-                className="border-2 border-primary/20 shadow-2xl relative overflow-hidden"
-                style={{
-                  backgroundImage: `url(${marketAnalysisImg})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center'
-                }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-background/98 via-background/95 to-background/98" />
+              <Card className="border-2 border-primary/20 shadow-2xl bg-card">
+
                 
-                <CardHeader className="relative z-10 border-b border-border pb-6">
+                <CardHeader className="border-b border-border pb-6">
                   <div className="flex items-start justify-between">
                     <div className="flex items-center gap-4">
                       <div className="p-4 bg-primary/10 rounded-lg">
@@ -164,7 +157,7 @@ const FutureTrend = () => {
                   </div>
                 </CardHeader>
 
-                <CardContent className="relative z-10 pt-8">
+                <CardContent className="pt-8">
                   <div className="space-y-8">
                     {report.sections.map((section, sectionIndex) => (
                       <motion.div

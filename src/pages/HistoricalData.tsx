@@ -129,16 +129,8 @@ const HistoricalData = () => {
                 </CardContent>
               </Card>
 
-              <Card 
-                className="border-2 border-primary/20 shadow-2xl relative overflow-hidden"
-                style={{
-                  backgroundImage: `url(${refineryHeroImg})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center'
-                }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-background/98 to-background/95" />
-                <CardHeader className="relative z-10">
+              <Card className="border-2 border-primary/20 shadow-2xl bg-card">
+                <CardHeader>
                   <CardTitle className="flex items-center gap-3">
                     <div className="p-3 bg-primary/10 rounded-lg">
                       <TrendingUp className="h-8 w-8 text-primary" />
@@ -149,7 +141,7 @@ const HistoricalData = () => {
                     </div>
                   </CardTitle>
                 </CardHeader>
-                <CardContent className="relative z-10">
+                <CardContent>
                   <ResponsiveContainer width="100%" height={400}>
                     <LineChart data={chartData}>
                       <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
@@ -228,16 +220,8 @@ const HistoricalData = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4 }}
               >
-                <Card 
-                  className="border-2 border-primary/20 shadow-2xl relative overflow-hidden"
-                  style={{
-                    backgroundImage: `url(${refineryHeroImg})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center'
-                  }}
-                >
-                  <div className="absolute inset-0 bg-gradient-to-br from-background/98 to-background/95" />
-                  <CardHeader className="relative z-10">
+                <Card className="border-2 border-primary/20 shadow-2xl bg-card">
+                  <CardHeader>
                     <CardTitle className="flex items-center gap-3">
                       <div className="p-3 bg-primary/10 rounded-lg">
                         <TrendingUp className="h-8 w-8 text-primary" />
@@ -248,7 +232,7 @@ const HistoricalData = () => {
                       </div>
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="relative z-10">
+                  <CardContent>
                     <ResponsiveContainer width="100%" height={400}>
                       <LineChart data={chartData}>
                         <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
