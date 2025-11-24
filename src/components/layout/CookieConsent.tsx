@@ -31,10 +31,9 @@ const CookieConsent = () => {
       <Card className="max-w-lg mx-4 p-6 shadow-xl">
         <h2 className="text-2xl font-bold mb-4">We Care Your Privacy</h2>
         <p className="text-muted-foreground mb-4">
-          We use cookies and similar technologies to monitor performance, improve user experience, 
-          analyze traffic, and tailor content and advertisements. By clicking "Accept all Cookies", 
-          you agree to store cookies on your device to enhance site navigation and support our 
-          marketing efforts.
+          We use cookies and similar technologies to help provide better user experience, analyze 
+          traffic, and tailor content. By clicking &quot;Accept all Cookies&quot;, you agree to store 
+          cookies on your device.
         </p>
         <Link
           to="/privacy"
