@@ -105,7 +105,7 @@ const BuySell = () => {
         {/* Polymer Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {polymers.map((polymer, index) => (
-            <Card key={index} className="group hover:shadow-xl transition-all duration-300 overflow-hidden">
+            <Card key={index} className="group hover:shadow-xl transition-all duration-300 overflow-hidden border-2">
               <div className="relative h-48 overflow-hidden">
                 <img 
                   src={polymer.image} 
@@ -114,38 +114,44 @@ const BuySell = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                 <div className="absolute bottom-4 left-4">
-                  <h3 className="text-2xl font-bold text-white">{polymer.code}</h3>
+                  <h3 className="text-3xl font-bold text-white">{polymer.code}</h3>
                 </div>
               </div>
-              <CardContent className="p-6">
-                <h4 className="font-semibold text-lg mb-4 min-h-[3rem]">{polymer.name}</h4>
-                
-                <div className="space-y-2">
+              <CardContent className="p-4 space-y-2">
+                <div className="flex items-center justify-between py-2 border-b">
+                  <Phone className="h-5 w-5 text-primary" />
+                  <span className="text-sm font-medium">Call</span>
                   <Button
-                    variant="outline"
+                    variant="ghost"
                     size="sm"
-                    className="w-full justify-start gap-2"
                     onClick={() => handleCall(polymer.phone)}
+                    className="text-primary hover:text-primary-dark"
                   >
-                    <Phone className="h-4 w-4" />
-                    Call
+                    <MessageCircle className="h-5 w-5" />
                   </Button>
+                </div>
+                <div className="flex items-center justify-between py-2 border-b">
+                  <Mail className="h-5 w-5 text-primary" />
+                  <span className="text-sm font-medium">Email</span>
                   <Button
-                    variant="outline"
+                    variant="ghost"
                     size="sm"
-                    className="w-full justify-start gap-2"
                     onClick={() => handleEmail(polymer.email)}
+                    className="text-primary hover:text-primary-dark"
                   >
-                    <Mail className="h-4 w-4" />
-                    Email
+                    <MessageCircle className="h-5 w-5" />
                   </Button>
+                </div>
+                <div className="flex items-center justify-between py-2">
+                  <MessageCircle className="h-5 w-5 text-green-600" />
+                  <span className="text-sm font-medium">WhatsApp</span>
                   <Button
+                    variant="ghost"
                     size="sm"
-                    className="w-full justify-start gap-2 bg-green-600 hover:bg-green-700 text-white"
                     onClick={() => handleWhatsApp(polymer.phone)}
+                    className="text-green-600 hover:text-green-700"
                   >
-                    <MessageCircle className="h-4 w-4" />
-                    WhatsApp
+                    <MessageCircle className="h-5 w-5" />
                   </Button>
                 </div>
               </CardContent>
