@@ -124,15 +124,38 @@ const Header = () => {
         {/* Desktop Navigation - Centered and cleaner */}
         {showNavigation && (
           <nav className="hidden lg:flex items-center justify-center flex-1 space-x-6 mx-8">
-            {mainMenuItems.map((item) => (
-              <Link
-                key={item.path}
-                to={item.path}
-                className="px-4 py-2 text-sm font-semibold text-foreground/90 hover:text-primary transition-colors relative after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary after:scale-x-0 hover:after:scale-x-100 after:transition-transform"
-              >
-                {item.label}
-              </Link>
-            ))}
+            {/* Home Link */}
+            <Link
+              to="/"
+              className="px-4 py-2 text-sm font-semibold text-foreground/90 hover:text-primary transition-colors relative after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary after:scale-x-0 hover:after:scale-x-100 after:transition-transform"
+            >
+              Home
+            </Link>
+
+            {/* Buy & Sell */}
+            <Link
+              to="/buy-sell"
+              className="px-4 py-2 text-sm font-semibold text-foreground/90 hover:text-primary transition-colors relative after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary after:scale-x-0 hover:after:scale-x-100 after:transition-transform"
+            >
+              Buy & Sell
+            </Link>
+
+            {/* About Dropdown */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="px-4 py-2 text-sm font-semibold text-foreground/90 hover:text-primary transition-colors h-auto">
+                  About
+                  <ChevronDown className="ml-1 h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56 bg-background shadow-lg z-50">
+                <DropdownMenuItem asChild>
+                  <Link to="/about" className="cursor-pointer">
+                    About Us
+                  </Link>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
             
             {/* Crude & Feedstock Dropdown */}
             <DropdownMenu>
@@ -156,12 +179,12 @@ const Header = () => {
             {/* Global Bazaar Dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="px-3 py-2 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-muted">
+                <Button variant="ghost" className="px-4 py-2 text-sm font-semibold text-foreground/90 hover:text-primary transition-colors h-auto">
                   Global Bazaar
                   <ChevronDown className="ml-1 h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56 bg-background">
+              <DropdownMenuContent className="w-56 bg-background shadow-lg z-50">
                 {globalBazaarItems.map((item) => (
                   <DropdownMenuItem key={item.label} asChild>
                     <Link to={item.path} className="cursor-pointer">
@@ -175,12 +198,12 @@ const Header = () => {
             {/* Indian Bazaar Dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="px-3 py-2 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-muted">
+                <Button variant="ghost" className="px-4 py-2 text-sm font-semibold text-foreground/90 hover:text-primary transition-colors h-auto">
                   Indian Bazaar
                   <ChevronDown className="ml-1 h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56 bg-background">
+              <DropdownMenuContent className="w-56 bg-background shadow-lg z-50">
                 {indianBazaarItems.map((item) => (
                   <DropdownMenuItem key={item.label} asChild>
                     <Link to={item.path} className="cursor-pointer">
@@ -194,12 +217,12 @@ const Header = () => {
             {/* Historical Data Dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="px-3 py-2 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-muted">
+                <Button variant="ghost" className="px-4 py-2 text-sm font-semibold text-foreground/90 hover:text-primary transition-colors h-auto">
                   Historical Data
                   <ChevronDown className="ml-1 h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56 bg-background">
+              <DropdownMenuContent className="w-56 bg-background shadow-lg z-50">
                 {historicalDataItems.map((item) => (
                   <DropdownMenuItem key={item.label} asChild>
                     <Link to={item.path} className="cursor-pointer">
@@ -213,12 +236,12 @@ const Header = () => {
             {/* Future Trend Dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="px-3 py-2 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-muted">
+                <Button variant="ghost" className="px-4 py-2 text-sm font-semibold text-foreground/90 hover:text-primary transition-colors h-auto">
                   Future Trend
                   <ChevronDown className="ml-1 h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56 bg-background max-h-96 overflow-y-auto">
+              <DropdownMenuContent className="w-56 bg-background shadow-lg z-50 max-h-96 overflow-y-auto">
                 {futureTrendItems.map((item) => (
                   <DropdownMenuItem key={item.label} asChild>
                     <Link to={item.path} className="cursor-pointer">
@@ -232,12 +255,12 @@ const Header = () => {
             {/* Services Dropdown */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="px-3 py-2 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-muted">
+                <Button variant="ghost" className="px-4 py-2 text-sm font-semibold text-foreground/90 hover:text-primary transition-colors h-auto">
                   Services
                   <ChevronDown className="ml-1 h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56 bg-background">
+              <DropdownMenuContent className="w-56 bg-background shadow-lg z-50">
                 {servicesItems.map((item) => (
                   <DropdownMenuItem key={item.label} asChild>
                     <Link to={item.path} className="cursor-pointer">
@@ -247,6 +270,14 @@ const Header = () => {
                 ))}
               </DropdownMenuContent>
             </DropdownMenu>
+
+            {/* Career */}
+            <Link
+              to="/career"
+              className="px-4 py-2 text-sm font-semibold text-foreground/90 hover:text-primary transition-colors relative after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary after:scale-x-0 hover:after:scale-x-100 after:transition-transform"
+            >
+              Career
+            </Link>
           </nav>
         )}
 
@@ -314,16 +345,41 @@ const Header = () => {
       {isMenuOpen && showNavigation && (
         <div className="lg:hidden border-t bg-background">
           <nav className="container px-4 py-4 space-y-2">
-            {mainMenuItems.map((item) => (
-                  <Link
-                    key={item.path}
-                    to={item.path}
-                    className="block px-3 py-2 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-muted rounded-md transition-colors"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
+            {/* Home Link */}
+            <Link
+              to="/"
+              className="block px-3 py-2 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-muted rounded-md transition-colors"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Home
+            </Link>
+
+            {/* Buy & Sell */}
+            <Link
+              to="/buy-sell"
+              className="block px-3 py-2 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-muted rounded-md transition-colors"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Buy & Sell
+            </Link>
+
+            {/* About */}
+            <Link
+              to="/about"
+              className="block px-3 py-2 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-muted rounded-md transition-colors"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              About
+            </Link>
+
+            {/* Career */}
+            <Link
+              to="/career"
+              className="block px-3 py-2 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-muted rounded-md transition-colors"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Career
+            </Link>
                 
                 {/* Crude & Feedstock in Mobile */}
                 <div className="space-y-1">
