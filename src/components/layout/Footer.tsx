@@ -5,9 +5,12 @@ import { ArrowRight, Phone, Mail, MapPin } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useState } from "react";
 import { SubscriptionModal } from "@/components/SubscriptionModal";
+import { useUserRole } from "@/hooks/useUserRole";
+import { Shield } from "lucide-react";
 
 const Footer = () => {
   const { user, hasActiveSubscription } = useAuth();
+  const { isAdmin } = useUserRole();
   const navigate = useNavigate();
   const [showSubscriptionModal, setShowSubscriptionModal] = useState(false);
 
@@ -116,8 +119,20 @@ const Footer = () => {
         </div>
 
         {/* Copyright */}
-        <div className="mt-8 pt-8 border-t text-center text-sm text-muted-foreground">
-          All Copyright ©2007 – 2024 reserved.
+        <div className="mt-8 pt-8 border-t">
+          <div className="flex items-center justify-between">
+            <div className="text-sm text-muted-foreground">
+              All Copyright ©2007 – 2024 reserved.
+            </div>
+            {isAdmin && (
+              <Button asChild variant="outline" size="sm" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+                <Link to="/admin">
+                  <Shield className="h-4 w-4 mr-2" />
+                  Admin Panel
+                </Link>
+              </Button>
+            )}
+          </div>
         </div>
       </div>
 
