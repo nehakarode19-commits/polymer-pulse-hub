@@ -24,7 +24,6 @@ import insightVideoImg from "@/assets/insight-video.jpg";
 import polymerWhy1Img from "@/assets/polymer-why-1.jpg";
 import polymerWhy2Img from "@/assets/polymer-why-2.jpg";
 import polymerWhy3Img from "@/assets/polymer-why-3.jpg";
-import polymerWarehouseImg from "@/assets/polymer-warehouse.jpg";
 
 const Home = () => {
   const [activeInsightTab, setActiveInsightTab] = useState("blog");
@@ -414,105 +413,6 @@ const Home = () => {
             />
           </motion.div>
         </motion.div>
-      </section>
-
-      {/* Trusted 20+ Years Section */}
-      <section className="relative min-h-[500px] overflow-hidden">
-        {/* Background Image with Parallax Effect */}
-        <motion.div 
-          className="absolute inset-0"
-          initial={{ scale: 1.1 }}
-          whileInView={{ scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1.5, ease: "easeOut" }}
-        >
-          <img 
-            src={polymerWarehouseImg} 
-            alt="Polymer Warehouse" 
-            className="w-full h-full object-cover"
-          />
-          {/* Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/80" />
-          
-          {/* Animated Particles */}
-          {[...Array(15)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-2 h-2 bg-primary/30 rounded-full"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-              }}
-              animate={{
-                y: [0, -50, 0],
-                opacity: [0.2, 0.6, 0.2],
-                scale: [1, 1.5, 1],
-              }}
-              transition={{
-                duration: 4 + Math.random() * 3,
-                repeat: Infinity,
-                delay: Math.random() * 2,
-                ease: "easeInOut",
-              }}
-            />
-          ))}
-        </motion.div>
-
-        {/* Content */}
-        <div className="container max-w-6xl mx-auto relative z-10 py-24 px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="text-center text-white"
-          >
-            <motion.h2 
-              className="text-5xl md:text-6xl font-black mb-8"
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-            >
-              <span className="bg-gradient-to-r from-white via-primary to-accent-orange bg-clip-text text-transparent">
-                Trusted 20+ Years
-              </span>
-            </motion.h2>
-            
-            <motion.p 
-              className="text-xl md:text-2xl text-white/90 mb-12 leading-relaxed max-w-4xl mx-auto"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-            >
-              Polymer Bazar Offers Accurate Transparent, and Community - Drive Updates Calculator
-            </motion.p>
-            
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.6, duration: 0.6 }}
-            >
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Button 
-                  asChild 
-                  size="lg" 
-                  className="bg-primary hover:bg-primary-dark text-white shadow-2xl hover:shadow-primary/50 transition-all duration-300 text-xl px-12 py-8 rounded-xl font-bold group"
-                >
-                  <Link to="/pricing">
-                    Get Started
-                    <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-2 transition-transform" />
-                  </Link>
-                </Button>
-              </motion.div>
-            </motion.div>
-          </motion.div>
-        </div>
       </section>
 
       {/* Latest Insights Section */}
