@@ -1,9 +1,35 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Phone, Mail, MapPin } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
+import { useState } from "react";
+import { SubscriptionModal } from "@/components/SubscriptionModal";
 
 const Footer = () => {
+  const { user, hasActiveSubscription } = useAuth();
+  const navigate = useNavigate();
+  const [showSubscriptionModal, setShowSubscriptionModal] = useState(false);
+
+  const handleFooterLinkClick = (e: React.MouseEvent, path: string) => {
+    // Home and Pricing are always accessible
+    if (path === "/" || path === "/pricing") {
+      return;
+    }
+
+    // If user is not logged in, redirect to login
+    if (!user) {
+      e.preventDefault();
+      navigate("/login");
+      return;
+    }
+
+    // If user is logged in but doesn't have active subscription, show modal
+    if (!hasActiveSubscription()) {
+      e.preventDefault();
+      setShowSubscriptionModal(true);
+    }
+  };
   const otherLinks = [
     { label: "Buy & Sell", path: "/buy-sell" },
     { label: "About", path: "/about" },
@@ -56,6 +82,7 @@ const Footer = () => {
                 <li key={link.path}>
                   <Link
                     to={link.path}
+                    onClick={(e) => handleFooterLinkClick(e, link.path)}
                     className="text-muted-foreground hover:text-primary transition-colors"
                   >
                     {link.label}
@@ -73,6 +100,7 @@ const Footer = () => {
                 <li key={link.path}>
                   <Link
                     to={link.path}
+                    onClick={(e) => handleFooterLinkClick(e, link.path)}
                     className="text-muted-foreground hover:text-primary transition-colors"
                   >
                     {link.label}
@@ -106,6 +134,11 @@ const Footer = () => {
           All Copyright ©2007 – 2024 reserved.
         </div>
       </div>
+
+      <SubscriptionModal 
+        open={showSubscriptionModal} 
+        onOpenChange={setShowSubscriptionModal} 
+      />
     </footer>
   );
 };

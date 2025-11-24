@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo.png";
 import {
@@ -10,10 +10,33 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Menu, User, ChevronDown } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
+import { SubscriptionModal } from "@/components/SubscriptionModal";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { user, signOut } = useAuth();
+  const [showSubscriptionModal, setShowSubscriptionModal] = useState(false);
+  const { user, signOut, hasActiveSubscription } = useAuth();
+  const navigate = useNavigate();
+
+  const handleNavClick = (e: React.MouseEvent, path: string) => {
+    // Home and Pricing are always accessible
+    if (path === "/" || path === "/pricing") {
+      return;
+    }
+
+    // If user is not logged in, redirect to login
+    if (!user) {
+      e.preventDefault();
+      navigate("/login");
+      return;
+    }
+
+    // If user is logged in but doesn't have active subscription, show modal
+    if (!hasActiveSubscription()) {
+      e.preventDefault();
+      setShowSubscriptionModal(true);
+    }
+  };
 
   const mainMenuItems = [
     { label: "Buy & Sell", path: "/buy-sell" },
@@ -41,6 +64,7 @@ const Header = () => {
             <Link
               key={item.path}
               to={item.path}
+              onClick={(e) => handleNavClick(e, item.path)}
               className="px-3 py-2 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-muted rounded-md transition-colors"
             >
               {item.label}
@@ -96,7 +120,12 @@ const Header = () => {
                 key={item.path}
                 to={item.path}
                 className="block px-3 py-2 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-muted rounded-md transition-colors"
-                onClick={() => setIsMenuOpen(false)}
+                onClick={(e) => {
+                  handleNavClick(e, item.path);
+                  if (item.path === "/" || item.path === "/pricing" || hasActiveSubscription()) {
+                    setIsMenuOpen(false);
+                  }
+                }}
               >
                 {item.label}
               </Link>
@@ -104,6 +133,11 @@ const Header = () => {
           </nav>
         </div>
       )}
+
+      <SubscriptionModal 
+        open={showSubscriptionModal} 
+        onOpenChange={setShowSubscriptionModal} 
+      />
     </header>
   );
 };
