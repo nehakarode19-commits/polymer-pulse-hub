@@ -2,76 +2,86 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Phone, Mail, MessageCircle } from "lucide-react";
 import { toast } from "sonner";
+import polymerPpImg from "@/assets/polymer-card-pp.jpg";
+import polymerPvcImg from "@/assets/polymer-card-pvc.jpg";
+import polymerLldpeImg from "@/assets/polymer-card-lldpe.jpg";
+import polymerHdpeImg from "@/assets/polymer-card-hdpe.jpg";
+import polymerLdpeImg from "@/assets/polymer-card-ldpe.jpg";
+import polymerPetImg from "@/assets/polymer-card-pet.jpg";
+import polymerPsImg from "@/assets/polymer-card-ps.jpg";
+import polymerAbsImg from "@/assets/polymer-card-abs.jpg";
+import polymerEnggImg from "@/assets/polymer-card-engg.jpg";
+import polymerEvaImg from "@/assets/polymer-card-eva.jpg";
 
 const BuySell = () => {
   const polymers = [
     { 
       code: "PP", 
       name: "Polypropylene",
-      image: "https://images.unsplash.com/photo-1614854262318-831574f15f1f?w=800&q=80",
+      image: polymerPpImg,
       phone: "+91 93746 24365",
       email: "info@polymerbazaar.com"
     },
     { 
       code: "PVC", 
       name: "Polyvinyl Chloride",
-      image: "https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=800&q=80",
+      image: polymerPvcImg,
       phone: "+91 93746 24365",
       email: "info@polymerbazaar.com"
     },
     { 
       code: "LLDPE", 
       name: "Linear Low Density Polyethylene",
-      image: "https://images.unsplash.com/photo-1580982324671-decad83d7f58?w=800&q=80",
+      image: polymerLldpeImg,
       phone: "+91 93746 24365",
       email: "info@polymerbazaar.com"
     },
     { 
       code: "HDPE", 
       name: "High Density Polyethylene",
-      image: "https://images.unsplash.com/photo-1614935151651-0bea6508db6b?w=800&q=80",
+      image: polymerHdpeImg,
       phone: "+91 93746 24365",
       email: "info@polymerbazaar.com"
     },
     { 
       code: "LDPE", 
       name: "Low Density Polyethylene",
-      image: "https://images.unsplash.com/photo-1588508065469-b676f87df6b5?w=800&q=80",
+      image: polymerLdpeImg,
       phone: "+91 93746 24365",
       email: "info@polymerbazaar.com"
     },
     { 
       code: "PET", 
       name: "Polyethylene Terephthalate",
-      image: "https://images.unsplash.com/photo-1562408590-e32931084e23?w=800&q=80",
+      image: polymerPetImg,
       phone: "+91 93746 24365",
       email: "info@polymerbazaar.com"
     },
     { 
       code: "PS", 
       name: "Polystyrene",
-      image: "https://images.unsplash.com/photo-1614854262318-831574f15f1f?w=800&q=80",
+      image: polymerPsImg,
       phone: "+91 93746 24365",
       email: "info@polymerbazaar.com"
     },
     { 
       code: "ABS", 
       name: "Acrylonitrile Butadiene Styrene",
-      image: "https://images.unsplash.com/photo-1587293852726-70cdb56c2866?w=800&q=80",
+      image: polymerAbsImg,
       phone: "+91 93746 24365",
       email: "info@polymerbazaar.com"
     },
     { 
       code: "ENGG", 
       name: "Engineering Plastics",
-      image: "https://images.unsplash.com/photo-1580982324671-decad83d7f58?w=800&q=80",
+      image: polymerEnggImg,
       phone: "+91 93746 24365",
       email: "info@polymerbazaar.com"
     },
     { 
       code: "EVA", 
       name: "Ethylene Vinyl Acetate",
-      image: "https://images.unsplash.com/photo-1614935151651-0bea6508db6b?w=800&q=80",
+      image: polymerEvaImg,
       phone: "+91 93746 24365",
       email: "info@polymerbazaar.com"
     },
@@ -119,17 +129,23 @@ const BuySell = () => {
               key={index}
               className="group hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-maroon/15 bg-card"
             >
-              <div className="relative h-40 bg-gradient-to-br from-maroon via-accent-red to-accent-orange flex items-end justify-between p-4">
-                <div>
-                  <p className="text-xs font-medium text-white/70 tracking-[0.2em] uppercase">
+              <div 
+                className="relative h-48 bg-cover bg-center flex items-end justify-between p-4"
+                style={{ backgroundImage: `url(${polymer.image})` }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                
+                <div className="relative z-10">
+                  <p className="text-xs font-medium text-white/70 tracking-[0.2em] uppercase drop-shadow-md">
                     Polymer Code
                   </p>
                   <h3 className="text-3xl font-extrabold text-white drop-shadow-lg">{polymer.code}</h3>
-                  <p className="mt-1 text-xs text-white/80 line-clamp-2">
+                  <p className="mt-1 text-xs text-white/80 line-clamp-2 drop-shadow-md">
                     {polymer.name}
                   </p>
                 </div>
-                <div className="hidden md:flex flex-col items-end gap-1 text-right text-[10px] text-white/80">
+                
+                <div className="relative z-10 hidden md:flex flex-col items-end gap-1 text-right text-[10px] text-white/90 drop-shadow-md">
                   <span className="inline-flex items-center gap-1">
                     <Phone className="h-3 w-3" /> Live Desk
                   </span>
