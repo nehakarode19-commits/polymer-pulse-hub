@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -16,22 +16,24 @@ const Login = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
 
-  // Redirect if already logged in
-  if (user) {
-    navigate("/");
-    return null;
-  }
-
+  // Redirect to home when user is already logged in
+  useEffect(() => {
+    if (user) {
+      navigate("/");
+    }
+  }, [user, navigate]);
+ 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-
+ 
     try {
       await signIn(email, password);
       toast({
         title: "Welcome back!",
         description: "You have successfully logged in.",
       });
+      navigate("/");
     } catch (error: any) {
       toast({
         title: "Login failed",
