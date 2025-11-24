@@ -96,9 +96,9 @@ const Header = () => {
   ];
 
   const servicesItems = [
-    { label: "Events", path: "/services" },
-    { label: "Press Release", path: "/services" },
-    { label: "Whatsapp Chatbot", path: "/services" },
+    { label: "Events", path: "/events" },
+    { label: "Press Release", path: "/press-release" },
+    { label: "Whatsapp Chatbot", path: "/whatsapp-chatbot" },
   ];
 
   // Show subscription modal when non-subscribed user tries to access content
