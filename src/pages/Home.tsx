@@ -10,6 +10,12 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import worldMapImage from "@/assets/world-map-analytics.jpg";
 import polymerPelletsImage from "@/assets/polymer-pellets-1.jpg";
 import polymerWarehouseImage from "@/assets/polymer-warehouse.jpg";
+import expertConsultationImg from "@/assets/expert-consultation.jpg";
+import eventSeoulImg from "@/assets/event-seoul.jpg";
+import eventLondonImg from "@/assets/event-london.jpg";
+import polymerWhy1Img from "@/assets/polymer-why-1.jpg";
+import polymerWhy2Img from "@/assets/polymer-why-2.jpg";
+import polymerWhy3Img from "@/assets/polymer-why-3.jpg";
 
 const Home = () => {
   const [activeInsightTab, setActiveInsightTab] = useState("blog");
@@ -796,35 +802,34 @@ const Home = () => {
           
           <div className="relative max-w-6xl mx-auto">
             <div className="flex items-center justify-center gap-10 overflow-hidden px-20">
-              {whyPolymerBazaar.slice(carouselIndex, carouselIndex + 3).map((item, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: index * 0.1, duration: 0.5 }}
-                  className="flex-1"
-                >
-                  <Card className="hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 border-2 hover:border-primary/50 group">
-                    <div className="h-56 bg-gradient-to-br from-primary via-accent-red to-accent-orange relative overflow-hidden">
-                      <motion.div
-                        className="absolute inset-0 bg-white/10"
-                        animate={{
-                          scale: [1, 1.2, 1],
-                          opacity: [0.5, 0.8, 0.5],
-                        }}
-                        transition={{
-                          duration: 3,
-                          repeat: Infinity,
-                          delay: index * 0.5,
-                        }}
-                      />
-                    </div>
-                    <CardContent className="p-8 text-center">
-                      <h3 className="font-bold text-xl group-hover:text-primary transition-colors">{item.title}</h3>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
+              {whyPolymerBazaar.slice(carouselIndex, carouselIndex + 3).map((item, index) => {
+                const images = [polymerWhy1Img, polymerWhy2Img, polymerWhy3Img];
+                const imageIndex = (carouselIndex + index) % images.length;
+                
+                return (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: index * 0.1, duration: 0.5 }}
+                    className="flex-1"
+                  >
+                    <Card className="hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 border-2 hover:border-primary/50 group">
+                      <div className="h-56 relative overflow-hidden">
+                        <img 
+                          src={images[imageIndex]} 
+                          alt={`Polymer materials ${imageIndex + 1}`}
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                      </div>
+                      <CardContent className="p-8 text-center">
+                        <h3 className="font-bold text-xl group-hover:text-primary transition-colors">{item.title}</h3>
+                      </CardContent>
+                    </Card>
+                  </motion.div>
+                );
+              })}
             </div>
             
             <Button
@@ -862,34 +867,39 @@ const Home = () => {
           </motion.div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-            {events.map((event, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
-              >
-                <Card className="hover:shadow-2xl transition-all duration-500 group hover:-translate-y-2 border-2 hover:border-primary/50 h-full">
-                  <div className="h-56 bg-gradient-to-br from-primary via-accent-red to-accent-orange relative overflow-hidden">
-                    <motion.div
-                      className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"
-                      whileHover={{ opacity: 0.6 }}
-                      transition={{ duration: 0.3 }}
-                    />
-                  </div>
-                  <CardContent className="p-6">
-                    <h3 className="font-bold text-lg mb-3 group-hover:text-primary transition-colors leading-tight">
-                      {event.title}
-                    </h3>
-                    <p className="text-sm text-muted-foreground flex items-center gap-2">
-                      <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-                      {event.location}
-                    </p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
+            {events.map((event, index) => {
+              const eventImages = [eventSeoulImg, eventSeoulImg, eventLondonImg, eventSeoulImg];
+              
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1, duration: 0.5 }}
+                >
+                  <Card className="hover:shadow-2xl transition-all duration-500 group hover:-translate-y-2 border-2 hover:border-primary/50 h-full">
+                    <div className="h-56 relative overflow-hidden">
+                      <img 
+                        src={eventImages[index]} 
+                        alt={event.title}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    </div>
+                    <CardContent className="p-6">
+                      <h3 className="font-bold text-lg mb-3 group-hover:text-primary transition-colors leading-tight">
+                        {event.title}
+                      </h3>
+                      <p className="text-sm text-muted-foreground flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                        {event.location}
+                      </p>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              );
+            })}
           </div>
 
           <motion.div
@@ -918,16 +928,13 @@ const Home = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="h-[500px] bg-gradient-to-br from-primary/20 via-accent-red/20 to-accent-orange/20 rounded-2xl flex items-center justify-center shadow-2xl relative overflow-hidden"
+              className="h-[500px] rounded-2xl shadow-2xl relative overflow-hidden"
             >
-              <motion.div
-                animate={{ scale: [1, 1.1, 1], rotate: [0, 5, 0] }}
-                transition={{ duration: 5, repeat: Infinity }}
-                className="absolute inset-0 opacity-20"
-              >
-                <Users className="h-full w-full text-primary" />
-              </motion.div>
-              <Users className="h-40 w-40 text-primary/40 relative z-10" />
+              <img 
+                src={expertConsultationImg} 
+                alt="Professional business consultation" 
+                className="w-full h-full object-cover"
+              />
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: 30 }}
