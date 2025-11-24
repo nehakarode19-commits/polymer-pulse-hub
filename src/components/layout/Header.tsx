@@ -116,27 +116,18 @@ const Header = () => {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm">
       <div className="container flex h-16 items-center justify-between px-4">
-        {/* Logo + Brand - always visible and clickable to Home */}
-        <Link to="/" className="flex items-center gap-3 mr-8" aria-label="Go to Polymer Bazaar home">
+        {/* Logo - clickable to Home */}
+        <Link to="/" className="flex items-center mr-8" aria-label="Go to Polymer Bazaar home">
           <img
             src={logo}
-            alt="Polymer Bazaar logo"
-            className="h-10 w-auto object-contain drop-shadow-sm"
+            alt="Polymer Bazaar"
+            className="h-12 w-auto object-contain"
           />
-          <span className="text-base font-semibold text-primary">Polymer Bazaar</span>
         </Link>
 
         {/* Desktop Navigation - Centered and cleaner */}
         {showNavigation && (
           <nav className="hidden lg:flex items-center justify-center flex-1 space-x-6 mx-8">
-            {/* Home */}
-            <Link
-              to="/"
-              className="px-4 py-2 text-sm font-semibold text-foreground/90 hover:text-primary transition-colors relative after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary after:scale-x-0 hover:after:scale-x-100 after:transition-transform"
-            >
-              Home
-            </Link>
-
             {/* Buy & Sell */}
             <Link
               to="/buy-sell"
