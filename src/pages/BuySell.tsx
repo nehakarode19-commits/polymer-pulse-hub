@@ -94,72 +94,117 @@ const BuySell = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <main className="min-h-screen bg-background">
       {/* Hero Section */}
-      <div className="relative h-64 bg-gradient-to-br from-primary/20 via-primary/10 to-background flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1614935151651-0bea6508db6b?w=1200&q=80')] bg-cover bg-center opacity-20" />
-        <h1 className="relative text-5xl font-bold text-foreground z-10">Buy & Sell</h1>
-      </div>
+      <header className="relative gradient-hero h-64 md:h-72 flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-background/10 via-background/0 to-background/40" />
+        <div className="container max-w-7xl mx-auto relative z-10 text-center">
+          <p className="text-sm font-semibold tracking-[0.2em] text-primary-foreground/80 uppercase mb-2">
+            Trade Desk
+          </p>
+          <h1 className="text-4xl md:text-5xl font-black tracking-tight text-primary-foreground mb-3">
+            Buy &amp; Sell Polymers
+          </h1>
+          <p className="text-sm md:text-base text-primary-foreground/80 max-w-2xl mx-auto">
+            Direct access to verified polymer suppliers with one-tap Call, Email, or WhatsApp support.
+          </p>
+        </div>
+      </header>
 
-      <div className="container max-w-7xl mx-auto px-4 py-12">
+      <section className="container max-w-7xl mx-auto px-4 py-12">
         {/* Polymer Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {polymers.map((polymer, index) => (
-            <Card key={index} className="group hover:shadow-xl transition-all duration-300 overflow-hidden border-2">
-              <div className="relative h-48 overflow-hidden">
-                <img 
-                  src={polymer.image} 
-                  alt={polymer.name}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                <div className="absolute bottom-4 left-4">
-                  <h3 className="text-3xl font-bold text-white">{polymer.code}</h3>
+            <Card
+              key={index}
+              className="group hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-maroon/15 bg-card"
+            >
+              <div className="relative h-40 bg-gradient-to-br from-maroon via-accent-red to-accent-orange flex items-end justify-between p-4">
+                <div>
+                  <p className="text-xs font-medium text-white/70 tracking-[0.2em] uppercase">
+                    Polymer Code
+                  </p>
+                  <h3 className="text-3xl font-extrabold text-white drop-shadow-lg">{polymer.code}</h3>
+                  <p className="mt-1 text-xs text-white/80 line-clamp-2">
+                    {polymer.name}
+                  </p>
+                </div>
+                <div className="hidden md:flex flex-col items-end gap-1 text-right text-[10px] text-white/80">
+                  <span className="inline-flex items-center gap-1">
+                    <Phone className="h-3 w-3" /> Live Desk
+                  </span>
+                  <span className="inline-flex items-center gap-1">
+                    <Mail className="h-3 w-3" /> Email Support
+                  </span>
+                  <span className="inline-flex items-center gap-1">
+                    <MessageCircle className="h-3 w-3" /> WhatsApp Alerts
+                  </span>
                 </div>
               </div>
-              <CardContent className="p-4 space-y-2">
-                <div className="flex items-center justify-between py-2 border-b">
-                  <Phone className="h-5 w-5 text-primary" />
-                  <span className="text-sm font-medium">Call</span>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => handleCall(polymer.phone)}
-                    className="text-primary hover:text-primary-dark"
-                  >
-                    <MessageCircle className="h-5 w-5" />
-                  </Button>
+
+              <CardContent className="p-4 space-y-3">
+                <div className="text-xs font-semibold text-muted-foreground tracking-wide uppercase mb-1">
+                  Connect For {polymer.code}
                 </div>
-                <div className="flex items-center justify-between py-2 border-b">
-                  <Mail className="h-5 w-5 text-primary" />
-                  <span className="text-sm font-medium">Email</span>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => handleEmail(polymer.email)}
-                    className="text-primary hover:text-primary-dark"
-                  >
-                    <MessageCircle className="h-5 w-5" />
-                  </Button>
-                </div>
-                <div className="flex items-center justify-between py-2">
-                  <MessageCircle className="h-5 w-5 text-green-600" />
-                  <span className="text-sm font-medium">WhatsApp</span>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => handleWhatsApp(polymer.phone)}
-                    className="text-green-600 hover:text-green-700"
-                  >
-                    <MessageCircle className="h-5 w-5" />
-                  </Button>
+
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between gap-2 py-1 border-b border-border/60">
+                    <div className="flex items-center gap-2 text-sm">
+                      <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-primary/10 text-primary">
+                        <Phone className="h-4 w-4" />
+                      </span>
+                      <span className="font-medium">Call</span>
+                    </div>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => handleCall(polymer.phone)}
+                      className="border-primary/60 text-primary hover:bg-primary hover:text-primary-foreground"
+                    >
+                      Call Desk
+                    </Button>
+                  </div>
+
+                  <div className="flex items-center justify-between gap-2 py-1 border-b border-border/60">
+                    <div className="flex items-center gap-2 text-sm">
+                      <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-primary/10 text-primary">
+                        <Mail className="h-4 w-4" />
+                      </span>
+                      <span className="font-medium">Email</span>
+                    </div>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => handleEmail(polymer.email)}
+                      className="border-primary/60 text-primary hover:bg-primary hover:text-primary-foreground"
+                    >
+                      Send Mail
+                    </Button>
+                  </div>
+
+                  <div className="flex items-center justify-between gap-2 py-1">
+                    <div className="flex items-center gap-2 text-sm">
+                      <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-primary/10 text-primary">
+                        <MessageCircle className="h-4 w-4" />
+                      </span>
+                      <span className="font-medium">WhatsApp</span>
+                    </div>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => handleWhatsApp(polymer.phone)}
+                      className="border-primary/60 text-primary hover:bg-primary hover:text-primary-foreground"
+                    >
+                      Chat Now
+                    </Button>
+                  </div>
                 </div>
               </CardContent>
             </Card>
           ))}
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
   );
 };
 
