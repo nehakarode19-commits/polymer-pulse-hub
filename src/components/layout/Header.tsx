@@ -117,8 +117,8 @@ const Header = () => {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 shadow-sm">
       <div className="container flex h-16 items-center justify-between px-4">
         {/* Logo */}
-        <Link to="/" className="flex items-center">
-          <img src={logo} alt="Polymer Bazaar" className="h-12 w-auto" />
+        <Link to="/" className="flex items-center gap-2 mr-8">
+          <img src={logo} alt="Polymer Bazaar" className="h-14 w-auto object-contain" />
         </Link>
 
         {/* Desktop Navigation - Centered and cleaner */}
