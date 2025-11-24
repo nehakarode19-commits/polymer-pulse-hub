@@ -124,14 +124,6 @@ const Header = () => {
         {/* Desktop Navigation - Centered and cleaner */}
         {showNavigation && (
           <nav className="hidden lg:flex items-center justify-center flex-1 space-x-6 mx-8">
-            {/* Home Link */}
-            <Link
-              to="/"
-              className="px-4 py-2 text-sm font-semibold text-foreground/90 hover:text-primary transition-colors relative after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary after:scale-x-0 hover:after:scale-x-100 after:transition-transform"
-            >
-              Home
-            </Link>
-
             {/* Buy & Sell */}
             <Link
               to="/buy-sell"
@@ -345,15 +337,6 @@ const Header = () => {
       {isMenuOpen && showNavigation && (
         <div className="lg:hidden border-t bg-background">
           <nav className="container px-4 py-4 space-y-2">
-            {/* Home Link */}
-            <Link
-              to="/"
-              className="block px-3 py-2 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-muted rounded-md transition-colors"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Home
-            </Link>
-
             {/* Buy & Sell */}
             <Link
               to="/buy-sell"
