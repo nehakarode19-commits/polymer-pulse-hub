@@ -74,17 +74,10 @@ const CrudeFeedstock = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4 }}
               >
-                <Card 
-                  className="border-2 border-primary/20 shadow-2xl relative overflow-hidden"
-                  style={{
-                    backgroundImage: `url(${chemicalPlantImg})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center'
-                  }}
-                >
-                  <div className="absolute inset-0 bg-gradient-to-br from-background/98 via-background/95 to-background/98" />
+                <Card className="border-2 border-primary/20 shadow-2xl bg-card">
+
                   
-                  <CardHeader className="relative z-10 border-b border-border">
+                  <CardHeader className="border-b border-border">
                     <div className="flex items-center justify-between">
                       <CardTitle className="flex items-center gap-3">
                         <div className="p-3 bg-primary/10 rounded-lg">
@@ -113,7 +106,7 @@ const CrudeFeedstock = () => {
                     </div>
                   </CardHeader>
 
-                  <CardContent className="relative z-10 pt-6">
+                  <CardContent className="pt-6">
                     {/* Chart */}
                     <div className="mb-6">
                       <ResponsiveContainer width="100%" height={400}>
