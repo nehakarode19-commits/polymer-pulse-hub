@@ -18,26 +18,6 @@ const Header = () => {
   const { user, signOut, hasActiveSubscription } = useAuth();
   const navigate = useNavigate();
 
-  const handleNavClick = (e: React.MouseEvent, path: string) => {
-    // Home and Pricing are always accessible
-    if (path === "/" || path === "/pricing") {
-      return;
-    }
-
-    // If user is not logged in, redirect to login
-    if (!user) {
-      e.preventDefault();
-      navigate("/login");
-      return;
-    }
-
-    // If user is logged in but doesn't have active subscription, show modal
-    if (!hasActiveSubscription()) {
-      e.preventDefault();
-      setShowSubscriptionModal(true);
-    }
-  };
-
   const mainMenuItems = [
     { label: "Buy & Sell", path: "/buy-sell" },
     { label: "About", path: "/about" },
@@ -50,6 +30,18 @@ const Header = () => {
     { label: "Career", path: "/career" },
   ];
 
+  // Show subscription modal when non-subscribed user tries to access content
+  const handleRestrictedAccess = () => {
+    if (!user) {
+      navigate("/login");
+    } else {
+      setShowSubscriptionModal(true);
+    }
+  };
+
+  // Only show navigation items if user has active subscription
+  const showNavigation = user && hasActiveSubscription();
+
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-20 items-center justify-between px-4">
@@ -58,19 +50,33 @@ const Header = () => {
           <img src={logo} alt="Polymer Bazaar" className="h-14 w-auto" />
         </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center space-x-1">
-          {mainMenuItems.map((item) => (
-            <Link
-              key={item.path}
-              to={item.path}
-              onClick={(e) => handleNavClick(e, item.path)}
-              className="px-3 py-2 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-muted rounded-md transition-colors"
+        {/* Desktop Navigation - Only show if subscribed */}
+        {showNavigation && (
+          <nav className="hidden lg:flex items-center space-x-1">
+            {mainMenuItems.map((item) => (
+              <Link
+                key={item.path}
+                to={item.path}
+                className="px-3 py-2 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-muted rounded-md transition-colors"
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+        )}
+        
+        {/* Show Pricing link for non-subscribed users */}
+        {!showNavigation && (
+          <nav className="hidden lg:flex items-center">
+            <Button 
+              onClick={handleRestrictedAccess}
+              variant="outline"
+              className="mr-2"
             >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
+              View Membership Plans
+            </Button>
+          </nav>
+        )}
 
         {/* Right Side Actions */}
         <div className="flex items-center space-x-4">
@@ -115,21 +121,29 @@ const Header = () => {
       {isMenuOpen && (
         <div className="lg:hidden border-t bg-background">
           <nav className="container px-4 py-4 space-y-2">
-            {mainMenuItems.map((item) => (
-              <Link
-                key={item.path}
-                to={item.path}
-                className="block px-3 py-2 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-muted rounded-md transition-colors"
-                onClick={(e) => {
-                  handleNavClick(e, item.path);
-                  if (item.path === "/" || item.path === "/pricing" || hasActiveSubscription()) {
-                    setIsMenuOpen(false);
-                  }
+            {showNavigation ? (
+              mainMenuItems.map((item) => (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  className="block px-3 py-2 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-muted rounded-md transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              ))
+            ) : (
+              <Button 
+                onClick={() => {
+                  handleRestrictedAccess();
+                  setIsMenuOpen(false);
                 }}
+                variant="outline"
+                className="w-full"
               >
-                {item.label}
-              </Link>
-            ))}
+                View Membership Plans
+              </Button>
+            )}
           </nav>
         </div>
       )}

@@ -11,25 +11,17 @@ const Footer = () => {
   const navigate = useNavigate();
   const [showSubscriptionModal, setShowSubscriptionModal] = useState(false);
 
-  const handleFooterLinkClick = (e: React.MouseEvent, path: string) => {
-    // Home and Pricing are always accessible
-    if (path === "/" || path === "/pricing") {
-      return;
-    }
+  // Only show footer links if user has active subscription
+  const showFooterLinks = user && hasActiveSubscription();
 
-    // If user is not logged in, redirect to login
+  const handleRestrictedAccess = () => {
     if (!user) {
-      e.preventDefault();
       navigate("/login");
-      return;
-    }
-
-    // If user is logged in but doesn't have active subscription, show modal
-    if (!hasActiveSubscription()) {
-      e.preventDefault();
+    } else {
       setShowSubscriptionModal(true);
     }
   };
+
   const otherLinks = [
     { label: "Buy & Sell", path: "/buy-sell" },
     { label: "About", path: "/about" },
@@ -75,40 +67,55 @@ const Footer = () => {
           </div>
 
           {/* Other Links */}
-          <div>
-            <h3 className="font-bold text-lg mb-4">Quick Links</h3>
-            <ul className="space-y-2 text-sm">
-              {otherLinks.map((link) => (
-                <li key={link.path}>
-                  <Link
-                    to={link.path}
-                    onClick={(e) => handleFooterLinkClick(e, link.path)}
-                    className="text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {showFooterLinks ? (
+            <>
+              <div>
+                <h3 className="font-bold text-lg mb-4">Quick Links</h3>
+                <ul className="space-y-2 text-sm">
+                  {otherLinks.map((link) => (
+                    <li key={link.path}>
+                      <Link
+                        to={link.path}
+                        className="text-muted-foreground hover:text-primary transition-colors"
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-          {/* Other Information */}
-          <div>
-            <h3 className="font-bold text-lg mb-4">Other Information</h3>
-            <ul className="space-y-2 text-sm">
-              {otherInfo.map((link) => (
-                <li key={link.path}>
-                  <Link
-                    to={link.path}
-                    onClick={(e) => handleFooterLinkClick(e, link.path)}
-                    className="text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+              {/* Other Information */}
+              <div>
+                <h3 className="font-bold text-lg mb-4">Other Information</h3>
+                <ul className="space-y-2 text-sm">
+                  {otherInfo.map((link) => (
+                    <li key={link.path}>
+                      <Link
+                        to={link.path}
+                        className="text-muted-foreground hover:text-primary transition-colors"
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </>
+          ) : (
+            <div className="md:col-span-2">
+              <h3 className="font-bold text-lg mb-4">Unlock Full Access</h3>
+              <p className="text-sm text-muted-foreground mb-4">
+                Subscribe to access all market data, trends, and exclusive content.
+              </p>
+              <Button 
+                onClick={handleRestrictedAccess}
+                className="bg-primary hover:bg-primary-dark"
+              >
+                View Membership Plans
+              </Button>
+            </div>
+          )}
 
           {/* Newsletter */}
           <div>

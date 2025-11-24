@@ -103,11 +103,14 @@ const Pricing = () => {
       if (error) throw error;
 
       toast({
-        title: "Success!",
-        description: "Your subscription has been activated.",
+        title: "🎉 Subscription Activated!",
+        description: `Welcome to ${planType} plan! You now have full access to all features.`,
       });
 
-      navigate("/");
+      // Wait a moment for the toast, then redirect and reload to update subscription status
+      setTimeout(() => {
+        window.location.href = "/";
+      }, 1500);
     } catch (error: any) {
       toast({
         title: "Error",
