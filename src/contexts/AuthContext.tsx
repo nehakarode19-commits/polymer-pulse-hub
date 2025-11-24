@@ -1,0 +1,159 @@
+import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+import { User, Session } from "@supabase/supabase-js";
+import { supabase } from "@/integrations/supabase/client";
+import { useNavigate } from "react-router-dom";
+
+interface Subscription {
+  id: string;
+  plan_type: string;
+  status: string;
+  end_date: string | null;
+}
+
+interface AuthContextType {
+  user: User | null;
+  session: Session | null;
+  subscription: Subscription | null;
+  loading: boolean;
+  signIn: (email: string, password: string) => Promise<void>;
+  signUp: (email: string, password: string, fullName: string, phone: string, city: string) => Promise<void>;
+  signOut: () => Promise<void>;
+  hasActiveSubscription: () => boolean;
+}
+
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
+
+export const AuthProvider = ({ children }: { children: ReactNode }) => {
+  const [user, setUser] = useState<User | null>(null);
+  const [session, setSession] = useState<Session | null>(null);
+  const [subscription, setSubscription] = useState<Subscription | null>(null);
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Set up auth state listener
+    const { data: { subscription: authSubscription } } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        setSession(session);
+        setUser(session?.user ?? null);
+        
+        // Fetch subscription when user changes
+        if (session?.user) {
+          setTimeout(() => fetchSubscription(session.user.id), 0);
+        } else {
+          setSubscription(null);
+        }
+      }
+    );
+
+    // Check for existing session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+      setUser(session?.user ?? null);
+      if (session?.user) {
+        fetchSubscription(session.user.id).finally(() => setLoading(false));
+      } else {
+        setLoading(false);
+      }
+    });
+
+    return () => authSubscription.unsubscribe();
+  }, []);
+
+  const fetchSubscription = async (userId: string) => {
+    try {
+      const { data, error } = await supabase
+        .from("subscriptions")
+        .select("*")
+        .eq("user_id", userId)
+        .maybeSingle();
+
+      if (error) throw error;
+      setSubscription(data);
+    } catch (error) {
+      console.error("Error fetching subscription:", error);
+      setSubscription(null);
+    }
+  };
+
+  const signIn = async (email: string, password: string) => {
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) throw error;
+    navigate("/");
+  };
+
+  const signUp = async (email: string, password: string, fullName: string, phone: string, city: string) => {
+    const redirectUrl = `${window.location.origin}/`;
+    
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        emailRedirectTo: redirectUrl,
+        data: {
+          full_name: fullName,
+          phone: phone,
+          city: city,
+        },
+      },
+    });
+
+    if (error) throw error;
+
+    // Update profile with additional info
+    if (data.user) {
+      await supabase
+        .from("profiles")
+        .update({ phone, city })
+        .eq("id", data.user.id);
+    }
+
+    // Redirect to pricing page
+    navigate("/pricing");
+  };
+
+  const signOut = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) throw error;
+    setSubscription(null);
+    navigate("/");
+  };
+
+  const hasActiveSubscription = () => {
+    if (!subscription) return false;
+    if (subscription.status !== "active") return false;
+    if (subscription.end_date) {
+      return new Date(subscription.end_date) > new Date();
+    }
+    return true;
+  };
+
+  return (
+    <AuthContext.Provider
+      value={{
+        user,
+        session,
+        subscription,
+        loading,
+        signIn,
+        signUp,
+        signOut,
+        hasActiveSubscription,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (context === undefined) {
+    throw new Error("useAuth must be used within an AuthProvider");
+  }
+  return context;
+};

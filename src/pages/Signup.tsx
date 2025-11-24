@@ -4,15 +4,27 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
+import { useToast } from "@/hooks/use-toast";
 
 const Signup = () => {
   const navigate = useNavigate();
+  const { signUp, user } = useAuth();
+  const { toast } = useToast();
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
     email: "",
+    password: "",
     city: "",
   });
+
+  // Redirect if already logged in
+  if (user) {
+    navigate("/pricing");
+    return null;
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -21,10 +33,25 @@ const Signup = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Navigate to pricing/subscription page
-    navigate("/pricing");
+    setLoading(true);
+
+    try {
+      await signUp(formData.email, formData.password, formData.name, formData.phone, formData.city);
+      toast({
+        title: "Account created!",
+        description: "Please choose a membership plan to continue.",
+      });
+    } catch (error: any) {
+      toast({
+        title: "Signup failed",
+        description: error.message || "Failed to create account",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -80,6 +107,20 @@ const Signup = () => {
             </div>
 
             <div className="space-y-2">
+              <Label htmlFor="password">Password *</Label>
+              <Input
+                id="password"
+                name="password"
+                type="password"
+                placeholder="Create a password (min. 6 characters)"
+                value={formData.password}
+                onChange={handleChange}
+                required
+                minLength={6}
+              />
+            </div>
+
+            <div className="space-y-2">
               <Label htmlFor="city">City *</Label>
               <Input
                 id="city"
@@ -93,9 +134,10 @@ const Signup = () => {
 
             <Button
               type="submit"
+              disabled={loading}
               className="w-full bg-primary hover:bg-primary-dark"
             >
-              Proceed to Payment
+              {loading ? "Creating Account..." : "Continue to Plans"}
             </Button>
           </form>
 
