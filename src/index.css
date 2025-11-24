@@ -8,13 +8,14 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Primary maroon/deep red brand colors */
-    --primary: 0 70% 45%;
+    /* Rich maroon/burgundy brand colors */
+    --primary: 348 75% 42%;
     --primary-foreground: 0 0% 100%;
-    --primary-light: 0 65% 55%;
-    --primary-dark: 0 70% 35%;
+    --primary-light: 348 70% 52%;
+    --primary-dark: 348 80% 32%;
     --accent-red: 0 85% 60%;
-    --accent-orange: 15 90% 60%;
+    --accent-orange: 25 95% 58%;
+    --accent-gold: 45 95% 58%;
     
     /* Backgrounds */
     --background: 0 0% 100%;
@@ -34,7 +35,7 @@ All colors MUST be HSL.
     --muted-foreground: 0 0% 45%;
     
     /* Accent colors */
-    --accent: 0 60% 45%;
+    --accent: 348 75% 42%;
     --accent-foreground: 0 0% 100%;
     
     /* Border and input */
@@ -55,11 +56,11 @@ All colors MUST be HSL.
     --warning-foreground: 0 0% 100%;
     
     /* Chart colors */
-    --chart-1: 0 65% 35%;
-    --chart-2: 0 55% 50%;
-    --chart-3: 0 45% 60%;
-    --chart-4: 0 35% 70%;
-    --chart-5: 0 25% 80%;
+    --chart-1: 348 75% 42%;
+    --chart-2: 348 65% 52%;
+    --chart-3: 348 55% 60%;
+    --chart-4: 25 75% 58%;
+    --chart-5: 45 75% 58%;
     
     /* Popover */
     --popover: 0 0% 100%;
@@ -69,10 +70,11 @@ All colors MUST be HSL.
     --radius: 0.5rem;
     
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(0 65% 35%), hsl(0 55% 50%));
-    --gradient-hero: linear-gradient(135deg, hsl(0 70% 35%) 0%, hsl(0 80% 45%) 50%, hsl(15 85% 55%) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(348 80% 32%), hsl(348 70% 52%));
+    --gradient-hero: linear-gradient(135deg, hsl(348 85% 28%) 0%, hsl(348 75% 42%) 50%, hsl(25 90% 55%) 100%);
     --gradient-card: linear-gradient(180deg, hsl(var(--card)) 0%, hsl(var(--muted)) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(var(--accent-red)) 0%, hsl(var(--accent-orange)) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(348 85% 55%) 0%, hsl(25 95% 58%) 100%);
+    --gradient-luxury: linear-gradient(135deg, hsl(348 80% 32%) 0%, hsl(348 70% 42%) 50%, hsl(45 85% 50%) 100%);
     
     /* Shadows */
     --shadow-sm: 0 1px 2px 0 hsl(0 0% 0% / 0.05);
@@ -95,10 +97,10 @@ All colors MUST be HSL.
     --card-foreground: 0 0% 98%;
     --card-hover: 0 0% 14%;
     
-    --primary: 0 65% 45%;
+    --primary: 348 70% 48%;
     --primary-foreground: 0 0% 100%;
-    --primary-light: 0 55% 55%;
-    --primary-dark: 0 70% 35%;
+    --primary-light: 348 65% 58%;
+    --primary-dark: 348 75% 38%;
     
     --secondary: 0 0% 15%;
     --secondary-foreground: 0 0% 90%;
@@ -106,7 +108,7 @@ All colors MUST be HSL.
     --muted: 0 0% 15%;
     --muted-foreground: 0 0% 60%;
     
-    --accent: 0 60% 50%;
+    --accent: 348 70% 48%;
     --accent-foreground: 0 0% 100%;
     
     --border: 0 0% 20%;

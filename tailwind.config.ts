@@ -30,6 +30,7 @@ export default {
           foreground: "hsl(var(--accent-foreground))",
           red: "hsl(var(--accent-red))",
           orange: "hsl(var(--accent-orange))",
+          gold: "hsl(var(--accent-gold))",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
