@@ -104,47 +104,46 @@ const Career = () => {
           <h2 className="text-3xl font-bold mb-8 border-l-4 border-maroon pl-4 text-maroon">Featured job</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {featuredJobs.map((job) => (
-              <Card key={job.id} className="hover:shadow-lg transition-all border-2 hover:border-maroon">
-                <CardContent className="p-6">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                        <span className="text-xl font-bold text-primary">G</span>
+              <Link to={`/job/${job.id}`} key={job.id}>
+                <Card className="hover:shadow-lg transition-all border-2 hover:border-maroon h-full cursor-pointer">
+                  <CardContent className="p-6">
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                          <span className="text-xl font-bold text-primary">G</span>
+                        </div>
+                        <div>
+                          <h3 className="font-bold text-lg">{job.title}</h3>
+                          <p className="text-sm text-muted-foreground">{job.company}</p>
+                        </div>
                       </div>
-                      <div>
-                        <h3 className="font-bold text-lg">{job.title}</h3>
-                        <p className="text-sm text-muted-foreground">{job.company}</p>
-                      </div>
+                      <Button variant="ghost" size="icon">
+                        <Bookmark className="h-4 w-4" />
+                      </Button>
                     </div>
-                    <Button variant="ghost" size="icon">
-                      <Bookmark className="h-4 w-4" />
-                    </Button>
-                  </div>
 
-                  <div className="flex items-center gap-2 mb-4">
-                    <span className={`px-3 py-1 rounded text-xs font-medium ${job.typeColor}`}>
-                      {job.type}
-                    </span>
-                    <span className="text-sm text-muted-foreground">
-                      Salary: {job.salary}
-                    </span>
-                  </div>
+                    <div className="flex items-center gap-2 mb-4">
+                      <span className={`px-3 py-1 rounded text-xs font-medium ${job.typeColor}`}>
+                        {job.type}
+                      </span>
+                      <span className="text-sm text-muted-foreground">
+                        Salary: {job.salary}
+                      </span>
+                    </div>
 
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
-                    <MapPin className="h-4 w-4" />
-                    <span>{job.location}</span>
-                  </div>
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
+                      <MapPin className="h-4 w-4" />
+                      <span>{job.location}</span>
+                    </div>
 
-                  <Button 
-                    asChild
-                    className="w-full bg-maroon hover:bg-maroon/90"
-                  >
-                    <Link to={`/job/${job.id}`}>
+                    <Button 
+                      className="w-full bg-maroon hover:bg-maroon/90"
+                    >
                       View Details
-                    </Link>
-                  </Button>
-                </CardContent>
-              </Card>
+                    </Button>
+                  </CardContent>
+                </Card>
+              </Link>
             ))}
           </div>
         </div>
