@@ -1,7 +1,6 @@
 import React from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import { ProtectedRoute } from "./components/ProtectedRoute";
@@ -23,10 +22,8 @@ import Career from "./pages/Career";
 import JobDetail from "./pages/JobDetail";
 import NotFound from "./pages/NotFound";
 
-const queryClient = new QueryClient();
-
 const App = () => (
-  <QueryClientProvider client={queryClient}>
+  <>
     <Toaster />
     <Sonner />
     <BrowserRouter>
@@ -55,7 +52,7 @@ const App = () => (
         </Routes>
       </AuthProvider>
     </BrowserRouter>
-  </QueryClientProvider>
+  </>
 );
 
 export default App;
