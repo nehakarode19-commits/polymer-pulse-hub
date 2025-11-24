@@ -246,19 +246,6 @@ const Header = () => {
             </DropdownMenu>
           </nav>
         )}
-        
-        {/* Show Pricing link for non-subscribed users */}
-        {!showNavigation && (
-          <nav className="hidden lg:flex items-center">
-            <Button 
-              onClick={handleRestrictedAccess}
-              variant="outline"
-              className="mr-2"
-            >
-              View Membership Plans
-            </Button>
-          </nav>
-        )}
 
         {/* Right Side Actions */}
         <div className="flex items-center space-x-4">
@@ -300,12 +287,10 @@ const Header = () => {
       </div>
 
       {/* Mobile Menu */}
-      {isMenuOpen && (
+      {isMenuOpen && showNavigation && (
         <div className="lg:hidden border-t bg-background">
           <nav className="container px-4 py-4 space-y-2">
-            {showNavigation ? (
-              <>
-                {mainMenuItems.map((item) => (
+            {mainMenuItems.map((item) => (
                   <Link
                     key={item.path}
                     to={item.path}
@@ -415,21 +400,8 @@ const Header = () => {
                     >
                       {item.label}
                     </Link>
-                  ))}
-                </div>
-              </>
-            ) : (
-              <Button 
-                onClick={() => {
-                  handleRestrictedAccess();
-                  setIsMenuOpen(false);
-                }}
-                variant="outline"
-                className="w-full"
-              >
-                View Membership Plans
-              </Button>
-            )}
+                ))}
+              </div>
           </nav>
         </div>
       )}
