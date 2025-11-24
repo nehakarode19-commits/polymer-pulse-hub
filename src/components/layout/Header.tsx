@@ -1,0 +1,114 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Menu, User, ChevronDown } from "lucide-react";
+
+const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const isLoggedIn = false; // This would come from auth context
+
+  const mainMenuItems = [
+    { label: "Buy & Sell", path: "/buy-sell" },
+    { label: "About", path: "/about" },
+    { label: "Crude & Feedstock", path: "/crude-feedstock" },
+    { label: "Global Bazaar", path: "/global-bazaar" },
+    { label: "Indian Bazaar", path: "/indian-bazaar" },
+    { label: "Historical Data", path: "/historical-data" },
+    { label: "Future Trend", path: "/future-trend" },
+    { label: "Services", path: "/services" },
+    { label: "Career", path: "/career" },
+  ];
+
+  return (
+    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="container flex h-16 items-center justify-between px-4">
+        {/* Logo */}
+        <Link to="/" className="flex items-center space-x-2">
+          <div className="text-2xl font-bold text-primary">
+            Polymer <span className="text-primary-light">Bazaar</span>
+          </div>
+        </Link>
+
+        {/* Desktop Navigation */}
+        <nav className="hidden lg:flex items-center space-x-1">
+          {mainMenuItems.map((item) => (
+            <Link
+              key={item.path}
+              to={item.path}
+              className="px-3 py-2 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-muted rounded-md transition-colors"
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+
+        {/* Right Side Actions */}
+        <div className="flex items-center space-x-4">
+          {isLoggedIn ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="flex items-center space-x-2">
+                  <User className="h-4 w-4" />
+                  <span className="hidden md:inline">Hiren Shah</span>
+                  <ChevronDown className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-48">
+                <DropdownMenuItem asChild>
+                  <Link to="/profile">My Profile</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/profile?tab=subscription">My Subscription</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link to="/profile?tab=payment-history">Payment History</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>Logout</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <Button asChild className="bg-primary hover:bg-primary-dark">
+              <Link to="/login">Login</Link>
+            </Button>
+          )}
+
+          {/* Mobile Menu Toggle */}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="lg:hidden"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+          >
+            <Menu className="h-6 w-6" />
+          </Button>
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <div className="lg:hidden border-t bg-background">
+          <nav className="container px-4 py-4 space-y-2">
+            {mainMenuItems.map((item) => (
+              <Link
+                key={item.path}
+                to={item.path}
+                className="block px-3 py-2 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-muted rounded-md transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
+      )}
+    </header>
+  );
+};
+
+export default Header;
