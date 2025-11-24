@@ -15,6 +15,13 @@ const JobDetail = () => {
     });
   };
 
+  const handleApplyNow = () => {
+    toast({
+      title: "Application Started",
+      description: "Your application has been submitted successfully!",
+    });
+  };
+
   return (
     <div className="min-h-screen">
       <section className="gradient-hero text-white py-20 px-4">
@@ -175,7 +182,11 @@ const JobDetail = () => {
                 </div>
 
                 <div className="mt-8 space-y-3">
-                  <Button className="w-full bg-maroon hover:bg-maroon/90" size="lg">
+                  <Button 
+                    className="w-full bg-maroon hover:bg-maroon/90" 
+                    size="lg"
+                    onClick={handleApplyNow}
+                  >
                     Apply Now
                   </Button>
                   <Button variant="outline" className="w-full" size="lg">
