@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Phone, Mail, MessageCircle } from "lucide-react";
 import { toast } from "sonner";
+import { motion } from "framer-motion";
 import polymerPpImg from "@/assets/polymer-card-pp.jpg";
 import polymerPvcImg from "@/assets/polymer-card-pvc.jpg";
 import polymerLldpeImg from "@/assets/polymer-card-lldpe.jpg";
@@ -104,119 +105,129 @@ const BuySell = () => {
   };
 
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen bg-gradient-to-b from-background via-background to-muted/20">
       {/* Hero Section */}
-      <header className="relative gradient-hero h-64 md:h-72 flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-background/10 via-background/0 to-background/40" />
-        <div className="container max-w-7xl mx-auto relative z-10 text-center">
-          <p className="text-sm font-semibold tracking-[0.2em] text-primary-foreground/80 uppercase mb-2">
-            Trade Desk
-          </p>
-          <h1 className="text-4xl md:text-5xl font-black tracking-tight text-primary-foreground mb-3">
-            Buy &amp; Sell Polymers
-          </h1>
-          <p className="text-sm md:text-base text-primary-foreground/80 max-w-2xl mx-auto">
-            Direct access to verified polymer suppliers with one-tap Call, Email, or WhatsApp support.
-          </p>
+      <header className="relative gradient-hero h-80 flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/80 to-accent-orange/90" />
+        <div className="container max-w-7xl mx-auto relative z-10 text-center px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <h1 className="text-5xl md:text-6xl font-black tracking-tight text-white mb-4 drop-shadow-2xl">
+              Buy &amp; Sell Polymers
+            </h1>
+            <p className="text-lg md:text-xl text-white/95 max-w-3xl mx-auto font-medium">
+              Direct access to verified polymer suppliers with one-tap Call, Email, or WhatsApp support.
+            </p>
+          </motion.div>
         </div>
       </header>
 
-      <section className="container max-w-7xl mx-auto px-4 py-12">
+      <section className="container max-w-7xl mx-auto px-4 py-16">
         {/* Polymer Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
           {polymers.map((polymer, index) => (
-            <Card
+            <motion.div
               key={index}
-              className="group hover:shadow-2xl transition-all duration-300 overflow-hidden border-2 border-maroon/15 bg-card"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.05, duration: 0.4 }}
             >
-              <div 
-                className="relative h-48 bg-cover bg-center flex items-end justify-between p-4"
-                style={{ backgroundImage: `url(${polymer.image})` }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                
-                <div className="relative z-10">
-                  <p className="text-xs font-medium text-white/70 tracking-[0.2em] uppercase drop-shadow-md">
-                    Polymer Code
-                  </p>
-                  <h3 className="text-3xl font-extrabold text-white drop-shadow-lg">{polymer.code}</h3>
-                  <p className="mt-1 text-xs text-white/80 line-clamp-2 drop-shadow-md">
-                    {polymer.name}
-                  </p>
-                </div>
-                
-                <div className="relative z-10 hidden md:flex flex-col items-end gap-1 text-right text-[10px] text-white/90 drop-shadow-md">
-                  <span className="inline-flex items-center gap-1">
-                    <Phone className="h-3 w-3" /> Live Desk
-                  </span>
-                  <span className="inline-flex items-center gap-1">
-                    <Mail className="h-3 w-3" /> Email Support
-                  </span>
-                  <span className="inline-flex items-center gap-1">
-                    <MessageCircle className="h-3 w-3" /> WhatsApp Alerts
-                  </span>
-                </div>
-              </div>
-
-              <CardContent className="p-4 space-y-3">
-                <div className="text-xs font-semibold text-muted-foreground tracking-wide uppercase mb-1">
-                  Connect For {polymer.code}
-                </div>
-
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between gap-2 py-1 border-b border-border/60">
-                    <div className="flex items-center gap-2 text-sm">
-                      <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-primary/10 text-primary">
-                        <Phone className="h-4 w-4" />
-                      </span>
-                      <span className="font-medium">Call</span>
-                    </div>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => handleCall(polymer.phone)}
-                      className="border-primary/60 text-primary hover:bg-primary hover:text-primary-foreground"
-                    >
-                      Call Desk
-                    </Button>
+              <Card className="group overflow-hidden border-2 border-border/50 hover:border-primary/50 bg-card shadow-lg hover:shadow-2xl transition-all duration-300 h-full flex flex-col">
+                {/* Image Header */}
+                <div 
+                  className="relative h-56 bg-cover bg-center overflow-hidden"
+                  style={{ backgroundImage: `url(${polymer.image})` }}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                  
+                  {/* Category Label */}
+                  <div className="absolute top-4 left-4 px-3 py-1.5 bg-primary/90 backdrop-blur-sm rounded-full">
+                    <span className="text-xs font-bold text-white tracking-wider uppercase">
+                      Polymer Code
+                    </span>
                   </div>
-
-                  <div className="flex items-center justify-between gap-2 py-1 border-b border-border/60">
-                    <div className="flex items-center gap-2 text-sm">
-                      <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-primary/10 text-primary">
-                        <Mail className="h-4 w-4" />
-                      </span>
-                      <span className="font-medium">Email</span>
-                    </div>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => handleEmail(polymer.email)}
-                      className="border-primary/60 text-primary hover:bg-primary hover:text-primary-foreground"
-                    >
-                      Send Mail
-                    </Button>
-                  </div>
-
-                  <div className="flex items-center justify-between gap-2 py-1">
-                    <div className="flex items-center gap-2 text-sm">
-                      <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-primary/10 text-primary">
-                        <MessageCircle className="h-4 w-4" />
-                      </span>
-                      <span className="font-medium">WhatsApp</span>
-                    </div>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => handleWhatsApp(polymer.phone)}
-                      className="border-primary/60 text-primary hover:bg-primary hover:text-primary-foreground"
-                    >
-                      Chat Now
-                    </Button>
+                  
+                  {/* Polymer Code */}
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <h3 className="text-4xl font-black text-white drop-shadow-2xl mb-2">
+                      {polymer.code}
+                    </h3>
+                    <p className="text-sm text-white/90 font-medium drop-shadow-lg line-clamp-1">
+                      {polymer.name}
+                    </p>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
+
+                <CardContent className="p-6 flex-1 flex flex-col">
+                  {/* Connect Header */}
+                  <div className="mb-4 pb-3 border-b border-border">
+                    <h4 className="text-sm font-bold text-primary uppercase tracking-wide">
+                      Connect for {polymer.code}
+                    </h4>
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div className="space-y-3 flex-1">
+                    {/* Call */}
+                    <div className="flex items-center justify-between gap-3">
+                      <div className="flex items-center gap-3 flex-1">
+                        <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary/20 transition-colors">
+                          <Phone className="h-5 w-5 text-primary" />
+                        </div>
+                        <span className="text-sm font-semibold text-foreground">Call</span>
+                      </div>
+                      <Button
+                        onClick={() => handleCall(polymer.phone)}
+                        size="sm"
+                        className="bg-primary hover:bg-primary/90 text-white shadow-md hover:shadow-lg transition-all"
+                      >
+                        Call Desk
+                      </Button>
+                    </div>
+
+                    {/* Email */}
+                    <div className="flex items-center justify-between gap-3">
+                      <div className="flex items-center gap-3 flex-1">
+                        <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary/20 transition-colors">
+                          <Mail className="h-5 w-5 text-primary" />
+                        </div>
+                        <span className="text-sm font-semibold text-foreground">Email</span>
+                      </div>
+                      <Button
+                        onClick={() => handleEmail(polymer.email)}
+                        size="sm"
+                        variant="outline"
+                        className="border-primary/60 text-primary hover:bg-primary hover:text-white transition-all"
+                      >
+                        Send Mail
+                      </Button>
+                    </div>
+
+                    {/* WhatsApp */}
+                    <div className="flex items-center justify-between gap-3">
+                      <div className="flex items-center gap-3 flex-1">
+                        <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary/20 transition-colors">
+                          <MessageCircle className="h-5 w-5 text-primary" />
+                        </div>
+                        <span className="text-sm font-semibold text-foreground">WhatsApp</span>
+                      </div>
+                      <Button
+                        onClick={() => handleWhatsApp(polymer.phone)}
+                        size="sm"
+                        variant="outline"
+                        className="border-primary/60 text-primary hover:bg-primary hover:text-white transition-all"
+                      >
+                        Chat Now
+                      </Button>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
         </div>
       </section>
