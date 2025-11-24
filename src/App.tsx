@@ -21,6 +21,9 @@ import IndianBazaar from "./pages/IndianBazaar";
 import HistoricalData from "./pages/HistoricalData";
 import FutureTrend from "./pages/FutureTrend";
 import Services from "./pages/Services";
+import Events from "./pages/Events";
+import PressRelease from "./pages/PressRelease";
+import WhatsAppChatbot from "./pages/WhatsAppChatbot";
 import Career from "./pages/Career";
 import JobDetail from "./pages/JobDetail";
 import NotFound from "./pages/NotFound";
@@ -52,6 +55,9 @@ const App = () => (
           <Route path="/historical-data" element={<Layout><ProtectedRoute><HistoricalData /></ProtectedRoute></Layout>} />
           <Route path="/future-trend" element={<Layout><ProtectedRoute><FutureTrend /></ProtectedRoute></Layout>} />
           <Route path="/services" element={<Layout><ProtectedRoute><Services /></ProtectedRoute></Layout>} />
+          <Route path="/events" element={<Layout><ProtectedRoute><Events /></ProtectedRoute></Layout>} />
+          <Route path="/press-release" element={<Layout><ProtectedRoute><PressRelease /></ProtectedRoute></Layout>} />
+          <Route path="/whatsapp-chatbot" element={<Layout><ProtectedRoute><WhatsAppChatbot /></ProtectedRoute></Layout>} />
           <Route path="/career" element={<Layout><ProtectedRoute><Career /></ProtectedRoute></Layout>} />
           <Route path="/job/:id" element={<Layout><ProtectedRoute><JobDetail /></ProtectedRoute></Layout>} />
           <Route path="/privacy-policy" element={<Layout><PrivacyPolicy /></Layout>} />
