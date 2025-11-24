@@ -33,14 +33,10 @@ const Footer = () => {
   ];
 
   const otherInfo = [
-    { label: "Essential Information", path: "/essential-info" },
-    { label: "Polymer Market News", path: "/news" },
-    { label: "Pricing", path: "/pricing" },
-    { label: "VIP Delegations", path: "/vip-delegations" },
-    { label: "Plant News", path: "/plant-news" },
+    { label: "Future Trend", path: "/future-trend" },
     { label: "Careers", path: "/career" },
-    { label: "Privacy Policy", path: "/privacy" },
-    { label: "Terms & Conditions", path: "/terms" },
+    { label: "Privacy Policy", path: "/privacy-policy" },
+    { label: "Terms & Conditions", path: "/terms-conditions" },
   ];
 
   return (
@@ -66,56 +62,39 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Other Links */}
-          {showFooterLinks ? (
-            <>
-              <div>
-                <h3 className="font-bold text-lg mb-4">Quick Links</h3>
-                <ul className="space-y-2 text-sm">
-                  {otherLinks.map((link) => (
-                    <li key={link.path}>
-                      <Link
-                        to={link.path}
-                        className="text-muted-foreground hover:text-primary transition-colors"
-                      >
-                        {link.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+          {/* Other Links - Always visible */}
+          <div>
+            <h3 className="font-bold text-lg mb-4">Quick Links</h3>
+            <ul className="space-y-2 text-sm">
+              {otherLinks.map((link) => (
+                <li key={link.path}>
+                  <Link
+                    to={link.path}
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-              {/* Other Information */}
-              <div>
-                <h3 className="font-bold text-lg mb-4">Other Information</h3>
-                <ul className="space-y-2 text-sm">
-                  {otherInfo.map((link) => (
-                    <li key={link.path}>
-                      <Link
-                        to={link.path}
-                        className="text-muted-foreground hover:text-primary transition-colors"
-                      >
-                        {link.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </>
-          ) : (
-            <div className="md:col-span-2">
-              <h3 className="font-bold text-lg mb-4">Unlock Full Access</h3>
-              <p className="text-sm text-muted-foreground mb-4">
-                Subscribe to access all market data, trends, and exclusive content.
-              </p>
-              <Button 
-                onClick={handleRestrictedAccess}
-                className="bg-primary hover:bg-primary-dark"
-              >
-                View Membership Plans
-              </Button>
-            </div>
-          )}
+          {/* Other Information - Always visible */}
+          <div>
+            <h3 className="font-bold text-lg mb-4">Other Information</h3>
+            <ul className="space-y-2 text-sm">
+              {otherInfo.map((link) => (
+                <li key={link.path}>
+                  <Link
+                    to={link.path}
+                    className="text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
           {/* Newsletter */}
           <div>

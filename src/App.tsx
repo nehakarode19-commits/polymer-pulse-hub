@@ -22,6 +22,8 @@ import Services from "./pages/Services";
 import Career from "./pages/Career";
 import JobDetail from "./pages/JobDetail";
 import NotFound from "./pages/NotFound";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsConditions from "./pages/TermsConditions";
 
 const App = () => (
   <>
@@ -48,6 +50,8 @@ const App = () => (
           <Route path="/services" element={<Layout><ProtectedRoute><Services /></ProtectedRoute></Layout>} />
           <Route path="/career" element={<Layout><ProtectedRoute><Career /></ProtectedRoute></Layout>} />
           <Route path="/job/:id" element={<Layout><ProtectedRoute><JobDetail /></ProtectedRoute></Layout>} />
+          <Route path="/privacy-policy" element={<Layout><PrivacyPolicy /></Layout>} />
+          <Route path="/terms-conditions" element={<Layout><TermsConditions /></Layout>} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
