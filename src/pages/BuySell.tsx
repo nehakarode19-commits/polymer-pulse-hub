@@ -127,103 +127,67 @@ const BuySell = () => {
 
       <section className="container max-w-7xl mx-auto px-4 py-16">
         {/* Polymer Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {polymers.map((polymer, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.05, duration: 0.4 }}
             >
-              <Card className="group overflow-hidden border-2 border-border/50 hover:border-primary/50 bg-card shadow-lg hover:shadow-2xl transition-all duration-300 h-full flex flex-col">
-                {/* Image Header */}
-                <div 
-                  className="relative h-56 bg-cover bg-center overflow-hidden"
-                  style={{ backgroundImage: `url(${polymer.image})` }}
-                >
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-                  
-                  {/* Category Label */}
-                  <div className="absolute top-4 left-4 px-3 py-1.5 bg-primary/90 backdrop-blur-sm rounded-full">
-                    <span className="text-xs font-bold text-white tracking-wider uppercase">
-                      Polymer Code
-                    </span>
-                  </div>
-                  
-                  {/* Polymer Code */}
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <h3 className="text-4xl font-black text-white drop-shadow-2xl mb-2">
-                      {polymer.code}
-                    </h3>
-                    <p className="text-sm text-white/90 font-medium drop-shadow-lg line-clamp-1">
-                      {polymer.name}
-                    </p>
-                  </div>
+              <Card className="overflow-hidden border border-border bg-card shadow-sm hover:shadow-lg transition-all duration-300 h-full flex flex-col">
+                {/* Image */}
+                <div className="relative h-48 w-full overflow-hidden">
+                  <img 
+                    src={polymer.image} 
+                    alt={polymer.name}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
 
-                <CardContent className="p-6 flex-1 flex flex-col">
-                  {/* Connect Header */}
-                  <div className="mb-4 pb-3 border-b border-border">
-                    <h4 className="text-sm font-bold text-primary uppercase tracking-wide">
-                      Connect for {polymer.code}
-                    </h4>
-                  </div>
+                {/* Polymer Code */}
+                <div className="py-4 text-center border-b border-border">
+                  <h3 className="text-2xl font-bold text-foreground tracking-wide">
+                    {polymer.code}
+                  </h3>
+                </div>
 
-                  {/* Action Buttons */}
-                  <div className="space-y-3 flex-1">
+                {/* Action Buttons */}
+                <CardContent className="p-4 flex-1 flex items-center justify-center">
+                  <div className="flex items-center justify-around w-full gap-2">
                     {/* Call */}
-                    <div className="flex items-center justify-between gap-3">
-                      <div className="flex items-center gap-3 flex-1">
-                        <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary/20 transition-colors">
-                          <Phone className="h-5 w-5 text-primary" />
-                        </div>
-                        <span className="text-sm font-semibold text-foreground">Call</span>
+                    <button
+                      onClick={() => handleCall(polymer.phone)}
+                      className="flex flex-col items-center gap-2 p-3 rounded-lg hover:bg-muted/50 transition-colors group"
+                    >
+                      <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                        <Phone className="h-5 w-5 text-primary" />
                       </div>
-                      <Button
-                        onClick={() => handleCall(polymer.phone)}
-                        size="sm"
-                        className="bg-primary hover:bg-primary/90 text-white shadow-md hover:shadow-lg transition-all"
-                      >
-                        Call Desk
-                      </Button>
-                    </div>
+                      <span className="text-xs font-semibold text-foreground/80">Call</span>
+                    </button>
 
                     {/* Email */}
-                    <div className="flex items-center justify-between gap-3">
-                      <div className="flex items-center gap-3 flex-1">
-                        <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary/20 transition-colors">
-                          <Mail className="h-5 w-5 text-primary" />
-                        </div>
-                        <span className="text-sm font-semibold text-foreground">Email</span>
+                    <button
+                      onClick={() => handleEmail(polymer.email)}
+                      className="flex flex-col items-center gap-2 p-3 rounded-lg hover:bg-muted/50 transition-colors group"
+                    >
+                      <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                        <Mail className="h-5 w-5 text-primary" />
                       </div>
-                      <Button
-                        onClick={() => handleEmail(polymer.email)}
-                        size="sm"
-                        variant="outline"
-                        className="border-primary/60 text-primary hover:bg-primary hover:text-white transition-all"
-                      >
-                        Send Mail
-                      </Button>
-                    </div>
+                      <span className="text-xs font-semibold text-foreground/80">Email</span>
+                    </button>
 
                     {/* WhatsApp */}
-                    <div className="flex items-center justify-between gap-3">
-                      <div className="flex items-center gap-3 flex-1">
-                        <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary/20 transition-colors">
-                          <MessageCircle className="h-5 w-5 text-primary" />
-                        </div>
-                        <span className="text-sm font-semibold text-foreground">WhatsApp</span>
+                    <button
+                      onClick={() => handleWhatsApp(polymer.phone)}
+                      className="flex flex-col items-center gap-2 p-3 rounded-lg hover:bg-muted/50 transition-colors group"
+                    >
+                      <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                        <MessageCircle className="h-5 w-5 text-primary" />
                       </div>
-                      <Button
-                        onClick={() => handleWhatsApp(polymer.phone)}
-                        size="sm"
-                        variant="outline"
-                        className="border-primary/60 text-primary hover:bg-primary hover:text-white transition-all"
-                      >
-                        Chat Now
-                      </Button>
-                    </div>
+                      <span className="text-xs font-semibold text-foreground/80">WhatsApp</span>
+                    </button>
                   </div>
                 </CardContent>
               </Card>
