@@ -21,13 +21,27 @@ const Header = () => {
   const mainMenuItems = [
     { label: "Buy & Sell", path: "/buy-sell" },
     { label: "About", path: "/about" },
-    { label: "Crude & Feedstock", path: "/crude-feedstock" },
     { label: "Global Bazaar", path: "/global-bazaar" },
     { label: "Indian Bazaar", path: "/indian-bazaar" },
     { label: "Historical Data", path: "/historical-data" },
     { label: "Future Trend", path: "/future-trend" },
     { label: "Services", path: "/services" },
     { label: "Career", path: "/career" },
+  ];
+
+  const crudeFeedstockItems = [
+    { label: "ACN - Acrylonitrile", path: "/crude-feedstock" },
+    { label: "Butadine", path: "/crude-feedstock" },
+    { label: "Crude", path: "/crude-feedstock" },
+    { label: "EDC", path: "/crude-feedstock" },
+    { label: "Ethylene", path: "/crude-feedstock" },
+    { label: "MEG", path: "/crude-feedstock" },
+    { label: "Naphtha", path: "/crude-feedstock" },
+    { label: "PTA", path: "/crude-feedstock" },
+    { label: "Propylene", path: "/crude-feedstock" },
+    { label: "Styrene", path: "/crude-feedstock" },
+    { label: "VCM", path: "/crude-feedstock" },
+    { label: "Vinyl Acetate - VA", path: "/crude-feedstock" },
   ];
 
   // Show subscription modal when non-subscribed user tries to access content
@@ -62,6 +76,25 @@ const Header = () => {
                 {item.label}
               </Link>
             ))}
+            
+            {/* Crude & Feedstock Dropdown */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="px-3 py-2 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-muted">
+                  Crude & Feedstock
+                  <ChevronDown className="ml-1 h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56 bg-background">
+                {crudeFeedstockItems.map((item) => (
+                  <DropdownMenuItem key={item.label} asChild>
+                    <Link to={item.path} className="cursor-pointer">
+                      {item.label}
+                    </Link>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
           </nav>
         )}
         
@@ -122,16 +155,35 @@ const Header = () => {
         <div className="lg:hidden border-t bg-background">
           <nav className="container px-4 py-4 space-y-2">
             {showNavigation ? (
-              mainMenuItems.map((item) => (
-                <Link
-                  key={item.path}
-                  to={item.path}
-                  className="block px-3 py-2 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-muted rounded-md transition-colors"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              ))
+              <>
+                {mainMenuItems.map((item) => (
+                  <Link
+                    key={item.path}
+                    to={item.path}
+                    className="block px-3 py-2 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-muted rounded-md transition-colors"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+                
+                {/* Crude & Feedstock in Mobile */}
+                <div className="space-y-1">
+                  <div className="px-3 py-2 text-sm font-semibold text-foreground">
+                    Crude & Feedstock
+                  </div>
+                  {crudeFeedstockItems.map((item) => (
+                    <Link
+                      key={item.label}
+                      to={item.path}
+                      className="block px-6 py-2 text-sm text-foreground/80 hover:text-foreground hover:bg-muted rounded-md transition-colors"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              </>
             ) : (
               <Button 
                 onClick={() => {
