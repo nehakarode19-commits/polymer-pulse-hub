@@ -6,6 +6,7 @@ import { Globe, TrendingUp, DollarSign } from "lucide-react";
 import { motion } from "framer-motion";
 import globalTradingImg from "@/assets/global-trading.jpg";
 import refineryHeroImg from "@/assets/refinery-hero.jpg";
+import globalBazaarDarkImg from "@/assets/global-bazaar-dark.jpg";
 
 const GlobalBazaar = () => {
   const [selectedMonth, setSelectedMonth] = useState("January");
@@ -20,9 +21,9 @@ const GlobalBazaar = () => {
       {/* Hero Section */}
       <section 
         className="relative h-80 bg-cover bg-center bg-no-repeat flex items-center justify-center"
-        style={{ backgroundImage: `url(${globalTradingImg})` }}
+        style={{ backgroundImage: `url(${globalBazaarDarkImg})` }}
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/70 to-accent-orange/80" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-primary/40 to-black/50" />
         <div className="container relative z-10 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
