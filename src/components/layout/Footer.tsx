@@ -86,7 +86,7 @@ const Footer = () => {
           <div>
             <h3 className="font-bold text-lg mb-4">Get in Touch</h3>
             <p className="text-sm text-muted-foreground mb-4">
-              You can contact us to send email to us
+              You can contact Us to send email to us
             </p>
             <div className="flex space-x-2">
               <Input

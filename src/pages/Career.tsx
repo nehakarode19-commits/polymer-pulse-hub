@@ -6,14 +6,14 @@ import { Search, Briefcase, MapPin, DollarSign, Clock, Bookmark } from "lucide-r
 
 const Career = () => {
   const categories = [
-    { name: "Graphics & Design", openPositions: 12 },
-    { name: "Code & Programming", openPositions: 18 },
-    { name: "Digital Marketing", openPositions: 8 },
-    { name: "Video & Animation", openPositions: 6 },
-    { name: "Music & Audio", openPositions: 4 },
-    { name: "Account & Finance", openPositions: 10 },
-    { name: "Health & Care", openPositions: 5 },
-    { name: "Data & Science", openPositions: 15 },
+    { name: "Graphics & Design", openPositions: 357 },
+    { name: "Code & Programming", openPositions: 312 },
+    { name: "Digital Marketing", openPositions: 297 },
+    { name: "Video & Animation", openPositions: 247 },
+    { name: "Music & Audio", openPositions: 204 },
+    { name: "Account & Finance", openPositions: 167 },
+    { name: "Health & Care", openPositions: 125 },
+    { name: "Data & Science", openPositions: 57 },
   ];
 
   const featuredJobs = [

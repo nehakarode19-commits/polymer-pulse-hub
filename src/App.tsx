@@ -17,6 +17,7 @@ import HistoricalData from "./pages/HistoricalData";
 import FutureTrend from "./pages/FutureTrend";
 import Services from "./pages/Services";
 import Career from "./pages/Career";
+import JobDetail from "./pages/JobDetail";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -41,6 +42,7 @@ const App = () => (
           <Route path="/future-trend" element={<Layout><FutureTrend /></Layout>} />
           <Route path="/services" element={<Layout><Services /></Layout>} />
           <Route path="/career" element={<Layout><Career /></Layout>} />
+          <Route path="/job/:id" element={<Layout><JobDetail /></Layout>} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

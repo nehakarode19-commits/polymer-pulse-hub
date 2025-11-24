@@ -43,11 +43,12 @@ const About = () => {
         </TabsList>
 
         <TabsContent value="about" className="space-y-12">
-          <div className="prose max-w-none">
+          <div className="prose max-w-none mb-12">
+            <p className="text-lg text-muted-foreground leading-relaxed mb-4">
+              Polymer Bazaar is a leading information services provider specializing in polymer and petrochemical markets. Since our founding, we have been committed to delivering precise, transparent market intelligence to industry professionals worldwide.
+            </p>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Polymer Bazaar is the world's leading information services provider for the global polymer
-              and petrochemical industry. Since 2007, we've been delivering accurate, transparent, and
-              actionable market intelligence to manufacturers, traders, and procurement professionals worldwide.
+              Our platform offers comprehensive daily updates, historical data analysis, future trend predictions, and real-time pricing intelligence across all major polymer categories including PP, HDPE, LDPE, LLDPE, PVC, and PET.
             </p>
           </div>
 
@@ -59,8 +60,7 @@ const About = () => {
                 </div>
                 <h3 className="text-2xl font-bold mb-4">Our Mission</h3>
                 <p className="text-muted-foreground">
-                  To empower the global polymer industry with real-time, accurate market intelligence
-                  that drives informed decision-making and sustainable growth across the petrochemical value chain.
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque efficitur nisl sodales egestas lobortis. Curabitur vel magna eu elit pulvinar interdum ac vel felis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.
                 </p>
               </CardContent>
             </Card>
@@ -72,8 +72,7 @@ const About = () => {
                 </div>
                 <h3 className="text-2xl font-bold mb-4">Our Vision</h3>
                 <p className="text-muted-foreground">
-                  To be the most trusted and comprehensive polymer market intelligence platform globally,
-                  connecting buyers and sellers while promoting transparency and efficiency in polymer trading.
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque efficitur nisl sodales egestas lobortis. Curabitur vel magna eu elit pulvinar interdum ac vel felis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.
                 </p>
               </CardContent>
             </Card>
@@ -85,8 +84,7 @@ const About = () => {
                 </div>
                 <h3 className="text-2xl font-bold mb-4">Our Purpose</h3>
                 <p className="text-muted-foreground">
-                  We exist to bring clarity to complex polymer markets, helping businesses optimize sourcing,
-                  maximize opportunities, and navigate market volatility with confidence through data-driven insights.
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque efficitur nisl sodales egestas lobortis. Curabitur vel magna eu elit pulvinar interdum ac vel felis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.
                 </p>
               </CardContent>
             </Card>
@@ -98,20 +96,32 @@ const About = () => {
                 </div>
                 <h3 className="text-2xl font-bold mb-4">Our History</h3>
                 <p className="text-muted-foreground">
-                  Founded in Ahmedabad in 2007, Polymer Bazaar has grown from a regional price reporting
-                  service to a global platform serving 10,000+ users across 50+ countries with 24/7 market coverage.
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque efficitur nisl sodales egestas lobortis. Curabitur vel magna eu elit pulvinar interdum ac vel felis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.
                 </p>
               </CardContent>
             </Card>
           </div>
 
-          <div>
+          <div className="mb-12">
             <h3 className="text-3xl font-bold mb-6 text-center">Our Clients</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {clients.map((client, index) => (
                 <Card key={index} className="hover:shadow-lg transition-all">
                   <CardContent className="p-6 text-center">
                     <p className="font-semibold text-muted-foreground">{client}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-3xl font-bold mb-6 text-center">Media Partners</h3>
+            <div className="flex justify-center gap-8 flex-wrap">
+              {["PLAS", "TATIFLASE", "GCCA"].map((partner, index) => (
+                <Card key={index} className="hover:shadow-lg transition-all">
+                  <CardContent className="p-8 text-center min-w-32">
+                    <p className="font-bold text-xl text-primary">{partner}</p>
                   </CardContent>
                 </Card>
               ))}
@@ -130,7 +140,7 @@ const About = () => {
                 <CardContent className="p-6">
                   <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
                     <span className="text-3xl font-bold text-primary">
-                      {member.name.split(' ').map(n => n[0]).join('')}
+                      {member.name.split(" ").map(n => n[0]).join("")}
                     </span>
                   </div>
                   <h3 className="font-bold text-lg mb-1">{member.name}</h3>
@@ -151,8 +161,8 @@ const About = () => {
             <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-primary/20"></div>
             <div className="space-y-12">
               {timeline.map((item, index) => (
-                <div key={index} className={`flex items-center ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}>
-                  <div className={`w-1/2 ${index % 2 === 0 ? 'pr-8 text-right' : 'pl-8 text-left'}`}>
+                <div key={index} className={`flex items-center ${index % 2 === 0 ? "flex-row" : "flex-row-reverse"}`}>
+                  <div className={`w-1/2 ${index % 2 === 0 ? "pr-8 text-right" : "pl-8 text-left"}`}>
                     <Card className="inline-block">
                       <CardContent className="p-6">
                         <h3 className="text-2xl font-bold text-primary mb-2">{item.year}</h3>
@@ -178,6 +188,15 @@ const About = () => {
               Polymer Bazaar partners with leading petrochemical trade publications, industry associations,
               and media outlets to deliver comprehensive market coverage and expert analysis.
             </p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            {["PLAS", "TATIFLASE", "GCCA"].map((partner, index) => (
+              <Card key={index} className="hover:shadow-lg transition-all">
+                <CardContent className="p-12 text-center">
+                  <p className="font-bold text-2xl text-primary">{partner}</p>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </TabsContent>
 
