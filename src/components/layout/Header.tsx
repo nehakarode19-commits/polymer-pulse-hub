@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import logo from "@/assets/logo.png";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -27,12 +28,10 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center justify-between px-4">
+      <div className="container flex h-20 items-center justify-between px-4">
         {/* Logo */}
-        <Link to="/" className="flex items-center space-x-2">
-          <div className="text-2xl font-bold text-primary">
-            Polymer <span className="text-primary-light">Bazaar</span>
-          </div>
+        <Link to="/" className="flex items-center">
+          <img src={logo} alt="Polymer Bazaar" className="h-14 w-auto" />
         </Link>
 
         {/* Desktop Navigation */}
