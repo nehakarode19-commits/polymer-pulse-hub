@@ -292,19 +292,23 @@ const Home = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Button size="lg" className="bg-white text-primary hover:bg-white shadow-2xl hover:shadow-white/20 transition-all duration-300 text-xl px-12 py-8 rounded-xl font-bold group">
-                  <Calculator className="mr-3 h-7 w-7 group-hover:rotate-12 transition-transform" />
-                  Start Calculator
-                  <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-2 transition-transform" />
+                <Button asChild size="lg" className="bg-white text-primary hover:bg-white shadow-2xl hover:shadow-white/20 transition-all duration-300 text-xl px-12 py-8 rounded-xl font-bold group">
+                  <Link to="/pricing">
+                    <Calculator className="mr-3 h-7 w-7 group-hover:rotate-12 transition-transform" />
+                    Get Started
+                    <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-2 transition-transform" />
+                  </Link>
                 </Button>
               </motion.div>
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Button size="lg" variant="outline" className="bg-white/10 border-2 border-white/40 text-white hover:bg-white/20 backdrop-blur-md shadow-2xl transition-all duration-300 text-xl px-12 py-8 rounded-xl font-bold group">
-                  <Play className="mr-3 h-7 w-7 group-hover:scale-110 transition-transform" />
-                  Watch Demo
+                <Button asChild size="lg" variant="outline" className="bg-white/10 border-2 border-white/40 text-white hover:bg-white/20 backdrop-blur-md shadow-2xl transition-all duration-300 text-xl px-12 py-8 rounded-xl font-bold group">
+                  <Link to="/about">
+                    <Play className="mr-3 h-7 w-7 group-hover:scale-110 transition-transform" />
+                    Learn More
+                  </Link>
                 </Button>
               </motion.div>
             </motion.div>

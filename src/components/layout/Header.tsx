@@ -9,10 +9,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Menu, User, ChevronDown } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const isLoggedIn = false; // This would come from auth context
+  const { user, signOut } = useAuth();
 
   const mainMenuItems = [
     { label: "Buy & Sell", path: "/buy-sell" },
@@ -49,12 +50,12 @@ const Header = () => {
 
         {/* Right Side Actions */}
         <div className="flex items-center space-x-4">
-          {isLoggedIn ? (
+          {user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="ghost" className="flex items-center space-x-2">
                   <User className="h-4 w-4" />
-                  <span className="hidden md:inline">Hiren Shah</span>
+                  <span className="hidden md:inline">{user.email?.split('@')[0]}</span>
                   <ChevronDown className="h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
@@ -63,12 +64,9 @@ const Header = () => {
                   <Link to="/profile">My Profile</Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link to="/profile?tab=subscription">My Subscription</Link>
+                  <Link to="/pricing">My Subscription</Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link to="/profile?tab=payment-history">Payment History</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem>Logout</DropdownMenuItem>
+                <DropdownMenuItem onClick={signOut}>Logout</DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (

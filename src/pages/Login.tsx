@@ -4,29 +4,42 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Link } from "react-router-dom";
+import { useAuth } from "@/contexts/AuthContext";
+import { useToast } from "@/hooks/use-toast";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [phone, setPhone] = useState("");
-  const [otp, setOtp] = useState(["", "", "", ""]);
-  const [showOtp, setShowOtp] = useState(false);
-  const [timer, setTimer] = useState(30);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const { signIn, user } = useAuth();
+  const { toast } = useToast();
+  const navigate = useNavigate();
 
-  const handleSendOtp = () => {
-    setShowOtp(true);
-    // Start timer countdown
-  };
+  // Redirect if already logged in
+  if (user) {
+    navigate("/");
+    return null;
+  }
 
-  const handleOtpChange = (index: number, value: string) => {
-    if (value.length <= 1 && /^\d*$/.test(value)) {
-      const newOtp = [...otp];
-      newOtp[index] = value;
-      setOtp(newOtp);
-      
-      // Auto-focus next input
-      if (value && index < 3) {
-        const nextInput = document.getElementById(`otp-${index + 1}`);
-        nextInput?.focus();
-      }
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      await signIn(email, password);
+      toast({
+        title: "Welcome back!",
+        description: "You have successfully logged in.",
+      });
+    } catch (error: any) {
+      toast({
+        title: "Login failed",
+        description: error.message || "Invalid email or password",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -43,73 +56,39 @@ const Login = () => {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
-          <div className="space-y-2">
-            <Label htmlFor="phone">Mobile Number</Label>
-            <Input
-              id="phone"
-              type="tel"
-              placeholder="Enter your mobile number"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-            />
-          </div>
+          <form onSubmit={handleLogin} className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="email">Email Address</Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
 
-          {showOtp && (
-            <>
-              <div className="space-y-2">
-                <Label>Enter OTP</Label>
-                <div className="flex gap-3 justify-center">
-                  {otp.map((digit, index) => (
-                    <Input
-                      key={index}
-                      id={`otp-${index}`}
-                      type="text"
-                      maxLength={1}
-                      value={digit}
-                      onChange={(e) => handleOtpChange(index, e.target.value)}
-                      className="w-14 h-14 text-center text-2xl"
-                    />
-                  ))}
-                </div>
-                <p className="text-sm text-center text-muted-foreground mt-2">
-                  Resend OTP in {timer}s
-                </p>
-              </div>
-            </>
-          )}
+            <div className="space-y-2">
+              <Label htmlFor="password">Password</Label>
+              <Input
+                id="password"
+                type="password"
+                placeholder="Enter your password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
 
-          {!showOtp ? (
             <Button
-              onClick={handleSendOtp}
+              type="submit"
+              disabled={loading}
               className="w-full bg-primary hover:bg-primary-dark"
             >
-              Send OTP
+              {loading ? "Logging in..." : "Login"}
             </Button>
-          ) : (
-            <Button
-              className="w-full bg-primary hover:bg-primary-dark"
-            >
-              Login
-            </Button>
-          )}
-
-          <div className="relative">
-            <div className="absolute inset-0 flex items-center">
-              <span className="w-full border-t" />
-            </div>
-            <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-card px-2 text-muted-foreground">Or</span>
-            </div>
-          </div>
-
-          <div className="space-y-3">
-            <Button variant="outline" className="w-full">
-              Continue with Google
-            </Button>
-            <Button variant="outline" className="w-full">
-              Continue with Email
-            </Button>
-          </div>
+          </form>
 
           <p className="text-center text-sm">
             Don't have an account?{" "}
