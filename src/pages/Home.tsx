@@ -100,9 +100,6 @@ const Home = () => {
     { name: "Polypropylene (PP)", code: "PP", description: "• Packaging & automotive\n• Textile applications\n• High-performance thermoplastic" },
     { name: "High Density Polyethylene", code: "HDPE", description: "• Bottles & pipes\n• Industrial containers\n• Excellent chemical resistance" },
     { name: "Low Density Polyethylene", code: "LDPE", description: "• Flexible film & bags\n• Packaging applications\n• Soft & flexible" },
-    { name: "Linear Low Density PE", code: "LLDPE", description: "• Stretch film\n• Flexible packaging\n• Enhanced strength" },
-    { name: "Polyvinyl Chloride", code: "PVC", description: "• Pipes & cables\n• Construction applications\n• Versatile polymer" },
-    { name: "Polyethylene Terephthalate", code: "PET", description: "• Bottles & containers\n• Textile fibers\n• Clear & strong" },
   ];
 
   const whyPolymerBazaar = [
