@@ -3,15 +3,18 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ArrowRight, Calculator, TrendingUp, Globe, BarChart3, Users, ShieldCheck, Clock, ChevronLeft, ChevronRight, Sparkles, Award, Zap } from "lucide-react";
+import { ArrowRight, Calculator, TrendingUp, Globe, BarChart3, Users, ChevronLeft, ChevronRight, Sparkles, Award, Zap, Rocket, LineChart, Target, Star, CheckCircle2, Play, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 
 const Home = () => {
   const [activeInsightTab, setActiveInsightTab] = useState("blog");
   const [carouselIndex, setCarouselIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
+  const { scrollYProgress } = useScroll();
+  const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.2], [1, 0.95]);
 
   useEffect(() => {
     setIsVisible(true);
@@ -94,181 +97,309 @@ const Home = () => {
   ];
 
   const whyPolymerBazaar = [
-    { title: "20+ Years of Trust", image: "trusted" },
-    { title: "Global Coverage", image: "global" },
-    { title: "Real-Time Data", image: "realtime" },
-    { title: "Expert Analysis", image: "expert" },
-    { title: "Multi-Channel Access", image: "multichannel" },
+    { title: "20+ Years of Trust", icon: Award },
+    { title: "Global Coverage", icon: Globe },
+    { title: "Real-Time Data", icon: Zap },
+    { title: "Expert Analysis", icon: Star },
+    { title: "Multi-Channel Access", icon: Rocket },
   ];
 
   const events = [
     {
       title: "Polymer Bazar Korea Conference & Exhibition",
       location: "South Korea",
-      image: "korea",
     },
     {
       title: "Polymer Bazar London Conference & Exhibition",
       location: "London UK",
-      image: "london",
     },
     {
       title: "Polymer Bazar Singapore Conference & Exhibition",
       location: "Singapore",
-      image: "singapore",
     },
     {
       title: "Polymer Bazar Dubai Conference & Exhibition",
       location: "Dubai UAE",
-      image: "dubai",
     },
   ];
 
   const currentInsights = insights[activeInsightTab as keyof typeof insights] || insights.blog;
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gradient-to-b from-background via-secondary/20 to-background">
       {/* Hero Banner Section */}
-      <section className="relative gradient-hero text-white py-32 px-4 overflow-hidden">
-        {/* Animated background elements */}
+      <section className="relative gradient-hero text-white min-h-[90vh] flex items-center px-4 overflow-hidden">
+        {/* Advanced Animated background */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMzLjMxNCAwIDYgMi42ODYgNiA2cy0yLjY4NiA2LTYgNi02LTIuNjg2LTYtNiAyLjY4Ni02IDYtNnoiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii4xIi8+PC9nPjwvc3ZnPg==')] opacity-10"></div>
+          {/* Grid Pattern */}
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.05)_1px,transparent_1px)] bg-[size:50px_50px] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_50%,black,transparent)]"></div>
+          
+          {/* Floating Particles */}
+          {[...Array(20)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-2 h-2 bg-white rounded-full"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                y: [0, -30, 0],
+                opacity: [0.2, 0.8, 0.2],
+                scale: [1, 1.5, 1],
+              }}
+              transition={{
+                duration: 3 + Math.random() * 4,
+                repeat: Infinity,
+                delay: Math.random() * 2,
+                ease: "easeInOut",
+              }}
+            />
+          ))}
+          
+          {/* Large Gradient Blobs */}
           <motion.div
-            className="absolute top-20 left-10 w-72 h-72 bg-white/10 rounded-full blur-3xl"
-            animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.3, 0.5, 0.3],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-          <motion.div
-            className="absolute bottom-20 right-10 w-96 h-96 bg-accent-orange/20 rounded-full blur-3xl"
+            className="absolute -top-40 -left-40 w-96 h-96 bg-white/10 rounded-full blur-3xl"
             animate={{
               scale: [1, 1.3, 1],
-              opacity: [0.2, 0.4, 0.2],
+              x: [0, 50, 0],
+              y: [0, 30, 0],
+              opacity: [0.3, 0.5, 0.3],
             }}
             transition={{
               duration: 10,
               repeat: Infinity,
               ease: "easeInOut",
+            }}
+          />
+          <motion.div
+            className="absolute top-1/4 right-0 w-[600px] h-[600px] bg-accent-orange/15 rounded-full blur-3xl"
+            animate={{
+              scale: [1, 1.2, 1],
+              x: [0, -50, 0],
+              y: [0, 50, 0],
+              opacity: [0.2, 0.4, 0.2],
+            }}
+            transition={{
+              duration: 12,
+              repeat: Infinity,
+              ease: "easeInOut",
               delay: 1,
+            }}
+          />
+          <motion.div
+            className="absolute bottom-0 left-1/3 w-[500px] h-[500px] bg-accent-red/15 rounded-full blur-3xl"
+            animate={{
+              scale: [1, 1.4, 1],
+              rotate: [0, 90, 0],
+              opacity: [0.2, 0.35, 0.2],
+            }}
+            transition={{
+              duration: 15,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 2,
             }}
           />
         </div>
 
         <div className="container max-w-7xl mx-auto relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: isVisible ? 1 : 0, y: isVisible ? 0 : 30 }}
-            transition={{ duration: 0.8 }}
-            className="text-center space-y-8"
+            style={{ opacity, scale }}
+            className="text-center space-y-10"
           >
+            {/* Animated Badge */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.6 }}
             >
-              <Badge variant="secondary" className="text-sm px-6 py-2 bg-white/20 text-white border-white/30 backdrop-blur-sm shadow-lg">
-                <Award className="w-4 h-4 mr-2 inline" />
-                Trusted 20+ Years
+              <Badge className="text-base px-8 py-3 bg-white/20 text-white border-white/40 backdrop-blur-md shadow-2xl hover:bg-white/30 transition-all">
+                <Award className="w-5 h-5 mr-2 inline animate-pulse" />
+                Trusted 20+ Years in Industry
               </Badge>
             </motion.div>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+            {/* Main Heading with Gradient */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.4, duration: 0.8 }}
-              className="text-6xl md:text-7xl lg:text-8xl font-bold text-balance leading-tight"
             >
-              POLYMER BAZAAR
-            </motion.h1>
+              <h1 className="text-7xl md:text-8xl lg:text-9xl font-black tracking-tight mb-6">
+                <span className="inline-block bg-gradient-to-r from-white via-white to-white/80 bg-clip-text text-transparent drop-shadow-2xl">
+                  POLYMER
+                </span>
+                <br />
+                <span className="inline-block bg-gradient-to-r from-white/90 to-white/70 bg-clip-text text-transparent">
+                  BAZAAR
+                </span>
+              </h1>
+            </motion.div>
 
+            {/* Animated Tagline */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6, duration: 0.8 }}
-              className="flex items-center justify-center gap-6 text-3xl md:text-4xl font-bold flex-wrap"
+              className="relative inline-block"
             >
-              <motion.span
-                animate={{ scale: [1, 1.05, 1] }}
-                transition={{ duration: 2, repeat: Infinity, delay: 0 }}
-              >
-                Price
-              </motion.span>
-              <span className="text-white/50">|</span>
-              <motion.span
-                animate={{ scale: [1, 1.05, 1] }}
-                transition={{ duration: 2, repeat: Infinity, delay: 0.7 }}
-              >
-                Prediction
-              </motion.span>
-              <span className="text-white/50">|</span>
-              <motion.span
-                animate={{ scale: [1, 1.05, 1] }}
-                transition={{ duration: 2, repeat: Infinity, delay: 1.4 }}
-              >
-                Profit
-              </motion.span>
+              <div className="flex items-center justify-center gap-8 text-4xl md:text-5xl font-bold flex-wrap px-8 py-4 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 shadow-2xl">
+                <motion.div
+                  className="flex items-center gap-3"
+                  whileHover={{ scale: 1.05 }}
+                >
+                  <LineChart className="w-8 h-8" />
+                  <span className="bg-gradient-to-r from-white to-white/90 bg-clip-text text-transparent">Price</span>
+                </motion.div>
+                <span className="text-white/40">|</span>
+                <motion.div
+                  className="flex items-center gap-3"
+                  whileHover={{ scale: 1.05 }}
+                >
+                  <Target className="w-8 h-8" />
+                  <span className="bg-gradient-to-r from-white to-white/90 bg-clip-text text-transparent">Prediction</span>
+                </motion.div>
+                <span className="text-white/40">|</span>
+                <motion.div
+                  className="flex items-center gap-3"
+                  whileHover={{ scale: 1.05 }}
+                >
+                  <TrendingUp className="w-8 h-8" />
+                  <span className="bg-gradient-to-r from-white to-white/90 bg-clip-text text-transparent">Profit</span>
+                </motion.div>
+              </div>
             </motion.div>
 
+            {/* Description */}
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.8, duration: 0.8 }}
-              className="text-xl md:text-2xl text-white/90 max-w-4xl mx-auto text-balance leading-relaxed"
+              className="text-2xl md:text-3xl text-white/95 max-w-5xl mx-auto leading-relaxed font-light"
             >
-              Polymer Bazar Offers Accurate Transparent, And Community-Drive Updates
+              Polymer Bazar Offers Accurate, Transparent, And Community-Driven Updates
             </motion.p>
 
+            {/* CTA Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1, duration: 0.8 }}
+              className="flex flex-col sm:flex-row gap-6 justify-center pt-8"
+            >
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button size="lg" className="bg-white text-primary hover:bg-white shadow-2xl hover:shadow-white/20 transition-all duration-300 text-xl px-12 py-8 rounded-xl font-bold group">
+                  <Calculator className="mr-3 h-7 w-7 group-hover:rotate-12 transition-transform" />
+                  Start Calculator
+                  <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-2 transition-transform" />
+                </Button>
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button size="lg" variant="outline" className="bg-white/10 border-2 border-white/40 text-white hover:bg-white/20 backdrop-blur-md shadow-2xl transition-all duration-300 text-xl px-12 py-8 rounded-xl font-bold group">
+                  <Play className="mr-3 h-7 w-7 group-hover:scale-110 transition-transform" />
+                  Watch Demo
+                </Button>
+              </motion.div>
+            </motion.div>
+
+            {/* Stats Row */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1, duration: 0.8 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center pt-6"
+              transition={{ delay: 1.2, duration: 0.8 }}
+              className="grid grid-cols-3 gap-8 max-w-4xl mx-auto pt-16"
             >
-              <Button size="lg" className="bg-white text-primary hover:bg-white/90 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 text-lg px-8 py-6">
-                <Calculator className="mr-2 h-6 w-6" />
-                Calculator
-              </Button>
+              {[
+                { number: "20+", label: "Years Experience" },
+                { number: "10K+", label: "Active Users" },
+                { number: "50+", label: "Countries" },
+              ].map((stat, i) => (
+                <motion.div
+                  key={i}
+                  whileHover={{ y: -5 }}
+                  className="text-center p-6 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20"
+                >
+                  <div className="text-5xl font-bold mb-2">{stat.number}</div>
+                  <div className="text-white/80 text-sm font-medium">{stat.label}</div>
+                </motion.div>
+              ))}
             </motion.div>
           </motion.div>
         </div>
+
+        {/* Scroll Indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5, duration: 1 }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2"
+        >
+          <motion.div
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="w-6 h-10 border-2 border-white/40 rounded-full flex items-start justify-center p-2"
+          >
+            <motion.div
+              animate={{ y: [0, 12, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="w-1.5 h-1.5 bg-white rounded-full"
+            />
+          </motion.div>
+        </motion.div>
       </section>
 
       {/* Latest Insights Section */}
-      <section className="py-24 px-4 bg-gradient-to-b from-background to-secondary/30">
-        <div className="container max-w-7xl mx-auto">
+      <section className="py-32 px-4 relative overflow-hidden">
+        {/* Background Decoration */}
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/20 to-background"></div>
+        <div className="absolute top-20 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 left-0 w-96 h-96 bg-accent-orange/5 rounded-full blur-3xl"></div>
+        
+        <div className="container max-w-7xl mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-16"
+            className="text-center mb-20"
           >
-            <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">
-              <Sparkles className="w-4 h-4 mr-2" />
-              Intelligence Hub
-            </Badge>
-            <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-accent-orange bg-clip-text text-transparent">
-              Latest Insights
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              className="inline-block"
+            >
+              <Badge className="mb-6 bg-gradient-to-r from-primary/10 to-accent-orange/10 text-primary border-primary/20 px-6 py-3 text-base">
+                <Sparkles className="w-5 h-5 mr-2 animate-pulse" />
+                Intelligence Hub
+              </Badge>
+            </motion.div>
+            <h2 className="text-6xl md:text-7xl font-black mb-8">
+              <span className="bg-gradient-to-r from-primary via-accent-red to-accent-orange bg-clip-text text-transparent">
+                Latest Insights
+              </span>
             </h2>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Our analysts across the global petrochemical supply chain are tracking markets 24/7 to give you Price, Prediction, and Profit intelligence. We deliver this through a mix of reports, videos, webinars, and more.
+            <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
+              Our analysts across the global petrochemical supply chain are tracking markets 24/7 to give you <span className="text-primary font-semibold">Price, Prediction, and Profit</span> intelligence. We deliver this through a mix of reports, videos, webinars, and more.
             </p>
           </motion.div>
 
-          <Tabs value={activeInsightTab} onValueChange={setActiveInsightTab} className="mb-8">
-            <TabsList className="grid w-full grid-cols-2 md:grid-cols-6">
-              <TabsTrigger value="select">Select</TabsTrigger>
-              <TabsTrigger value="news">News</TabsTrigger>
-              <TabsTrigger value="blog">Blog</TabsTrigger>
-              <TabsTrigger value="insightPapers">Insight Papers</TabsTrigger>
-              <TabsTrigger value="webinars">Webinars</TabsTrigger>
-              <TabsTrigger value="videoInsights">Video Insights</TabsTrigger>
+          <Tabs value={activeInsightTab} onValueChange={setActiveInsightTab} className="mb-12">
+            <TabsList className="grid w-full grid-cols-2 md:grid-cols-6 h-auto p-2 bg-secondary/50 backdrop-blur-sm border border-border/50">
+              {["select", "news", "blog", "insightPapers", "webinars", "videoInsights"].map((tab) => (
+                <TabsTrigger 
+                  key={tab}
+                  value={tab}
+                  className="data-[state=active]:bg-white data-[state=active]:shadow-lg data-[state=active]:text-primary py-3 px-6 rounded-lg font-semibold transition-all capitalize"
+                >
+                  {tab === "insightPapers" ? "Insight Papers" : tab === "videoInsights" ? "Video Insights" : tab}
+                </TabsTrigger>
+              ))}
             </TabsList>
           </Tabs>
 
@@ -276,34 +407,61 @@ const Home = () => {
             {currentInsights.map((insight, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
+                whileHover={{ y: -10 }}
+                className="h-full"
               >
-                <Card className="group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 overflow-hidden border-2 hover:border-primary/50 h-full">
-                  <div className="h-52 bg-gradient-to-br from-primary via-accent-red to-accent-orange relative overflow-hidden">
+                <Card className="group hover:shadow-2xl transition-all duration-500 overflow-hidden border-2 hover:border-primary/50 h-full bg-gradient-to-b from-card to-card/50 backdrop-blur-sm">
+                  <div className="h-56 bg-gradient-to-br from-primary via-accent-red to-accent-orange relative overflow-hidden">
+                    {/* Animated Overlay */}
                     <motion.div
-                      className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"
-                      whileHover={{ opacity: 0.3 }}
+                      className="absolute inset-0"
+                      initial={{ opacity: 0 }}
+                      whileHover={{ opacity: 1 }}
                       transition={{ duration: 0.3 }}
-                    />
-                    <div className="absolute top-4 right-4">
-                      <Sparkles className="w-6 h-6 text-white opacity-60" />
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <motion.div
+                          initial={{ scale: 0 }}
+                          whileHover={{ scale: 1 }}
+                          className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center"
+                        >
+                          <ArrowRight className="w-8 h-8 text-white" />
+                        </motion.div>
+                      </div>
+                    </motion.div>
+                    
+                    {/* Decorative Elements */}
+                    <div className="absolute top-4 right-4 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center">
+                      <Sparkles className="w-6 h-6 text-white" />
                     </div>
+                    <motion.div
+                      className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-white/0 via-white/50 to-white/0"
+                      initial={{ scaleX: 0 }}
+                      whileHover={{ scaleX: 1 }}
+                      transition={{ duration: 0.5 }}
+                    />
                   </div>
-                  <CardContent className="p-6">
-                    <Badge variant="secondary" className="mb-4 bg-primary/10 text-primary">
+                  
+                  <CardContent className="p-8">
+                    <Badge className="mb-4 bg-primary/10 text-primary border-primary/20 px-3 py-1">
                       {insight.type}
                     </Badge>
-                    <h3 className="font-bold text-xl mb-3 group-hover:text-primary transition-colors leading-tight">
+                    <h3 className="font-bold text-2xl mb-4 group-hover:text-primary transition-colors leading-tight line-clamp-2">
                       {insight.title}
                     </h3>
-                    <p className="text-sm text-muted-foreground mb-3 font-medium">{insight.date}</p>
-                    <p className="text-sm text-muted-foreground mb-5 leading-relaxed">{insight.excerpt}</p>
-                    <Button variant="link" className="p-0 h-auto text-primary font-semibold group/btn">
-                      Read More 
-                      <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
+                      <CheckCircle2 className="w-4 h-4" />
+                      <span className="font-medium">{insight.date}</span>
+                    </div>
+                    <p className="text-sm text-muted-foreground mb-6 leading-relaxed line-clamp-3">{insight.excerpt}</p>
+                    <Button variant="link" className="p-0 h-auto text-primary font-semibold group/btn text-base">
+                      Read Full Article
+                      <ArrowRight className="ml-2 h-5 w-5 group-hover/btn:translate-x-2 transition-transform" />
                     </Button>
                   </CardContent>
                 </Card>
@@ -314,73 +472,168 @@ const Home = () => {
       </section>
 
       {/* Global Map Section */}
-      <section className="py-24 px-4 bg-gradient-to-br from-secondary via-background to-secondary/50 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxjaXJjbGUgY3g9IjIwIiBjeT0iMjAiIHI9IjEiIGZpbGw9ImhzbCh2YXIoLS1wcmltYXJ5KSkiIGZpbGwtb3BhY2l0eT0iMC4xIi8+PC9nPjwvc3ZnPg==')] opacity-40"></div>
+      <section className="py-32 px-4 relative overflow-hidden">
+        {/* Animated Background */}
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-gradient-to-br from-secondary via-background to-secondary/50"></div>
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxjaXJjbGUgY3g9IjIwIiBjeT0iMjAiIHI9IjEiIGZpbGw9ImhzbCh2YXIoLS1wcmltYXJ5KSkiIGZpbGwtb3BhY2l0eT0iMC4xIi8+PC9nPjwvc3ZnPg==')] opacity-40"></div>
+        </div>
+        
         <div className="container max-w-7xl mx-auto relative z-10">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-20 items-center">
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="relative h-[500px] bg-gradient-to-br from-primary/10 via-accent-red/10 to-accent-orange/10 rounded-2xl flex items-center justify-center shadow-2xl overflow-hidden"
+              className="relative h-[600px] rounded-3xl overflow-hidden shadow-2xl group"
             >
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-0 opacity-20"
-              >
-                <Globe className="h-full w-full text-primary" />
-              </motion.div>
-              <Globe className="h-40 w-40 text-primary/30 relative z-10" />
-              {[
-                { top: "25%", left: "25%", delay: 0 },
-                { top: "33%", right: "33%", delay: 0.5 },
-                { bottom: "33%", left: "50%", delay: 1 },
-                { top: "50%", right: "20%", delay: 1.5 },
-                { bottom: "25%", right: "40%", delay: 2 },
-              ].map((position, i) => (
+              {/* Main Globe Container */}
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-accent-red/20 to-accent-orange/20 backdrop-blur-sm">
+                {/* Rotating Globe */}
                 <motion.div
-                  key={i}
-                  className="absolute w-4 h-4 rounded-full bg-primary shadow-lg shadow-primary/50"
-                  style={position}
-                  animate={{
-                    scale: [1, 1.5, 1],
-                    opacity: [0.5, 1, 0.5],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    delay: position.delay,
-                  }}
-                />
-              ))}
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 80, repeat: Infinity, ease: "linear" }}
+                  className="absolute inset-0 opacity-30"
+                >
+                  <Globe className="h-full w-full text-primary" />
+                </motion.div>
+                
+                {/* Center Globe */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <motion.div
+                    animate={{ scale: [1, 1.05, 1] }}
+                    transition={{ duration: 4, repeat: Infinity }}
+                  >
+                    <Globe className="h-48 w-48 text-primary/40" />
+                  </motion.div>
+                </div>
+                
+                {/* Animated Markers */}
+                {[
+                  { top: "20%", left: "20%", delay: 0, label: "USA" },
+                  { top: "25%", right: "25%", delay: 0.5, label: "Europe" },
+                  { bottom: "30%", left: "45%", delay: 1, label: "Asia" },
+                  { top: "45%", right: "15%", delay: 1.5, label: "Middle East" },
+                  { bottom: "20%", right: "35%", delay: 2, label: "India" },
+                ].map((position, i) => (
+                  <motion.div
+                    key={i}
+                    className="absolute group/marker"
+                    style={{ top: position.top, left: position.left, right: position.right, bottom: position.bottom }}
+                    initial={{ scale: 0, opacity: 0 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    transition={{ delay: position.delay, duration: 0.5 }}
+                  >
+                    <motion.div
+                      animate={{
+                        scale: [1, 1.5, 1],
+                        opacity: [0.5, 1, 0.5],
+                      }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        delay: position.delay,
+                      }}
+                      className="w-5 h-5 rounded-full bg-primary shadow-lg shadow-primary/50 relative cursor-pointer"
+                    >
+                      {/* Ping Effect */}
+                      <span className="absolute inset-0 rounded-full bg-primary animate-ping"></span>
+                    </motion.div>
+                    
+                    {/* Tooltip */}
+                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1 bg-black/80 text-white text-xs rounded-lg opacity-0 group-hover/marker:opacity-100 transition-opacity whitespace-nowrap">
+                      {position.label}
+                    </div>
+                  </motion.div>
+                ))}
+                
+                {/* Connection Lines */}
+                <svg className="absolute inset-0 w-full h-full opacity-20">
+                  <motion.line
+                    x1="20%" y1="20%" x2="45%" y2="45%"
+                    stroke="hsl(var(--primary))"
+                    strokeWidth="2"
+                    initial={{ pathLength: 0 }}
+                    whileInView={{ pathLength: 1 }}
+                    transition={{ duration: 2, delay: 0.5 }}
+                  />
+                  <motion.line
+                    x1="75%" y1="25%" x2="45%" y2="45%"
+                    stroke="hsl(var(--primary))"
+                    strokeWidth="2"
+                    initial={{ pathLength: 0 }}
+                    whileInView={{ pathLength: 1 }}
+                    transition={{ duration: 2, delay: 1 }}
+                  />
+                </svg>
+              </div>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
+              className="space-y-8"
             >
-              <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">
-                <Globe className="w-4 h-4 mr-2" />
-                Worldwide Coverage
-              </Badge>
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">Global Market Coverage</h2>
-              <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
-                Polymer Bazaar bridges the world&apos;s polymer markets, delivering real-time prices, trends, and intelligence across key regions. From the USA to Europe, Middle East to Asia, we track volatility and opportunities across 10+ countries including China, Nepal, Sri Lanka, Bangladesh, and KSA. Access localized data on PP, HDPE, PVC via SMS, WhatsApp, or our platform—serving an $800+ billion industry growing at 5.4% CAGR.
+              <div>
+                <Badge className="mb-6 bg-gradient-to-r from-primary/10 to-accent-orange/10 text-primary border-primary/20 px-6 py-3 text-base">
+                  <Globe className="w-5 h-5 mr-2" />
+                  Worldwide Coverage
+                </Badge>
+                <h2 className="text-5xl md:text-6xl font-black mb-8 leading-tight">
+                  Global Market <span className="bg-gradient-to-r from-primary to-accent-orange bg-clip-text text-transparent">Coverage</span>
+                </h2>
+              </div>
+              
+              <p className="text-xl text-muted-foreground leading-relaxed">
+                Polymer Bazaar bridges the world's polymer markets, delivering <span className="text-primary font-semibold">real-time prices, trends, and intelligence</span> across key regions. From the USA to Europe, Middle East to Asia, we track volatility and opportunities across <span className="text-primary font-semibold">10+ countries</span> including China, Nepal, Sri Lanka, Bangladesh, and KSA.
               </p>
-              <div className="flex flex-wrap gap-3 mb-8">
-                {["USA", "Europe", "China", "India", "UAE", "Bangladesh"].map((country, i) => (
-                  <Badge key={i} variant="outline" className="text-sm px-4 py-2">
-                    {country}
-                  </Badge>
+              
+              <div className="grid grid-cols-2 gap-4">
+                {["USA", "Europe", "China", "India", "UAE", "Bangladesh", "Nepal", "Sri Lanka"].map((country, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1 }}
+                    whileHover={{ scale: 1.05, x: 5 }}
+                  >
+                    <Badge variant="outline" className="w-full justify-center text-base px-4 py-3 border-2 hover:border-primary hover:bg-primary/5 transition-all cursor-pointer">
+                      <CheckCircle2 className="w-4 h-4 mr-2 text-primary" />
+                      {country}
+                    </Badge>
+                  </motion.div>
                 ))}
               </div>
-              <Button size="lg" className="bg-primary hover:bg-primary-dark shadow-lg hover:shadow-xl transition-all hover:scale-105">
-                More Info
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
+              
+              <div className="bg-gradient-to-r from-primary/5 to-accent-orange/5 p-8 rounded-2xl border-2 border-primary/10">
+                <div className="grid grid-cols-3 gap-6 text-center">
+                  <div>
+                    <div className="text-4xl font-bold text-primary mb-2">$800B+</div>
+                    <div className="text-sm text-muted-foreground">Industry Size</div>
+                  </div>
+                  <div>
+                    <div className="text-4xl font-bold text-primary mb-2">5.4%</div>
+                    <div className="text-sm text-muted-foreground">CAGR Growth</div>
+                  </div>
+                  <div>
+                    <div className="text-4xl font-bold text-primary mb-2">24/7</div>
+                    <div className="text-sm text-muted-foreground">Market Tracking</div>
+                  </div>
+                </div>
+              </div>
+              
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button size="lg" className="bg-gradient-to-r from-primary to-accent-red hover:from-primary-dark hover:to-accent-red shadow-xl hover:shadow-2xl transition-all text-lg px-10 py-6 group">
+                  Explore Markets
+                  <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-2 transition-transform" />
+                </Button>
+              </motion.div>
             </motion.div>
           </div>
         </div>
