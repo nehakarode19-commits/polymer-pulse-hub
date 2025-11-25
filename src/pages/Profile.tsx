@@ -77,22 +77,22 @@ const Profile = () => {
         </Card>
 
         <Tabs defaultValue="profile" className="space-y-6">
-          <TabsList className="w-full justify-center bg-muted/30 rounded-none h-auto p-0 mb-8">
+          <TabsList className="w-full justify-center bg-primary rounded-none h-auto p-0 mb-8">
             <TabsTrigger 
               value="profile"
-              className="flex-1 rounded-none data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-none px-8 py-4 text-base font-normal data-[state=inactive]:text-muted-foreground"
+              className="flex-1 rounded-none data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-none px-8 py-4 text-base font-normal data-[state=inactive]:text-white"
             >
               My Profile
             </TabsTrigger>
             <TabsTrigger 
               value="subscription"
-              className="flex-1 rounded-none data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-none px-8 py-4 text-base font-normal data-[state=inactive]:text-muted-foreground"
+              className="flex-1 rounded-none data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-none px-8 py-4 text-base font-normal data-[state=inactive]:text-white"
             >
               My Subscription
             </TabsTrigger>
             <TabsTrigger 
               value="payment-history"
-              className="flex-1 rounded-none data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-none px-8 py-4 text-base font-normal data-[state=inactive]:text-muted-foreground"
+              className="flex-1 rounded-none data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-none px-8 py-4 text-base font-normal data-[state=inactive]:text-white"
             >
               Payment History
             </TabsTrigger>
