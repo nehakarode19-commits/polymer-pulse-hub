@@ -128,90 +128,90 @@ const JobDetail = () => {
 
           {/* Sidebar */}
           <div className="space-y-6">
-            <Card className="sticky top-20 border-2">
-              <CardContent className="p-6">
-                <h3 className="text-xl font-bold mb-6 text-primary">Job Overview</h3>
-                <div className="space-y-4">
-                  <div className="flex items-start gap-3">
-                    <Calendar className="h-5 w-5 text-primary mt-0.5" />
-                    <div>
-                      <p className="text-sm text-muted-foreground">Job Posted:</p>
-                      <p className="font-medium">14 Jun, 2021</p>
+            <div className="lg:sticky lg:top-24 space-y-6">
+              <Card className="border-2">
+                <CardContent className="p-6">
+                  <h3 className="text-xl font-bold mb-6 text-primary">Job Overview</h3>
+                  <div className="space-y-4">
+                    <div className="flex items-start gap-3">
+                      <Calendar className="h-5 w-5 text-primary mt-0.5" />
+                      <div>
+                        <p className="text-sm text-muted-foreground">Job Posted:</p>
+                        <p className="font-medium">14 Jun, 2021</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-3">
+                      <Clock className="h-5 w-5 text-primary mt-0.5" />
+                      <div>
+                        <p className="text-sm text-muted-foreground">Job expire in:</p>
+                        <p className="font-medium">14 Aug, 2021</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-3">
+                      <TrendingUp className="h-5 w-5 text-primary mt-0.5" />
+                      <div>
+                        <p className="text-sm text-muted-foreground">Job Level:</p>
+                        <p className="font-medium">Entry Level</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-3">
+                      <DollarSign className="h-5 w-5 text-primary mt-0.5" />
+                      <div>
+                        <p className="text-sm text-muted-foreground">Salary:</p>
+                        <p className="font-medium">$20,000 - $25,000</p>
+                        <p className="text-xs text-muted-foreground">Yearly salary</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-3">
+                      <GraduationCap className="h-5 w-5 text-primary mt-0.5" />
+                      <div>
+                        <p className="text-sm text-muted-foreground">Education:</p>
+                        <p className="font-medium">Graduation</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-3">
+                      <MapPin className="h-5 w-5 text-primary mt-0.5" />
+                      <div>
+                        <p className="text-sm text-muted-foreground">Job Location:</p>
+                        <p className="font-medium">Dhaka, Bangladesh</p>
+                      </div>
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-3">
-                    <Clock className="h-5 w-5 text-primary mt-0.5" />
-                    <div>
-                      <p className="text-sm text-muted-foreground">Job expire in:</p>
-                      <p className="font-medium">14 Aug, 2021</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-3">
-                    <TrendingUp className="h-5 w-5 text-primary mt-0.5" />
-                    <div>
-                      <p className="text-sm text-muted-foreground">Job Level:</p>
-                      <p className="font-medium">Entry Level</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-3">
-                    <DollarSign className="h-5 w-5 text-primary mt-0.5" />
-                    <div>
-                      <p className="text-sm text-muted-foreground">Salary:</p>
-                      <p className="font-medium">$20,000 - $25,000</p>
-                      <p className="text-xs text-muted-foreground">Yearly salary</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-3">
-                    <GraduationCap className="h-5 w-5 text-primary mt-0.5" />
-                    <div>
-                      <p className="text-sm text-muted-foreground">Education:</p>
-                      <p className="font-medium">Graduation</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-3">
-                    <MapPin className="h-5 w-5 text-primary mt-0.5" />
-                    <div>
-                      <p className="text-sm text-muted-foreground">Job Location:</p>
-                      <p className="font-medium">Dhaka, Bangladesh</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-8 space-y-3">
-                  <Button 
-                    className="w-full bg-primary hover:bg-primary/90 text-white" 
-                    size="lg"
-                    onClick={handleApplyNow}
-                  >
-                    Apply Now
-                  </Button>
-                  <Button variant="outline" className="w-full" size="lg">
-                    <Bookmark className="h-4 w-4 mr-2" />
-                    Save Job
-                  </Button>
-                  
-                  <div className="pt-4">
-                    <p className="text-sm font-medium mb-2">Share this job:</p>
-                    <Button
-                      variant="outline"
-                      className="w-full"
-                      onClick={handleCopyLink}
+                  <div className="mt-8 space-y-3">
+                    <Button 
+                      className="w-full bg-primary hover:bg-primary/90 text-white" 
+                      size="lg"
+                      onClick={handleApplyNow}
                     >
-                      <Copy className="h-4 w-4 mr-2" />
-                      Copy Links
+                      Apply Now
                     </Button>
+                    <Button variant="outline" className="w-full" size="lg">
+                      <Bookmark className="h-4 w-4 mr-2" />
+                      Save Job
+                    </Button>
+                    
+                    <div className="pt-4">
+                      <p className="text-sm font-medium mb-2">Share this job:</p>
+                      <Button
+                        variant="outline"
+                        className="w-full"
+                        onClick={handleCopyLink}
+                      >
+                        <Copy className="h-4 w-4 mr-2" />
+                        Copy Links
+                      </Button>
+                    </div>
                   </div>
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
 
-            {/* Job Application Form */}
-            <div className="mt-8">
+              {/* Job Application Form */}
               <JobApplicationForm jobTitle="Technical Support Specialist" jobId="1" />
             </div>
           </div>
