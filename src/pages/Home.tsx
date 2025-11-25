@@ -827,12 +827,12 @@ const Home = () => {
               >
                 <Card className="hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 h-full border-2 hover:border-primary/30">
                   <CardContent className="p-8">
-                    <motion.div
-                      className="w-16 h-16 rounded-xl bg-gradient-to-br from-primary to-accent-orange flex items-center justify-center mb-6 shadow-lg"
-                      whileHover={{ scale: 1.1, rotate: 5 }}
+                  <motion.div
+                      className="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary via-primary to-primary/90 flex items-center justify-center mb-6 shadow-xl"
+                      whileHover={{ scale: 1.08, rotate: 3 }}
                       transition={{ duration: 0.3 }}
                     >
-                      <item.icon className="h-8 w-8 text-white" />
+                      <item.icon className="h-10 w-10 text-white" strokeWidth={2.5} />
                     </motion.div>
                     <h3 className="text-2xl font-bold mb-5 leading-tight">{item.title}</h3>
                     {item.description && (
