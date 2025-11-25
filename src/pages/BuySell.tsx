@@ -135,63 +135,62 @@ const BuySell = () => {
               viewport={{ once: true }}
               transition={{ delay: index * 0.05, duration: 0.4 }}
             >
-              <Card className="overflow-hidden border border-border hover:border-primary transition-all duration-300 group">
-                {/* Image with Polymer Code Overlay */}
-                <div className="relative h-48 w-full overflow-hidden">
+              <Card className="overflow-hidden border-0 bg-card shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 group">
+                {/* Image */}
+                <div className="relative h-52 w-full overflow-hidden rounded-t-lg">
                   <img 
                     src={polymer.image} 
                     alt={polymer.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-full object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <h3 className="text-5xl font-black text-white drop-shadow-lg">
+                </div>
+
+                {/* Card Content */}
+                <div className="p-5">
+                  {/* Badge */}
+                  <div className="mb-3">
+                    <span className="inline-block px-3 py-1 bg-primary text-white text-xs font-semibold rounded-full uppercase tracking-wide">
                       {polymer.code}
-                    </h3>
+                    </span>
                   </div>
-                </div>
 
-                {/* Polymer Name */}
-                <div className="p-4 text-center border-b border-border">
-                  <p className="text-sm font-medium text-muted-foreground">
+                  {/* Title */}
+                  <h3 className="text-lg font-bold text-foreground mb-2 line-clamp-2">
                     {polymer.name}
-                  </p>
-                </div>
+                  </h3>
 
-                {/* Action Buttons */}
-                <div className="p-4">
-                  <div className="flex items-center justify-center gap-2">
+                  {/* Description */}
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Connect with verified suppliers for quality {polymer.name.toLowerCase()}
+                  </p>
+
+                  {/* Action Buttons */}
+                  <div className="flex items-center gap-2 pt-3 border-t border-border">
                     <button
                       onClick={() => handleCall(polymer.phone)}
-                      className="flex flex-col items-center gap-1 py-2 px-3 rounded-lg hover:bg-muted transition-colors flex-1"
+                      className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-muted hover:bg-primary hover:text-white transition-colors flex-1 text-sm font-medium"
                       aria-label="Call"
                     >
-                      <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center">
-                        <Phone className="h-4 w-4 text-primary" />
-                      </div>
-                      <span className="text-xs font-medium text-foreground">Call</span>
+                      <Phone className="h-4 w-4" />
+                      Call
                     </button>
 
                     <button
                       onClick={() => handleEmail(polymer.email)}
-                      className="flex flex-col items-center gap-1 py-2 px-3 rounded-lg hover:bg-muted transition-colors flex-1"
+                      className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-muted hover:bg-primary hover:text-white transition-colors flex-1 text-sm font-medium"
                       aria-label="Email"
                     >
-                      <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center">
-                        <Mail className="h-4 w-4 text-primary" />
-                      </div>
-                      <span className="text-xs font-medium text-foreground">Email</span>
+                      <Mail className="h-4 w-4" />
+                      Email
                     </button>
 
                     <button
                       onClick={() => handleWhatsApp(polymer.phone)}
-                      className="flex flex-col items-center gap-1 py-2 px-3 rounded-lg hover:bg-muted transition-colors flex-1"
+                      className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-green-50 hover:bg-green-600 hover:text-white text-green-700 transition-colors flex-1 text-sm font-medium"
                       aria-label="WhatsApp"
                     >
-                      <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center">
-                        <MessageCircle className="h-4 w-4 text-primary" />
-                      </div>
-                      <span className="text-xs font-medium text-foreground">WhatsApp</span>
+                      <MessageCircle className="h-4 w-4" />
+                      WhatsApp
                     </button>
                   </div>
                 </div>
