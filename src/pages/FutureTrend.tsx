@@ -178,31 +178,6 @@ const FutureTrend = () => {
                       </motion.div>
                     ))}
                   </div>
-
-                  {/* Key Metrics */}
-                  <div className="mt-8 grid md:grid-cols-3 gap-6">
-                    <Card className="bg-primary/5 border-primary/30">
-                      <CardContent className="p-6">
-                        <p className="text-sm text-muted-foreground mb-2">Price Forecast</p>
-                        <p className="text-3xl font-black text-primary">+3-5%</p>
-                        <p className="text-xs text-muted-foreground mt-1">Q1 2024</p>
-                      </CardContent>
-                    </Card>
-                    <Card className="bg-success/5 border-success/30">
-                      <CardContent className="p-6">
-                        <p className="text-sm text-muted-foreground mb-2">Demand Growth</p>
-                        <p className="text-3xl font-black text-success">+6.2%</p>
-                        <p className="text-xs text-muted-foreground mt-1">YoY</p>
-                      </CardContent>
-                    </Card>
-                    <Card className="bg-accent-orange/5 border-accent-orange/30">
-                      <CardContent className="p-6">
-                        <p className="text-sm text-muted-foreground mb-2">Market Outlook</p>
-                        <p className="text-3xl font-black text-accent-orange">Bullish</p>
-                        <p className="text-xs text-muted-foreground mt-1">Next Quarter</p>
-                      </CardContent>
-                    </Card>
-                  </div>
                 </CardContent>
               </Card>
             </motion.div>
