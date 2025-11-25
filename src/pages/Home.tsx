@@ -552,91 +552,139 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Global Map Section */}
-      <section className="py-24 px-4 bg-muted/30">
-        <div className="container max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Left Side - World Map with Pin Points */}
+      {/* Global Market Coverage Section */}
+      <section className="py-24 px-4 bg-gradient-to-br from-background via-muted/20 to-background relative overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, hsl(var(--primary)) 1px, transparent 0)', backgroundSize: '40px 40px' }}></div>
+        </div>
+
+        <div className="container max-w-7xl mx-auto relative z-10">
+          {/* Section Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
+            <Badge className="mb-4 bg-primary text-white border-primary shadow-md">
+              <Globe className="w-4 h-4 mr-2" />
+              Global Presence
+            </Badge>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
+              Worldwide Market Coverage
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+              Real-time polymer intelligence across 7 major regions, empowering millions of manufacturers, traders, and importers globally
+            </p>
+          </motion.div>
+
+          {/* Map and Stats Grid */}
+          <div className="grid lg:grid-cols-3 gap-8 items-start">
+            {/* World Map with Pin Points - Takes 2 columns */}
             <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="relative"
+              transition={{ duration: 0.8 }}
+              className="lg:col-span-2 relative rounded-2xl overflow-hidden bg-card border border-border shadow-2xl p-8"
             >
               <div className="relative">
                 <img
                   src={worldMapDark}
-                  alt="World Map"
-                  className="w-full h-auto"
+                  alt="Global Market Coverage"
+                  className="w-full h-auto opacity-90"
                 />
                 
-                {/* Pin Points with Numbers */}
+                {/* Interactive Pin Points */}
                 {[
-                  { number: "01", top: "25%", left: "15%", label: "NORTH\nAMERICA" },
-                  { number: "02", top: "30%", left: "20%", label: "" },
-                  { number: "03", top: "65%", left: "25%", label: "SOUTH\nAMERICA" },
-                  { number: "04", top: "22%", left: "48%", label: "EUROPE" },
-                  { number: "05", top: "28%", left: "70%", label: "ASIA" },
-                  { number: "06", top: "50%", left: "48%", label: "AFRICA" },
-                  { number: "07", top: "70%", left: "80%", label: "AUSTRALIA" },
+                  { number: "01", top: "25%", left: "15%", region: "North America", market: "$180B+" },
+                  { number: "02", top: "30%", left: "20%", region: "Central America", market: "$25B+" },
+                  { number: "03", top: "65%", left: "25%", region: "South America", market: "$45B+" },
+                  { number: "04", top: "22%", left: "48%", region: "Europe", market: "$220B+" },
+                  { number: "05", top: "28%", left: "70%", region: "Asia", market: "$380B+" },
+                  { number: "06", top: "50%", left: "48%", region: "Africa", market: "$35B+" },
+                  { number: "07", top: "70%", left: "80%", region: "Australia", market: "$20B+" },
                 ].map((pin, i) => (
                   <motion.div
                     key={i}
                     initial={{ scale: 0, opacity: 0 }}
                     whileInView={{ scale: 1, opacity: 1 }}
                     viewport={{ once: true }}
-                    transition={{ delay: i * 0.15, duration: 0.4 }}
-                    className="absolute group/pin"
+                    transition={{ delay: i * 0.1, duration: 0.5, type: "spring" }}
+                    className="absolute group/pin cursor-pointer"
                     style={{ top: pin.top, left: pin.left }}
                   >
                     <div className="relative flex flex-col items-center">
                       {/* Pin Marker */}
                       <motion.div
-                        whileHover={{ scale: 1.2 }}
-                        className="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm cursor-pointer shadow-lg relative z-10 border-2 border-white"
+                        whileHover={{ scale: 1.3, rotate: 360 }}
+                        transition={{ duration: 0.3 }}
+                        className="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm shadow-xl relative z-10 border-3 border-white"
                       >
                         {pin.number}
-                        {/* Ping Animation */}
-                        <span className="absolute inset-0 rounded-full bg-primary animate-ping opacity-40"></span>
+                        {/* Pulse Effect */}
+                        <span className="absolute inset-0 rounded-full bg-primary animate-ping opacity-30"></span>
+                        <span className="absolute inset-0 rounded-full bg-primary/20 animate-pulse"></span>
                       </motion.div>
                       
-                      {/* Region Label */}
-                      {pin.label && (
-                        <div className="mt-1 text-[10px] font-bold text-foreground text-center whitespace-pre-line leading-tight">
-                          {pin.label}
+                      {/* Hover Card */}
+                      <div className="absolute top-full mt-3 opacity-0 group-hover/pin:opacity-100 transition-opacity duration-300 pointer-events-none">
+                        <div className="bg-background border border-border rounded-lg shadow-xl p-3 min-w-[140px]">
+                          <p className="font-bold text-sm text-foreground whitespace-nowrap">{pin.region}</p>
+                          <p className="text-xs text-muted-foreground mt-1">Market: {pin.market}</p>
                         </div>
-                      )}
+                      </div>
                     </div>
                   </motion.div>
                 ))}
               </div>
             </motion.div>
 
-            {/* Right Side - Text Content */}
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="space-y-6"
-            >
-              <h2 className="text-3xl md:text-4xl font-bold leading-tight text-foreground">
-                Polymer Bazaar bridges the world's polymer markets, delivering real prices, trends, and intelligence across key regions
-              </h2>
-              
-              <p className="text-base text-muted-foreground leading-relaxed">
-                From the USA and Europe to Asia, the Middle East, and beyond. With our India-headquartered expertise, we are empowering millions of manufacturers, traders, and importers with actionable insights via SMS, WhatsApp, and our platform. Stay ahead in a <span className="font-semibold">$800+ billion</span> global polymers industry growing at <span className="font-semibold">5.4% CAGR</span>—access localized data for PP, HDPE, PVC, and more to make informed decisions.
-              </p>
-              
-              <Button 
-                size="lg"
-                className="bg-primary hover:bg-primary/90 text-white px-8 py-6 text-base font-semibold shadow-lg hover:shadow-xl transition-all"
-              >
-                More Info
-              </Button>
-            </motion.div>
+            {/* Stats Cards - Takes 1 column */}
+            <div className="space-y-6">
+              {[
+                { icon: Globe, label: "Countries Covered", value: "50+", color: "text-blue-500" },
+                { icon: TrendingUp, label: "Market Updates", value: "Daily", color: "text-green-500" },
+                { icon: Users, label: "Active Users", value: "2M+", color: "text-purple-500" },
+                { icon: Target, label: "Market Value", value: "$800B+", color: "text-primary" },
+              ].map((stat, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, x: 30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.15, duration: 0.5 }}
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  className="bg-card border border-border rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all cursor-pointer group"
+                >
+                  <div className="flex items-start justify-between mb-3">
+                    <div className={`w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors`}>
+                      <stat.icon className={`w-6 h-6 ${stat.color}`} />
+                    </div>
+                  </div>
+                  <p className="text-sm text-muted-foreground mb-1">{stat.label}</p>
+                  <p className="text-3xl font-bold text-foreground">{stat.value}</p>
+                </motion.div>
+              ))}
+            </div>
           </div>
+
+          {/* Bottom Description */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="mt-12 text-center max-w-4xl mx-auto"
+          >
+            <p className="text-base text-muted-foreground leading-relaxed">
+              With India-headquartered expertise, we deliver actionable insights via SMS, WhatsApp, and our platform. 
+              Access localized data for <span className="font-semibold text-primary">PP, HDPE, PVC, and more</span> to make informed decisions 
+              in the <span className="font-semibold text-primary">$800+ billion</span> global polymers industry growing at <span className="font-semibold text-primary">5.4% CAGR</span>.
+            </p>
+          </motion.div>
         </div>
       </section>
 
