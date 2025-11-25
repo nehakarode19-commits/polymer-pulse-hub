@@ -134,22 +134,24 @@ const BOPPFilm = () => {
                     <h3 className="font-bold text-base">{film.title}</h3>
                   </div>
                   
-                  <div className="p-6 space-y-4 bg-gradient-to-b from-background to-muted/5">
-                    <div>
-                      <p className="text-xs uppercase text-muted-foreground mb-1">Company</p>
-                      <p className="text-sm font-semibold text-foreground">{film.company}</p>
-                    </div>
-                    
-                    <div>
-                      <p className="text-xs uppercase text-muted-foreground mb-1">Sub Category</p>
-                      <p className="text-sm font-semibold text-foreground">{film.subCategory}</p>
-                    </div>
-                    
-                    <div>
-                      <p className="text-xs uppercase text-muted-foreground mb-1">Price Change</p>
-                      <p className={`text-lg font-bold ${film.priceChange.startsWith('+') ? 'text-green-600' : 'text-red-600'}`}>
-                        {film.priceChange}
-                      </p>
+                  <div className="p-6 bg-gradient-to-b from-background to-muted/5">
+                    <div className="grid grid-cols-3 gap-4 text-center">
+                      <div>
+                        <p className="text-xs uppercase text-muted-foreground mb-2">Company</p>
+                        <p className="text-sm font-semibold text-foreground">{film.company}</p>
+                      </div>
+                      
+                      <div>
+                        <p className="text-xs uppercase text-muted-foreground mb-2">Sub Category</p>
+                        <p className="text-sm font-semibold text-foreground">{film.subCategory}</p>
+                      </div>
+                      
+                      <div>
+                        <p className="text-xs uppercase text-muted-foreground mb-2">Price Change</p>
+                        <p className={`text-lg font-bold ${film.priceChange.startsWith('+') ? 'text-green-600' : 'text-red-600'}`}>
+                          {film.priceChange}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </CardContent>
