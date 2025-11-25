@@ -34,6 +34,7 @@ import newsletterModernImg from "@/assets/newsletter-modern.jpg";
 const Home = () => {
   const [activeInsightTab, setActiveInsightTab] = useState("blog");
   const [carouselIndex, setCarouselIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const { scrollYProgress } = useScroll();
   const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
@@ -185,6 +186,22 @@ const Home = () => {
       description: "Seamless access to market data anytime, anywhere through multiple platforms and communication channels."
     },
   ];
+
+  // Auto-scroll effect
+  useEffect(() => {
+    if (isPaused) return;
+    
+    const interval = setInterval(() => {
+      setCarouselIndex((prev) => {
+        if (prev >= whyPolymerBazaar.length - 3) {
+          return 0;
+        }
+        return prev + 1;
+      });
+    }, 4000); // Auto-scroll every 4 seconds
+
+    return () => clearInterval(interval);
+  }, [isPaused, whyPolymerBazaar.length]);
 
   const events = [
     {
@@ -943,9 +960,19 @@ const Home = () => {
       </section>
 
       {/* Why Polymer Bazaar Carousel */}
-      <section className="py-32 px-4 relative overflow-hidden">
-        {/* Subtle Background */}
-        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-background via-muted/20 to-background"></div>
+      <section className="py-32 px-4 relative overflow-hidden bg-gradient-to-b from-background via-muted/5 to-background">
+        {/* Subtle animated background */}
+        <motion.div 
+          className="absolute inset-0 -z-10"
+          animate={{ 
+            background: [
+              "radial-gradient(circle at 20% 50%, rgba(229, 57, 53, 0.03) 0%, transparent 50%)",
+              "radial-gradient(circle at 80% 50%, rgba(229, 57, 53, 0.03) 0%, transparent 50%)",
+              "radial-gradient(circle at 20% 50%, rgba(229, 57, 53, 0.03) 0%, transparent 50%)"
+            ]
+          }}
+          transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+        />
 
         <div className="container max-w-7xl mx-auto">
           <motion.div
@@ -955,7 +982,7 @@ const Home = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-20"
           >
-            <Badge variant="outline" className="mb-4 text-sm px-4 py-1.5 border-primary/20">
+            <Badge variant="outline" className="mb-4 text-sm px-4 py-1.5 border-primary/20 bg-primary/5">
               Why Choose Us
             </Badge>
             <h2 className="text-5xl md:text-6xl font-bold mb-6">
@@ -966,45 +993,100 @@ const Home = () => {
             </p>
           </motion.div>
           
-          <div className="relative max-w-7xl mx-auto">
+          <div 
+            className="relative max-w-7xl mx-auto"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+          >
             <div className="flex items-stretch justify-center gap-8 overflow-hidden px-24">
               {whyPolymerBazaar.slice(carouselIndex, carouselIndex + 3).map((item, index) => {
                 const images = [whyPolymerModernImg, whyPolymerModernImg, whyPolymerModernImg];
                 const imageIndex = (carouselIndex + index) % images.length;
-                const direction = index === 0 ? -60 : index === 2 ? 60 : 0;
+                const direction = index === 0 ? -80 : index === 2 ? 80 : 0;
                 
                 return (
                   <motion.div
                     key={`${carouselIndex}-${index}`}
-                    initial={{ opacity: 0, x: direction }}
-                    animate={{ opacity: 1, x: 0 }}
+                    initial={{ opacity: 0, x: direction, scale: 0.9 }}
+                    animate={{ opacity: 1, x: 0, scale: 1 }}
+                    exit={{ opacity: 0, x: -direction, scale: 0.9 }}
                     transition={{ 
                       delay: index * 0.1, 
-                      duration: 0.5,
-                      ease: "easeOut"
+                      duration: 0.6,
+                      ease: [0.4, 0, 0.2, 1]
                     }}
                     className="flex-1 min-w-0"
                   >
-                    <Card className="group shadow-lg hover:shadow-xl transition-all duration-300 border hover:border-primary/30 h-full bg-card">
-                      <div className="h-72 relative overflow-hidden">
-                        <img 
+                    <Card className="group relative shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border-2 border-border/50 hover:border-primary/40 h-full bg-card overflow-hidden">
+                      {/* Animated gradient overlay */}
+                      <motion.div 
+                        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10"
+                        style={{
+                          background: "linear-gradient(135deg, rgba(229, 57, 53, 0.05) 0%, transparent 50%, rgba(229, 57, 53, 0.05) 100%)"
+                        }}
+                      />
+                      
+                      {/* Shine effect */}
+                      <motion.div 
+                        className="absolute inset-0 z-20 pointer-events-none"
+                        initial={{ x: "-100%" }}
+                        animate={{ x: isPaused ? "-100%" : "100%" }}
+                        transition={{ 
+                          duration: 3,
+                          repeat: Infinity,
+                          repeatDelay: 5,
+                          ease: "linear"
+                        }}
+                        style={{
+                          background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent)"
+                        }}
+                      />
+                      
+                      <div className="h-80 relative overflow-hidden">
+                        <motion.img 
                           src={images[imageIndex]} 
-                          alt={`Polymer materials ${imageIndex + 1}`}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          alt={item.title}
+                          className="w-full h-full object-cover"
+                          whileHover={{ scale: 1.05 }}
+                          transition={{ duration: 0.6 }}
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
                         
-                        {/* Simple Icon Badge */}
-                        <div className="absolute top-6 right-6 w-16 h-16 rounded-xl bg-primary/90 backdrop-blur-sm flex items-center justify-center shadow-lg">
+                        {/* Gradient overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                        
+                        {/* Icon badge with pulse */}
+                        <motion.div 
+                          className="absolute top-6 right-6 w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-red-600 flex items-center justify-center shadow-2xl"
+                          animate={{ 
+                            boxShadow: [
+                              "0 10px 40px rgba(229, 57, 53, 0.3)",
+                              "0 10px 60px rgba(229, 57, 53, 0.5)",
+                              "0 10px 40px rgba(229, 57, 53, 0.3)"
+                            ]
+                          }}
+                          transition={{ duration: 2, repeat: Infinity }}
+                        >
                           <item.icon className="w-8 h-8 text-white" />
+                        </motion.div>
+                        
+                        {/* Bottom info bar */}
+                        <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 to-transparent">
+                          <h3 className="text-white font-bold text-2xl mb-2">{item.title}</h3>
                         </div>
                       </div>
                       
-                      <CardContent className="p-8 text-center">
-                        <h3 className="font-bold text-2xl mb-4">{item.title}</h3>
+                      <CardContent className="p-8 relative z-10">
                         <p className="text-base text-muted-foreground leading-relaxed">
                           {item.description}
                         </p>
+                        
+                        {/* Animated bottom border */}
+                        <motion.div 
+                          className="mt-6 h-1 bg-gradient-to-r from-primary via-red-600 to-primary rounded-full"
+                          initial={{ scaleX: 0 }}
+                          whileInView={{ scaleX: 1 }}
+                          transition={{ duration: 0.8, delay: 0.3 }}
+                        />
                       </CardContent>
                     </Card>
                   </motion.div>
@@ -1012,12 +1094,16 @@ const Home = () => {
               })}
             </div>
             
-            {/* Minimal transparent buttons */}
+            {/* Navigation buttons */}
             <Button
               variant="ghost"
               size="icon"
-              className="absolute -left-4 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-background/60 hover:bg-background/80 backdrop-blur-sm border border-border/50 hover:border-primary/50 transition-all duration-200 disabled:opacity-20"
-              onClick={() => setCarouselIndex(Math.max(0, carouselIndex - 1))}
+              className="absolute -left-4 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-background/80 hover:bg-background backdrop-blur-md border border-border/50 hover:border-primary/50 shadow-xl transition-all duration-300 disabled:opacity-30"
+              onClick={() => {
+                setIsPaused(true);
+                setCarouselIndex(Math.max(0, carouselIndex - 1));
+                setTimeout(() => setIsPaused(false), 3000);
+              }}
               disabled={carouselIndex === 0}
             >
               <ChevronLeft className="h-6 w-6" />
@@ -1025,12 +1111,50 @@ const Home = () => {
             <Button
               variant="ghost"
               size="icon"
-              className="absolute -right-4 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-background/60 hover:bg-background/80 backdrop-blur-sm border border-border/50 hover:border-primary/50 transition-all duration-200 disabled:opacity-20"
-              onClick={() => setCarouselIndex(Math.min(whyPolymerBazaar.length - 3, carouselIndex + 1))}
+              className="absolute -right-4 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-background/80 hover:bg-background backdrop-blur-md border border-border/50 hover:border-primary/50 shadow-xl transition-all duration-300 disabled:opacity-30"
+              onClick={() => {
+                setIsPaused(true);
+                setCarouselIndex(Math.min(whyPolymerBazaar.length - 3, carouselIndex + 1));
+                setTimeout(() => setIsPaused(false), 3000);
+              }}
               disabled={carouselIndex >= whyPolymerBazaar.length - 3}
             >
               <ChevronRight className="h-6 w-6" />
             </Button>
+            
+            {/* Progress indicators */}
+            <div className="flex justify-center gap-2 mt-8">
+              {Array.from({ length: whyPolymerBazaar.length - 2 }).map((_, i) => (
+                <motion.button
+                  key={i}
+                  className={`h-1.5 rounded-full transition-all duration-300 ${
+                    i === carouselIndex ? 'bg-primary w-8' : 'bg-muted w-1.5'
+                  }`}
+                  onClick={() => {
+                    setIsPaused(true);
+                    setCarouselIndex(i);
+                    setTimeout(() => setIsPaused(false), 3000);
+                  }}
+                  whileHover={{ scale: 1.2 }}
+                />
+              ))}
+            </div>
+            
+            {/* Auto-play indicator */}
+            {!isPaused && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-xs text-muted-foreground flex items-center gap-2"
+              >
+                <motion.div
+                  animate={{ scale: [1, 1.2, 1] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                  className="w-2 h-2 bg-primary rounded-full"
+                />
+                Auto-playing • Hover to pause
+              </motion.div>
+            )}
           </div>
         </div>
       </section>
