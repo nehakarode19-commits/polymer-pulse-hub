@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo.png";
+import logoNav from "@/assets/logo-nav.png";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -128,6 +129,19 @@ const Header = () => {
         {/* Desktop Navigation - Modern and attractive */}
         {showNavigation && (
           <nav className="hidden lg:flex items-center justify-center flex-1 gap-1 mx-8">
+            {/* Logo before menu items */}
+            <Link
+              to="/"
+              className="mr-2 hover:opacity-80 transition-opacity"
+              aria-label="Go to home"
+            >
+              <img
+                src={logoNav}
+                alt="Polymer Bazaar"
+                className="h-12 w-auto object-contain"
+              />
+            </Link>
+
             {/* Buy & Sell */}
             <Link
               to="/buy-sell"
