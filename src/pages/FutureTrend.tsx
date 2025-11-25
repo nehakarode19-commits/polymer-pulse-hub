@@ -9,9 +9,26 @@ import futureTrendsImg from "@/assets/future-trends.jpg";
 const FutureTrend = () => {
   const [selectedMonth, setSelectedMonth] = useState("January");
   const [selectedYear, setSelectedYear] = useState("2024");
+  const [selectedPolymer, setSelectedPolymer] = useState("All Polymers");
 
   const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   const years = ["2024", "2025"];
+  const polymerTypes = [
+    "All Polymers",
+    "PP (Polypropylene)",
+    "HDPE (High-Density Polyethylene)",
+    "LLDPE (Linear Low-Density Polyethylene)",
+    "LDPE (Low-Density Polyethylene)",
+    "PVC (Polyvinyl Chloride)",
+    "PET (Polyethylene Terephthalate)",
+    "PS (Polystyrene)",
+    "ABS (Acrylonitrile Butadiene Styrene)",
+    "EVA",
+    "PC",
+    "SAN",
+    "Nylon 6 & 6-6",
+    "Engineering Polymers"
+  ];
 
   const trendReports = [
     {
@@ -106,14 +123,35 @@ const FutureTrend = () => {
       <section className="container max-w-7xl mx-auto px-4 py-8">
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
           <h2 className="text-2xl font-bold text-foreground">Future Trend Reports</h2>
-          <div className="flex gap-3">
+          <div className="flex flex-wrap gap-3">
+            <Select value={selectedPolymer} onValueChange={setSelectedPolymer}>
+              <SelectTrigger className="w-52 border-border bg-card">
+                <SelectValue placeholder="Select polymer type" />
+              </SelectTrigger>
+              <SelectContent className="bg-card border-border z-[100] max-h-[300px]">
+                {polymerTypes.map((polymer) => (
+                  <SelectItem 
+                    key={polymer} 
+                    value={polymer}
+                    className="hover:bg-accent focus:bg-accent cursor-pointer"
+                  >
+                    {polymer}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+
             <Select value={selectedMonth} onValueChange={setSelectedMonth}>
-              <SelectTrigger className="w-40 border-border">
+              <SelectTrigger className="w-40 border-border bg-card">
                 <SelectValue placeholder="Select month" />
               </SelectTrigger>
-              <SelectContent className="bg-background z-50">
+              <SelectContent className="bg-card border-border z-[100]">
                 {months.map((month) => (
-                  <SelectItem key={month} value={month}>
+                  <SelectItem 
+                    key={month} 
+                    value={month}
+                    className="hover:bg-accent focus:bg-accent cursor-pointer"
+                  >
                     {month}
                   </SelectItem>
                 ))}
@@ -121,12 +159,16 @@ const FutureTrend = () => {
             </Select>
 
             <Select value={selectedYear} onValueChange={setSelectedYear}>
-              <SelectTrigger className="w-32 border-border">
+              <SelectTrigger className="w-32 border-border bg-card">
                 <SelectValue placeholder="Select year" />
               </SelectTrigger>
-              <SelectContent className="bg-background z-50">
+              <SelectContent className="bg-card border-border z-[100]">
                 {years.map((year) => (
-                  <SelectItem key={year} value={year}>
+                  <SelectItem 
+                    key={year} 
+                    value={year}
+                    className="hover:bg-accent focus:bg-accent cursor-pointer"
+                  >
                     {year}
                   </SelectItem>
                 ))}
