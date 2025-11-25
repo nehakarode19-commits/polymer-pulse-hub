@@ -95,6 +95,19 @@ const Header = () => {
     { label: "BOPP Film", path: "/future-trend" },
   ];
 
+  const buySellItems = [
+    { label: "PP - Polypropylene", path: "/buy-sell" },
+    { label: "PVC - Polyvinyl Chloride", path: "/buy-sell" },
+    { label: "LLDPE - Linear Low Density Polyethylene", path: "/buy-sell" },
+    { label: "HDPE - High Density Polyethylene", path: "/buy-sell" },
+    { label: "LDPE - Low Density Polyethylene", path: "/buy-sell" },
+    { label: "PET - Polyethylene Terephthalate", path: "/buy-sell" },
+    { label: "PS - Polystyrene", path: "/buy-sell" },
+    { label: "ABS - Acrylonitrile Butadiene Styrene", path: "/buy-sell" },
+    { label: "ENGG - Engineering Plastics", path: "/buy-sell" },
+    { label: "EVA - Ethylene Vinyl Acetate", path: "/buy-sell" },
+  ];
+
   const servicesItems = [
     { label: "Events", path: "/events" },
     { label: "Press Release", path: "/press-release" },
@@ -137,13 +150,26 @@ const Header = () => {
               Home
             </Link>
 
-            {/* Buy & Sell */}
-            <Link
-              to="/buy-sell"
-              className="px-4 py-2.5 text-sm font-medium text-foreground rounded-lg hover:bg-primary/5 hover:text-primary transition-all duration-200"
-            >
-              Buy & Sell
-            </Link>
+            {/* Buy & Sell Dropdown */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="px-4 py-2.5 text-sm font-medium text-foreground rounded-lg hover:bg-primary/5 hover:text-primary transition-all duration-200 h-auto">
+                  Buy & Sell
+                  <ChevronDown className="ml-1.5 h-4 w-4 transition-transform group-hover:rotate-180" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-[900px] bg-white border border-border/50 shadow-xl z-[100] rounded-lg p-4">
+                <div className="grid grid-cols-3 gap-2">
+                  {buySellItems.map((item) => (
+                    <DropdownMenuItem key={item.label} asChild className="rounded-md hover:bg-primary/5 focus:bg-primary/5 cursor-pointer">
+                      <Link to={item.path} className="w-full px-3 py-2.5 text-sm">
+                        {item.label}
+                      </Link>
+                    </DropdownMenuItem>
+                  ))}
+                </div>
+              </DropdownMenuContent>
+            </DropdownMenu>
 
             {/* About Dropdown */}
             <DropdownMenu>
@@ -371,13 +397,19 @@ const Header = () => {
             </Link>
 
             {/* Buy & Sell */}
-            <Link
-              to="/buy-sell"
-              className="block px-4 py-3 text-sm font-medium text-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-all duration-200"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Buy & Sell
-            </Link>
+            <div className="space-y-1">
+              <div className="px-4 py-2 text-sm font-semibold text-foreground/70">Buy & Sell</div>
+              {buySellItems.map((item) => (
+                <Link
+                  key={item.label}
+                  to={item.path}
+                  className="block pl-8 pr-4 py-2 text-sm text-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-all duration-200"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
 
             {/* About */}
             <Link
