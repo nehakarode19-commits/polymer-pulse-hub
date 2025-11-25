@@ -22,6 +22,7 @@ import BuySell from "./pages/BuySell";
 import CrudeFeedstock from "./pages/CrudeFeedstock";
 import GlobalBazaar from "./pages/GlobalBazaar";
 import IndianBazaar from "./pages/IndianBazaar";
+import RateRevision from "./pages/RateRevision";
 import HistoricalData from "./pages/HistoricalData";
 import FutureTrend from "./pages/FutureTrend";
 import Services from "./pages/Services";
@@ -61,6 +62,7 @@ const App = () => (
           <Route path="/crude-feedstock" element={<Layout><ProtectedRoute><CrudeFeedstock /></ProtectedRoute></Layout>} />
           <Route path="/global-bazaar" element={<Layout><ProtectedRoute><GlobalBazaar /></ProtectedRoute></Layout>} />
           <Route path="/indian-bazaar" element={<Layout><ProtectedRoute><IndianBazaar /></ProtectedRoute></Layout>} />
+          <Route path="/rate-revision" element={<Layout><ProtectedRoute><RateRevision /></ProtectedRoute></Layout>} />
           <Route path="/historical-data" element={<Layout><ProtectedRoute><HistoricalData /></ProtectedRoute></Layout>} />
           <Route path="/future-trend" element={<Layout><ProtectedRoute><FutureTrend /></ProtectedRoute></Layout>} />
           <Route path="/services" element={<Layout><ProtectedRoute><Services /></ProtectedRoute></Layout>} />
