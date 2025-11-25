@@ -134,10 +134,11 @@ const BuySell = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.05, duration: 0.4 }}
+              className="h-full"
             >
-              <Card className="overflow-hidden border-0 bg-card shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 group">
+              <Card className="overflow-hidden border-0 bg-card shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 group h-full flex flex-col">
                 {/* Image */}
-                <div className="relative h-52 w-full overflow-hidden rounded-t-lg">
+                <div className="relative h-48 w-full overflow-hidden">
                   <img 
                     src={polymer.image} 
                     alt={polymer.name}
@@ -146,7 +147,7 @@ const BuySell = () => {
                 </div>
 
                 {/* Card Content */}
-                <div className="p-5">
+                <div className="p-5 flex flex-col flex-1">
                   {/* Badge */}
                   <div className="mb-3">
                     <span className="inline-block px-3 py-1 bg-primary text-white text-xs font-semibold rounded-full uppercase tracking-wide">
@@ -155,20 +156,20 @@ const BuySell = () => {
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-lg font-bold text-foreground mb-2 line-clamp-2">
+                  <h3 className="text-lg font-bold text-foreground mb-2 min-h-[3.5rem] line-clamp-2">
                     {polymer.name}
                   </h3>
 
                   {/* Description */}
-                  <p className="text-sm text-muted-foreground mb-4">
+                  <p className="text-sm text-muted-foreground mb-4 min-h-[2.5rem] line-clamp-2">
                     Connect with verified suppliers for quality {polymer.name.toLowerCase()}
                   </p>
 
                   {/* Action Buttons */}
-                  <div className="flex items-center gap-2 pt-3 border-t border-border">
+                  <div className="flex items-center gap-2 pt-3 border-t border-border mt-auto">
                     <button
                       onClick={() => handleCall(polymer.phone)}
-                      className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-muted hover:bg-primary hover:text-white transition-colors flex-1 text-sm font-medium"
+                      className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-lg bg-muted hover:bg-primary hover:text-white transition-colors flex-1 text-sm font-medium"
                       aria-label="Call"
                     >
                       <Phone className="h-4 w-4" />
@@ -177,7 +178,7 @@ const BuySell = () => {
 
                     <button
                       onClick={() => handleEmail(polymer.email)}
-                      className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-muted hover:bg-primary hover:text-white transition-colors flex-1 text-sm font-medium"
+                      className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-lg bg-muted hover:bg-primary hover:text-white transition-colors flex-1 text-sm font-medium"
                       aria-label="Email"
                     >
                       <Mail className="h-4 w-4" />
@@ -186,7 +187,7 @@ const BuySell = () => {
 
                     <button
                       onClick={() => handleWhatsApp(polymer.phone)}
-                      className="flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg bg-green-50 hover:bg-green-600 hover:text-white text-green-700 transition-colors flex-1 text-sm font-medium"
+                      className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-lg bg-green-50 hover:bg-green-600 hover:text-white text-green-700 transition-colors flex-1 text-sm font-medium"
                       aria-label="WhatsApp"
                     >
                       <MessageCircle className="h-4 w-4" />
