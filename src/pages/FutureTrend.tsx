@@ -2,32 +2,34 @@ import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
-import { FileDown, Target } from "lucide-react";
+import { FileDown, Target, FileText } from "lucide-react";
 import { motion } from "framer-motion";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import futureTrendsImg from "@/assets/future-trends.jpg";
 
 const FutureTrend = () => {
   const [selectedMonth, setSelectedMonth] = useState("January");
   const [selectedYear, setSelectedYear] = useState("2024");
-  const [selectedPolymer, setSelectedPolymer] = useState("All Polymers");
+  const [selectedPolymer, setSelectedPolymer] = useState("PP");
 
   const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   const years = ["2024", "2025"];
-  const polymerTypes = [
-    "All Polymers",
-    "PP (Polypropylene)",
-    "HDPE (High-Density Polyethylene)",
-    "LLDPE (Linear Low-Density Polyethylene)",
-    "LDPE (Low-Density Polyethylene)",
-    "PVC (Polyvinyl Chloride)",
-    "PET (Polyethylene Terephthalate)",
-    "PS (Polystyrene)",
-    "ABS (Acrylonitrile Butadiene Styrene)",
+  const polymerTabs = [
+    "PP",
+    "PE",
+    "PVC",
+    "PET",
+    "PS",
+    "ABS",
     "EVA",
     "PC",
     "SAN",
     "Nylon 6 & 6-6",
-    "Engineering Polymers"
+    "PBT",
+    "POM",
+    "Polyester",
+    "PMMA",
+    "BOPP Film"
   ];
 
   const trendReports = [
@@ -119,64 +121,77 @@ const FutureTrend = () => {
         </div>
       </section>
 
-      {/* Filter Section */}
-      <section className="container max-w-7xl mx-auto px-4 py-8">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
-          <h2 className="text-2xl font-bold text-foreground">Future Trend Reports</h2>
-          <div className="flex flex-wrap gap-3">
-            <Select value={selectedPolymer} onValueChange={setSelectedPolymer}>
-              <SelectTrigger className="w-52 border-border bg-card">
-                <SelectValue placeholder="Select polymer type" />
-              </SelectTrigger>
-              <SelectContent className="bg-card border-border z-[100] max-h-[300px]">
-                {polymerTypes.map((polymer) => (
-                  <SelectItem 
-                    key={polymer} 
-                    value={polymer}
-                    className="hover:bg-accent focus:bg-accent cursor-pointer"
+      {/* Horizontal Polymer Navigation Bar */}
+      <section className="bg-background border-y border-border">
+        <div className="container max-w-7xl mx-auto px-4 py-4">
+          <div className="flex items-center justify-between gap-4">
+            {/* Left side - Future Trend label */}
+            <div className="flex items-center gap-2 flex-shrink-0">
+              <FileText className="h-5 w-5 text-primary" />
+              <span className="font-semibold text-primary">Future Trend</span>
+            </div>
+
+            {/* Center - Horizontal scrollable polymer tabs */}
+            <ScrollArea className="flex-1 mx-4">
+              <div className="flex gap-6 pb-2">
+                {polymerTabs.map((polymer) => (
+                  <button
+                    key={polymer}
+                    onClick={() => setSelectedPolymer(polymer)}
+                    className={`whitespace-nowrap text-sm font-medium transition-colors pb-2 border-b-2 ${
+                      selectedPolymer === polymer
+                        ? "text-primary border-primary"
+                        : "text-muted-foreground border-transparent hover:text-foreground hover:border-border"
+                    }`}
                   >
                     {polymer}
-                  </SelectItem>
+                  </button>
                 ))}
-              </SelectContent>
-            </Select>
+              </div>
+              <ScrollBar orientation="horizontal" />
+            </ScrollArea>
 
-            <Select value={selectedMonth} onValueChange={setSelectedMonth}>
-              <SelectTrigger className="w-40 border-border bg-card">
-                <SelectValue placeholder="Select month" />
-              </SelectTrigger>
-              <SelectContent className="bg-card border-border z-[100]">
-                {months.map((month) => (
-                  <SelectItem 
-                    key={month} 
-                    value={month}
-                    className="hover:bg-accent focus:bg-accent cursor-pointer"
-                  >
-                    {month}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            {/* Right side - Year and Month dropdowns */}
+            <div className="flex gap-3 flex-shrink-0">
+              <Select value={selectedYear} onValueChange={setSelectedYear}>
+                <SelectTrigger className="w-28 h-9 border-border bg-card">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent className="bg-card border-border z-[100]">
+                  {years.map((year) => (
+                    <SelectItem 
+                      key={year} 
+                      value={year}
+                      className="hover:bg-accent focus:bg-accent cursor-pointer"
+                    >
+                      {year}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
 
-            <Select value={selectedYear} onValueChange={setSelectedYear}>
-              <SelectTrigger className="w-32 border-border bg-card">
-                <SelectValue placeholder="Select year" />
-              </SelectTrigger>
-              <SelectContent className="bg-card border-border z-[100]">
-                {years.map((year) => (
-                  <SelectItem 
-                    key={year} 
-                    value={year}
-                    className="hover:bg-accent focus:bg-accent cursor-pointer"
-                  >
-                    {year}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+              <Select value={selectedMonth} onValueChange={setSelectedMonth}>
+                <SelectTrigger className="w-32 h-9 border-border bg-card">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent className="bg-card border-border z-[100]">
+                  {months.map((month) => (
+                    <SelectItem 
+                      key={month} 
+                      value={month}
+                      className="hover:bg-accent focus:bg-accent cursor-pointer"
+                    >
+                      {month}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
           </div>
         </div>
       </section>
+
+      {/* Filter Section - REMOVED, now integrated above */}
 
       {/* Trend Reports Section */}
       <section className="container max-w-7xl mx-auto px-4 pb-12">
