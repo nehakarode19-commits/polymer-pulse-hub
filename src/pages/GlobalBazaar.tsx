@@ -162,46 +162,52 @@ const GlobalBazaar = () => {
                   1st Week {selectedMonth} {selectedYear} - ({country.currency})
                 </div>
 
-                {/* Pricing Data Cards */}
-                <Card className="border-2 border-primary/20 shadow-xl rounded-t-none">
-                  <CardContent className="p-6">
-                    {Object.keys(countryPricing).length > 0 ? (
-                      <div className="space-y-8">
-                        {Object.entries(countryPricing).map(([polymer, grades]: [string, any]) => (
-                          <div key={polymer} className="border-b border-border last:border-b-0 pb-6 last:pb-0">
-                            {/* Polymer Category Header */}
-                            <h3 className="text-xl font-bold text-primary mb-4">{polymer}</h3>
-                            
-                            {/* Pricing Table */}
-                            <div className="space-y-2">
-                              {grades.map((item: any, idx: number) => (
-                                <div 
-                                  key={idx}
-                                  className="grid grid-cols-2 gap-4 py-3 px-4 hover:bg-muted/50 rounded-lg transition-colors"
-                                >
-                                  <div>
-                                    <p className="text-sm text-muted-foreground mb-0.5">Grade / Material</p>
-                                    <p className="font-semibold text-foreground">{item.grade}</p>
+                {/* Pricing Data Grid - 3 Column Layout */}
+                {Object.keys(countryPricing).length > 0 ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {Object.entries(countryPricing).map(([polymer, grades]: [string, any]) => (
+                      <Card key={polymer} className="border-2 border-border hover:border-primary/50 shadow-md hover:shadow-xl transition-all duration-300">
+                        {/* Polymer Header */}
+                        <div className="bg-primary text-white py-3 px-5 rounded-t-lg">
+                          <h3 className="text-xl font-bold text-center">{polymer}</h3>
+                        </div>
+                        
+                        {/* Grades & Pricing */}
+                        <CardContent className="p-5">
+                          <div className="space-y-3">
+                            {grades.map((item: any, idx: number) => (
+                              <div 
+                                key={idx}
+                                className="border-b border-border last:border-b-0 pb-3 last:pb-0"
+                              >
+                                <div className="flex justify-between items-center">
+                                  <div className="flex-1">
+                                    <p className="text-xs text-muted-foreground mb-1">Grade / Material</p>
+                                    <p className="font-semibold text-foreground text-sm">{item.grade}</p>
                                   </div>
-                                  <div className="text-right">
-                                    <p className="text-sm text-muted-foreground mb-0.5">Price</p>
-                                    <p className="font-bold text-primary text-lg">#{item.price}</p>
+                                  <div className="text-right ml-4">
+                                    <p className="text-xs text-muted-foreground mb-1">Price</p>
+                                    <p className="font-bold text-primary text-base">#{item.price}</p>
                                   </div>
                                 </div>
-                              ))}
-                            </div>
+                              </div>
+                            ))}
                           </div>
-                        ))}
-                      </div>
-                    ) : (
-                      <div className="text-center py-12 text-muted-foreground">
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                ) : (
+                  <Card className="border-2 border-border shadow-md">
+                    <CardContent className="p-12">
+                      <div className="text-center text-muted-foreground">
                         <Globe className="h-16 w-16 mx-auto mb-4 opacity-50" />
-                        <p className="text-lg">No pricing data available for {country.label}</p>
+                        <p className="text-lg font-semibold">No pricing data available for {country.label}</p>
                         <p className="text-sm mt-2">Please check back later or select another region</p>
                       </div>
-                    )}
-                  </CardContent>
-                </Card>
+                    </CardContent>
+                  </Card>
+                )}
               </motion.div>
             </TabsContent>
           ))}
