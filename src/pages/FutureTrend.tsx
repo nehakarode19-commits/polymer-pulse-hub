@@ -1,39 +1,48 @@
 import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
-import { Download, TrendingUp, Calendar, FileText, Target } from "lucide-react";
+import { FileDown, Target } from "lucide-react";
 import { motion } from "framer-motion";
 import futureTrendsImg from "@/assets/future-trends.jpg";
-import marketAnalysisImg from "@/assets/market-analysis.jpg";
 
 const FutureTrend = () => {
-  const [selectedPolymer, setSelectedPolymer] = useState("PP");
   const [selectedMonth, setSelectedMonth] = useState("January");
   const [selectedYear, setSelectedYear] = useState("2024");
 
-  const polymers = ["PP", "PE", "PVC", "PET", "PS", "ABS"];
   const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   const years = ["2024", "2025"];
 
-  const reports = [
+  const trendData = [
     {
-      title: "Global PP Market Outlook",
-      date: "January 15, 2024",
-      sections: [
-        {
-          title: "Market Overview",
-          content: "The global polypropylene market shows robust growth momentum with increasing demand from automotive and packaging sectors. Supply constraints in Asia-Pacific region continue to support price stability."
-        },
-        {
-          title: "Price Forecast",
-          content: "We expect PP prices to trend upward by 3-5% in Q1 2024, driven by rising feedstock costs and strong downstream demand. Regional variations may apply based on local supply-demand dynamics."
-        },
-        {
-          title: "Key Market Drivers",
-          content: "Major factors include: crude oil price movements, naphtha cracker maintenance schedules, growing packaging industry demand, and automotive sector recovery in key markets."
-        }
-      ]
+      title: "PP Market Price Forecast Q1 2024",
+      description: "Comprehensive analysis of polypropylene market trends showing expected 3-5% price increase driven by rising feedstock costs and strong downstream demand from automotive and packaging sectors.",
+      date: "January 15, 2024"
+    },
+    {
+      title: "HDPE Supply-Demand Analysis",
+      description: "High-density polyethylene market outlook indicating supply tightness in Asia-Pacific region with projected price stability through first quarter amid balanced supply-demand dynamics.",
+      date: "January 10, 2024"
+    },
+    {
+      title: "PVC Industry Outlook 2024",
+      description: "Polyvinyl chloride market forecast highlighting construction sector recovery and infrastructure investments supporting steady demand growth across major global markets.",
+      date: "January 8, 2024"
+    },
+    {
+      title: "LDPE Global Trade Patterns",
+      description: "Low-density polyethylene international trade analysis revealing shifting supply chains and emerging market opportunities in Southeast Asian packaging industries.",
+      date: "January 5, 2024"
+    },
+    {
+      title: "PET Recycling Market Trends",
+      description: "Polyethylene terephthalate recycling sector growth forecast showing increased investment in circular economy initiatives and sustainable packaging solutions.",
+      date: "January 3, 2024"
+    },
+    {
+      title: "PS Market Dynamics Review",
+      description: "Polystyrene market assessment covering raw material price volatility and demand fluctuations in food packaging and consumer electronics applications.",
+      date: "December 28, 2023"
     }
   ];
 
@@ -67,121 +76,72 @@ const FutureTrend = () => {
 
       {/* Content Section */}
       <section className="container max-w-7xl mx-auto px-4 py-12">
-        {/* Filter Section */}
-        <Card className="mb-8 border-2 border-primary/20 shadow-xl">
-          <CardContent className="p-6">
-            <div className="flex flex-wrap gap-4 items-center">
-              <div className="flex items-center gap-2">
-                <FileText className="h-5 w-5 text-primary" />
-                <span className="font-semibold text-foreground">Select Report Parameters:</span>
-              </div>
-              
-              {/* Polymer Buttons */}
-              <div className="flex flex-wrap gap-2">
-                {polymers.map((polymer) => (
-                  <Button
-                    key={polymer}
-                    variant={selectedPolymer === polymer ? "default" : "outline"}
-                    onClick={() => setSelectedPolymer(polymer)}
-                    className={selectedPolymer === polymer ? "bg-primary" : "border-primary/30 hover:border-primary"}
+        {/* Header with Month/Year Selection */}
+        <div className="mb-8">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
+            <h2 className="text-3xl font-bold text-foreground">Future Trend Reports</h2>
+            <div className="flex gap-4">
+              <Select value={selectedMonth} onValueChange={setSelectedMonth}>
+                <SelectTrigger className="w-40 border-primary/30">
+                  <SelectValue placeholder="Select month" />
+                </SelectTrigger>
+                <SelectContent className="bg-background z-50">
+                  {months.map((month) => (
+                    <SelectItem key={month} value={month}>
+                      {month}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+
+              <Select value={selectedYear} onValueChange={setSelectedYear}>
+                <SelectTrigger className="w-32 border-primary/30">
+                  <SelectValue placeholder="Select year" />
+                </SelectTrigger>
+                <SelectContent className="bg-background z-50">
+                  {years.map((year) => (
+                    <SelectItem key={year} value={year}>
+                      {year}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+
+          <Card className="border-2 border-primary/20 shadow-xl">
+            <CardContent className="p-6">
+              <div className="space-y-6">
+                {trendData.map((trend, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.05 }}
+                    className="flex items-start justify-between gap-4 pb-6 border-b border-border last:border-b-0 last:pb-0"
                   >
-                    {polymer}
-                  </Button>
+                    <div className="flex-1">
+                      <h3 className="text-lg font-bold text-foreground mb-2">
+                        {trend.title}
+                      </h3>
+                      <p className="text-sm text-muted-foreground mb-2 leading-relaxed">
+                        {trend.description}
+                      </p>
+                      <p className="text-xs text-muted-foreground">{trend.date}</p>
+                    </div>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="flex-shrink-0 hover:bg-primary/10"
+                      onClick={() => window.print()}
+                    >
+                      <FileDown className="h-5 w-5 text-primary" />
+                    </Button>
+                  </motion.div>
                 ))}
               </div>
-
-              <div className="ml-auto flex gap-4">
-                <Select value={selectedMonth} onValueChange={setSelectedMonth}>
-                  <SelectTrigger className="w-40 border-primary/30">
-                    <SelectValue placeholder="Select month" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-background z-50">
-                    {months.map((month) => (
-                      <SelectItem key={month} value={month}>
-                        {month}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-
-                <Select value={selectedYear} onValueChange={setSelectedYear}>
-                  <SelectTrigger className="w-32 border-primary/30">
-                    <SelectValue placeholder="Select year" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-background z-50">
-                    {years.map((year) => (
-                      <SelectItem key={year} value={year}>
-                        {year}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Trend Reports */}
-        <div className="space-y-8">
-          {reports.map((report, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-            >
-              <Card className="border-2 border-primary/20 shadow-2xl bg-card">
-
-                
-                <CardHeader className="border-b border-border pb-6">
-                  <div className="flex items-start justify-between">
-                    <div className="flex items-center gap-4">
-                      <div className="p-4 bg-primary/10 rounded-lg">
-                        <TrendingUp className="h-10 w-10 text-primary" />
-                      </div>
-                      <div>
-                        <CardTitle className="text-3xl font-bold text-foreground mb-2">
-                          {report.title}
-                        </CardTitle>
-                        <div className="flex items-center gap-2 text-muted-foreground">
-                          <Calendar className="h-4 w-4" />
-                          <span className="text-sm">{report.date}</span>
-                        </div>
-                      </div>
-                    </div>
-                    <Button className="bg-primary hover:bg-primary-dark">
-                      <Download className="mr-2 h-4 w-4" />
-                      Download PDF
-                    </Button>
-                  </div>
-                </CardHeader>
-
-                <CardContent className="pt-8">
-                  <div className="space-y-8">
-                    {report.sections.map((section, sectionIndex) => (
-                      <motion.div
-                        key={sectionIndex}
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: sectionIndex * 0.15 }}
-                        className="bg-muted/30 rounded-lg p-6 border border-border hover:border-primary/50 transition-all"
-                      >
-                        <h3 className="text-xl font-bold text-foreground mb-4 flex items-center gap-2">
-                          <div className="w-2 h-2 bg-primary rounded-full" />
-                          {section.title}
-                        </h3>
-                        <p className="text-muted-foreground leading-relaxed">
-                          {section.content}
-                        </p>
-                      </motion.div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
+            </CardContent>
+          </Card>
         </div>
       </section>
     </div>
