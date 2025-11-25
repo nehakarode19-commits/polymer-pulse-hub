@@ -98,7 +98,6 @@ const Header = () => {
   const servicesItems = [
     { label: "Events", path: "/events" },
     { label: "Press Release", path: "/press-release" },
-    { label: "Partnerships", path: "/partnerships" },
     { label: "Whatsapp Chatbot", path: "/whatsapp-chatbot" },
   ];
 

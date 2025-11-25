@@ -7,6 +7,7 @@ import { useState } from "react";
 import { SubscriptionModal } from "@/components/SubscriptionModal";
 import { useUserRole } from "@/hooks/useUserRole";
 import { Shield } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 const Footer = () => {
   const { user, hasActiveSubscription } = useAuth();
@@ -39,6 +40,13 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {/* Contact Us */}
           <div>
+            <Link to="/" className="inline-block mb-6">
+              <img
+                src={logo}
+                alt="Polymer Bazaar"
+                className="h-12 w-auto object-contain"
+              />
+            </Link>
             <h4 className="font-semibold text-base mb-6 text-foreground">Contact Us</h4>
             <div className="space-y-4">
               <a
