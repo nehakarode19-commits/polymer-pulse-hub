@@ -106,24 +106,38 @@ const IndianBazaar = () => {
 
       {/* City Wise Section */}
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Section Title and Filters */}
-        <div className="mb-6 flex items-center justify-between flex-wrap gap-4">
-          <h2 className="text-2xl font-bold text-foreground">City Wise</h2>
-          
-          {/* City Filter */}
-          <Select value={selectedCity} onValueChange={setSelectedCity}>
-            <SelectTrigger className="w-48">
-              <SelectValue placeholder="Select City" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="Ahem">Ahem</SelectItem>
-              <SelectItem value="Mumbai">Mumbai</SelectItem>
-              <SelectItem value="Delhi">Delhi</SelectItem>
-              <SelectItem value="Bangalore">Bangalore</SelectItem>
-              <SelectItem value="Chennai">Chennai</SelectItem>
-              <SelectItem value="Kolkata">Kolkata</SelectItem>
-            </SelectContent>
-          </Select>
+        {/* Ribbon Header with Filters */}
+        <div className="mb-8">
+          <div className="flex items-center justify-between flex-wrap gap-4">
+            {/* Ribbon Style Heading */}
+            <div className="relative inline-block">
+              <div className="bg-primary text-white px-8 py-4 relative shadow-lg">
+                <div className="flex items-center gap-3">
+                  <FileText className="h-6 w-6" />
+                  <h2 className="text-2xl font-bold tracking-wide">City Wise Data</h2>
+                </div>
+                {/* Ribbon tail left */}
+                <div className="absolute left-0 top-full w-0 h-0 border-l-[20px] border-l-transparent border-t-[15px] border-t-primary/80"></div>
+                {/* Ribbon tail right */}
+                <div className="absolute right-0 top-full w-0 h-0 border-r-[20px] border-r-transparent border-t-[15px] border-t-primary/80"></div>
+              </div>
+            </div>
+            
+            {/* City Filter */}
+            <Select value={selectedCity} onValueChange={setSelectedCity}>
+              <SelectTrigger className="w-48">
+                <SelectValue placeholder="Select City" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="Ahem">Ahem</SelectItem>
+                <SelectItem value="Mumbai">Mumbai</SelectItem>
+                <SelectItem value="Delhi">Delhi</SelectItem>
+                <SelectItem value="Bangalore">Bangalore</SelectItem>
+                <SelectItem value="Chennai">Chennai</SelectItem>
+                <SelectItem value="Kolkata">Kolkata</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
         </div>
 
         {/* Polymer Cards Grid */}
