@@ -62,12 +62,12 @@ const Header = () => {
 
   const indianBazaarItems = [
     { label: "City Wise", path: "/indian-bazaar" },
-    { label: "Rate Revision", path: "/indian-bazaar" },
-    { label: "Price Prediction", path: "/indian-bazaar" },
-    { label: "Company Price List", path: "/indian-bazaar" },
-    { label: "US$-INR Custom Exchange Rate", path: "/indian-bazaar" },
-    { label: "BOPP Film ( TT & NTT )", path: "/indian-bazaar" },
-    { label: "Indian Government Policies", path: "/indian-bazaar" },
+    { label: "Rate Revision", path: "/rate-revision" },
+    { label: "Price Prediction", path: "/price-prediction" },
+    { label: "Company Price List", path: "/company-price-list" },
+    { label: "US$-INR Custom Exchange Rate", path: "/exchange-rate" },
+    { label: "BOPP Film ( TT & NTT )", path: "/bopp-film" },
+    { label: "Indian Government Policies", path: "/government-policies" },
   ];
 
   const historicalDataItems = [

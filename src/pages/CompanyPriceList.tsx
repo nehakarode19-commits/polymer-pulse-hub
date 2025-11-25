@@ -1,18 +1,10 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Building2, ChevronDown } from "lucide-react";
+import { Building2 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 
 const CompanyPriceList = () => {
-  const navigate = useNavigate();
   const [selectedMonth, setSelectedMonth] = useState("January");
   const [selectedYear, setSelectedYear] = useState("2024");
 
@@ -81,36 +73,6 @@ const CompanyPriceList = () => {
             </div>
             
             <div className="flex items-center gap-3">
-              <DropdownMenu>
-                <DropdownMenuTrigger className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/90 transition-colors">
-                  Indian Bazaar
-                  <ChevronDown className="h-4 w-4" />
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-56 bg-white z-50">
-                  <DropdownMenuItem onClick={() => navigate('/indian-bazaar')} className="cursor-pointer">
-                    City Wise
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => navigate('/rate-revision')} className="cursor-pointer">
-                    Rate Revision
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => navigate('/price-prediction')} className="cursor-pointer">
-                    Price Prediction
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => navigate('/company-price-list')} className="cursor-pointer">
-                    Company Price List
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => navigate('/exchange-rate')} className="cursor-pointer">
-                    US$-INR Custom Exchange Rate
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => navigate('/bopp-film')} className="cursor-pointer">
-                    BOPP Film (TT & NTT)
-                  </DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => navigate('/government-policies')} className="cursor-pointer">
-                    Indian Government Policies
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-
               <Select value={selectedMonth} onValueChange={setSelectedMonth}>
                 <SelectTrigger className="w-32">
                   <SelectValue placeholder="Month" />
