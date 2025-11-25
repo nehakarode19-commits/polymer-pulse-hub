@@ -95,7 +95,7 @@ const ExchangeRate = () => {
                       
                       <div className="text-center">
                         <p className="text-xs uppercase text-muted-foreground mb-2">Exchange Rate</p>
-                        <p className="text-2xl font-bold text-primary">₹{item.rate}</p>
+                        <p className="text-lg font-bold text-primary">₹{item.rate}</p>
                       </div>
                       
                       <div className="text-center">
