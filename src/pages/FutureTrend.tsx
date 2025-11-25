@@ -121,40 +121,35 @@ const FutureTrend = () => {
         </div>
       </section>
 
-      {/* Horizontal Polymer Navigation Bar */}
+      {/* Polymer Selection Badges - Similar to Global Bazaar Design */}
       <section className="bg-background border-y border-border">
-        <div className="container max-w-7xl mx-auto px-4 py-4">
-          <div className="flex items-center justify-between gap-4">
-            {/* Left side - Future Trend label */}
-            <div className="flex items-center gap-2 flex-shrink-0">
-              <FileText className="h-5 w-5 text-primary" />
-              <span className="font-semibold text-primary">Future Trend</span>
-            </div>
-
-            {/* Center - Horizontal scrollable polymer tabs */}
-            <ScrollArea className="flex-1 mx-4">
-              <div className="flex gap-6 pb-2">
+        <div className="container max-w-7xl mx-auto px-4 py-6">
+          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+            {/* Polymer Type Badges */}
+            <div className="flex-1">
+              <div className="flex flex-wrap gap-3">
                 {polymerTabs.map((polymer) => (
-                  <button
+                  <Button
                     key={polymer}
                     onClick={() => setSelectedPolymer(polymer)}
-                    className={`whitespace-nowrap text-sm font-medium transition-colors pb-2 border-b-2 ${
+                    variant={selectedPolymer === polymer ? "default" : "outline"}
+                    className={`rounded-full px-4 py-2 h-auto font-medium transition-all ${
                       selectedPolymer === polymer
-                        ? "text-primary border-primary"
-                        : "text-muted-foreground border-transparent hover:text-foreground hover:border-border"
+                        ? "bg-primary text-primary-foreground hover:bg-primary/90 shadow-md"
+                        : "bg-card border-border hover:bg-accent hover:border-primary/50"
                     }`}
                   >
+                    <span className="mr-2 text-base">🧪</span>
                     {polymer}
-                  </button>
+                  </Button>
                 ))}
               </div>
-              <ScrollBar orientation="horizontal" />
-            </ScrollArea>
+            </div>
 
-            {/* Right side - Year and Month dropdowns */}
+            {/* Year and Month Filters */}
             <div className="flex gap-3 flex-shrink-0">
               <Select value={selectedYear} onValueChange={setSelectedYear}>
-                <SelectTrigger className="w-28 h-9 border-border bg-card">
+                <SelectTrigger className="w-28 h-10 border-border bg-card rounded-full">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent className="bg-card border-border z-[100]">
@@ -171,7 +166,7 @@ const FutureTrend = () => {
               </Select>
 
               <Select value={selectedMonth} onValueChange={setSelectedMonth}>
-                <SelectTrigger className="w-32 h-9 border-border bg-card">
+                <SelectTrigger className="w-36 h-10 border-border bg-card rounded-full">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent className="bg-card border-border z-[100]">
@@ -190,8 +185,6 @@ const FutureTrend = () => {
           </div>
         </div>
       </section>
-
-      {/* Filter Section - REMOVED, now integrated above */}
 
       {/* Trend Reports Section */}
       <section className="container max-w-7xl mx-auto px-4 pb-12">
