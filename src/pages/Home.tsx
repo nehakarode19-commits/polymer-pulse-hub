@@ -944,12 +944,8 @@ const Home = () => {
 
       {/* Why Polymer Bazaar Carousel */}
       <section className="py-32 px-4 relative overflow-hidden">
-        {/* Animated Background */}
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute top-20 left-20 w-[600px] h-[600px] bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-20 right-20 w-[600px] h-[600px] bg-accent-orange/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1.5s' }}></div>
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-primary/5 to-red-600/5 rounded-full blur-3xl"></div>
-        </div>
+        {/* Subtle Background */}
+        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-background via-muted/20 to-background"></div>
 
         <div className="container max-w-7xl mx-auto">
           <motion.div
@@ -959,13 +955,13 @@ const Home = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-20"
           >
-            <Badge variant="outline" className="mb-4 text-base px-6 py-2 bg-gradient-to-r from-primary to-red-600 text-white border-none shadow-lg">
+            <Badge variant="outline" className="mb-4 text-sm px-4 py-1.5 border-primary/20">
               Why Choose Us
             </Badge>
-            <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent">
+            <h2 className="text-5xl md:text-6xl font-bold mb-6">
               Why Polymer Bazaar
             </h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Industry-leading intelligence platform trusted by polymer professionals worldwide
             </p>
           </motion.div>
@@ -975,67 +971,40 @@ const Home = () => {
               {whyPolymerBazaar.slice(carouselIndex, carouselIndex + 3).map((item, index) => {
                 const images = [whyPolymerModernImg, whyPolymerModernImg, whyPolymerModernImg];
                 const imageIndex = (carouselIndex + index) % images.length;
-                const direction = index === 0 ? -120 : index === 2 ? 120 : 0;
+                const direction = index === 0 ? -60 : index === 2 ? 60 : 0;
                 
                 return (
                   <motion.div
                     key={`${carouselIndex}-${index}`}
-                    initial={{ opacity: 0, x: direction, scale: 0.85 }}
-                    animate={{ opacity: 1, x: 0, scale: 1 }}
-                    exit={{ opacity: 0, x: -direction, scale: 0.85 }}
+                    initial={{ opacity: 0, x: direction }}
+                    animate={{ opacity: 1, x: 0 }}
                     transition={{ 
-                      delay: index * 0.15, 
-                      duration: 0.8,
-                      type: "spring",
-                      bounce: 0.35
+                      delay: index * 0.1, 
+                      duration: 0.5,
+                      ease: "easeOut"
                     }}
                     className="flex-1 min-w-0"
                   >
-                    <Card className="group shadow-2xl hover:shadow-[0_40px_100px_-25px_rgba(229,57,53,0.7)] transition-all duration-700 hover:-translate-y-6 hover:scale-[1.08] border-2 hover:border-primary/60 h-full relative overflow-hidden bg-gradient-to-br from-card via-card/95 to-primary/10 backdrop-blur-sm">
-                      {/* Multiple shine effects */}
-                      <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
-                      <div className="absolute inset-0 bg-gradient-to-bl from-primary/0 via-primary/10 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-                      
-                      {/* Glow effect around card */}
-                      <div className="absolute -inset-1 bg-gradient-to-r from-primary via-red-600 to-primary opacity-0 group-hover:opacity-30 blur-xl transition-opacity duration-700"></div>
-                      
+                    <Card className="group shadow-lg hover:shadow-xl transition-all duration-300 border hover:border-primary/30 h-full bg-card">
                       <div className="h-72 relative overflow-hidden">
                         <img 
                           src={images[imageIndex]} 
                           alt={`Polymer materials ${imageIndex + 1}`}
-                          className="w-full h-full object-cover transition-all duration-700 group-hover:scale-125 group-hover:rotate-3"
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
                         
-                        {/* Animated gradient overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-transparent to-red-600/30 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-                        
-                        {/* Icon Badge - Larger */}
-                        <div className="absolute top-6 right-6 w-20 h-20 rounded-2xl bg-gradient-to-br from-primary via-red-600 to-red-700 flex items-center justify-center shadow-2xl group-hover:scale-125 group-hover:rotate-[360deg] transition-all duration-700">
-                          <div className="absolute inset-0 rounded-2xl bg-white/30 blur-xl group-hover:bg-white/50 transition-all duration-700"></div>
-                          <item.icon className="w-10 h-10 text-white relative z-10 drop-shadow-lg" />
-                        </div>
-
-                        {/* Floating particles effect */}
-                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
-                          <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-white/60 rounded-full animate-pulse"></div>
-                          <div className="absolute top-1/3 right-1/3 w-1.5 h-1.5 bg-primary/60 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
-                          <div className="absolute bottom-1/3 left-1/2 w-2 h-2 bg-white/40 rounded-full animate-pulse" style={{ animationDelay: '1s' }}></div>
+                        {/* Simple Icon Badge */}
+                        <div className="absolute top-6 right-6 w-16 h-16 rounded-xl bg-primary/90 backdrop-blur-sm flex items-center justify-center shadow-lg">
+                          <item.icon className="w-8 h-8 text-white" />
                         </div>
                       </div>
                       
-                      <CardContent className="p-8 text-center relative z-10">
-                        <h3 className="font-bold text-2xl mb-4 group-hover:text-primary transition-colors duration-300 leading-tight">{item.title}</h3>
-                        <p className="text-base text-muted-foreground leading-relaxed group-hover:text-foreground/80 transition-colors duration-300">
+                      <CardContent className="p-8 text-center">
+                        <h3 className="font-bold text-2xl mb-4">{item.title}</h3>
+                        <p className="text-base text-muted-foreground leading-relaxed">
                           {item.description}
                         </p>
-                        
-                        {/* Bottom accent line with animation */}
-                        <div className="mt-6 w-full h-1.5 rounded-full bg-gradient-to-r from-transparent via-primary to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 shadow-lg shadow-primary/50"></div>
-                        
-                        {/* Corner decorations */}
-                        <div className="absolute bottom-0 left-0 w-20 h-20 bg-gradient-to-tr from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                        <div className="absolute bottom-0 right-0 w-20 h-20 bg-gradient-to-tl from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                       </CardContent>
                     </Card>
                   </motion.div>
@@ -1043,23 +1012,24 @@ const Home = () => {
               })}
             </div>
             
+            {/* Minimal transparent buttons */}
             <Button
               variant="ghost"
               size="icon"
-              className="absolute -left-4 top-1/2 -translate-y-1/2 w-16 h-16 rounded-full bg-background/20 hover:bg-background/40 backdrop-blur-md border border-white/20 hover:border-primary/50 shadow-2xl hover:shadow-[0_20px_50px_rgba(229,57,53,0.4)] hover:scale-125 transition-all duration-300 disabled:opacity-30 disabled:hover:scale-100"
+              className="absolute -left-4 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-background/60 hover:bg-background/80 backdrop-blur-sm border border-border/50 hover:border-primary/50 transition-all duration-200 disabled:opacity-20"
               onClick={() => setCarouselIndex(Math.max(0, carouselIndex - 1))}
               disabled={carouselIndex === 0}
             >
-              <ChevronLeft className="h-8 w-8 text-foreground group-hover:text-primary transition-colors" />
+              <ChevronLeft className="h-6 w-6" />
             </Button>
             <Button
               variant="ghost"
               size="icon"
-              className="absolute -right-4 top-1/2 -translate-y-1/2 w-16 h-16 rounded-full bg-background/20 hover:bg-background/40 backdrop-blur-md border border-white/20 hover:border-primary/50 shadow-2xl hover:shadow-[0_20px_50px_rgba(229,57,53,0.4)] hover:scale-125 transition-all duration-300 disabled:opacity-30 disabled:hover:scale-100"
+              className="absolute -right-4 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-background/60 hover:bg-background/80 backdrop-blur-sm border border-border/50 hover:border-primary/50 transition-all duration-200 disabled:opacity-20"
               onClick={() => setCarouselIndex(Math.min(whyPolymerBazaar.length - 3, carouselIndex + 1))}
               disabled={carouselIndex >= whyPolymerBazaar.length - 3}
             >
-              <ChevronRight className="h-8 w-8 text-foreground group-hover:text-primary transition-colors" />
+              <ChevronRight className="h-6 w-6" />
             </Button>
           </div>
         </div>
