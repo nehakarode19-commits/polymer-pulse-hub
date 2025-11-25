@@ -44,52 +44,78 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="relative bg-gradient-to-br from-gray-50 via-white to-gray-50 border-t border-primary/10 mt-20">
-      {/* Decorative Top Border */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary/60 via-primary to-primary/60" />
-      
-      <div className="container px-4 py-16">
-        {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
-          {/* Brand Section */}
-          <div className="lg:col-span-1">
-            <Link to="/" className="inline-block mb-6 group">
+    <footer className="bg-white border-t mt-20">
+      {/* Main Footer */}
+      <div className="container px-4 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12">
+          {/* Brand Column */}
+          <div className="lg:col-span-2">
+            <Link to="/" className="inline-block mb-4">
               <img
                 src={logo}
                 alt="Polymer Bazaar"
-                className="h-16 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                className="h-12 w-auto object-contain"
               />
             </Link>
-            <p className="text-sm text-muted-foreground leading-relaxed mb-6">
-              Your trusted partner in the global polymer trade, providing real-time market intelligence and trade solutions.
+            <p className="text-sm text-muted-foreground mb-6 leading-relaxed max-w-sm">
+              Leading global platform for polymer trade intelligence and market insights.
             </p>
             
-            {/* Social Media Links */}
-            <div className="flex items-center gap-3">
+            {/* Contact Cards */}
+            <div className="space-y-3 mb-6">
+              <a
+                href="tel:+919374524365"
+                className="flex items-center gap-3 p-3 rounded-lg bg-gray-50 hover:bg-primary/5 transition-colors group"
+              >
+                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <Phone className="h-4 w-4 text-primary" />
+                </div>
+                <div>
+                  <div className="text-xs text-muted-foreground">Call us</div>
+                  <div className="text-sm font-medium">+91 93 745 24 365</div>
+                </div>
+              </a>
+              
+              <a
+                href="mailto:Info@polymerbazaar.com"
+                className="flex items-center gap-3 p-3 rounded-lg bg-gray-50 hover:bg-primary/5 transition-colors group"
+              >
+                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <Mail className="h-4 w-4 text-primary" />
+                </div>
+                <div>
+                  <div className="text-xs text-muted-foreground">Email us</div>
+                  <div className="text-sm font-medium break-all">Info@polymerbazaar.com</div>
+                </div>
+              </a>
+            </div>
+
+            {/* Social Links */}
+            <div className="flex items-center gap-2">
               <a
                 href="#"
-                className="w-10 h-10 rounded-full bg-primary/5 hover:bg-primary text-muted-foreground hover:text-white flex items-center justify-center transition-all duration-300 hover:scale-110"
+                className="w-9 h-9 rounded-lg bg-gray-100 hover:bg-primary text-muted-foreground hover:text-white flex items-center justify-center transition-all"
                 aria-label="Facebook"
               >
                 <Facebook className="h-4 w-4" />
               </a>
               <a
                 href="#"
-                className="w-10 h-10 rounded-full bg-primary/5 hover:bg-primary text-muted-foreground hover:text-white flex items-center justify-center transition-all duration-300 hover:scale-110"
+                className="w-9 h-9 rounded-lg bg-gray-100 hover:bg-primary text-muted-foreground hover:text-white flex items-center justify-center transition-all"
                 aria-label="Twitter"
               >
                 <Twitter className="h-4 w-4" />
               </a>
               <a
                 href="#"
-                className="w-10 h-10 rounded-full bg-primary/5 hover:bg-primary text-muted-foreground hover:text-white flex items-center justify-center transition-all duration-300 hover:scale-110"
+                className="w-9 h-9 rounded-lg bg-gray-100 hover:bg-primary text-muted-foreground hover:text-white flex items-center justify-center transition-all"
                 aria-label="LinkedIn"
               >
                 <Linkedin className="h-4 w-4" />
               </a>
               <a
                 href="#"
-                className="w-10 h-10 rounded-full bg-primary/5 hover:bg-primary text-muted-foreground hover:text-white flex items-center justify-center transition-all duration-300 hover:scale-110"
+                className="w-9 h-9 rounded-lg bg-gray-100 hover:bg-primary text-muted-foreground hover:text-white flex items-center justify-center transition-all"
                 aria-label="Instagram"
               >
                 <Instagram className="h-4 w-4" />
@@ -99,18 +125,14 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="font-bold text-lg mb-6 text-foreground relative inline-block">
-              Quick Links
-              <span className="absolute bottom-0 left-0 w-12 h-0.5 bg-primary rounded-full" />
-            </h3>
-            <ul className="space-y-3">
+            <h4 className="font-semibold text-sm mb-4 text-foreground">Quick Links</h4>
+            <ul className="space-y-2.5">
               {otherLinks.map((link) => (
                 <li key={link.path}>
                   <Link
                     to={link.path}
-                    className="text-sm text-muted-foreground hover:text-primary transition-all duration-200 inline-flex items-center group"
+                    className="text-sm text-muted-foreground hover:text-primary hover:translate-x-1 inline-block transition-all"
                   >
-                    <ArrowRight className="h-3 w-3 mr-2 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
                     {link.label}
                   </Link>
                 </li>
@@ -118,20 +140,16 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Other Information */}
+          {/* Resources */}
           <div>
-            <h3 className="font-bold text-lg mb-6 text-foreground relative inline-block">
-              Resources
-              <span className="absolute bottom-0 left-0 w-12 h-0.5 bg-primary rounded-full" />
-            </h3>
-            <ul className="space-y-3">
+            <h4 className="font-semibold text-sm mb-4 text-foreground">Resources</h4>
+            <ul className="space-y-2.5">
               {otherInfo.map((link) => (
                 <li key={link.path}>
                   <Link
                     to={link.path}
-                    className="text-sm text-muted-foreground hover:text-primary transition-all duration-200 inline-flex items-center group"
+                    className="text-sm text-muted-foreground hover:text-primary hover:translate-x-1 inline-block transition-all"
                   >
-                    <ArrowRight className="h-3 w-3 mr-2 opacity-0 -ml-5 group-hover:opacity-100 group-hover:ml-0 transition-all duration-300" />
                     {link.label}
                   </Link>
                 </li>
@@ -139,88 +157,51 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Contact & Newsletter */}
+          {/* Newsletter */}
           <div>
-            <h3 className="font-bold text-lg mb-6 text-foreground relative inline-block">
-              Get in Touch
-              <span className="absolute bottom-0 left-0 w-12 h-0.5 bg-primary rounded-full" />
-            </h3>
-            
-            {/* Contact Info */}
-            <div className="space-y-4 mb-6">
-              <a
-                href="tel:+919374524365"
-                className="flex items-start gap-3 text-sm text-muted-foreground hover:text-primary transition-colors group"
-              >
-                <div className="w-9 h-9 rounded-lg bg-primary/5 group-hover:bg-primary flex items-center justify-center flex-shrink-0 transition-colors">
-                  <Phone className="h-4 w-4 text-primary group-hover:text-white transition-colors" />
-                </div>
-                <span className="pt-1.5">+91 93 745 24 365</span>
-              </a>
-              
-              <a
-                href="mailto:Info@polymerbazaar.com"
-                className="flex items-start gap-3 text-sm text-muted-foreground hover:text-primary transition-colors group"
-              >
-                <div className="w-9 h-9 rounded-lg bg-primary/5 group-hover:bg-primary flex items-center justify-center flex-shrink-0 transition-colors">
-                  <Mail className="h-4 w-4 text-primary group-hover:text-white transition-colors" />
-                </div>
-                <span className="pt-1.5 break-all">Info@polymerbazaar.com</span>
-              </a>
-              
-              <div className="flex items-start gap-3 text-sm text-muted-foreground">
-                <div className="w-9 h-9 rounded-lg bg-primary/5 flex items-center justify-center flex-shrink-0">
-                  <MapPin className="h-4 w-4 text-primary" />
-                </div>
-                <span className="pt-1.5">Ahmedabad, Gujarat, India</span>
-              </div>
+            <h4 className="font-semibold text-sm mb-4 text-foreground">Newsletter</h4>
+            <p className="text-xs text-muted-foreground mb-4">
+              Get the latest polymer market updates
+            </p>
+            <div className="flex gap-2 mb-4">
+              <Input
+                type="email"
+                placeholder="Enter email"
+                className="h-10 text-sm"
+              />
+              <Button size="sm" className="h-10 px-4 bg-primary hover:bg-primary/90">
+                <ArrowRight className="h-4 w-4" />
+              </Button>
             </div>
-
-            {/* Newsletter */}
-            <div className="bg-gradient-to-br from-primary/5 to-primary/10 rounded-xl p-4 border border-primary/10">
-              <p className="text-xs text-muted-foreground mb-3 font-medium">
-                Subscribe to our newsletter
-              </p>
-              <div className="flex gap-2">
-                <Input
-                  type="email"
-                  placeholder="Your email"
-                  className="flex-1 bg-white border-white/50 focus-visible:ring-primary h-9 text-sm"
-                />
-                <Button size="sm" className="bg-primary hover:bg-primary/90 shadow-sm h-9 px-3">
-                  <ArrowRight className="h-4 w-4" />
-                </Button>
-              </div>
+            <div className="flex items-start gap-2 text-xs text-muted-foreground">
+              <MapPin className="h-3 w-3 mt-0.5 flex-shrink-0" />
+              <span>Ahmedabad, Gujarat, India</span>
             </div>
           </div>
         </div>
+      </div>
 
-        {/* Bottom Bar */}
-        <div className="pt-8 border-t border-primary/10">
+      {/* Bottom Bar */}
+      <div className="border-t bg-gray-50">
+        <div className="container px-4 py-4">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="text-sm text-muted-foreground text-center md:text-left">
-              All Copyright © 2007 – 2025 Polymer Bazaar. All rights reserved.
+            <div className="text-xs text-muted-foreground">
+              © 2007-2025 Polymer Bazaar. All rights reserved.
             </div>
             
-            <div className="flex items-center gap-4">
-              {isAdmin && (
-                <Button 
-                  asChild 
-                  variant="outline" 
-                  size="sm" 
-                  className="border-primary/30 text-primary hover:bg-primary hover:text-white transition-all duration-200"
-                >
-                  <Link to="/admin">
-                    <Shield className="h-4 w-4 mr-2" />
-                    Admin Panel
-                  </Link>
-                </Button>
-              )}
-              
-              <div className="text-xs text-muted-foreground hidden sm:block">
-                Made with ❤️ in India
-              </div>
-            </div>
+            {isAdmin && (
+              <Button 
+                asChild 
+                variant="outline" 
+                size="sm"
+                className="h-9 border-primary/30 text-primary hover:bg-primary hover:text-white"
+              >
+                <Link to="/admin">
+                  <Shield className="h-4 w-4 mr-2" />
+                  Admin
+                </Link>
+              </Button>
+            )}
           </div>
         </div>
       </div>
