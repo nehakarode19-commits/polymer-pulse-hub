@@ -13,6 +13,7 @@ All colors MUST be HSL.
     --primary-foreground: 0 0% 100%;
     --primary-light: 1 77% 65%;
     --primary-dark: 1 77% 45%;
+    --primary-darker: 1 70% 38%;
     --accent-red: 1 77% 55%;
     --accent-orange: 14 90% 53%;
     --accent-gold: 45 93% 47%;
