@@ -1,62 +1,23 @@
-import { Card, CardContent } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Building2 } from "lucide-react";
-import { motion } from "framer-motion";
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
 
 const CompanyPriceList = () => {
-  const [selectedMonth, setSelectedMonth] = useState("January");
-  const [selectedYear, setSelectedYear] = useState("2024");
+  const [selectedMonth, setSelectedMonth] = useState("May");
+  const [selectedYear, setSelectedYear] = useState("2025");
 
-  const companyData = [
-    {
-      company: "IOCL",
-      products: [
-        { name: "PP FILM", price: "94.5" },
-        { name: "PP IM-HMEL M 12 RR", price: "93.5" },
-        { name: "HI110 MG", price: "93.25" },
-      ]
-    },
-    {
-      company: "Reliance Industries",
-      products: [
-        { name: "HDPE BLOW", price: "92.0" },
-        { name: "LLDPE INJ.MLDG", price: "91.5" },
-        { name: "LDPE LAMI", price: "95.0" },
-      ]
-    },
-    {
-      company: "Haldia Petrochemicals",
-      products: [
-        { name: "PP FILM", price: "94.0" },
-        { name: "Engineering Material", price: "96.0" },
-        { name: "PVC", price: "88.5" },
-      ]
-    },
-    {
-      company: "Gail India",
-      products: [
-        { name: "PP IM-HMEL", price: "93.5" },
-        { name: "HDPE", price: "92.5" },
-        { name: "LLDPE", price: "91.0" },
-      ]
-    },
-    {
-      company: "ONGC Petro",
-      products: [
-        { name: "LDPE LAMI", price: "95.0" },
-        { name: "PP", price: "94.5" },
-        { name: "HDPE", price: "92.0" },
-      ]
-    },
-    {
-      company: "Bharat Petroleum",
-      products: [
-        { name: "Engineering Material", price: "96.0" },
-        { name: "PVC", price: "89.0" },
-        { name: "PET", price: "97.5" },
-      ]
-    },
+  const priceListData = [
+    { product: "BOPP Film", date: "30-05-2025" },
+    { product: "PVC", date: "30-05-2025" },
+    { product: "PP (Polypropylene)", date: "30-05-2025" },
+    { product: "HDPE", date: "30-05-2025" },
+    { product: "LDPE", date: "30-05-2025" },
+    { product: "LLDPE", date: "30-05-2025" },
+    { product: "PET", date: "30-05-2025" },
+    { product: "PS (Polystyrene)", date: "30-05-2025" },
+    { product: "ABS", date: "30-05-2025" },
+    { product: "Engineering Plastics", date: "30-05-2025" },
   ];
 
   return (
@@ -81,6 +42,9 @@ const CompanyPriceList = () => {
                   <SelectItem value="January">January</SelectItem>
                   <SelectItem value="February">February</SelectItem>
                   <SelectItem value="March">March</SelectItem>
+                  <SelectItem value="April">April</SelectItem>
+                  <SelectItem value="May">May</SelectItem>
+                  <SelectItem value="June">June</SelectItem>
                 </SelectContent>
               </Select>
 
@@ -89,6 +53,7 @@ const CompanyPriceList = () => {
                   <SelectValue placeholder="Year" />
                 </SelectTrigger>
                 <SelectContent>
+                  <SelectItem value="2025">2025</SelectItem>
                   <SelectItem value="2024">2024</SelectItem>
                   <SelectItem value="2023">2023</SelectItem>
                 </SelectContent>
@@ -100,50 +65,56 @@ const CompanyPriceList = () => {
 
       {/* Content */}
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="mb-10">
-          <div className="flex items-center gap-4 bg-gradient-to-r from-primary/10 via-primary/5 to-transparent backdrop-blur-sm border border-primary/20 rounded-2xl p-6 shadow-xl">
-            <div className="p-3 bg-primary/20 backdrop-blur-md rounded-xl border border-primary/30 shadow-lg">
-              <Building2 className="h-7 w-7 text-primary" />
-            </div>
-            <div>
-              <h2 className="text-3xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
-                Company-Wise Price Lists
-              </h2>
-              <p className="text-sm text-muted-foreground mt-1">Current polymer prices by major companies</p>
-            </div>
-          </div>
+        {/* Title Section */}
+        <div className="text-center mb-8">
+          <h2 className="text-2xl font-bold text-foreground">
+            Company Price List - {selectedMonth} {selectedYear}
+          </h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {companyData.map((company, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.05 }}
-            >
-              <Card className="border-2 border-primary/10 shadow-lg hover:shadow-xl hover:border-primary/30 transition-all duration-300 overflow-hidden">
-                <CardContent className="p-0">
-                  <div className="bg-gradient-to-r from-primary via-primary to-primary/90 text-white px-5 py-4 text-center relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
-                    <h3 className="font-bold text-lg relative z-10 tracking-wide">{company.company}</h3>
-                  </div>
-                  
-                  <div className="p-5 space-y-3 bg-gradient-to-b from-background to-muted/5">
-                    {company.products.map((product, idx) => (
-                      <div 
-                        key={idx} 
-                        className="flex justify-between items-center py-3 px-2 rounded-md hover:bg-primary/5 transition-colors border-b border-border/50 last:border-0"
+        {/* Table */}
+        <div className="bg-white rounded-lg shadow-md border border-border overflow-hidden">
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead>
+                <tr className="border-b-2 border-border bg-muted/30">
+                  <th className="text-left px-6 py-4 text-sm font-semibold text-muted-foreground uppercase tracking-wider">
+                    PRODUCT
+                  </th>
+                  <th className="text-left px-6 py-4 text-sm font-semibold text-muted-foreground uppercase tracking-wider">
+                    DATE
+                  </th>
+                  <th className="text-right px-6 py-4 text-sm font-semibold text-muted-foreground uppercase tracking-wider">
+                    
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {priceListData.map((item, index) => (
+                  <tr 
+                    key={index} 
+                    className="border-b border-border hover:bg-muted/20 transition-colors"
+                  >
+                    <td className="px-6 py-4">
+                      <span className="text-sm font-medium text-foreground">{item.product}</span>
+                    </td>
+                    <td className="px-6 py-4">
+                      <span className="text-sm text-foreground">{item.date}</span>
+                    </td>
+                    <td className="px-6 py-4 text-right">
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        className="border-primary text-primary hover:bg-primary hover:text-white transition-all"
                       >
-                        <span className="text-sm font-medium text-foreground">{product.name}</span>
-                        <span className="text-base font-bold text-primary">₹{product.price}</span>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
+                        Price list link
+                      </Button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
