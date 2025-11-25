@@ -520,7 +520,7 @@ const Home = () => {
                 whileHover={{ y: -12, scale: 1.02 }}
                 className="h-full"
               >
-                <Card className="group relative hover:shadow-2xl transition-all duration-500 overflow-hidden border-2 border-border hover:border-primary/50 h-full bg-gradient-to-br from-card via-card to-muted/20 backdrop-blur-sm">
+                <Card className="group relative hover:shadow-2xl transition-all duration-500 overflow-hidden border-2 border-border hover:border-primary/50 h-full bg-gradient-to-br from-card via-card to-muted/20 backdrop-blur-sm shadow-xl hover:shadow-[0_20px_60px_-15px_rgba(229,57,53,0.4)]">
                   {/* Gradient overlay on card */}
                   <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/0 to-primary/0 group-hover:from-primary/5 group-hover:via-primary/10 group-hover:to-primary/5 transition-all duration-500 pointer-events-none z-10"></div>
                   
