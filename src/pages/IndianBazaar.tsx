@@ -107,25 +107,29 @@ const IndianBazaar = () => {
       {/* City Wise Section */}
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Ribbon Header with Filters */}
-        <div className="mb-8">
-          <div className="flex items-center justify-between flex-wrap gap-4">
-            {/* Ribbon Style Heading */}
+        <div className="mb-10">
+          <div className="flex items-center justify-between flex-wrap gap-6">
+            {/* Ribbon Style Heading with Gradient */}
             <div className="relative inline-block">
-              <div className="bg-primary text-white px-8 py-4 relative shadow-lg">
+              <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-white px-10 py-5 relative shadow-xl">
                 <div className="flex items-center gap-3">
-                  <FileText className="h-6 w-6" />
+                  <div className="p-2 bg-white/10 rounded-lg backdrop-blur-sm">
+                    <FileText className="h-6 w-6" />
+                  </div>
                   <h2 className="text-2xl font-bold tracking-wide">City Wise Data</h2>
                 </div>
-                {/* Ribbon tail left */}
-                <div className="absolute left-0 top-full w-0 h-0 border-l-[20px] border-l-transparent border-t-[15px] border-t-primary/80"></div>
-                {/* Ribbon tail right */}
-                <div className="absolute right-0 top-full w-0 h-0 border-r-[20px] border-r-transparent border-t-[15px] border-t-primary/80"></div>
+                {/* Ribbon fold left */}
+                <div className="absolute left-0 top-full w-0 h-0 border-l-[25px] border-l-transparent border-t-[18px] border-t-slate-900/70"></div>
+                {/* Ribbon fold right */}
+                <div className="absolute right-0 top-full w-0 h-0 border-r-[25px] border-r-transparent border-t-[18px] border-t-slate-900/70"></div>
+                {/* Decorative shine effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent"></div>
               </div>
             </div>
             
-            {/* City Filter */}
+            {/* City Filter with enhanced styling */}
             <Select value={selectedCity} onValueChange={setSelectedCity}>
-              <SelectTrigger className="w-48">
+              <SelectTrigger className="w-52 h-12 border-2 border-primary/20 hover:border-primary/40 transition-colors">
                 <SelectValue placeholder="Select City" />
               </SelectTrigger>
               <SelectContent>
@@ -149,22 +153,23 @@ const IndianBazaar = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.05 }}
             >
-              <Card className="border border-border shadow-sm hover:shadow-md transition-shadow">
+              <Card className="border-2 border-primary/10 shadow-lg hover:shadow-xl hover:border-primary/30 transition-all duration-300 overflow-hidden">
                 <CardContent className="p-0">
-                  {/* Card Header */}
-                  <div className="bg-primary text-white px-4 py-3 text-center">
-                    <h3 className="font-bold text-base">{polymer.title}</h3>
+                  {/* Card Header with vibrant red gradient */}
+                  <div className="bg-gradient-to-r from-primary via-primary to-primary/90 text-white px-5 py-4 text-center relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+                    <h3 className="font-bold text-lg relative z-10 tracking-wide">{polymer.title}</h3>
                   </div>
                   
-                  {/* Card Body */}
-                  <div className="p-4 space-y-2">
+                  {/* Card Body with enhanced styling */}
+                  <div className="p-5 space-y-3 bg-gradient-to-b from-background to-muted/5">
                     {polymer.items.map((item, idx) => (
                       <div 
                         key={idx} 
-                        className="flex justify-between items-center py-2 border-b border-border last:border-0"
+                        className="flex justify-between items-center py-3 px-2 rounded-md hover:bg-primary/5 transition-colors border-b border-border/50 last:border-0"
                       >
-                        <span className="text-sm text-muted-foreground">{item.name}</span>
-                        <span className="text-sm font-semibold text-foreground">{item.price}</span>
+                        <span className="text-sm font-medium text-foreground">{item.name}</span>
+                        <span className="text-base font-bold text-primary">{item.price}</span>
                       </div>
                     ))}
                   </div>
