@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, DollarSign, Clock, Calendar, TrendingUp, GraduationCap, Bookmark, Copy } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import JobApplicationForm from "@/components/JobApplicationForm";
 
 const JobDetail = () => {
   const { toast } = useToast();
@@ -208,6 +209,11 @@ const JobDetail = () => {
                 </div>
               </CardContent>
             </Card>
+
+            {/* Job Application Form */}
+            <div className="mt-8">
+              <JobApplicationForm jobTitle="Technical Support Specialist" jobId="1" />
+            </div>
           </div>
         </div>
       </div>
