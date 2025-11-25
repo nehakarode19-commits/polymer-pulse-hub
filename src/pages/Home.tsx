@@ -491,17 +491,44 @@ const Home = () => {
           </motion.div>
 
           <Tabs value={activeInsightTab} onValueChange={setActiveInsightTab} className="mb-12">
-            <TabsList className="grid w-full grid-cols-2 md:grid-cols-6 h-auto p-2 bg-card/50 backdrop-blur-sm border-2 border-border/50 rounded-xl shadow-lg">
-              {["select", "news", "blog", "insightPapers", "webinars", "videoInsights"].map((tab) => (
-                <TabsTrigger 
-                  key={tab}
-                  value={tab}
-                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-red-600 data-[state=active]:text-white data-[state=active]:shadow-xl py-3 px-4 rounded-lg font-semibold transition-all capitalize text-sm hover:bg-muted/50"
-                >
-                  {tab === "insightPapers" ? "Insight Papers" : tab === "videoInsights" ? "Video Insights" : tab}
-                </TabsTrigger>
-              ))}
-            </TabsList>
+            <div className="relative">
+              {/* Decorative gradient background */}
+              <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 rounded-2xl blur-xl"></div>
+              
+              <TabsList className="relative grid w-full grid-cols-2 md:grid-cols-6 h-auto p-2.5 bg-gradient-to-br from-card/80 via-card to-card/80 backdrop-blur-xl border-2 border-border/50 rounded-2xl shadow-2xl">
+                {[
+                  { value: "select", label: "All Insights", icon: "✨" },
+                  { value: "news", label: "News", icon: "📰" },
+                  { value: "blog", label: "Blog", icon: "📝" },
+                  { value: "insightPapers", label: "Papers", icon: "📄" },
+                  { value: "webinars", label: "Webinars", icon: "🎥" },
+                  { value: "videoInsights", label: "Videos", icon: "📹" }
+                ].map((tab) => (
+                  <TabsTrigger 
+                    key={tab.value}
+                    value={tab.value}
+                    className="relative data-[state=active]:bg-gradient-to-br data-[state=active]:from-primary data-[state=active]:via-primary data-[state=active]:to-red-600 data-[state=active]:text-white data-[state=active]:shadow-xl data-[state=active]:shadow-primary/50 py-3.5 px-5 rounded-xl font-bold transition-all text-sm hover:bg-muted/80 hover:scale-105 data-[state=active]:scale-105 group overflow-hidden"
+                  >
+                    {/* Shine effect on active tab */}
+                    <span className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/30 to-white/0 translate-x-[-100%] group-data-[state=active]:translate-x-[100%] transition-transform duration-1000"></span>
+                    
+                    <span className="relative z-10 flex items-center justify-center gap-2">
+                      <span className="text-lg">{tab.icon}</span>
+                      <span className="hidden sm:inline">{tab.label}</span>
+                      <span className="sm:hidden">{tab.label.split(' ')[0]}</span>
+                    </span>
+                    
+                    {/* Active indicator line */}
+                    <motion.div
+                      className="absolute bottom-0 left-0 right-0 h-1 bg-white rounded-full"
+                      initial={{ scaleX: 0 }}
+                      animate={{ scaleX: activeInsightTab === tab.value ? 1 : 0 }}
+                      transition={{ duration: 0.3 }}
+                    />
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+            </div>
           </Tabs>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
