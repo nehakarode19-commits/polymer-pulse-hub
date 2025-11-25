@@ -207,18 +207,38 @@ const Home = () => {
     {
       title: "Polymer Bazar Korea Conference & Exhibition",
       location: "South Korea",
+      category: "CONFERENCE",
+      description: "Join industry leaders for the premier polymer trading conference in Asia Pacific region",
+      author: "Sarah Kim",
+      time: "2h ago",
+      categoryColor: "bg-blue-500"
     },
     {
       title: "Polymer Bazar London Conference & Exhibition",
       location: "London UK",
+      category: "EXHIBITION",
+      description: "Explore the latest innovations in polymer manufacturing and global trade opportunities",
+      author: "James Wilson",
+      time: "5h ago",
+      categoryColor: "bg-purple-500"
     },
     {
       title: "Polymer Bazar Singapore Conference & Exhibition",
       location: "Singapore",
+      category: "NETWORKING",
+      description: "Connect with polymer industry professionals and discover emerging market trends",
+      author: "Li Wei",
+      time: "1d ago",
+      categoryColor: "bg-pink-500"
     },
     {
       title: "Polymer Bazar Dubai Conference & Exhibition",
       location: "Dubai UAE",
+      category: "WORKSHOP",
+      description: "Hands-on sessions covering polymer pricing strategies and market analysis techniques",
+      author: "Ahmed Hassan",
+      time: "2d ago",
+      categoryColor: "bg-orange-500"
     },
   ];
 
@@ -1225,20 +1245,27 @@ const Home = () => {
       </section>
 
       {/* Events Preview */}
-      <section className="py-24 px-4 bg-gradient-to-b from-secondary to-background">
+      <section className="py-24 px-4 bg-muted/30">
         <div className="container max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
+            className="text-center mb-16"
           >
-            <h2 className="text-5xl font-bold mb-16 text-center">Events</h2>
+            <Badge variant="outline" className="mb-4 text-sm px-4 py-1.5 border-primary/20 bg-primary/5">
+              Upcoming Events
+            </Badge>
+            <h2 className="text-5xl font-bold mb-4">Events</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Connect with industry leaders at our global conferences and exhibitions
+            </p>
           </motion.div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-            {events.map((event, index) => {
-              const eventImages = [eventSeoulImg, eventSeoulImg, eventLondonImg, eventSeoulImg];
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            {events.slice(0, 3).map((event, index) => {
+              const eventImages = [eventSeoulImg, eventLondonImg, eventSeoulImg];
               
               return (
                 <motion.div
@@ -1246,25 +1273,57 @@ const Home = () => {
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: index * 0.1, duration: 0.5 }}
+                  transition={{ delay: index * 0.15, duration: 0.5 }}
                 >
-                  <Card className="hover:shadow-2xl transition-all duration-500 group hover:-translate-y-2 border-2 hover:border-primary/50 h-full">
-                    <div className="h-56 relative overflow-hidden">
-                      <img 
+                  <Card className="group bg-card hover:shadow-2xl transition-all duration-500 border-0 overflow-hidden h-full">
+                    {/* Image Section */}
+                    <div className="relative h-56 overflow-hidden">
+                      <motion.img 
                         src={eventImages[index]} 
                         alt={event.title}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        className="w-full h-full object-cover"
+                        whileHover={{ scale: 1.08 }}
+                        transition={{ duration: 0.6 }}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                      
+                      {/* Category Badge */}
+                      <Badge 
+                        className={`absolute top-4 left-4 ${event.categoryColor} text-white border-0 text-xs font-semibold px-3 py-1 shadow-lg`}
+                      >
+                        {event.category}
+                      </Badge>
                     </div>
+
                     <CardContent className="p-6">
-                      <h3 className="font-bold text-lg mb-3 group-hover:text-primary transition-colors leading-tight">
-                        {event.title}
-                      </h3>
-                      <p className="text-sm text-muted-foreground flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                      {/* Location with icon */}
+                      <p className="text-xs text-muted-foreground mb-3 flex items-center gap-1.5">
+                        <MapPin className="w-3.5 h-3.5" />
                         {event.location}
                       </p>
+
+                      {/* Title */}
+                      <h3 className="font-bold text-xl mb-3 leading-tight group-hover:text-primary transition-colors line-clamp-2">
+                        {event.title}
+                      </h3>
+
+                      {/* Description */}
+                      <p className="text-sm text-muted-foreground mb-6 line-clamp-2 leading-relaxed">
+                        {event.description}
+                      </p>
+
+                      {/* Divider */}
+                      <div className="h-px bg-border mb-4"></div>
+
+                      {/* Author Section */}
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-red-600 flex items-center justify-center text-white font-semibold text-sm shadow-md">
+                          {event.author.split(' ').map(n => n[0]).join('')}
+                        </div>
+                        <div className="flex-1">
+                          <p className="font-semibold text-sm">{event.author}</p>
+                          <p className="text-xs text-muted-foreground">{event.time}</p>
+                        </div>
+                      </div>
                     </CardContent>
                   </Card>
                 </motion.div>
@@ -1279,7 +1338,11 @@ const Home = () => {
             transition={{ duration: 0.6 }}
             className="text-center"
           >
-            <Button size="lg" asChild className="bg-primary hover:bg-primary-dark shadow-xl hover:shadow-2xl transition-all hover:scale-105 text-lg px-8 py-6">
+            <Button 
+              size="lg" 
+              asChild 
+              className="bg-primary hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all hover:scale-105 text-base px-8"
+            >
               <Link to="/events">
                 View all Events
                 <ArrowRight className="ml-2 h-5 w-5" />
