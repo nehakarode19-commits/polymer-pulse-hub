@@ -121,23 +121,40 @@ const FutureTrend = () => {
         </div>
       </section>
 
-      {/* Polymer Selection Badges */}
-      <section className="bg-muted/30 border-y border-border">
-        <div className="container max-w-7xl mx-auto px-4 py-6">
-          <div className="flex flex-col lg:flex-row items-start lg:items-center gap-6">
-            {/* Polymer Type Badges */}
+      {/* Polymer Selection Section - Enhanced Design */}
+      <section className="bg-background border-y border-border py-5">
+        <div className="container max-w-7xl mx-auto px-4">
+          <div className="flex flex-col lg:flex-row items-start lg:items-center gap-4">
+            {/* Polymer Type Badges - Two Row Layout */}
             <div className="flex-1">
-              <div className="flex flex-wrap gap-2.5">
-                {polymerTabs.map((polymer) => (
+              <div className="flex flex-wrap items-center gap-2">
+                {polymerTabs.slice(0, 12).map((polymer) => (
                   <Button
                     key={polymer}
                     onClick={() => setSelectedPolymer(polymer)}
                     variant={selectedPolymer === polymer ? "default" : "outline"}
                     size="sm"
-                    className={`rounded-full px-5 py-2 h-9 font-medium text-sm transition-all ${
+                    className={`rounded-full px-4 h-8 font-medium text-sm transition-all ${
                       selectedPolymer === polymer
-                        ? "bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm border-primary"
-                        : "bg-background border-border text-foreground hover:bg-accent hover:border-primary/40"
+                        ? "bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm"
+                        : "bg-background border-border text-foreground hover:bg-muted hover:text-foreground"
+                    }`}
+                  >
+                    {polymer}
+                  </Button>
+                ))}
+                {/* Second Row */}
+                <div className="w-full" />
+                {polymerTabs.slice(12).map((polymer) => (
+                  <Button
+                    key={polymer}
+                    onClick={() => setSelectedPolymer(polymer)}
+                    variant={selectedPolymer === polymer ? "default" : "outline"}
+                    size="sm"
+                    className={`rounded-full px-4 h-8 font-medium text-sm transition-all ${
+                      selectedPolymer === polymer
+                        ? "bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm"
+                        : "bg-background border-border text-foreground hover:bg-muted hover:text-foreground"
                     }`}
                   >
                     {polymer}
@@ -146,10 +163,10 @@ const FutureTrend = () => {
               </div>
             </div>
 
-            {/* Year and Month Filters */}
-            <div className="flex gap-2.5 flex-shrink-0">
+            {/* Year and Month Filters - Aligned Right */}
+            <div className="flex gap-2 flex-shrink-0 lg:self-start">
               <Select value={selectedYear} onValueChange={setSelectedYear}>
-                <SelectTrigger className="w-28 h-9 border-border bg-background rounded-md text-sm">
+                <SelectTrigger className="w-24 h-8 border-border bg-background rounded-md text-sm font-medium">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent className="bg-card border-border z-[100]">
@@ -166,7 +183,7 @@ const FutureTrend = () => {
               </Select>
 
               <Select value={selectedMonth} onValueChange={setSelectedMonth}>
-                <SelectTrigger className="w-36 h-9 border-border bg-background rounded-md text-sm">
+                <SelectTrigger className="w-32 h-8 border-border bg-background rounded-md text-sm font-medium">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent className="bg-card border-border z-[100]">
