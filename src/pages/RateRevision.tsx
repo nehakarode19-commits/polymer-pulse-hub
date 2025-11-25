@@ -10,40 +10,58 @@ const RateRevision = () => {
 
   const revisionData = [
     {
+      date: "Tues 19-04-2025",
+      company: "Supreme",
+      grades: [
+        { name: "C exsf Japan", priceChange: "-0.50" },
+        { name: "Blow Mid", priceChange: "Down by Rs.2/kg" },
+        { name: "Brent", priceChange: "Down by Rs.1/kg" },
+        { name: "Brent", priceChange: "+0.50" },
+        { name: "Brent", priceChange: "Up by Rs.2/Kg" },
+      ]
+    },
+    {
+      date: "Mon 18-04-2025",
       company: "IOCL",
-      grade: "PP FILM",
-      priceChange: "+2.5",
-      currentPrice: "94.5"
+      grades: [
+        { name: "PP FILM", priceChange: "+2.5" },
+        { name: "PP IM-HMEL M 12 RR", priceChange: "Up by Rs.1/kg" },
+        { name: "HI110 MG", priceChange: "-1.0" },
+      ]
     },
     {
+      date: "Fri 15-04-2025",
       company: "Reliance Industries",
-      grade: "HDPE BLOW",
-      priceChange: "-1.0",
-      currentPrice: "92.0"
+      grades: [
+        { name: "HDPE BLOW", priceChange: "Down by Rs.3/kg" },
+        { name: "LLDPE INJ.MLDG", priceChange: "+3.0" },
+        { name: "LDPE LAMI", priceChange: "-0.5" },
+      ]
     },
     {
+      date: "Thu 14-04-2025",
       company: "Haldia Petrochemicals",
-      grade: "LLDPE INJ.MLDG",
-      priceChange: "+3.0",
-      currentPrice: "91.5"
+      grades: [
+        { name: "PP FILM", priceChange: "+1.5" },
+        { name: "Engineering Material", priceChange: "Up by Rs.2.5/kg" },
+      ]
     },
     {
+      date: "Wed 13-04-2025",
       company: "Gail India",
-      grade: "PP IM-HMEL",
-      priceChange: "+1.5",
-      currentPrice: "93.5"
+      grades: [
+        { name: "PP IM-HMEL", priceChange: "+1.5" },
+        { name: "HDPE", priceChange: "Down by Rs.1.5/kg" },
+        { name: "LLDPE", priceChange: "+2.0" },
+      ]
     },
     {
+      date: "Tue 12-04-2025",
       company: "ONGC Petro",
-      grade: "LDPE LAMI",
-      priceChange: "-0.5",
-      currentPrice: "95.0"
-    },
-    {
-      company: "Bharat Petroleum",
-      grade: "Engineering Material",
-      priceChange: "+2.0",
-      currentPrice: "96.0"
+      grades: [
+        { name: "LDPE LAMI", priceChange: "-0.5" },
+        { name: "PP", priceChange: "Up by Rs.1/kg" },
+      ]
     },
   ];
 
@@ -119,35 +137,49 @@ const RateRevision = () => {
             >
               <Card className="border-2 border-border/50 shadow-lg hover:shadow-xl hover:border-primary/30 transition-all duration-300 overflow-hidden">
                 <CardContent className="p-0">
-                  {/* Card Header */}
-                  <div className="bg-gradient-to-r from-slate-800 via-slate-700 to-slate-800 text-white px-5 py-4 text-center relative overflow-hidden">
+                  {/* Date Header - Red */}
+                  <div className="bg-gradient-to-r from-primary via-primary to-primary/90 text-white px-5 py-3 text-center relative overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
-                    <h3 className="font-bold text-lg relative z-10 tracking-wide">{revision.company}</h3>
+                    <p className="font-bold text-sm relative z-10 tracking-wide">{revision.date}</p>
+                  </div>
+
+                  {/* Company Header */}
+                  <div className="bg-muted/30 px-5 py-3 border-b border-border">
+                    <div className="text-center">
+                      <p className="text-xs uppercase text-muted-foreground mb-1">COMPANY</p>
+                      <h3 className="font-bold text-base text-foreground">{revision.company}</h3>
+                    </div>
                   </div>
                   
-                  {/* Card Body */}
-                  <div className="p-5 space-y-4 bg-gradient-to-b from-background to-muted/5">
-                    <div className="flex justify-between items-center py-2 px-2 rounded-md border-b border-border/50">
-                      <span className="text-sm font-medium text-muted-foreground">Grade</span>
-                      <span className="text-sm font-semibold text-foreground">{revision.grade}</span>
-                    </div>
-                    
-                    <div className="flex justify-between items-center py-2 px-2 rounded-md border-b border-border/50">
-                      <span className="text-sm font-medium text-muted-foreground">Current Price</span>
-                      <span className="text-base font-bold text-primary">₹{revision.currentPrice}</span>
-                    </div>
-                    
-                    <div className="flex justify-between items-center py-2 px-2 rounded-md bg-primary/5">
-                      <span className="text-sm font-medium text-muted-foreground">Change</span>
-                      <span className={`text-base font-bold flex items-center gap-1 ${
-                        revision.priceChange.startsWith('+') ? 'text-green-600' : 'text-red-600'
-                      }`}>
-                        <TrendingUp className={`h-4 w-4 ${
-                          revision.priceChange.startsWith('+') ? 'rotate-0' : 'rotate-180'
-                        }`} />
-                        {revision.priceChange}
-                      </span>
-                    </div>
+                  {/* Grades List */}
+                  <div className="p-5 space-y-3 bg-gradient-to-b from-background to-muted/5">
+                    {revision.grades.map((grade, idx) => (
+                      <div 
+                        key={idx} 
+                        className="flex justify-between items-start py-2 px-3 rounded-md hover:bg-primary/5 transition-colors border-b border-border/30 last:border-0"
+                      >
+                        <div className="flex-1">
+                          <p className="text-xs uppercase text-muted-foreground mb-1">GRADE</p>
+                          <p className="text-sm font-medium text-foreground">{grade.name}</p>
+                        </div>
+                        <div className="text-right ml-4">
+                          <p className="text-xs uppercase text-muted-foreground mb-1">PRICE CHANGE</p>
+                          <span className={`text-sm font-bold flex items-center justify-end gap-1 ${
+                            grade.priceChange.startsWith('+') || grade.priceChange.toLowerCase().includes('up') 
+                              ? 'text-green-600' 
+                              : 'text-red-600'
+                          }`}>
+                            {(grade.priceChange.startsWith('+') || grade.priceChange.toLowerCase().includes('up')) && (
+                              <TrendingUp className="h-3 w-3" />
+                            )}
+                            {(grade.priceChange.startsWith('-') || grade.priceChange.toLowerCase().includes('down')) && (
+                              <TrendingUp className="h-3 w-3 rotate-180" />
+                            )}
+                            {grade.priceChange}
+                          </span>
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </CardContent>
               </Card>
