@@ -764,7 +764,7 @@ const Home = () => {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
               >
-                <Card className="group hover:shadow-2xl transition-all duration-500 hover:scale-105 hover:border-primary/50 overflow-hidden h-full bg-gradient-to-br from-card to-accent-pink/10 border-2">
+                <Card className="group shadow-xl hover:shadow-[0_25px_70px_-15px_rgba(229,57,53,0.5)] transition-all duration-500 hover:scale-105 hover:border-primary/50 overflow-hidden h-full bg-gradient-to-br from-card to-accent-pink/10 border-2">
                   <div className="relative overflow-hidden">
                     {/* Gradient Overlay on Image */}
                     <div className="absolute inset-0 z-10 bg-gradient-to-br from-primary/60 via-accent-red/50 to-accent-orange/40 mix-blend-multiply"></div>
