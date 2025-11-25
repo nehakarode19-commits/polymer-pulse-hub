@@ -9,12 +9,12 @@ const ExchangeRate = () => {
   const [selectedYear, setSelectedYear] = useState("2024");
 
   const exchangeData = [
-    { date: "Mon 18-04-2025", rate: "83.45", change: "+0.15" },
-    { date: "Fri 15-04-2025", rate: "83.30", change: "-0.25" },
-    { date: "Thu 14-04-2025", rate: "83.55", change: "+0.10" },
-    { date: "Wed 13-04-2025", rate: "83.45", change: "-0.05" },
-    { date: "Tue 12-04-2025", rate: "83.50", change: "+0.20" },
-    { date: "Mon 11-04-2025", rate: "83.30", change: "-0.15" },
+    { date: "Mon 18-04-2025", type: "Buy", rate: "83.45", change: "+0.15" },
+    { date: "Fri 15-04-2025", type: "Sell", rate: "83.30", change: "-0.25" },
+    { date: "Thu 14-04-2025", type: "Buy", rate: "83.55", change: "+0.10" },
+    { date: "Wed 13-04-2025", type: "Sell", rate: "83.45", change: "-0.05" },
+    { date: "Tue 12-04-2025", type: "Buy", rate: "83.50", change: "+0.20" },
+    { date: "Mon 11-04-2025", type: "Sell", rate: "83.30", change: "-0.15" },
   ];
 
   return (
@@ -86,17 +86,24 @@ const ExchangeRate = () => {
                     <p className="font-bold text-sm">{item.date}</p>
                   </div>
                   
-                  <div className="p-6 space-y-4 bg-gradient-to-b from-background to-muted/5">
-                    <div className="text-center">
-                      <p className="text-xs uppercase text-muted-foreground mb-2">Exchange Rate</p>
-                      <p className="text-3xl font-bold text-primary">₹{item.rate}</p>
-                    </div>
-                    
-                    <div className="text-center pt-3 border-t border-border">
-                      <p className="text-xs uppercase text-muted-foreground mb-1">Daily Change</p>
-                      <p className={`text-lg font-bold ${item.change.startsWith('+') ? 'text-green-600' : 'text-red-600'}`}>
-                        {item.change}
-                      </p>
+                  <div className="p-6 bg-gradient-to-b from-background to-muted/5">
+                    <div className="grid grid-cols-3 gap-4">
+                      <div className="text-center">
+                        <p className="text-xs uppercase text-muted-foreground mb-2">Transaction Type</p>
+                        <p className="text-lg font-bold text-primary">{item.type}</p>
+                      </div>
+                      
+                      <div className="text-center">
+                        <p className="text-xs uppercase text-muted-foreground mb-2">Exchange Rate</p>
+                        <p className="text-2xl font-bold text-primary">₹{item.rate}</p>
+                      </div>
+                      
+                      <div className="text-center">
+                        <p className="text-xs uppercase text-muted-foreground mb-2">Daily Change</p>
+                        <p className={`text-lg font-bold ${item.change.startsWith('+') ? 'text-green-600' : 'text-red-600'}`}>
+                          {item.change}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </CardContent>
