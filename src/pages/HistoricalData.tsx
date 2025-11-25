@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { TrendingUp, Calendar, BarChart3 } from "lucide-react";
 import { motion } from "framer-motion";
 import marketAnalysisImg from "@/assets/market-analysis.jpg";
@@ -10,25 +10,21 @@ import refineryHeroImg from "@/assets/refinery-hero.jpg";
 
 const HistoricalData = () => {
   const [selectedYear, setSelectedYear] = useState("2023");
-  const [selectedGrade, setSelectedGrade] = useState("PP Homo");
+  const [timeFrame1, setTimeFrame1] = useState("Yearly");
+  const [timeFrame2, setTimeFrame2] = useState("Yearly");
 
   const years = ["2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023"];
   const polymers = ["PP", "HDPE", "LDPE", "LLDPE", "PVC"];
-  const ppGrades = ["PP Homo", "PP Copo", "PP Random", "PP Impact"];
 
-  const chartData = [
-    { month: 'Jan', price: 1200, volume: 450 },
-    { month: 'Feb', price: 1250, volume: 480 },
-    { month: 'Mar', price: 1180, volume: 420 },
-    { month: 'Apr', price: 1320, volume: 510 },
-    { month: 'May', price: 1280, volume: 490 },
-    { month: 'Jun', price: 1350, volume: 530 },
-    { month: 'Jul', price: 1310, volume: 500 },
-    { month: 'Aug', price: 1380, volume: 550 },
-    { month: 'Sep', price: 1340, volume: 520 },
-    { month: 'Oct', price: 1400, volume: 570 },
-    { month: 'Nov', price: 1370, volume: 540 },
-    { month: 'Dec', price: 1420, volume: 590 },
+  const yearlyChartData = [
+    { year: '2016', value: 12 },
+    { year: '2017', value: 18 },
+    { year: '2018', value: 22 },
+    { year: '2019', value: 19 },
+    { year: '2020', value: 15 },
+    { year: '2021', value: 24 },
+    { year: '2022', value: 28 },
+    { year: '2023', value: 26 },
   ];
 
   return (
@@ -102,86 +98,128 @@ const HistoricalData = () => {
             ))}
           </TabsList>
 
-          {/* PP Tab with Grade Selection */}
+          {/* PP Tab */}
           <TabsContent value="PP">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4 }}
             >
-              <Card className="mb-6 border-2 border-primary/20">
-                <CardContent className="p-6">
-                  <div className="flex items-center gap-4">
-                    <span className="font-semibold text-foreground">Select PP Grade:</span>
-                    <Select value={selectedGrade} onValueChange={setSelectedGrade}>
-                      <SelectTrigger className="w-48 border-primary/30">
-                        <SelectValue placeholder="Select grade" />
-                      </SelectTrigger>
-                      <SelectContent className="bg-background z-50">
-                        {ppGrades.map((grade) => (
-                          <SelectItem key={grade} value={grade}>
-                            {grade}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </CardContent>
-              </Card>
+              <div className="grid md:grid-cols-2 gap-6">
+                {/* First Chart */}
+                <Card className="border-2 border-primary/20 shadow-xl bg-card">
+                  <CardHeader className="pb-4">
+                    <div className="flex items-center justify-between">
+                      <CardTitle className="text-lg font-semibold">CIF NS, MUMBAI</CardTitle>
+                      <Select value={timeFrame1} onValueChange={setTimeFrame1}>
+                        <SelectTrigger className="w-28 h-8 border-primary/30">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent className="bg-background z-50">
+                          <SelectItem value="Yearly">Yearly</SelectItem>
+                          <SelectItem value="Monthly">Monthly</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <ResponsiveContainer width="100%" height={300}>
+                      <AreaChart data={yearlyChartData}>
+                        <defs>
+                          <linearGradient id="colorValue1" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="5%" stopColor="hsl(var(--primary))" stopOpacity={0.3}/>
+                            <stop offset="95%" stopColor="hsl(var(--primary))" stopOpacity={0.05}/>
+                          </linearGradient>
+                        </defs>
+                        <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" vertical={false} />
+                        <XAxis 
+                          dataKey="year" 
+                          stroke="hsl(var(--muted-foreground))"
+                          style={{ fontSize: '11px' }}
+                          tickLine={false}
+                        />
+                        <YAxis 
+                          stroke="hsl(var(--muted-foreground))"
+                          style={{ fontSize: '11px' }}
+                          tickLine={false}
+                          axisLine={false}
+                        />
+                        <Tooltip 
+                          contentStyle={{
+                            backgroundColor: 'hsl(var(--card))',
+                            border: '1px solid hsl(var(--border))',
+                            borderRadius: '8px'
+                          }}
+                        />
+                        <Area 
+                          type="monotone" 
+                          dataKey="value" 
+                          stroke="hsl(var(--primary))" 
+                          strokeWidth={2}
+                          fill="url(#colorValue1)"
+                        />
+                      </AreaChart>
+                    </ResponsiveContainer>
+                  </CardContent>
+                </Card>
 
-              <Card className="border-2 border-primary/20 shadow-2xl bg-card">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-3">
-                    <div className="p-3 bg-primary/10 rounded-lg">
-                      <TrendingUp className="h-8 w-8 text-primary" />
+                {/* Second Chart */}
+                <Card className="border-2 border-primary/20 shadow-xl bg-card">
+                  <CardHeader className="pb-4">
+                    <div className="flex items-center justify-between">
+                      <CardTitle className="text-lg font-semibold">CIF NS, MUMBAI</CardTitle>
+                      <Select value={timeFrame2} onValueChange={setTimeFrame2}>
+                        <SelectTrigger className="w-28 h-8 border-primary/30">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent className="bg-background z-50">
+                          <SelectItem value="Yearly">Yearly</SelectItem>
+                          <SelectItem value="Monthly">Monthly</SelectItem>
+                        </SelectContent>
+                      </Select>
                     </div>
-                    <div>
-                      <h3 className="text-2xl font-bold">PP Price Trend - {selectedGrade}</h3>
-                      <p className="text-sm text-muted-foreground font-normal">Year: {selectedYear}</p>
-                    </div>
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ResponsiveContainer width="100%" height={400}>
-                    <LineChart data={chartData}>
-                      <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-                      <XAxis 
-                        dataKey="month" 
-                        stroke="hsl(var(--foreground))"
-                        style={{ fontSize: '12px' }}
-                      />
-                      <YAxis 
-                        stroke="hsl(var(--foreground))"
-                        style={{ fontSize: '12px' }}
-                      />
-                      <Tooltip 
-                        contentStyle={{
-                          backgroundColor: 'hsl(var(--card))',
-                          border: '1px solid hsl(var(--border))',
-                          borderRadius: '8px'
-                        }}
-                      />
-                      <Legend />
-                      <Line 
-                        type="monotone" 
-                        dataKey="price" 
-                        stroke="hsl(var(--primary))" 
-                        strokeWidth={3}
-                        name="Price (USD/MT)"
-                        dot={{ fill: 'hsl(var(--primary))', r: 5 }}
-                      />
-                      <Line 
-                        type="monotone" 
-                        dataKey="volume" 
-                        stroke="hsl(var(--accent-orange))" 
-                        strokeWidth={3}
-                        name="Volume (MT)"
-                        dot={{ fill: 'hsl(var(--accent-orange))', r: 5 }}
-                      />
-                    </LineChart>
-                  </ResponsiveContainer>
-                </CardContent>
-              </Card>
+                  </CardHeader>
+                  <CardContent>
+                    <ResponsiveContainer width="100%" height={300}>
+                      <AreaChart data={yearlyChartData}>
+                        <defs>
+                          <linearGradient id="colorValue2" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="5%" stopColor="hsl(var(--primary))" stopOpacity={0.3}/>
+                            <stop offset="95%" stopColor="hsl(var(--primary))" stopOpacity={0.05}/>
+                          </linearGradient>
+                        </defs>
+                        <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" vertical={false} />
+                        <XAxis 
+                          dataKey="year" 
+                          stroke="hsl(var(--muted-foreground))"
+                          style={{ fontSize: '11px' }}
+                          tickLine={false}
+                        />
+                        <YAxis 
+                          stroke="hsl(var(--muted-foreground))"
+                          style={{ fontSize: '11px' }}
+                          tickLine={false}
+                          axisLine={false}
+                        />
+                        <Tooltip 
+                          contentStyle={{
+                            backgroundColor: 'hsl(var(--card))',
+                            border: '1px solid hsl(var(--border))',
+                            borderRadius: '8px'
+                          }}
+                        />
+                        <Area 
+                          type="monotone" 
+                          dataKey="value" 
+                          stroke="hsl(var(--primary))" 
+                          strokeWidth={2}
+                          fill="url(#colorValue2)"
+                        />
+                      </AreaChart>
+                    </ResponsiveContainer>
+                  </CardContent>
+                </Card>
+              </div>
             </motion.div>
           </TabsContent>
 
@@ -193,59 +231,121 @@ const HistoricalData = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4 }}
               >
-                <Card className="border-2 border-primary/20 shadow-2xl bg-card">
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-3">
-                      <div className="p-3 bg-primary/10 rounded-lg">
-                        <TrendingUp className="h-8 w-8 text-primary" />
+                <div className="grid md:grid-cols-2 gap-6">
+                  {/* First Chart */}
+                  <Card className="border-2 border-primary/20 shadow-xl bg-card">
+                    <CardHeader className="pb-4">
+                      <div className="flex items-center justify-between">
+                        <CardTitle className="text-lg font-semibold">CIF NS, MUMBAI</CardTitle>
+                        <Select value={timeFrame1} onValueChange={setTimeFrame1}>
+                          <SelectTrigger className="w-28 h-8 border-primary/30">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent className="bg-background z-50">
+                            <SelectItem value="Yearly">Yearly</SelectItem>
+                            <SelectItem value="Monthly">Monthly</SelectItem>
+                          </SelectContent>
+                        </Select>
                       </div>
-                      <div>
-                        <h3 className="text-2xl font-bold">{polymer} Price Trend</h3>
-                        <p className="text-sm text-muted-foreground font-normal">Year: {selectedYear}</p>
+                    </CardHeader>
+                    <CardContent>
+                      <ResponsiveContainer width="100%" height={300}>
+                        <AreaChart data={yearlyChartData}>
+                          <defs>
+                            <linearGradient id={`colorValue1-${polymer}`} x1="0" y1="0" x2="0" y2="1">
+                              <stop offset="5%" stopColor="hsl(var(--primary))" stopOpacity={0.3}/>
+                              <stop offset="95%" stopColor="hsl(var(--primary))" stopOpacity={0.05}/>
+                            </linearGradient>
+                          </defs>
+                          <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" vertical={false} />
+                          <XAxis 
+                            dataKey="year" 
+                            stroke="hsl(var(--muted-foreground))"
+                            style={{ fontSize: '11px' }}
+                            tickLine={false}
+                          />
+                          <YAxis 
+                            stroke="hsl(var(--muted-foreground))"
+                            style={{ fontSize: '11px' }}
+                            tickLine={false}
+                            axisLine={false}
+                          />
+                          <Tooltip 
+                            contentStyle={{
+                              backgroundColor: 'hsl(var(--card))',
+                              border: '1px solid hsl(var(--border))',
+                              borderRadius: '8px'
+                            }}
+                          />
+                          <Area 
+                            type="monotone" 
+                            dataKey="value" 
+                            stroke="hsl(var(--primary))" 
+                            strokeWidth={2}
+                            fill={`url(#colorValue1-${polymer})`}
+                          />
+                        </AreaChart>
+                      </ResponsiveContainer>
+                    </CardContent>
+                  </Card>
+
+                  {/* Second Chart */}
+                  <Card className="border-2 border-primary/20 shadow-xl bg-card">
+                    <CardHeader className="pb-4">
+                      <div className="flex items-center justify-between">
+                        <CardTitle className="text-lg font-semibold">CIF NS, MUMBAI</CardTitle>
+                        <Select value={timeFrame2} onValueChange={setTimeFrame2}>
+                          <SelectTrigger className="w-28 h-8 border-primary/30">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent className="bg-background z-50">
+                            <SelectItem value="Yearly">Yearly</SelectItem>
+                            <SelectItem value="Monthly">Monthly</SelectItem>
+                          </SelectContent>
+                        </Select>
                       </div>
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <ResponsiveContainer width="100%" height={400}>
-                      <LineChart data={chartData}>
-                        <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-                        <XAxis 
-                          dataKey="month" 
-                          stroke="hsl(var(--foreground))"
-                          style={{ fontSize: '12px' }}
-                        />
-                        <YAxis 
-                          stroke="hsl(var(--foreground))"
-                          style={{ fontSize: '12px' }}
-                        />
-                        <Tooltip 
-                          contentStyle={{
-                            backgroundColor: 'hsl(var(--card))',
-                            border: '1px solid hsl(var(--border))',
-                            borderRadius: '8px'
-                          }}
-                        />
-                        <Legend />
-                        <Line 
-                          type="monotone" 
-                          dataKey="price" 
-                          stroke="hsl(var(--primary))" 
-                          strokeWidth={3}
-                          name="Price (USD/MT)"
-                          dot={{ fill: 'hsl(var(--primary))', r: 5 }}
-                        />
-                        <Line 
-                          type="monotone" 
-                          dataKey="volume" 
-                          stroke="hsl(var(--accent-orange))" 
-                          strokeWidth={3}
-                          name="Volume (MT)"
-                          dot={{ fill: 'hsl(var(--accent-orange))', r: 5 }}
-                        />
-                      </LineChart>
-                    </ResponsiveContainer>
-                  </CardContent>
-                </Card>
+                    </CardHeader>
+                    <CardContent>
+                      <ResponsiveContainer width="100%" height={300}>
+                        <AreaChart data={yearlyChartData}>
+                          <defs>
+                            <linearGradient id={`colorValue2-${polymer}`} x1="0" y1="0" x2="0" y2="1">
+                              <stop offset="5%" stopColor="hsl(var(--primary))" stopOpacity={0.3}/>
+                              <stop offset="95%" stopColor="hsl(var(--primary))" stopOpacity={0.05}/>
+                            </linearGradient>
+                          </defs>
+                          <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" vertical={false} />
+                          <XAxis 
+                            dataKey="year" 
+                            stroke="hsl(var(--muted-foreground))"
+                            style={{ fontSize: '11px' }}
+                            tickLine={false}
+                          />
+                          <YAxis 
+                            stroke="hsl(var(--muted-foreground))"
+                            style={{ fontSize: '11px' }}
+                            tickLine={false}
+                            axisLine={false}
+                          />
+                          <Tooltip 
+                            contentStyle={{
+                              backgroundColor: 'hsl(var(--card))',
+                              border: '1px solid hsl(var(--border))',
+                              borderRadius: '8px'
+                            }}
+                          />
+                          <Area 
+                            type="monotone" 
+                            dataKey="value" 
+                            stroke="hsl(var(--primary))" 
+                            strokeWidth={2}
+                            fill={`url(#colorValue2-${polymer})`}
+                          />
+                        </AreaChart>
+                      </ResponsiveContainer>
+                    </CardContent>
+                  </Card>
+                </div>
               </motion.div>
             </TabsContent>
           ))}
