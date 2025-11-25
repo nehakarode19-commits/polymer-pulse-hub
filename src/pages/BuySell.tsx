@@ -105,88 +105,96 @@ const BuySell = () => {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-background via-background to-muted/20">
+    <main className="min-h-screen bg-background">
       {/* Hero Section */}
-      <header className="relative gradient-hero h-80 flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/80 to-accent-orange/90" />
-        <div className="container max-w-7xl mx-auto relative z-10 text-center px-4">
+      <header className="relative h-64 flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-[hsl(210,25%,25%)] via-[hsl(210,20%,35%)] to-[hsl(25,40%,45%)]" />
+        <div className="container max-w-7xl mx-auto relative z-10 text-center px-6">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.5 }}
           >
-            <h1 className="text-5xl md:text-6xl font-black tracking-tight text-white mb-4 drop-shadow-2xl">
-              Buy &amp; Sell Polymers
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-4">
+              Buy & Sell Polymers
             </h1>
-            <p className="text-lg md:text-xl text-white/95 max-w-3xl mx-auto font-medium">
+            <p className="text-base md:text-lg text-white/90 max-w-3xl mx-auto font-normal">
               Direct access to verified polymer suppliers with one-tap Call, Email, or WhatsApp support.
             </p>
           </motion.div>
         </div>
       </header>
 
-      <section className="container max-w-7xl mx-auto px-4 py-16">
+      <section className="container max-w-7xl mx-auto px-6 py-20">
         {/* Polymer Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
           {polymers.map((polymer, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.05, duration: 0.4 }}
             >
-              <Card className="overflow-hidden border border-border bg-card shadow-sm hover:shadow-lg transition-all duration-300 h-full flex flex-col">
-                {/* Image */}
-                <div className="relative h-48 w-full overflow-hidden">
+              <Card className="overflow-hidden border-0 bg-white shadow-[0_2px_16px_rgba(0,0,0,0.08)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.12)] transition-all duration-300 rounded-xl group">
+                {/* Image with Overlay Text */}
+                <div className="relative h-56 w-full overflow-hidden">
                   <img 
                     src={polymer.image} 
                     alt={polymer.name}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
+                  {/* Subtle Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
+                  {/* Text Overlay - Smaller and Less Dominant */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <h2 className="text-5xl md:text-6xl font-black text-white/80 tracking-wider drop-shadow-lg">
+                      {polymer.code}
+                    </h2>
+                  </div>
                 </div>
 
-                {/* Polymer Code */}
-                <div className="py-4 text-center border-b border-border">
-                  <h3 className="text-2xl font-bold text-foreground tracking-wide">
+                {/* Polymer Name Label */}
+                <div className="py-5 text-center bg-white border-b border-gray-100">
+                  <h3 className="text-xl font-bold text-gray-900 tracking-tight">
                     {polymer.code}
                   </h3>
                 </div>
 
                 {/* Action Buttons */}
-                <CardContent className="p-4 flex-1 flex items-center justify-center">
-                  <div className="flex items-center justify-around w-full gap-2">
+                <CardContent className="p-6 bg-white">
+                  <div className="flex items-center justify-evenly gap-2">
                     {/* Call */}
                     <button
                       onClick={() => handleCall(polymer.phone)}
-                      className="flex flex-col items-center gap-2 p-3 rounded-lg hover:bg-muted/50 transition-colors group"
+                      className="flex flex-col items-center gap-2.5 p-2 rounded-lg hover:bg-gray-50 transition-all group/btn"
                     >
-                      <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                        <Phone className="h-5 w-5 text-primary" />
+                      <div className="w-11 h-11 rounded-full bg-gray-100 flex items-center justify-center group-hover/btn:bg-primary/10 group-hover/btn:scale-110 transition-all">
+                        <Phone className="h-4.5 w-4.5 text-gray-700 group-hover/btn:text-primary" />
                       </div>
-                      <span className="text-xs font-semibold text-foreground/80">Call</span>
+                      <span className="text-[11px] font-semibold text-gray-700">Call</span>
                     </button>
 
                     {/* Email */}
                     <button
                       onClick={() => handleEmail(polymer.email)}
-                      className="flex flex-col items-center gap-2 p-3 rounded-lg hover:bg-muted/50 transition-colors group"
+                      className="flex flex-col items-center gap-2.5 p-2 rounded-lg hover:bg-gray-50 transition-all group/btn"
                     >
-                      <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                        <Mail className="h-5 w-5 text-primary" />
+                      <div className="w-11 h-11 rounded-full bg-gray-100 flex items-center justify-center group-hover/btn:bg-primary/10 group-hover/btn:scale-110 transition-all">
+                        <Mail className="h-4.5 w-4.5 text-gray-700 group-hover/btn:text-primary" />
                       </div>
-                      <span className="text-xs font-semibold text-foreground/80">Email</span>
+                      <span className="text-[11px] font-semibold text-gray-700">Email</span>
                     </button>
 
                     {/* WhatsApp */}
                     <button
                       onClick={() => handleWhatsApp(polymer.phone)}
-                      className="flex flex-col items-center gap-2 p-3 rounded-lg hover:bg-muted/50 transition-colors group"
+                      className="flex flex-col items-center gap-2.5 p-2 rounded-lg hover:bg-gray-50 transition-all group/btn"
                     >
-                      <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                        <MessageCircle className="h-5 w-5 text-primary" />
+                      <div className="w-11 h-11 rounded-full bg-gray-100 flex items-center justify-center group-hover/btn:bg-primary/10 group-hover/btn:scale-110 transition-all">
+                        <MessageCircle className="h-4.5 w-4.5 text-gray-700 group-hover/btn:text-primary" />
                       </div>
-                      <span className="text-xs font-semibold text-foreground/80">WhatsApp</span>
+                      <span className="text-[11px] font-semibold text-gray-700">WhatsApp</span>
                     </button>
                   </div>
                 </CardContent>
