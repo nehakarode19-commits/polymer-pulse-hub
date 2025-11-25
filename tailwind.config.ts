@@ -25,6 +25,7 @@ export default {
           foreground: "hsl(var(--primary-foreground))",
           light: "hsl(var(--primary-light))",
           dark: "hsl(var(--primary-dark))",
+          darker: "hsl(var(--primary-darker))",
         },
         accent: {
           DEFAULT: "hsl(var(--accent))",

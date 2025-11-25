@@ -158,7 +158,7 @@ const GlobalBazaar = () => {
                 transition={{ duration: 0.4 }}
               >
                 {/* Week Header Banner */}
-                <div className="bg-primary text-white py-3 px-6 rounded-lg font-bold text-center text-lg mb-6 shadow-md">
+                <div className="bg-primary-darker text-white py-3 px-6 rounded-lg font-bold text-center text-lg mb-6 shadow-md">
                   1st Week {selectedMonth} {selectedYear} - ({country.currency})
                 </div>
 
@@ -168,7 +168,7 @@ const GlobalBazaar = () => {
                     {Object.entries(countryPricing).map(([polymer, grades]: [string, any]) => (
                       <Card key={polymer} className="border border-gray-200 shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden">
                         {/* Polymer Header */}
-                        <div className="bg-primary text-white py-3 px-5 rounded-t-lg">
+                        <div className="bg-primary-darker text-white py-3 px-5 rounded-t-lg">
                           <h3 className="text-xl font-bold text-center">{polymer}</h3>
                         </div>
                         
