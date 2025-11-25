@@ -14,6 +14,10 @@ import Signup from "./pages/Signup";
 import Pricing from "./pages/Pricing";
 import Profile from "./pages/Profile";
 import About from "./pages/About";
+import Team from "./pages/Team";
+import Timeline from "./pages/Timeline";
+import Media from "./pages/Media";
+import Press from "./pages/Press";
 import BuySell from "./pages/BuySell";
 import CrudeFeedstock from "./pages/CrudeFeedstock";
 import GlobalBazaar from "./pages/GlobalBazaar";
@@ -49,6 +53,10 @@ const App = () => (
           {/* Protected routes - require active subscription */}
           <Route path="/profile" element={<Layout><ProtectedRoute><Profile /></ProtectedRoute></Layout>} />
           <Route path="/about" element={<Layout><ProtectedRoute><About /></ProtectedRoute></Layout>} />
+          <Route path="/team" element={<Layout><ProtectedRoute><Team /></ProtectedRoute></Layout>} />
+          <Route path="/timeline" element={<Layout><ProtectedRoute><Timeline /></ProtectedRoute></Layout>} />
+          <Route path="/media" element={<Layout><ProtectedRoute><Media /></ProtectedRoute></Layout>} />
+          <Route path="/press" element={<Layout><ProtectedRoute><Press /></ProtectedRoute></Layout>} />
           <Route path="/buy-sell" element={<Layout><ProtectedRoute><BuySell /></ProtectedRoute></Layout>} />
           <Route path="/crude-feedstock" element={<Layout><ProtectedRoute><CrudeFeedstock /></ProtectedRoute></Layout>} />
           <Route path="/global-bazaar" element={<Layout><ProtectedRoute><GlobalBazaar /></ProtectedRoute></Layout>} />
