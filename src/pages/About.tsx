@@ -24,21 +24,21 @@ const About = () => {
   return (
     <div className="min-h-screen">
       {/* Hero */}
-      <section className="gradient-hero text-white py-20 px-4">
+      <section className="gradient-hero text-white py-12 sm:py-16 md:py-20 px-4">
         <div className="container max-w-4xl mx-auto text-center">
-          <h1 className="text-5xl font-bold mb-6">Polymer Bazaar</h1>
-          <p className="text-2xl text-white/90 font-semibold">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6">Polymer Bazaar</h1>
+          <p className="text-xl sm:text-2xl text-white/90 font-semibold">
             Empowering Decisions in a Volatile World
           </p>
         </div>
       </section>
 
-      <div className="container max-w-6xl mx-auto py-12 px-4 space-y-16">
+      <div className="container max-w-6xl mx-auto py-8 sm:py-12 px-4 space-y-12 sm:space-y-16">
           {/* Who We Are */}
           <section>
-            <h2 className="text-3xl font-bold mb-6">Who We Are</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6">Who We Are</h2>
             <div className="prose max-w-none">
-              <p className="text-lg text-muted-foreground leading-relaxed mb-4">
+              <p className="text-base sm:text-lg text-muted-foreground leading-relaxed mb-4">
                 Polymer Bazaar is the definitive intelligence hub for the global plastics and petrochemical industry. We bridge the gap between complex data and actionable business strategy. Born in India—one of the world's fastest-growing polymer hubs—and expanded globally, we provide the critical edge that manufacturers, traders, and industry leaders need to navigate uncertain bazaars.
               </p>
               <p className="text-lg text-muted-foreground leading-relaxed">
