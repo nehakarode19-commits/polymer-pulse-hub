@@ -116,19 +116,19 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-white/95 backdrop-blur-md shadow-md">
-      <div className="container flex h-20 items-center justify-between px-6">
+      <div className="container flex h-16 sm:h-20 items-center justify-between px-4 sm:px-6">
         {/* Logo - Always visible and clickable to Home */}
         <Link to="/" className="flex items-center flex-shrink-0" aria-label="Go to Polymer Bazaar home">
           <img
             src={logoNav}
             alt="Polymer Bazaar"
-            className="h-12 w-auto object-contain hover:scale-105 transition-transform duration-300"
+            className="h-10 sm:h-12 w-auto object-contain hover:scale-105 transition-transform duration-300"
           />
         </Link>
 
         {/* Desktop Navigation - Modern and attractive */}
         {showNavigation && (
-          <nav className="hidden lg:flex items-center justify-center flex-1 gap-1 mx-8">
+          <nav className="hidden lg:flex items-center justify-center flex-1 gap-1 mx-4 xl:mx-8">
             {/* Buy & Sell */}
             <Link
               to="/buy-sell"
@@ -299,14 +299,14 @@ const Header = () => {
         )}
 
         {/* Right Side Actions */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           {user ? (
             <>
               {/* Admin Button - Only visible to admins */}
               {isAdmin && (
-                <Button asChild variant="outline" size="sm" className="border-primary/30 text-primary hover:bg-primary hover:text-white hover:border-primary transition-all duration-200">
+                <Button asChild variant="outline" size="sm" className="hidden sm:flex border-primary/30 text-primary hover:bg-primary hover:text-white hover:border-primary transition-all duration-200">
                   <Link to="/admin">
-                    <Shield className="h-4 w-4 mr-2" />
+                    <Shield className="h-4 w-4 sm:mr-2" />
                     <span className="hidden sm:inline">Admin</span>
                   </Link>
                 </Button>
@@ -314,12 +314,12 @@ const Header = () => {
               
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="flex items-center gap-2 rounded-lg hover:bg-primary/5 transition-all duration-200">
-                    <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
-                      <User className="h-4 w-4 text-primary" />
+                  <Button variant="ghost" className="flex items-center gap-2 rounded-lg hover:bg-primary/5 transition-all duration-200 h-9 sm:h-10 px-2 sm:px-3">
+                    <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-primary/10 flex items-center justify-center">
+                      <User className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary" />
                     </div>
-                    <span className="hidden md:inline font-medium">{user.email?.split('@')[0]}</span>
-                    <ChevronDown className="h-4 w-4" />
+                    <span className="hidden md:inline font-medium text-sm">{user.email?.split('@')[0]}</span>
+                    <ChevronDown className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-56 bg-white border border-border/50 shadow-xl z-[100] rounded-lg p-2">
@@ -345,13 +345,13 @@ const Header = () => {
           ) : (
             <>
               {isAdmin && (
-                <Button asChild variant="outline" size="sm" className="border-primary/30 text-primary hover:bg-primary hover:text-white transition-all duration-200">
+                <Button asChild variant="outline" size="sm" className="hidden sm:flex border-primary/30 text-primary hover:bg-primary hover:text-white transition-all duration-200">
                   <Link to="/admin">
                     <Shield className="h-4 w-4" />
                   </Link>
                 </Button>
               )}
-              <Button asChild className="bg-primary hover:bg-primary-dark shadow-sm hover:shadow-md transition-all duration-200">
+              <Button asChild size="sm" className="bg-primary hover:bg-primary-dark shadow-sm hover:shadow-md transition-all duration-200 h-9 text-sm">
                 <Link to="/login">Login</Link>
               </Button>
             </>

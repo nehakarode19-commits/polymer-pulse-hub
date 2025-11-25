@@ -79,15 +79,15 @@ const GlobalBazaar = () => {
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
       <section 
-        className="relative h-72 bg-cover bg-center bg-no-repeat flex items-center justify-start"
+        className="relative h-48 sm:h-64 md:h-72 bg-cover bg-center bg-no-repeat flex items-center justify-start"
         style={{ backgroundImage: `url(${globalBazaarDarkImg})` }}
       >
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-primary/50 to-black/60" />
-        <div className="container relative z-10 px-8">
+        <div className="container relative z-10 px-4 sm:px-6 md:px-8">
           <motion.h1
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="text-5xl md:text-6xl font-black text-white drop-shadow-2xl"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-white drop-shadow-2xl"
           >
             Global Bazaar
           </motion.h1>
@@ -95,20 +95,20 @@ const GlobalBazaar = () => {
       </section>
 
       {/* Main Content */}
-      <section className="container max-w-7xl mx-auto px-8 py-12">
+      <section className="container max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-8 sm:py-12">
         {/* Header with Icon and Filters */}
-        <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 sm:mb-8">
           <div className="flex items-center gap-3">
-            <div className="p-3 bg-primary/10 rounded-lg">
-              <Globe className="h-8 w-8 text-primary" />
+            <div className="p-2 sm:p-3 bg-primary/10 rounded-lg">
+              <Globe className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
             </div>
-            <h2 className="text-3xl font-bold text-primary">Global Bazaar</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-primary">Global Bazaar</h2>
           </div>
 
           {/* Month and Year Filters */}
-          <div className="flex gap-4">
+          <div className="flex gap-3 sm:gap-4">
             <Select value={selectedMonth} onValueChange={setSelectedMonth}>
-              <SelectTrigger className="w-40 bg-background border-border">
+              <SelectTrigger className="w-32 sm:w-40 bg-background border-border text-sm">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent className="bg-background border-border z-50">
@@ -121,7 +121,7 @@ const GlobalBazaar = () => {
             </Select>
 
             <Select value={selectedYear} onValueChange={setSelectedYear}>
-              <SelectTrigger className="w-32 bg-background border-border">
+              <SelectTrigger className="w-24 sm:w-32 bg-background border-border text-sm">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent className="bg-background border-border z-50">

@@ -36,8 +36,8 @@ const Footer = () => {
   return (
     <footer className="bg-background border-t mt-20">
       {/* Main Footer */}
-      <div className="container px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+      <div className="container px-4 sm:px-6 py-8 sm:py-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {/* Contact Us */}
           <div>
             <Link to="/" className="inline-block mb-6">
