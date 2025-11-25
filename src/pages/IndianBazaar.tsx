@@ -192,28 +192,6 @@ const IndianBazaar = () => {
                 </div>
               </CardTitle>
             </CardHeader>
-            <CardContent className="relative z-10">
-              <div className="grid md:grid-cols-3 gap-6">
-                <div className="p-6 bg-primary/5 rounded-lg border-2 border-primary/20">
-                  <p className="text-sm text-muted-foreground mb-2">Current Rate</p>
-                  <div className="flex items-center gap-2">
-                    <IndianRupee className="h-6 w-6 text-primary" />
-                    <p className="text-4xl font-black text-primary">83.25</p>
-                  </div>
-                  <p className="text-xs text-muted-foreground mt-2">per USD</p>
-                </div>
-                <div className="p-6 bg-card rounded-lg border border-border">
-                  <p className="text-sm text-muted-foreground mb-2">24h Change</p>
-                  <p className="text-3xl font-bold text-success">+0.15</p>
-                  <p className="text-sm text-success mt-1">+0.18%</p>
-                </div>
-                <div className="p-6 bg-card rounded-lg border border-border">
-                  <p className="text-sm text-muted-foreground mb-2">Week High</p>
-                  <p className="text-3xl font-bold text-foreground">83.42</p>
-                  <p className="text-sm text-muted-foreground mt-1">Jan 15, 2024</p>
-                </div>
-              </div>
-            </CardContent>
           </Card>
         </motion.div>
 

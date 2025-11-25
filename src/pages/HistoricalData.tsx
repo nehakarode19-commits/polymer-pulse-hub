@@ -180,33 +180,6 @@ const HistoricalData = () => {
                       />
                     </LineChart>
                   </ResponsiveContainer>
-
-                  <div className="mt-8 grid md:grid-cols-4 gap-4">
-                    <Card className="bg-primary/5 border-primary/30">
-                      <CardContent className="p-4">
-                        <p className="text-sm text-muted-foreground mb-1">Avg Price</p>
-                        <p className="text-2xl font-bold text-primary">$1,308</p>
-                      </CardContent>
-                    </Card>
-                    <Card className="bg-success/5 border-success/30">
-                      <CardContent className="p-4">
-                        <p className="text-sm text-muted-foreground mb-1">Year High</p>
-                        <p className="text-2xl font-bold text-success">$1,420</p>
-                      </CardContent>
-                    </Card>
-                    <Card className="bg-destructive/5 border-destructive/30">
-                      <CardContent className="p-4">
-                        <p className="text-sm text-muted-foreground mb-1">Year Low</p>
-                        <p className="text-2xl font-bold text-destructive">$1,180</p>
-                      </CardContent>
-                    </Card>
-                    <Card className="bg-accent-orange/5 border-accent-orange/30">
-                      <CardContent className="p-4">
-                        <p className="text-sm text-muted-foreground mb-1">Total Volume</p>
-                        <p className="text-2xl font-bold text-accent-orange">6,150 MT</p>
-                      </CardContent>
-                    </Card>
-                  </div>
                 </CardContent>
               </Card>
             </motion.div>

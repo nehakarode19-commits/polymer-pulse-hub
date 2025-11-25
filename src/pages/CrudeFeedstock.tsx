@@ -152,50 +152,6 @@ const CrudeFeedstock = () => {
                         </Button>
                       ))}
                     </div>
-
-                    {/* Stats Grid */}
-                    <div className="grid md:grid-cols-4 gap-4">
-                      <Card className="bg-primary/5 border-primary/30">
-                        <CardContent className="p-4">
-                          <p className="text-sm text-muted-foreground mb-1">Current Price</p>
-                          <p className="text-2xl font-bold text-primary">$1,320/bbl</p>
-                        </CardContent>
-                      </Card>
-                      <Card className="bg-success/5 border-success/30">
-                        <CardContent className="p-4">
-                          <p className="text-sm text-muted-foreground mb-1">24h Change</p>
-                          <div className="flex items-center gap-2">
-                            <TrendingUp className="h-5 w-5 text-success" />
-                            <p className="text-2xl font-bold text-success">+3.2%</p>
-                          </div>
-                        </CardContent>
-                      </Card>
-                      <Card className="bg-card border-border">
-                        <CardContent className="p-4">
-                          <p className="text-sm text-muted-foreground mb-1">Week High</p>
-                          <p className="text-2xl font-bold text-foreground">$1,350</p>
-                        </CardContent>
-                      </Card>
-                      <Card className="bg-card border-border">
-                        <CardContent className="p-4">
-                          <p className="text-sm text-muted-foreground mb-1">Week Low</p>
-                          <p className="text-2xl font-bold text-foreground">$1,180</p>
-                        </CardContent>
-                      </Card>
-                    </div>
-
-                    {/* Market Insights */}
-                    <div className="mt-8 p-6 bg-muted/50 rounded-lg border border-border">
-                      <h4 className="text-lg font-semibold mb-3 flex items-center gap-2">
-                        <TrendingUp className="h-5 w-5 text-primary" />
-                        Market Insights - {selectedCountry}
-                      </h4>
-                      <p className="text-muted-foreground leading-relaxed">
-                        {product} prices in {selectedCountry} show positive momentum with steady demand from downstream 
-                        polymer manufacturers. Supply dynamics remain balanced with moderate inventory levels supporting 
-                        current price levels. Technical indicators suggest continued upward trend in the short term.
-                      </p>
-                    </div>
                   </CardContent>
                 </Card>
               </motion.div>
