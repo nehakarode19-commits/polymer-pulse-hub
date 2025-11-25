@@ -140,7 +140,7 @@ const Pricing = () => {
             transition={{ delay: 0.1 }}
             className="inline-block mb-4"
           >
-            <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold">
+            <span className="inline-block px-4 py-2 rounded-full bg-primary text-white text-sm font-semibold shadow-md">
               Subscription Plans
             </span>
           </motion.div>
