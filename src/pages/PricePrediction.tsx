@@ -1,7 +1,8 @@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { TrendingUp } from "lucide-react";
+import { TrendingUp, Download } from "lucide-react";
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 const PricePrediction = () => {
   const [selectedMonth, setSelectedMonth] = useState("June");
@@ -67,10 +68,26 @@ const PricePrediction = () => {
         <Card className="border-2 border-border shadow-xl">
           <CardContent className="p-0">
             {/* Date Header - Inside Card */}
-            <div className="bg-gradient-to-r from-primary via-primary to-primary/90 text-white px-6 py-4 rounded-t-lg">
-              <div className="flex justify-between items-center">
-                <h2 className="text-xl font-bold">Price Prediction - {selectedMonth} {selectedYear}</h2>
-                <span className="text-sm font-semibold bg-white/20 px-4 py-1 rounded-full">08-06-2025</span>
+            <div className="bg-gradient-to-r from-primary via-primary to-primary/90 text-white px-6 py-5 rounded-t-lg">
+              <div className="flex justify-between items-center flex-wrap gap-4">
+                <div>
+                  <p className="text-sm font-medium text-white/80 mb-1">Prediction Date</p>
+                  <h2 className="text-3xl font-bold tracking-wide">08-06-2025</h2>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="text-right">
+                    <p className="text-sm font-medium text-white/80">Report</p>
+                    <p className="text-lg font-bold">{selectedMonth} {selectedYear}</p>
+                  </div>
+                  <Button 
+                    variant="secondary" 
+                    size="lg"
+                    className="bg-white text-primary hover:bg-white/90 font-semibold gap-2"
+                  >
+                    <Download className="h-5 w-5" />
+                    Download PDF
+                  </Button>
+                </div>
               </div>
             </div>
 
