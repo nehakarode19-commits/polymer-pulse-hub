@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Check, Zap, Crown, Building2 } from "lucide-react";
+import { Check, Monitor, Smartphone, MessageCircle, Zap, Briefcase, Building2 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
@@ -16,72 +16,76 @@ const Pricing = () => {
 
   const plans = [
     {
-      id: "basic",
-      name: "Basic",
-      icon: Zap,
-      price: "₹12,000",
-      period: "/year",
-      description: "Perfect for small businesses and startups",
+      id: "website-access",
+      name: "Website Access",
+      icon: Monitor,
+      price: "₹15,000",
+      period: "+",
+      description: "Full access to PolymerBazaar website with all features",
       features: [
-        "Access to Global & Indian Bazaar",
-        "Basic historical data (1 year)",
-        "Weekly market updates",
-        "Email support",
+        "Complete website access",
+      ],
+    },
+    {
+      id: "mobile-app",
+      name: "Mobile Application",
+      icon: Smartphone,
+      price: "₹7,500",
+      period: "+",
+      description: "Access PolymerBazaar through our mobile app",
+      features: [
         "Mobile app access",
       ],
-      popular: false,
     },
     {
-      id: "premium",
-      name: "Premium",
-      icon: Crown,
-      price: "₹24,000",
-      period: "/year",
-      description: "Most popular for growing businesses",
+      id: "normal-whatsapp",
+      name: "Normal WhatsApp",
+      icon: MessageCircle,
+      price: "₹5,500",
+      period: "+",
+      description: "Get updates and support via WhatsApp",
       features: [
-        "Everything in Basic",
-        "Full historical data (5+ years)",
-        "Daily market updates",
-        "Future trend analysis",
-        "Priority support",
-        "API access",
-        "Custom reports",
-        "WhatsApp integration",
+        "WhatsApp notifications",
       ],
-      popular: true,
     },
     {
-      id: "enterprise",
-      name: "Enterprise",
+      id: "auto-whatsapp",
+      name: "Auto WhatsApp",
+      icon: Zap,
+      price: "₹6,500",
+      period: "+",
+      description: "Automated WhatsApp services and alerts",
+      features: [
+        "Automated alerts",
+      ],
+    },
+    {
+      id: "sourcing-delegation",
+      name: "Sourcing & Delegation",
+      icon: Briefcase,
+      price: "₹20,000",
+      period: "+",
+      description: "Professional sourcing and delegation services",
+      features: [
+        "Professional sourcing",
+      ],
+    },
+    {
+      id: "corporate-package",
+      name: "Corporate Package",
       icon: Building2,
-      price: "Custom",
-      period: "",
-      description: "Tailored solutions for large organizations",
+      price: "₹25,000",
+      period: "+",
+      description: "Customized solutions for corporate clients",
       features: [
-        "Everything in Premium",
-        "Unlimited historical data",
-        "Real-time price alerts",
-        "Dedicated account manager",
-        "Custom integrations",
-        "On-premise deployment option",
-        "Training & onboarding",
-        "24/7 phone support",
+        "Custom solutions",
       ],
-      popular: false,
     },
   ];
 
   const handleSubscribe = async (planType: string) => {
     if (!user) {
       navigate("/signup");
-      return;
-    }
-
-    if (planType === "enterprise") {
-      toast({
-        title: "Contact Sales",
-        description: "Please contact our sales team for enterprise pricing.",
-      });
       return;
     }
 
@@ -130,15 +134,16 @@ const Pricing = () => {
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-16"
         >
-          <h1 className="text-5xl font-bold mb-4 bg-gradient-luxury bg-clip-text text-transparent">
-            Choose Your Plan
+          <h1 className="text-5xl font-bold mb-6">
+            Subscribe to <span className="text-primary">PolymerBazaar</span>
           </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Get instant access to comprehensive polymer market data and insights
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+            Choose the perfect plan for your business needs. From individual access to corporate solutions, 
+            we have packages designed to empower your polymer trading journey.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {plans.map((plan, index) => {
             const Icon = plan.icon;
             return (
@@ -148,50 +153,44 @@ const Pricing = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
               >
-                <Card
-                  className={`relative h-full ${
-                    plan.popular
-                      ? "border-primary shadow-xl shadow-primary/20 scale-105"
-                      : ""
-                  }`}
-                >
-                  {plan.popular && (
-                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground px-4 py-1 rounded-full text-sm font-semibold">
-                      Most Popular
-                    </div>
-                  )}
-                  <CardHeader className="text-center pb-8">
-                    <div className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-full flex items-center justify-center">
-                      <Icon className="h-8 w-8 text-primary" />
-                    </div>
-                    <CardTitle className="text-2xl">{plan.name}</CardTitle>
-                    <CardDescription className="mt-2">{plan.description}</CardDescription>
-                    <div className="mt-6">
-                      <span className="text-4xl font-bold">{plan.price}</span>
-                      <span className="text-muted-foreground">{plan.period}</span>
-                    </div>
+                <Card className="h-full hover:shadow-lg transition-shadow">
+                  <CardHeader className="pb-4">
+                    <CardTitle className="text-xl font-bold flex items-center gap-2">
+                      <Icon className="h-5 w-5 text-primary" />
+                      {plan.name}
+                    </CardTitle>
+                    <CardDescription className="text-sm mt-2">
+                      {plan.description}
+                    </CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-6">
-                    <ul className="space-y-3">
-                      {plan.features.map((feature, i) => (
-                        <li key={i} className="flex items-start gap-3">
-                          <Check className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                          <span className="text-sm">{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
+                    <div>
+                      <span className="text-3xl font-bold">{plan.price}</span>
+                      <span className="text-2xl text-muted-foreground">{plan.period}</span>
+                    </div>
+                    
+                    <div>
+                      <p className="text-sm font-semibold mb-3 flex items-center gap-2">
+                        <Zap className="h-4 w-4" />
+                        Features Included:
+                      </p>
+                      <ul className="space-y-2">
+                        {plan.features.map((feature, i) => (
+                          <li key={i} className="flex items-start gap-2 text-sm">
+                            <Check className="h-4 w-4 text-green-500 shrink-0 mt-0.5" />
+                            <span>{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+
                     <Button
                       onClick={() => handleSubscribe(plan.id)}
                       disabled={loading === plan.id}
-                      className={`w-full ${
-                        plan.popular
-                          ? "bg-primary hover:bg-primary-dark"
-                          : ""
-                      }`}
-                      variant={plan.popular ? "default" : "outline"}
+                      className="w-full bg-[#8B1538] hover:bg-[#6B0E2A] text-white"
                       size="lg"
                     >
-                      {loading === plan.id ? "Processing..." : user ? "Subscribe Now" : "Sign Up to Continue"}
+                      {loading === plan.id ? "Processing..." : "Proceed to Pay"}
                     </Button>
                   </CardContent>
                 </Card>
