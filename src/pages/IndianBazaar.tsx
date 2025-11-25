@@ -106,30 +106,25 @@ const IndianBazaar = () => {
 
       {/* City Wise Section */}
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Ribbon Header with Filters */}
+        {/* Glass Morphism Header with Filters */}
         <div className="mb-10">
-          <div className="flex items-center justify-between flex-wrap gap-6">
-            {/* Ribbon Style Heading with Gradient */}
-            <div className="relative inline-block">
-              <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 text-white px-10 py-5 relative shadow-xl">
-                <div className="flex items-center gap-3">
-                  <div className="p-2 bg-white/10 rounded-lg backdrop-blur-sm">
-                    <FileText className="h-6 w-6" />
-                  </div>
-                  <h2 className="text-2xl font-bold tracking-wide">City Wise Data</h2>
-                </div>
-                {/* Ribbon fold left */}
-                <div className="absolute left-0 top-full w-0 h-0 border-l-[25px] border-l-transparent border-t-[18px] border-t-slate-900/70"></div>
-                {/* Ribbon fold right */}
-                <div className="absolute right-0 top-full w-0 h-0 border-r-[25px] border-r-transparent border-t-[18px] border-t-slate-900/70"></div>
-                {/* Decorative shine effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent"></div>
+          <div className="flex items-center justify-between flex-wrap gap-6 bg-gradient-to-r from-primary/10 via-primary/5 to-transparent backdrop-blur-sm border border-primary/20 rounded-2xl p-6 shadow-xl">
+            {/* Modern Glass Heading */}
+            <div className="flex items-center gap-4">
+              <div className="p-3 bg-primary/20 backdrop-blur-md rounded-xl border border-primary/30 shadow-lg">
+                <FileText className="h-7 w-7 text-primary" />
+              </div>
+              <div>
+                <h2 className="text-3xl font-bold bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+                  City Wise Data
+                </h2>
+                <p className="text-sm text-muted-foreground mt-1">Select city to view polymer prices</p>
               </div>
             </div>
             
-            {/* City Filter with enhanced styling */}
+            {/* City Filter with glass effect */}
             <Select value={selectedCity} onValueChange={setSelectedCity}>
-              <SelectTrigger className="w-52 h-12 border-2 border-primary/20 hover:border-primary/40 transition-colors">
+              <SelectTrigger className="w-52 h-12 bg-background/50 backdrop-blur-sm border-2 border-primary/30 hover:border-primary/50 transition-all shadow-md">
                 <SelectValue placeholder="Select City" />
               </SelectTrigger>
               <SelectContent>
