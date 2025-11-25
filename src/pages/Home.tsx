@@ -159,11 +159,31 @@ const Home = () => {
   ];
 
   const whyPolymerBazaar = [
-    { title: "20+ Years of Trust", icon: Award },
-    { title: "Global Coverage", icon: Globe },
-    { title: "Real-Time Data", icon: Zap },
-    { title: "Expert Analysis", icon: Star },
-    { title: "Multi-Channel Access", icon: Rocket },
+    { 
+      title: "20+ Years of Trust", 
+      icon: Award,
+      description: "Two decades of proven excellence in polymer market intelligence and trade data across global markets."
+    },
+    { 
+      title: "Global Coverage", 
+      icon: Globe,
+      description: "Comprehensive market insights spanning 10+ countries with on-ground intelligence and local expertise."
+    },
+    { 
+      title: "Real-Time Data", 
+      icon: Zap,
+      description: "Instant price updates and market movements delivered through web, mobile, SMS, and WhatsApp channels."
+    },
+    { 
+      title: "Expert Analysis", 
+      icon: Star,
+      description: "Industry-leading forecasts and trend analysis by seasoned polymer market experts and analysts."
+    },
+    { 
+      title: "Multi-Channel Access", 
+      icon: Rocket,
+      description: "Seamless access to market data anytime, anywhere through multiple platforms and communication channels."
+    },
   ];
 
   const events = [
@@ -923,17 +943,30 @@ const Home = () => {
       </section>
 
       {/* Why Polymer Bazaar Carousel */}
-      <section className="py-24 px-4">
+      <section className="py-24 px-4 relative overflow-hidden">
+        {/* Animated Background */}
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute top-20 left-20 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-20 right-20 w-96 h-96 bg-accent-orange/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1.5s' }}></div>
+        </div>
+
         <div className="container max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
+            className="text-center mb-16"
           >
-            <h2 className="text-5xl font-bold mb-16 text-center bg-gradient-to-r from-primary to-accent-orange bg-clip-text text-transparent">
+            <Badge variant="outline" className="mb-4 text-base px-6 py-2 bg-gradient-to-r from-primary to-red-600 text-white border-none">
+              Why Choose Us
+            </Badge>
+            <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent">
               Why Polymer Bazaar
             </h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Industry-leading intelligence platform trusted by polymer professionals worldwide
+            </p>
           </motion.div>
           
           <div className="relative max-w-6xl mx-auto">
@@ -941,26 +974,49 @@ const Home = () => {
               {whyPolymerBazaar.slice(carouselIndex, carouselIndex + 3).map((item, index) => {
                 const images = [whyPolymerModernImg, whyPolymerModernImg, whyPolymerModernImg];
                 const imageIndex = (carouselIndex + index) % images.length;
+                const direction = index === 0 ? -100 : index === 2 ? 100 : 0;
                 
                 return (
                   <motion.div
-                    key={index}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: index * 0.1, duration: 0.5 }}
+                    key={`${carouselIndex}-${index}`}
+                    initial={{ opacity: 0, x: direction, scale: 0.9 }}
+                    animate={{ opacity: 1, x: 0, scale: 1 }}
+                    exit={{ opacity: 0, x: -direction, scale: 0.9 }}
+                    transition={{ 
+                      delay: index * 0.15, 
+                      duration: 0.7,
+                      type: "spring",
+                      bounce: 0.4
+                    }}
                     className="flex-1"
                   >
-                    <Card className="hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 border-2 hover:border-primary/50 group">
+                    <Card className="group shadow-xl hover:shadow-[0_30px_80px_-20px_rgba(229,57,53,0.6)] transition-all duration-500 hover:-translate-y-4 hover:scale-105 border-2 hover:border-primary/50 h-full relative overflow-hidden bg-gradient-to-br from-card via-card to-muted/20 backdrop-blur-sm">
+                      {/* Shine effect */}
+                      <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/10 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+                      
                       <div className="h-56 relative overflow-hidden">
                         <img 
                           src={images[imageIndex]} 
                           alt={`Polymer materials ${imageIndex + 1}`}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-125 group-hover:rotate-2"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+                        
+                        {/* Icon Badge */}
+                        <div className="absolute top-4 right-4 w-14 h-14 rounded-xl bg-gradient-to-br from-primary to-red-600 flex items-center justify-center shadow-xl group-hover:scale-110 group-hover:rotate-12 transition-all duration-500">
+                          <div className="absolute inset-0 rounded-xl bg-white/20 blur-lg group-hover:bg-white/30 transition-all duration-500"></div>
+                          <item.icon className="w-7 h-7 text-white relative z-10" />
+                        </div>
                       </div>
-                      <CardContent className="p-8 text-center">
-                        <h3 className="font-bold text-xl group-hover:text-primary transition-colors">{item.title}</h3>
+                      
+                      <CardContent className="p-6 text-center relative z-10">
+                        <h3 className="font-bold text-xl mb-3 group-hover:text-primary transition-colors">{item.title}</h3>
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          {item.description}
+                        </p>
+                        
+                        {/* Bottom accent line */}
+                        <div className="mt-4 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                       </CardContent>
                     </Card>
                   </motion.div>
@@ -971,7 +1027,7 @@ const Home = () => {
             <Button
               variant="outline"
               size="icon"
-              className="absolute left-0 top-1/2 -translate-y-1/2 shadow-xl hover:shadow-2xl hover:scale-110 transition-all border-2"
+              className="absolute left-0 top-1/2 -translate-y-1/2 shadow-xl hover:shadow-2xl hover:scale-110 transition-all border-2 bg-background/80 backdrop-blur-sm"
               onClick={() => setCarouselIndex(Math.max(0, carouselIndex - 1))}
               disabled={carouselIndex === 0}
             >
@@ -980,7 +1036,7 @@ const Home = () => {
             <Button
               variant="outline"
               size="icon"
-              className="absolute right-0 top-1/2 -translate-y-1/2 shadow-xl hover:shadow-2xl hover:scale-110 transition-all border-2"
+              className="absolute right-0 top-1/2 -translate-y-1/2 shadow-xl hover:shadow-2xl hover:scale-110 transition-all border-2 bg-background/80 backdrop-blur-sm"
               onClick={() => setCarouselIndex(Math.min(whyPolymerBazaar.length - 3, carouselIndex + 1))}
               disabled={carouselIndex >= whyPolymerBazaar.length - 3}
             >
