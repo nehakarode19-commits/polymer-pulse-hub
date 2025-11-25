@@ -77,10 +77,25 @@ const Profile = () => {
         </Card>
 
         <Tabs defaultValue="profile" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="profile">My Profile</TabsTrigger>
-            <TabsTrigger value="subscription">My Subscription</TabsTrigger>
-            <TabsTrigger value="payment-history">Payment History</TabsTrigger>
+          <TabsList className="w-full justify-center bg-muted/30 rounded-none h-auto p-0 mb-8">
+            <TabsTrigger 
+              value="profile"
+              className="flex-1 rounded-none data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-none px-8 py-4 text-base font-normal data-[state=inactive]:text-muted-foreground"
+            >
+              My Profile
+            </TabsTrigger>
+            <TabsTrigger 
+              value="subscription"
+              className="flex-1 rounded-none data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-none px-8 py-4 text-base font-normal data-[state=inactive]:text-muted-foreground"
+            >
+              My Subscription
+            </TabsTrigger>
+            <TabsTrigger 
+              value="payment-history"
+              className="flex-1 rounded-none data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-none px-8 py-4 text-base font-normal data-[state=inactive]:text-muted-foreground"
+            >
+              Payment History
+            </TabsTrigger>
           </TabsList>
 
           {/* My Profile Tab */}
