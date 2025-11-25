@@ -535,7 +535,7 @@ const Home = () => {
                   </div>
                   
                   <CardContent className="p-8">
-                    <Badge className="mb-4 bg-primary/10 text-primary border-primary/20 px-3 py-1">
+                    <Badge className="mb-4 bg-primary text-white border-primary px-3 py-1 shadow-md">
                       {insight.type}
                     </Badge>
                     <h3 className="font-bold text-2xl mb-4 group-hover:text-primary transition-colors leading-tight line-clamp-2">
@@ -704,7 +704,7 @@ const Home = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">
+            <Badge className="mb-4 bg-primary text-white border-primary shadow-md">
               <Zap className="w-4 h-4 mr-2" />
               Product Coverage
             </Badge>
@@ -796,7 +796,7 @@ const Home = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">
+            <Badge className="mb-4 bg-primary text-white border-primary shadow-md">
               <TrendingUp className="w-4 h-4 mr-2" />
               Strategic Intelligence
             </Badge>
@@ -1024,7 +1024,7 @@ const Home = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">
+              <Badge className="mb-4 bg-primary text-white border-primary shadow-md">
                 <Users className="w-4 h-4 mr-2" />
                 Expert Consultation
               </Badge>
