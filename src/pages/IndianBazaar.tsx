@@ -1,10 +1,13 @@
 import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { FileText } from "lucide-react";
+import { FileText, TrendingUp } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const IndianBazaar = () => {
+  const navigate = useNavigate();
   const [selectedCity, setSelectedCity] = useState("Ahem");
   const [selectedMonth, setSelectedMonth] = useState("January");
   const [selectedYear, setSelectedYear] = useState("2024");
@@ -73,8 +76,17 @@ const IndianBazaar = () => {
               <h1 className="text-2xl sm:text-3xl font-bold text-primary">Indian Bazaar</h1>
             </div>
             
-            {/* Month and Year Selectors */}
+            {/* Rate Revision Button and Month/Year Selectors */}
             <div className="flex items-center gap-3">
+              <Button 
+                onClick={() => navigate('/rate-revision')}
+                className="flex items-center gap-2"
+                variant="default"
+              >
+                <TrendingUp className="h-4 w-4" />
+                Rate Revision
+              </Button>
+
               <Select value={selectedMonth} onValueChange={setSelectedMonth}>
                 <SelectTrigger className="w-32">
                   <SelectValue placeholder="Month" />
