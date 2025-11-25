@@ -438,7 +438,7 @@ const Home = () => {
       </section>
 
       {/* Latest Insights Section */}
-      <section className="py-32 px-4 relative overflow-hidden">
+      <section className="py-24 px-4 relative overflow-hidden">
         {/* Background Decoration */}
         <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/20 to-background"></div>
         <div className="absolute top-20 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
@@ -446,38 +446,31 @@ const Home = () => {
         
         <div className="container max-w-7xl mx-auto relative z-10">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-20"
+            className="text-center mb-16"
           >
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              className="inline-block"
-            >
-              <Badge className="mb-6 bg-gradient-to-r from-primary/10 to-accent-orange/10 text-primary border-primary/20 px-6 py-3 text-base">
-                <Sparkles className="w-5 h-5 mr-2 animate-pulse" />
-                Intelligence Hub
-              </Badge>
-            </motion.div>
-            <h2 className="text-6xl md:text-7xl font-black mb-8">
-              <span className="bg-gradient-to-r from-primary via-accent-red to-accent-orange bg-clip-text text-transparent">
-                Latest Insights
-              </span>
+            <Badge className="mb-6 bg-primary text-white border-primary px-6 py-2.5 text-base shadow-md">
+              <Sparkles className="w-5 h-5 mr-2" />
+              Intelligence Hub
+            </Badge>
+            <h2 className="text-5xl md:text-6xl font-black mb-6 text-foreground">
+              Latest Insights
             </h2>
-            <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
+            <p className="text-lg text-muted-foreground max-w-4xl mx-auto leading-relaxed">
               Our analysts across the global petrochemical supply chain are tracking markets 24/7 to give you <span className="text-primary font-semibold">Price, Prediction, and Profit</span> intelligence. We deliver this through a mix of reports, videos, webinars, and more.
             </p>
           </motion.div>
 
-          <Tabs value={activeInsightTab} onValueChange={setActiveInsightTab} className="mb-12">
-            <TabsList className="grid w-full grid-cols-2 md:grid-cols-6 h-auto p-2 bg-secondary/50 backdrop-blur-sm border border-border/50">
+          <Tabs value={activeInsightTab} onValueChange={setActiveInsightTab} className="mb-10">
+            <TabsList className="grid w-full grid-cols-2 md:grid-cols-6 h-auto p-1.5 bg-secondary border border-border/50 rounded-lg">
               {["select", "news", "blog", "insightPapers", "webinars", "videoInsights"].map((tab) => (
                 <TabsTrigger 
                   key={tab}
                   value={tab}
-                  className="data-[state=active]:bg-white data-[state=active]:shadow-lg data-[state=active]:text-primary py-3 px-6 rounded-lg font-semibold transition-all capitalize"
+                  className="data-[state=active]:bg-primary data-[state=active]:text-white data-[state=active]:shadow-md py-2.5 px-4 rounded-md font-medium transition-all capitalize"
                 >
                   {tab === "insightPapers" ? "Insight Papers" : tab === "videoInsights" ? "Video Insights" : tab}
                 </TabsTrigger>
@@ -485,15 +478,15 @@ const Home = () => {
             </TabsList>
           </Tabs>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {currentInsights.map((insight, index) => (
-              <motion.div
+            <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 50 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
-                whileHover={{ y: -10 }}
+                transition={{ delay: index * 0.1, duration: 0.4 }}
+                whileHover={{ y: -8 }}
                 className="h-full"
               >
                 <Card className="group hover:shadow-2xl transition-all duration-500 overflow-hidden border-2 hover:border-primary/50 h-full bg-gradient-to-b from-card to-card/50 backdrop-blur-sm">
@@ -559,7 +552,7 @@ const Home = () => {
       </section>
 
       {/* Global Map Section */}
-      <section className="py-32 px-4 relative overflow-hidden">
+      <section className="py-24 px-4 relative overflow-hidden">
         {/* Animated Background */}
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-gradient-to-br from-secondary via-background to-secondary/50"></div>
@@ -567,7 +560,7 @@ const Home = () => {
         </div>
         
         <div className="container max-w-7xl mx-auto relative z-10">
-          <div className="grid lg:grid-cols-2 gap-20 items-center">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
              <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -625,37 +618,37 @@ const Home = () => {
               ))}
             </motion.div>
             <motion.div
-              initial={{ opacity: 0, x: 30 }}
+              initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="space-y-8"
+              transition={{ duration: 0.6 }}
+              className="space-y-6"
             >
               <div>
-                <Badge className="mb-6 bg-gradient-to-r from-primary/10 to-accent-orange/10 text-primary border-primary/20 px-6 py-3 text-base">
+                <Badge className="mb-6 bg-primary text-white border-primary px-6 py-2.5 text-base shadow-md">
                   <Globe className="w-5 h-5 mr-2" />
                   Worldwide Coverage
                 </Badge>
-                <h2 className="text-5xl md:text-6xl font-black mb-8 leading-tight">
-                  Global Market <span className="bg-gradient-to-r from-primary to-accent-orange bg-clip-text text-transparent">Coverage</span>
+                <h2 className="text-4xl md:text-5xl font-black mb-6 leading-tight text-foreground">
+                  Global Market Coverage
                 </h2>
               </div>
               
-              <p className="text-xl text-muted-foreground leading-relaxed">
+              <p className="text-lg text-muted-foreground leading-relaxed">
                 Polymer Bazaar bridges the world's polymer markets, delivering <span className="text-primary font-semibold">real-time prices, trends, and intelligence</span> across key regions. From the USA to Europe, Middle East to Asia, we track volatility and opportunities across <span className="text-primary font-semibold">10+ countries</span> including China, Nepal, Sri Lanka, Bangladesh, and KSA.
               </p>
               
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-3 mt-6">
                 {["USA", "Europe", "China", "India", "UAE", "Bangladesh", "Nepal", "Sri Lanka"].map((country, i) => (
                   <motion.div
                     key={i}
-                    initial={{ opacity: 0, x: -20 }}
+                    initial={{ opacity: 0, x: -10 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
-                    transition={{ delay: i * 0.1 }}
-                    whileHover={{ scale: 1.05, x: 5 }}
+                    transition={{ delay: i * 0.08 }}
+                    whileHover={{ scale: 1.03 }}
                   >
-                    <Badge variant="outline" className="w-full justify-center text-base px-4 py-3 border-2 hover:border-primary hover:bg-primary/5 transition-all cursor-pointer">
+                    <Badge variant="outline" className="w-full justify-center text-sm px-3 py-2.5 border-2 hover:border-primary hover:bg-primary/5 transition-all cursor-pointer font-medium">
                       <CheckCircle2 className="w-4 h-4 mr-2 text-primary" />
                       {country}
                     </Badge>
@@ -663,19 +656,19 @@ const Home = () => {
                 ))}
               </div>
               
-              <div className="bg-gradient-to-r from-primary/5 to-accent-orange/5 p-8 rounded-2xl border-2 border-primary/10">
-                <div className="grid grid-cols-3 gap-6 text-center">
+              <div className="bg-gradient-to-r from-primary/5 to-accent-orange/5 p-6 rounded-xl border border-primary/20 mt-6">
+                <div className="grid grid-cols-3 gap-4 text-center">
                   <div>
-                    <div className="text-4xl font-bold text-primary mb-2">$800B+</div>
-                    <div className="text-sm text-muted-foreground">Industry Size</div>
+                    <div className="text-3xl font-bold text-primary mb-1">$800B+</div>
+                    <div className="text-xs text-muted-foreground font-medium">Industry Size</div>
                   </div>
                   <div>
-                    <div className="text-4xl font-bold text-primary mb-2">5.4%</div>
-                    <div className="text-sm text-muted-foreground">CAGR Growth</div>
+                    <div className="text-3xl font-bold text-primary mb-1">5.4%</div>
+                    <div className="text-xs text-muted-foreground font-medium">CAGR Growth</div>
                   </div>
                   <div>
-                    <div className="text-4xl font-bold text-primary mb-2">24/7</div>
-                    <div className="text-sm text-muted-foreground">Market Tracking</div>
+                    <div className="text-3xl font-bold text-primary mb-1">24/7</div>
+                    <div className="text-xs text-muted-foreground font-medium">Market Tracking</div>
                   </div>
                 </div>
               </div>
