@@ -440,10 +440,35 @@ const Home = () => {
 
       {/* Latest Insights Section */}
       <section className="py-24 px-4 relative overflow-hidden">
-        {/* Background Decoration */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/20 to-background"></div>
-        <div className="absolute top-20 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 left-0 w-96 h-96 bg-accent-orange/5 rounded-full blur-3xl"></div>
+        {/* Animated Background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-background via-primary/5 to-background"></div>
+        <div className="absolute inset-0 overflow-hidden">
+          <motion.div 
+            className="absolute top-20 right-0 w-[500px] h-[500px] bg-gradient-to-br from-primary/10 to-transparent rounded-full blur-3xl"
+            animate={{ 
+              scale: [1, 1.2, 1],
+              opacity: [0.3, 0.5, 0.3]
+            }}
+            transition={{ 
+              duration: 8, 
+              repeat: Infinity,
+              ease: "easeInOut" 
+            }}
+          />
+          <motion.div 
+            className="absolute bottom-20 left-0 w-[500px] h-[500px] bg-gradient-to-tr from-primary/10 to-transparent rounded-full blur-3xl"
+            animate={{ 
+              scale: [1.2, 1, 1.2],
+              opacity: [0.5, 0.3, 0.5]
+            }}
+            transition={{ 
+              duration: 8, 
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 4
+            }}
+          />
+        </div>
         
         <div className="container max-w-7xl mx-auto relative z-10">
           <motion.div
@@ -453,11 +478,11 @@ const Home = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <Badge className="mb-6 bg-primary text-white border-primary px-6 py-2.5 text-base shadow-md">
+            <Badge className="mb-6 bg-gradient-to-r from-primary to-red-600 text-white border-0 px-6 py-2.5 text-base shadow-lg">
               <Sparkles className="w-5 h-5 mr-2" />
               Intelligence Hub
             </Badge>
-            <h2 className="text-5xl md:text-6xl font-black mb-6 text-foreground">
+            <h2 className="text-5xl md:text-6xl font-black mb-6 bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent">
               Latest Insights
             </h2>
             <p className="text-lg text-muted-foreground max-w-4xl mx-auto leading-relaxed">
@@ -465,13 +490,13 @@ const Home = () => {
             </p>
           </motion.div>
 
-          <Tabs value={activeInsightTab} onValueChange={setActiveInsightTab} className="mb-10">
-            <TabsList className="grid w-full grid-cols-2 md:grid-cols-6 h-auto p-1.5 bg-secondary border border-border/50 rounded-lg">
+          <Tabs value={activeInsightTab} onValueChange={setActiveInsightTab} className="mb-12">
+            <TabsList className="grid w-full grid-cols-2 md:grid-cols-6 h-auto p-2 bg-card/50 backdrop-blur-sm border-2 border-border/50 rounded-xl shadow-lg">
               {["select", "news", "blog", "insightPapers", "webinars", "videoInsights"].map((tab) => (
                 <TabsTrigger 
                   key={tab}
                   value={tab}
-                  className="data-[state=active]:bg-primary data-[state=active]:text-white data-[state=active]:shadow-md py-2.5 px-4 rounded-md font-medium transition-all capitalize"
+                  className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-primary data-[state=active]:to-red-600 data-[state=active]:text-white data-[state=active]:shadow-xl py-3 px-4 rounded-lg font-semibold transition-all capitalize text-sm hover:bg-muted/50"
                 >
                   {tab === "insightPapers" ? "Insight Papers" : tab === "videoInsights" ? "Video Insights" : tab}
                 </TabsTrigger>
@@ -479,72 +504,102 @@ const Home = () => {
             </TabsList>
           </Tabs>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {currentInsights.map((insight, index) => (
             <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.4 }}
-                whileHover={{ y: -8 }}
+                transition={{ 
+                  delay: index * 0.1, 
+                  duration: 0.5,
+                  type: "spring",
+                  stiffness: 100
+                }}
+                whileHover={{ y: -12, scale: 1.02 }}
                 className="h-full"
               >
-                <Card className="group hover:shadow-2xl transition-all duration-500 overflow-hidden border-2 hover:border-primary/50 h-full bg-gradient-to-b from-card to-card/50 backdrop-blur-sm">
+                <Card className="group relative hover:shadow-2xl transition-all duration-500 overflow-hidden border-2 border-border hover:border-primary/50 h-full bg-gradient-to-br from-card via-card to-muted/20 backdrop-blur-sm">
+                  {/* Gradient overlay on card */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/0 to-primary/0 group-hover:from-primary/5 group-hover:via-primary/10 group-hover:to-primary/5 transition-all duration-500 pointer-events-none z-10"></div>
+                  
+                  {/* Image Section */}
                   <div className="h-56 relative overflow-hidden">
                     <img 
                       src={insight.image} 
                       alt={insight.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-125 group-hover:rotate-2"
                     />
-                    {/* Animated Overlay */}
+                    
+                    {/* Multi-layer Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-500"></div>
+                    
+                    {/* Hover Play Button */}
                     <motion.div
-                      className="absolute inset-0"
-                      initial={{ opacity: 0 }}
-                      whileHover={{ opacity: 1 }}
-                      transition={{ duration: 0.3 }}
+                      className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      initial={{ scale: 0.5 }}
+                      whileHover={{ scale: 1 }}
                     >
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <motion.div
-                          initial={{ scale: 0 }}
-                          whileHover={{ scale: 1 }}
-                          className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center"
-                        >
-                          <ArrowRight className="w-8 h-8 text-white" />
-                        </motion.div>
+                      <div className="w-20 h-20 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border-2 border-white/50 shadow-2xl">
+                        <Play className="w-10 h-10 text-white fill-white ml-1" />
                       </div>
                     </motion.div>
                     
-                    {/* Decorative Elements */}
-                    <div className="absolute top-4 right-4 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center">
-                      <Sparkles className="w-6 h-6 text-white" />
-                    </div>
+                    {/* Floating Badge */}
+                    <motion.div 
+                      className="absolute top-4 right-4"
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                    >
+                      <Badge className="bg-gradient-to-r from-primary to-red-600 text-white border-0 px-3 py-1.5 shadow-xl font-semibold">
+                        {insight.type}
+                      </Badge>
+                    </motion.div>
+                    
+                    {/* Shine effect */}
+                    <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 pointer-events-none"></div>
+                    
+                    {/* Bottom border glow */}
                     <motion.div
-                      className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-white/0 via-white/50 to-white/0"
+                      className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary to-transparent"
                       initial={{ scaleX: 0 }}
-                      whileHover={{ scaleX: 1 }}
-                      transition={{ duration: 0.5 }}
+                      whileInView={{ scaleX: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.8, delay: index * 0.1 }}
                     />
                   </div>
                   
-                  <CardContent className="p-8">
-                    <Badge className="mb-4 bg-primary text-white border-primary px-3 py-1 shadow-md">
-                      {insight.type}
-                    </Badge>
-                    <h3 className="font-bold text-2xl mb-4 group-hover:text-primary transition-colors leading-tight line-clamp-2">
+                  {/* Content Section */}
+                  <CardContent className="p-6 relative z-20">
+                    <h3 className="font-bold text-xl mb-3 group-hover:text-primary transition-colors duration-300 leading-tight line-clamp-2 min-h-[56px]">
                       {insight.title}
                     </h3>
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
-                      <CheckCircle2 className="w-4 h-4" />
+                    
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground mb-3">
+                      <div className="w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-primary" />
+                      </div>
                       <span className="font-medium">{insight.date}</span>
                     </div>
-                    <p className="text-sm text-muted-foreground mb-6 leading-relaxed line-clamp-3">{insight.excerpt}</p>
-                    <Button variant="link" className="p-0 h-auto text-primary font-semibold group/btn text-base">
-                      Read Full Article
-                      <ArrowRight className="ml-2 h-5 w-5 group-hover/btn:translate-x-2 transition-transform" />
+                    
+                    <p className="text-sm text-muted-foreground mb-5 leading-relaxed line-clamp-3">
+                      {insight.excerpt}
+                    </p>
+                    
+                    <Button 
+                      variant="ghost" 
+                      className="p-0 h-auto text-primary font-semibold group/btn hover:bg-transparent relative overflow-hidden w-full justify-start"
+                    >
+                      <span className="relative z-10 flex items-center">
+                        Read Full Article
+                        <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-2 transition-transform duration-300" />
+                      </span>
+                      <span className="absolute inset-0 w-0 bg-primary/5 group-hover/btn:w-full transition-all duration-300 rounded-md"></span>
                     </Button>
                   </CardContent>
+
+                  {/* Corner decoration */}
+                  <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-primary/10 to-transparent rounded-tr-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
                 </Card>
               </motion.div>
             ))}
