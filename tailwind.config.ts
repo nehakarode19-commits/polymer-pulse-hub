@@ -32,6 +32,7 @@ export default {
           orange: "hsl(var(--accent-orange))",
           gold: "hsl(var(--accent-gold))",
           pink: "hsl(var(--accent-pink))",
+          maroon: "hsl(var(--accent-maroon))",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
