@@ -1080,13 +1080,34 @@ const Home = () => {
                           {item.description}
                         </p>
                         
-                        {/* Animated bottom border */}
-                        <motion.div 
-                          className="mt-6 h-1 bg-gradient-to-r from-primary via-red-600 to-primary rounded-full"
-                          initial={{ scaleX: 0 }}
-                          whileInView={{ scaleX: 1 }}
-                          transition={{ duration: 0.8, delay: 0.3 }}
-                        />
+                        {/* Enhanced animated bottom border with glow */}
+                        <div className="relative mt-6 h-1 bg-muted/30 rounded-full overflow-hidden">
+                          <motion.div 
+                            className="absolute inset-0 bg-gradient-to-r from-primary via-red-500 to-primary rounded-full shadow-[0_0_15px_rgba(229,57,53,0.6)]"
+                            initial={{ scaleX: 0, x: "-100%" }}
+                            whileInView={{ scaleX: 1, x: 0 }}
+                            transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
+                            animate={{
+                              backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
+                            }}
+                            style={{
+                              backgroundSize: "200% 100%"
+                            }}
+                          />
+                          {/* Additional glow effect */}
+                          <motion.div
+                            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent rounded-full"
+                            animate={{
+                              x: ["-100%", "200%"]
+                            }}
+                            transition={{
+                              duration: 2,
+                              repeat: Infinity,
+                              repeatDelay: 3,
+                              ease: "linear"
+                            }}
+                          />
+                        </div>
                       </CardContent>
                     </Card>
                   </motion.div>
@@ -1122,37 +1143,81 @@ const Home = () => {
               <ChevronRight className="h-6 w-6" />
             </Button>
             
-            {/* Progress indicators */}
-            <div className="flex justify-center gap-2 mt-8">
+            {/* Enhanced Progress indicators */}
+            <div className="flex justify-center items-center gap-3 mt-10">
               {Array.from({ length: whyPolymerBazaar.length - 2 }).map((_, i) => (
                 <motion.button
                   key={i}
-                  className={`h-1.5 rounded-full transition-all duration-300 ${
-                    i === carouselIndex ? 'bg-primary w-8' : 'bg-muted w-1.5'
+                  className={`relative rounded-full transition-all duration-500 ${
+                    i === carouselIndex 
+                      ? 'bg-gradient-to-r from-primary via-red-500 to-primary h-2.5 w-10 shadow-[0_0_20px_rgba(229,57,53,0.6)]' 
+                      : 'bg-muted hover:bg-muted-foreground/30 h-2.5 w-2.5'
                   }`}
                   onClick={() => {
                     setIsPaused(true);
                     setCarouselIndex(i);
                     setTimeout(() => setIsPaused(false), 3000);
                   }}
-                  whileHover={{ scale: 1.2 }}
-                />
+                  whileHover={{ scale: 1.3 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  {/* Active indicator with animated shine */}
+                  {i === carouselIndex && (
+                    <>
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent rounded-full"
+                        animate={{
+                          x: ["-100%", "200%"]
+                        }}
+                        transition={{
+                          duration: 1.5,
+                          repeat: Infinity,
+                          repeatDelay: 1,
+                          ease: "linear"
+                        }}
+                      />
+                      {/* Pulsing glow ring */}
+                      <motion.div
+                        className="absolute -inset-1 bg-primary/30 rounded-full blur-md"
+                        animate={{
+                          scale: [1, 1.4, 1],
+                          opacity: [0.5, 0.8, 0.5]
+                        }}
+                        transition={{
+                          duration: 2,
+                          repeat: Infinity,
+                          ease: "easeInOut"
+                        }}
+                      />
+                    </>
+                  )}
+                </motion.button>
               ))}
             </div>
             
-            {/* Auto-play indicator */}
+            {/* Enhanced Auto-play indicator */}
             {!isPaused && (
               <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-xs text-muted-foreground flex items-center gap-2"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                className="flex justify-center items-center gap-2 mt-6"
               >
                 <motion.div
-                  animate={{ scale: [1, 1.2, 1] }}
+                  animate={{ 
+                    scale: [1, 1.3, 1],
+                    boxShadow: [
+                      "0 0 0 0 rgba(229, 57, 53, 0.4)",
+                      "0 0 0 8px rgba(229, 57, 53, 0)",
+                      "0 0 0 0 rgba(229, 57, 53, 0)"
+                    ]
+                  }}
                   transition={{ duration: 1.5, repeat: Infinity }}
                   className="w-2 h-2 bg-primary rounded-full"
                 />
-                Auto-playing • Hover to pause
+                <span className="text-xs text-muted-foreground font-medium">
+                  Auto-playing • Hover to pause
+                </span>
               </motion.div>
             )}
           </div>
