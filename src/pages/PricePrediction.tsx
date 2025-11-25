@@ -75,8 +75,7 @@ const PricePrediction = () => {
                   <span className="text-sm font-semibold bg-white text-primary px-4 py-1 rounded border-2 border-white">08-06-2025</span>
                   <Button 
                     size="icon" 
-                    variant="ghost" 
-                    className="h-8 w-8 text-white hover:bg-white/20"
+                    className="h-9 w-9 bg-white hover:bg-white/90 text-primary"
                     onClick={() => window.print()}
                   >
                     <FileDown className="h-5 w-5" />
