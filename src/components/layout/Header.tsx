@@ -142,7 +142,7 @@ const Header = () => {
               to="/buy-sell"
               className="px-4 py-2.5 text-sm font-medium text-foreground rounded-lg hover:bg-primary/5 hover:text-primary transition-all duration-200"
             >
-              Buy & Sell{'\u00A0'}{'\u00A0'}{'\u00A0'}
+              Buy & Sell
             </Link>
 
             {/* About Dropdown */}
@@ -376,7 +376,7 @@ const Header = () => {
               className="block px-4 py-3 text-sm font-medium text-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-all duration-200"
               onClick={() => setIsMenuOpen(false)}
             >
-              Buy & Sell{'\u00A0'}{'\u00A0'}{'\u00A0'}
+              Buy & Sell
             </Link>
 
             {/* About */}
