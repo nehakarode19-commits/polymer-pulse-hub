@@ -157,39 +157,38 @@ const GlobalBazaar = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4 }}
               >
-                {/* Week Header - Clean Design */}
-                <div className="bg-white border-l-4 border-primary py-4 px-6 rounded-lg shadow-md mb-6">
-                  <p className="text-sm text-muted-foreground font-medium mb-1">Pricing Period</p>
-                  <h3 className="text-xl font-bold text-foreground">
-                    1st Week {selectedMonth} {selectedYear} <span className="text-primary">({country.currency})</span>
-                  </h3>
+                {/* Week Header Banner */}
+                <div className="bg-primary text-white py-3 px-6 rounded-lg font-bold text-center text-lg mb-6 shadow-md">
+                  1st Week {selectedMonth} {selectedYear} - ({country.currency})
                 </div>
 
                 {/* Pricing Data Grid - 3 Column Layout */}
                 {Object.keys(countryPricing).length > 0 ? (
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {Object.entries(countryPricing).map(([polymer, grades]: [string, any]) => (
-                      <Card key={polymer} className="bg-white border border-gray-200 hover:border-primary/40 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group">
-                        {/* Polymer Header - Subtle Design */}
-                        <div className="bg-gradient-to-r from-gray-50 to-white border-b-2 border-primary/20 py-4 px-5 group-hover:border-primary/40 transition-all">
-                          <h3 className="text-2xl font-bold text-center bg-gradient-to-r from-primary to-red-600 bg-clip-text text-transparent">{polymer}</h3>
+                      <Card key={polymer} className="border border-gray-200 shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden">
+                        {/* Polymer Header */}
+                        <div className="bg-primary text-white py-3 px-5 rounded-t-lg">
+                          <h3 className="text-xl font-bold text-center">{polymer}</h3>
                         </div>
                         
                         {/* Grades & Pricing */}
-                        <CardContent className="p-6 bg-white">
-                          <div className="space-y-4">
+                        <CardContent className="p-5 bg-white">
+                          <div className="space-y-3">
                             {grades.map((item: any, idx: number) => (
                               <div 
                                 key={idx}
-                                className="flex justify-between items-start p-3 rounded-lg bg-gray-50/50 hover:bg-gray-100/50 transition-colors border border-transparent hover:border-primary/20"
+                                className="border-b border-gray-100 last:border-b-0 pb-3 last:pb-0"
                               >
-                                <div className="flex-1">
-                                  <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-1.5">Grade / Material</p>
-                                  <p className="font-semibold text-foreground text-sm leading-tight">{item.grade}</p>
-                                </div>
-                                <div className="text-right ml-4 pl-4 border-l-2 border-primary/20">
-                                  <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-1.5">Price</p>
-                                  <p className="font-bold text-primary text-lg">#{item.price}</p>
+                                <div className="flex justify-between items-center">
+                                  <div className="flex-1">
+                                    <p className="text-xs text-muted-foreground mb-1">Grade / Material</p>
+                                    <p className="font-semibold text-foreground text-sm">{item.grade}</p>
+                                  </div>
+                                  <div className="text-right ml-4">
+                                    <p className="text-xs text-muted-foreground mb-1">Price</p>
+                                    <p className="font-bold text-primary text-base">#{item.price}</p>
+                                  </div>
                                 </div>
                               </div>
                             ))}
