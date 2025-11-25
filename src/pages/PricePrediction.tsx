@@ -1,7 +1,8 @@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { TrendingUp } from "lucide-react";
+import { TrendingUp, FileDown } from "lucide-react";
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 
 const PricePrediction = () => {
   const [selectedMonth, setSelectedMonth] = useState("June");
@@ -70,7 +71,17 @@ const PricePrediction = () => {
             <div className="bg-gradient-to-r from-primary via-primary to-primary/90 text-white px-6 py-4 rounded-t-lg">
               <div className="flex justify-between items-center">
                 <h2 className="text-xl font-bold">Price Prediction - {selectedMonth} {selectedYear}</h2>
-                <span className="text-sm font-semibold bg-white/20 px-4 py-1 rounded-full">08-06-2025</span>
+                <div className="flex items-center gap-3">
+                  <span className="text-sm font-semibold bg-white text-primary px-4 py-1 rounded border-2 border-white">08-06-2025</span>
+                  <Button 
+                    size="icon" 
+                    variant="ghost" 
+                    className="h-8 w-8 text-white hover:bg-white/20"
+                    onClick={() => window.print()}
+                  >
+                    <FileDown className="h-5 w-5" />
+                  </Button>
+                </div>
               </div>
             </div>
 
