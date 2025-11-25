@@ -101,7 +101,7 @@ const AdminUsers = () => {
                 Can view and analyze data, create reports
               </p>
             </div>
-            <div className="border-l-4 border-gray-500 pl-4">
+            <div className="border-l-4 border-border pl-4">
               <h3 className="font-semibold">Viewer</h3>
               <p className="text-sm text-muted-foreground">
                 Read-only access to content and reports

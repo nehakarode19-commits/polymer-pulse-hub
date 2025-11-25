@@ -149,8 +149,8 @@ const BuySell = () => {
                 </div>
 
                 {/* Polymer Name Label - Below Image */}
-                <div className="py-4 text-center bg-white">
-                  <h3 className="text-lg font-bold text-gray-900 tracking-tight">
+                <div className="py-4 text-center bg-background">
+                  <h3 className="text-lg font-bold text-foreground tracking-tight">
                     {polymer.code}
                   </h3>
                 </div>
@@ -161,34 +161,34 @@ const BuySell = () => {
                     {/* Call Button */}
                     <button
                       onClick={() => handleCall(polymer.phone)}
-                      className="flex flex-col items-center gap-1.5 py-2 px-3 rounded-md hover:bg-gray-50 transition-all group/btn flex-1"
+                      className="flex flex-col items-center gap-1.5 py-2 px-3 rounded-md hover:bg-muted transition-all group/btn flex-1"
                     >
-                      <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center group-hover/btn:bg-primary/10 transition-all">
-                        <Phone className="h-4 w-4 text-gray-600 group-hover/btn:text-primary" />
+                      <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center group-hover/btn:bg-primary/10 transition-all">
+                        <Phone className="h-4 w-4 text-muted-foreground group-hover/btn:text-primary" />
                       </div>
-                      <span className="text-[10px] font-semibold text-gray-700">Call</span>
+                      <span className="text-[10px] font-semibold text-foreground">Call</span>
                     </button>
 
                     {/* Email Button */}
                     <button
                       onClick={() => handleEmail(polymer.email)}
-                      className="flex flex-col items-center gap-1.5 py-2 px-3 rounded-md hover:bg-gray-50 transition-all group/btn flex-1"
+                      className="flex flex-col items-center gap-1.5 py-2 px-3 rounded-md hover:bg-muted transition-all group/btn flex-1"
                     >
-                      <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center group-hover/btn:bg-primary/10 transition-all">
-                        <Mail className="h-4 w-4 text-gray-600 group-hover/btn:text-primary" />
+                      <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center group-hover/btn:bg-primary/10 transition-all">
+                        <Mail className="h-4 w-4 text-muted-foreground group-hover/btn:text-primary" />
                       </div>
-                      <span className="text-[10px] font-semibold text-gray-700">Email</span>
+                      <span className="text-[10px] font-semibold text-foreground">Email</span>
                     </button>
 
                     {/* WhatsApp Button */}
                     <button
                       onClick={() => handleWhatsApp(polymer.phone)}
-                      className="flex flex-col items-center gap-1.5 py-2 px-3 rounded-md hover:bg-gray-50 transition-all group/btn flex-1"
+                      className="flex flex-col items-center gap-1.5 py-2 px-3 rounded-md hover:bg-muted transition-all group/btn flex-1"
                     >
-                      <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center group-hover/btn:bg-primary/10 transition-all">
-                        <MessageCircle className="h-4 w-4 text-gray-600 group-hover/btn:text-primary" />
+                      <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center group-hover/btn:bg-primary/10 transition-all">
+                        <MessageCircle className="h-4 w-4 text-muted-foreground group-hover/btn:text-primary" />
                       </div>
-                      <span className="text-[10px] font-semibold text-gray-700">WhatsApp</span>
+                      <span className="text-[10px] font-semibold text-foreground">WhatsApp</span>
                     </button>
                   </div>
                 </div>
