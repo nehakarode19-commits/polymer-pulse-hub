@@ -105,9 +105,9 @@ const BuySell = () => {
   };
 
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen bg-gradient-to-b from-background to-muted/30">
       {/* Hero Section */}
-      <header className="relative h-64 flex items-center justify-center overflow-hidden">
+      <header className="relative h-56 flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-[hsl(210,25%,25%)] via-[hsl(210,20%,35%)] to-[hsl(25,40%,45%)]" />
         <div className="container max-w-7xl mx-auto relative z-10 text-center px-6">
           <motion.div
@@ -115,89 +115,83 @@ const BuySell = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-4">
+            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-3">
               Buy & Sell Polymers
             </h1>
-            <p className="text-base md:text-lg text-white/90 max-w-3xl mx-auto font-normal">
+            <p className="text-sm md:text-base text-white/90 max-w-2xl mx-auto">
               Direct access to verified polymer suppliers with one-tap Call, Email, or WhatsApp support.
             </p>
           </motion.div>
         </div>
       </header>
 
-      <section className="container max-w-7xl mx-auto px-6 py-20">
+      <section className="container max-w-6xl mx-auto px-6 py-16">
         {/* Polymer Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {polymers.map((polymer, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.05, duration: 0.4 }}
             >
-              <Card className="overflow-hidden border-0 bg-white shadow-[0_2px_16px_rgba(0,0,0,0.08)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.12)] transition-all duration-300 rounded-xl group">
-                {/* Image with Overlay Text */}
-                <div className="relative h-56 w-full overflow-hidden">
+              <Card className="overflow-hidden border-0 bg-white shadow-[0_1px_3px_rgba(0,0,0,0.08)] hover:shadow-[0_4px_20px_rgba(0,0,0,0.12)] transition-all duration-300 rounded-lg group">
+                {/* Image with Subtle Overlay - NO LARGE TEXT */}
+                <div className="relative h-44 w-full overflow-hidden">
                   <img 
                     src={polymer.image} 
                     alt={polymer.name}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  {/* Subtle Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
-                  {/* Text Overlay - Smaller and Less Dominant */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <h2 className="text-5xl md:text-6xl font-black text-white/80 tracking-wider drop-shadow-lg">
-                      {polymer.code}
-                    </h2>
-                  </div>
+                  {/* Subtle gradient overlay only */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
                 </div>
 
-                {/* Polymer Name Label */}
-                <div className="py-5 text-center bg-white border-b border-gray-100">
-                  <h3 className="text-xl font-bold text-gray-900 tracking-tight">
+                {/* Polymer Name Label - Below Image */}
+                <div className="py-4 text-center bg-white">
+                  <h3 className="text-lg font-bold text-gray-900 tracking-tight">
                     {polymer.code}
                   </h3>
                 </div>
 
-                {/* Action Buttons */}
-                <CardContent className="p-6 bg-white">
-                  <div className="flex items-center justify-evenly gap-2">
-                    {/* Call */}
+                {/* Action Icons - Horizontal Layout */}
+                <div className="px-4 pb-4 bg-white">
+                  <div className="flex items-center justify-center gap-1">
+                    {/* Call Button */}
                     <button
                       onClick={() => handleCall(polymer.phone)}
-                      className="flex flex-col items-center gap-2.5 p-2 rounded-lg hover:bg-gray-50 transition-all group/btn"
+                      className="flex flex-col items-center gap-1.5 py-2 px-3 rounded-md hover:bg-gray-50 transition-all group/btn flex-1"
                     >
-                      <div className="w-11 h-11 rounded-full bg-gray-100 flex items-center justify-center group-hover/btn:bg-primary/10 group-hover/btn:scale-110 transition-all">
-                        <Phone className="h-4.5 w-4.5 text-gray-700 group-hover/btn:text-primary" />
+                      <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center group-hover/btn:bg-primary/10 transition-all">
+                        <Phone className="h-4 w-4 text-gray-600 group-hover/btn:text-primary" />
                       </div>
-                      <span className="text-[11px] font-semibold text-gray-700">Call</span>
+                      <span className="text-[10px] font-semibold text-gray-700">Call</span>
                     </button>
 
-                    {/* Email */}
+                    {/* Email Button */}
                     <button
                       onClick={() => handleEmail(polymer.email)}
-                      className="flex flex-col items-center gap-2.5 p-2 rounded-lg hover:bg-gray-50 transition-all group/btn"
+                      className="flex flex-col items-center gap-1.5 py-2 px-3 rounded-md hover:bg-gray-50 transition-all group/btn flex-1"
                     >
-                      <div className="w-11 h-11 rounded-full bg-gray-100 flex items-center justify-center group-hover/btn:bg-primary/10 group-hover/btn:scale-110 transition-all">
-                        <Mail className="h-4.5 w-4.5 text-gray-700 group-hover/btn:text-primary" />
+                      <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center group-hover/btn:bg-primary/10 transition-all">
+                        <Mail className="h-4 w-4 text-gray-600 group-hover/btn:text-primary" />
                       </div>
-                      <span className="text-[11px] font-semibold text-gray-700">Email</span>
+                      <span className="text-[10px] font-semibold text-gray-700">Email</span>
                     </button>
 
-                    {/* WhatsApp */}
+                    {/* WhatsApp Button */}
                     <button
                       onClick={() => handleWhatsApp(polymer.phone)}
-                      className="flex flex-col items-center gap-2.5 p-2 rounded-lg hover:bg-gray-50 transition-all group/btn"
+                      className="flex flex-col items-center gap-1.5 py-2 px-3 rounded-md hover:bg-gray-50 transition-all group/btn flex-1"
                     >
-                      <div className="w-11 h-11 rounded-full bg-gray-100 flex items-center justify-center group-hover/btn:bg-primary/10 group-hover/btn:scale-110 transition-all">
-                        <MessageCircle className="h-4.5 w-4.5 text-gray-700 group-hover/btn:text-primary" />
+                      <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center group-hover/btn:bg-primary/10 transition-all">
+                        <MessageCircle className="h-4 w-4 text-gray-600 group-hover/btn:text-primary" />
                       </div>
-                      <span className="text-[11px] font-semibold text-gray-700">WhatsApp</span>
+                      <span className="text-[10px] font-semibold text-gray-700">WhatsApp</span>
                     </button>
                   </div>
-                </CardContent>
+                </div>
               </Card>
             </motion.div>
           ))}
