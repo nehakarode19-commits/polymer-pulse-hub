@@ -33,8 +33,6 @@ import newsletterModernImg from "@/assets/newsletter-modern.jpg";
 
 const Home = () => {
   const [activeInsightTab, setActiveInsightTab] = useState("blog");
-  const [carouselIndex, setCarouselIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const { scrollYProgress } = useScroll();
   const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
@@ -186,22 +184,6 @@ const Home = () => {
       description: "Seamless access to market data anytime, anywhere through multiple platforms and communication channels."
     },
   ];
-
-  // Auto-scroll effect
-  useEffect(() => {
-    if (isPaused) return;
-    
-    const interval = setInterval(() => {
-      setCarouselIndex((prev) => {
-        if (prev >= whyPolymerBazaar.length - 3) {
-          return 0;
-        }
-        return prev + 1;
-      });
-    }, 4000); // Auto-scroll every 4 seconds
-
-    return () => clearInterval(interval);
-  }, [isPaused, whyPolymerBazaar.length]);
 
   const events = [
     {
@@ -979,267 +961,52 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Why Polymer Bazaar Carousel */}
-      <section className="py-32 px-4 relative overflow-hidden bg-gradient-to-b from-background via-muted/5 to-background">
-        {/* Subtle animated background */}
-        <motion.div 
-          className="absolute inset-0 -z-10"
-          animate={{ 
-            background: [
-              "radial-gradient(circle at 20% 50%, rgba(229, 57, 53, 0.03) 0%, transparent 50%)",
-              "radial-gradient(circle at 80% 50%, rgba(229, 57, 53, 0.03) 0%, transparent 50%)",
-              "radial-gradient(circle at 20% 50%, rgba(229, 57, 53, 0.03) 0%, transparent 50%)"
-            ]
-          }}
-          transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-        />
-
+      {/* Why Polymer Bazaar Section */}
+      <section className="py-32 px-4 relative">
         <div className="container max-w-7xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.5 }}
             className="text-center mb-20"
           >
-            <Badge variant="outline" className="mb-4 text-sm px-4 py-1.5 border-primary/20 bg-primary/5">
-              Why Choose Us
-            </Badge>
             <h2 className="text-5xl md:text-6xl font-bold mb-6">
               Why Polymer Bazaar
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Industry-leading intelligence platform trusted by polymer professionals worldwide
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Industry-leading intelligence platform trusted worldwide
             </p>
           </motion.div>
           
-          <div 
-            className="relative max-w-7xl mx-auto"
-            onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => setIsPaused(false)}
-          >
-            <div className="flex items-stretch justify-center gap-8 overflow-hidden px-24">
-              {whyPolymerBazaar.slice(carouselIndex, carouselIndex + 3).map((item, index) => {
-                const images = [whyPolymerModernImg, whyPolymerModernImg, whyPolymerModernImg];
-                const imageIndex = (carouselIndex + index) % images.length;
-                const direction = index === 0 ? -80 : index === 2 ? 80 : 0;
-                
-                return (
-                  <motion.div
-                    key={`${carouselIndex}-${index}`}
-                    initial={{ opacity: 0, x: direction, scale: 0.9 }}
-                    animate={{ opacity: 1, x: 0, scale: 1 }}
-                    exit={{ opacity: 0, x: -direction, scale: 0.9 }}
-                    transition={{ 
-                      delay: index * 0.1, 
-                      duration: 0.6,
-                      ease: [0.4, 0, 0.2, 1]
-                    }}
-                    className="flex-1 min-w-0"
-                  >
-                    <Card className="group relative shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border-2 border-border/50 hover:border-primary/40 h-full bg-card overflow-hidden">
-                      {/* Animated gradient overlay */}
-                      <motion.div 
-                        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10"
-                        style={{
-                          background: "linear-gradient(135deg, rgba(229, 57, 53, 0.05) 0%, transparent 50%, rgba(229, 57, 53, 0.05) 100%)"
-                        }}
-                      />
-                      
-                      {/* Shine effect */}
-                      <motion.div 
-                        className="absolute inset-0 z-20 pointer-events-none"
-                        initial={{ x: "-100%" }}
-                        animate={{ x: isPaused ? "-100%" : "100%" }}
-                        transition={{ 
-                          duration: 3,
-                          repeat: Infinity,
-                          repeatDelay: 5,
-                          ease: "linear"
-                        }}
-                        style={{
-                          background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent)"
-                        }}
-                      />
-                      
-                      <div className="h-80 relative overflow-hidden">
-                        <motion.img 
-                          src={images[imageIndex]} 
-                          alt={item.title}
-                          className="w-full h-full object-cover"
-                          whileHover={{ scale: 1.05 }}
-                          transition={{ duration: 0.6 }}
-                        />
-                        
-                        {/* Gradient overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-                        
-                        {/* Icon badge with pulse */}
-                        <motion.div 
-                          className="absolute top-6 right-6 w-16 h-16 rounded-2xl bg-gradient-to-br from-primary to-red-600 flex items-center justify-center shadow-2xl"
-                          animate={{ 
-                            boxShadow: [
-                              "0 10px 40px rgba(229, 57, 53, 0.3)",
-                              "0 10px 60px rgba(229, 57, 53, 0.5)",
-                              "0 10px 40px rgba(229, 57, 53, 0.3)"
-                            ]
-                          }}
-                          transition={{ duration: 2, repeat: Infinity }}
-                        >
-                          <item.icon className="w-8 h-8 text-white" />
-                        </motion.div>
-                        
-                        {/* Bottom info bar */}
-                        <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 to-transparent">
-                          <h3 className="text-white font-bold text-2xl mb-2">{item.title}</h3>
-                        </div>
-                      </div>
-                      
-                      <CardContent className="p-8 relative z-10">
-                        <p className="text-base text-muted-foreground leading-relaxed">
-                          {item.description}
-                        </p>
-                        
-                        {/* Enhanced animated bottom border with glow */}
-                        <div className="relative mt-6 h-1 bg-muted/30 rounded-full overflow-hidden">
-                          <motion.div 
-                            className="absolute inset-0 bg-gradient-to-r from-primary via-red-500 to-primary rounded-full shadow-[0_0_15px_rgba(229,57,53,0.6)]"
-                            initial={{ scaleX: 0, x: "-100%" }}
-                            whileInView={{ scaleX: 1, x: 0 }}
-                            transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
-                            animate={{
-                              backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
-                            }}
-                            style={{
-                              backgroundSize: "200% 100%"
-                            }}
-                          />
-                          {/* Additional glow effect */}
-                          <motion.div
-                            className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent rounded-full"
-                            animate={{
-                              x: ["-100%", "200%"]
-                            }}
-                            transition={{
-                              duration: 2,
-                              repeat: Infinity,
-                              repeatDelay: 3,
-                              ease: "linear"
-                            }}
-                          />
-                        </div>
-                      </CardContent>
-                    </Card>
-                  </motion.div>
-                );
-              })}
-            </div>
-            
-            {/* Navigation buttons */}
-            <Button
-              variant="ghost"
-              size="icon"
-              className="absolute -left-4 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-background/80 hover:bg-background backdrop-blur-md border border-border/50 hover:border-primary/50 shadow-xl transition-all duration-300 disabled:opacity-30"
-              onClick={() => {
-                setIsPaused(true);
-                setCarouselIndex(Math.max(0, carouselIndex - 1));
-                setTimeout(() => setIsPaused(false), 3000);
-              }}
-              disabled={carouselIndex === 0}
-            >
-              <ChevronLeft className="h-6 w-6" />
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="absolute -right-4 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full bg-background/80 hover:bg-background backdrop-blur-md border border-border/50 hover:border-primary/50 shadow-xl transition-all duration-300 disabled:opacity-30"
-              onClick={() => {
-                setIsPaused(true);
-                setCarouselIndex(Math.min(whyPolymerBazaar.length - 3, carouselIndex + 1));
-                setTimeout(() => setIsPaused(false), 3000);
-              }}
-              disabled={carouselIndex >= whyPolymerBazaar.length - 3}
-            >
-              <ChevronRight className="h-6 w-6" />
-            </Button>
-            
-            {/* Enhanced Progress indicators */}
-            <div className="flex justify-center items-center gap-3 mt-10">
-              {Array.from({ length: whyPolymerBazaar.length - 2 }).map((_, i) => (
-                <motion.button
-                  key={i}
-                  className={`relative rounded-full transition-all duration-500 ${
-                    i === carouselIndex 
-                      ? 'bg-gradient-to-r from-primary via-red-500 to-primary h-2.5 w-10 shadow-[0_0_20px_rgba(229,57,53,0.6)]' 
-                      : 'bg-muted hover:bg-muted-foreground/30 h-2.5 w-2.5'
-                  }`}
-                  onClick={() => {
-                    setIsPaused(true);
-                    setCarouselIndex(i);
-                    setTimeout(() => setIsPaused(false), 3000);
-                  }}
-                  whileHover={{ scale: 1.3 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  {/* Active indicator with animated shine */}
-                  {i === carouselIndex && (
-                    <>
-                      <motion.div
-                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent rounded-full"
-                        animate={{
-                          x: ["-100%", "200%"]
-                        }}
-                        transition={{
-                          duration: 1.5,
-                          repeat: Infinity,
-                          repeatDelay: 1,
-                          ease: "linear"
-                        }}
-                      />
-                      {/* Pulsing glow ring */}
-                      <motion.div
-                        className="absolute -inset-1 bg-primary/30 rounded-full blur-md"
-                        animate={{
-                          scale: [1, 1.4, 1],
-                          opacity: [0.5, 0.8, 0.5]
-                        }}
-                        transition={{
-                          duration: 2,
-                          repeat: Infinity,
-                          ease: "easeInOut"
-                        }}
-                      />
-                    </>
-                  )}
-                </motion.button>
-              ))}
-            </div>
-            
-            {/* Enhanced Auto-play indicator */}
-            {!isPaused && (
+          {/* Grid Layout - No Carousel */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {whyPolymerBazaar.map((item, index) => (
               <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 10 }}
-                className="flex justify-center items-center gap-2 mt-6"
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1, duration: 0.5 }}
               >
-                <motion.div
-                  animate={{ 
-                    scale: [1, 1.3, 1],
-                    boxShadow: [
-                      "0 0 0 0 rgba(229, 57, 53, 0.4)",
-                      "0 0 0 8px rgba(229, 57, 53, 0)",
-                      "0 0 0 0 rgba(229, 57, 53, 0)"
-                    ]
-                  }}
-                  transition={{ duration: 1.5, repeat: Infinity }}
-                  className="w-2 h-2 bg-primary rounded-full"
-                />
-                <span className="text-xs text-muted-foreground font-medium">
-                  Auto-playing • Hover to pause
-                </span>
+                <Card className="group h-full bg-card hover:shadow-xl transition-all duration-300 border-2 hover:border-primary/30">
+                  {/* Icon */}
+                  <CardContent className="p-8 text-center">
+                    <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-primary to-red-600 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+                      <item.icon className="w-8 h-8 text-white" />
+                    </div>
+                    
+                    {/* Title */}
+                    <h3 className="font-bold text-2xl mb-4">{item.title}</h3>
+                    
+                    {/* Description */}
+                    <p className="text-muted-foreground leading-relaxed">
+                      {item.description}
+                    </p>
+                  </CardContent>
+                </Card>
               </motion.div>
-            )}
+            ))}
           </div>
         </div>
       </section>
