@@ -98,6 +98,7 @@ const App = () => (
           <Route path="/admin/vip-delegation" element={<AdminRoute><AdminLayout><div>VIP Delegation Management</div></AdminLayout></AdminRoute>} />
           <Route path="/admin/press-release" element={<AdminRoute><AdminLayout><div>Press Release Management</div></AdminLayout></AdminRoute>} />
           <Route path="/admin/events" element={<AdminRoute><AdminLayout><div>Events Management</div></AdminLayout></AdminRoute>} />
+          <Route path="/admin/careers" element={<AdminRoute><AdminLayout><div>Careers Management</div></AdminLayout></AdminRoute>} />
           <Route path="/admin/whatsapp-bot" element={<AdminRoute><AdminLayout><div>WhatsApp Bot Management</div></AdminLayout></AdminRoute>} />
           <Route path="/admin/subscriptions" element={<AdminRoute><AdminLayout><div>Subscription Management</div></AdminLayout></AdminRoute>} />
           <Route path="/admin/user-management" element={<AdminRoute><AdminLayout><div>User Management</div></AdminLayout></AdminRoute>} />

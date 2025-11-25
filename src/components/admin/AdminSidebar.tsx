@@ -19,6 +19,7 @@ import {
   Bell,
   Settings,
   Shield,
+  Briefcase,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -32,11 +33,12 @@ const adminMenuItems = [
   { icon: BarChart3, label: "Historical Data", path: "/admin/historical-data" },
   { icon: TrendingUp, label: "Future Trend", path: "/admin/future-trend" },
   { icon: Factory, label: "Plant News", path: "/admin/plant-news" },
-  { icon: Plane, label: "VIP Delegation", path: "/admin/vip-delegation" },
+  { icon: Plane, label: "Delegations", path: "/admin/vip-delegation" },
   { icon: FileText, label: "Press Release", path: "/admin/press-release" },
   { icon: Calendar, label: "Events", path: "/admin/events" },
+  { icon: Briefcase, label: "Careers", path: "/admin/careers" },
+  { icon: CreditCard, label: "Payments", path: "/admin/subscriptions" },
   { icon: MessageCircle, label: "WhatsApp Bot", path: "/admin/whatsapp-bot" },
-  { icon: CreditCard, label: "Subscriptions", path: "/admin/subscriptions" },
   { icon: Users, label: "User Management", path: "/admin/user-management" },
   { icon: ImageIcon, label: "Media Library", path: "/admin/media" },
   { icon: FileCode, label: "CMS Pages", path: "/admin/cms-pages" },
@@ -48,13 +50,13 @@ export const AdminSidebar = () => {
   const location = useLocation();
 
   return (
-    <aside className="w-64 border-r bg-muted/40 min-h-screen">
-      <div className="p-6">
+    <aside className="w-64 border-r bg-muted/40 min-h-screen flex flex-col">
+      <div className="p-6 border-b">
         <h2 className="text-lg font-bold text-primary">Admin Panel</h2>
         <p className="text-xs text-muted-foreground mt-1">Content Management System</p>
       </div>
       
-      <nav className="space-y-1 px-3">
+      <nav className="flex-1 overflow-y-auto py-4 px-3 space-y-1">
         {adminMenuItems.map((item) => {
           const Icon = item.icon;
           const isActive = location.pathname === item.path;
@@ -64,13 +66,13 @@ export const AdminSidebar = () => {
               key={item.path}
               to={item.path}
               className={cn(
-                "flex items-center space-x-3 px-3 py-2 rounded-md text-sm font-medium transition-colors",
+                "flex items-center space-x-3 px-3 py-2.5 rounded-md text-sm font-medium transition-all",
                 isActive
-                  ? "bg-primary text-primary-foreground"
+                  ? "bg-primary text-white shadow-sm"
                   : "text-muted-foreground hover:text-foreground hover:bg-muted"
               )}
             >
-              <Icon className="h-4 w-4" />
+              <Icon className="h-4 w-4 flex-shrink-0" />
               <span>{item.label}</span>
             </Link>
           );
