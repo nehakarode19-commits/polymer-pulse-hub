@@ -187,8 +187,7 @@ const Pricing = () => {
                     <Button
                       onClick={() => handleSubscribe(plan.id)}
                       disabled={loading === plan.id}
-                      className="w-full font-semibold text-white"
-                      style={{ backgroundColor: '#8B1538' }}
+                      className="w-full bg-primary hover:bg-primary-dark text-primary-foreground font-semibold"
                       size="lg"
                     >
                       {loading === plan.id ? "Processing..." : "Proceed to Pay"}
