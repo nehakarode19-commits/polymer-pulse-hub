@@ -121,25 +121,25 @@ const FutureTrend = () => {
         </div>
       </section>
 
-      {/* Polymer Selection Badges - Similar to Global Bazaar Design */}
-      <section className="bg-background border-y border-border">
+      {/* Polymer Selection Badges */}
+      <section className="bg-muted/30 border-y border-border">
         <div className="container max-w-7xl mx-auto px-4 py-6">
-          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+          <div className="flex flex-col lg:flex-row items-start lg:items-center gap-6">
             {/* Polymer Type Badges */}
             <div className="flex-1">
-              <div className="flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-2.5">
                 {polymerTabs.map((polymer) => (
                   <Button
                     key={polymer}
                     onClick={() => setSelectedPolymer(polymer)}
                     variant={selectedPolymer === polymer ? "default" : "outline"}
-                    className={`rounded-full px-4 py-2 h-auto font-medium transition-all ${
+                    size="sm"
+                    className={`rounded-full px-5 py-2 h-9 font-medium text-sm transition-all ${
                       selectedPolymer === polymer
-                        ? "bg-primary text-primary-foreground hover:bg-primary/90 shadow-md"
-                        : "bg-card border-border hover:bg-accent hover:border-primary/50"
+                        ? "bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm border-primary"
+                        : "bg-background border-border text-foreground hover:bg-accent hover:border-primary/40"
                     }`}
                   >
-                    <span className="mr-2 text-base">🧪</span>
                     {polymer}
                   </Button>
                 ))}
@@ -147,9 +147,9 @@ const FutureTrend = () => {
             </div>
 
             {/* Year and Month Filters */}
-            <div className="flex gap-3 flex-shrink-0">
+            <div className="flex gap-2.5 flex-shrink-0">
               <Select value={selectedYear} onValueChange={setSelectedYear}>
-                <SelectTrigger className="w-28 h-10 border-border bg-card rounded-full">
+                <SelectTrigger className="w-28 h-9 border-border bg-background rounded-md text-sm">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent className="bg-card border-border z-[100]">
@@ -166,7 +166,7 @@ const FutureTrend = () => {
               </Select>
 
               <Select value={selectedMonth} onValueChange={setSelectedMonth}>
-                <SelectTrigger className="w-36 h-10 border-border bg-card rounded-full">
+                <SelectTrigger className="w-36 h-9 border-border bg-background rounded-md text-sm">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent className="bg-card border-border z-[100]">
