@@ -27,7 +27,6 @@ import polymerWhy3Img from "@/assets/polymer-why-3.jpg";
 import heroBackgroundMotionImg from "@/assets/hero-background-motion.jpg";
 import worldMapDark from "@/assets/world-map-dark.png";
 import globalCoverageModernImg from "@/assets/global-coverage-modern.jpg";
-import Globe3D from "@/components/Globe3D";
 import consultationModernImg from "@/assets/consultation-modern.jpg";
 import whyPolymerModernImg from "@/assets/why-polymer-modern.jpg";
 import newsletterModernImg from "@/assets/newsletter-modern.jpg";
@@ -557,7 +556,7 @@ const Home = () => {
       <section className="py-24 px-4 bg-muted/30">
         <div className="container max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Left Side - 3D Interactive Globe */}
+            {/* Left Side - World Map with Pin Points */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -565,10 +564,53 @@ const Home = () => {
               transition={{ duration: 0.6 }}
               className="relative"
             >
-              <Globe3D />
-              <p className="text-center mt-4 text-sm text-muted-foreground">
-                Click and drag to rotate • Scroll to zoom
-              </p>
+              <div className="relative">
+                <img
+                  src={worldMapDark}
+                  alt="World Map"
+                  className="w-full h-auto"
+                />
+                
+                {/* Pin Points with Numbers */}
+                {[
+                  { number: "01", top: "25%", left: "15%", label: "NORTH\nAMERICA" },
+                  { number: "02", top: "30%", left: "20%", label: "" },
+                  { number: "03", top: "65%", left: "25%", label: "SOUTH\nAMERICA" },
+                  { number: "04", top: "22%", left: "48%", label: "EUROPE" },
+                  { number: "05", top: "28%", left: "70%", label: "ASIA" },
+                  { number: "06", top: "50%", left: "48%", label: "AFRICA" },
+                  { number: "07", top: "70%", left: "80%", label: "AUSTRALIA" },
+                ].map((pin, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ scale: 0, opacity: 0 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.15, duration: 0.4 }}
+                    className="absolute group/pin"
+                    style={{ top: pin.top, left: pin.left }}
+                  >
+                    <div className="relative flex flex-col items-center">
+                      {/* Pin Marker */}
+                      <motion.div
+                        whileHover={{ scale: 1.2 }}
+                        className="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm cursor-pointer shadow-lg relative z-10 border-2 border-white"
+                      >
+                        {pin.number}
+                        {/* Ping Animation */}
+                        <span className="absolute inset-0 rounded-full bg-primary animate-ping opacity-40"></span>
+                      </motion.div>
+                      
+                      {/* Region Label */}
+                      {pin.label && (
+                        <div className="mt-1 text-[10px] font-bold text-foreground text-center whitespace-pre-line leading-tight">
+                          {pin.label}
+                        </div>
+                      )}
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
             </motion.div>
 
             {/* Right Side - Text Content */}
