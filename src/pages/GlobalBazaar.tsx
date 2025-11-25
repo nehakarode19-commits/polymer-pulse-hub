@@ -158,7 +158,7 @@ const GlobalBazaar = () => {
                 transition={{ duration: 0.4 }}
               >
                 {/* Week Header Banner */}
-                <div className="bg-primary text-white py-3 px-6 rounded-t-lg font-bold text-center text-lg mb-0">
+                <div className="bg-gradient-to-r from-red-700 to-red-600 text-white py-3 px-6 rounded-t-lg font-bold text-center text-lg mb-0 shadow-sm">
                   1st Week {selectedMonth} {selectedYear} - ({country.currency})
                 </div>
 
@@ -166,9 +166,9 @@ const GlobalBazaar = () => {
                 {Object.keys(countryPricing).length > 0 ? (
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {Object.entries(countryPricing).map(([polymer, grades]: [string, any]) => (
-                      <Card key={polymer} className="border-2 border-border hover:border-primary/50 shadow-md hover:shadow-xl transition-all duration-300">
+                      <Card key={polymer} className="border-2 border-border hover:border-red-200 shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
                         {/* Polymer Header */}
-                        <div className="bg-primary text-white py-3 px-5 rounded-t-lg">
+                        <div className="bg-gradient-to-r from-red-700 to-red-600 text-white py-3 px-5">
                           <h3 className="text-xl font-bold text-center">{polymer}</h3>
                         </div>
                         
@@ -187,7 +187,7 @@ const GlobalBazaar = () => {
                                   </div>
                                   <div className="text-right ml-4">
                                     <p className="text-xs text-muted-foreground mb-1">Price</p>
-                                    <p className="font-bold text-primary text-base">#{item.price}</p>
+                                    <p className="font-bold text-red-700 text-base">#{item.price}</p>
                                   </div>
                                 </div>
                               </div>
