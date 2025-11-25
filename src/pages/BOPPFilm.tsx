@@ -10,52 +10,58 @@ const BOPPFilm = () => {
 
   const filmData = [
     {
-      type: "TT (Transparent)",
-      grades: [
-        { name: "15 Micron", price: "145.0" },
-        { name: "20 Micron", price: "142.5" },
-        { name: "25 Micron", price: "140.0" },
-      ]
+      title: "15 Micron TT (Transparent)",
+      company: "Cosmo Films Ltd.",
+      subCategory: "Transparent Film",
+      priceChange: "+2.5"
     },
     {
-      type: "NTT (Non-Transparent)",
-      grades: [
-        { name: "15 Micron White", price: "148.0" },
-        { name: "20 Micron White", price: "145.5" },
-        { name: "25 Micron White", price: "143.0" },
-      ]
+      title: "20 Micron TT (Transparent)",
+      company: "Uflex Limited",
+      subCategory: "Transparent Film",
+      priceChange: "-1.0"
     },
     {
-      type: "Metalized",
-      grades: [
-        { name: "12 Micron", price: "165.0" },
-        { name: "15 Micron", price: "162.0" },
-        { name: "20 Micron", price: "158.5" },
-      ]
+      title: "25 Micron TT (Transparent)",
+      company: "Polyplex Corporation",
+      subCategory: "Transparent Film",
+      priceChange: "+0.5"
     },
     {
-      type: "Pearl",
-      grades: [
-        { name: "15 Micron", price: "155.0" },
-        { name: "20 Micron", price: "152.5" },
-        { name: "25 Micron", price: "150.0" },
-      ]
+      title: "15 Micron NTT (White)",
+      company: "Jindal Poly Films",
+      subCategory: "Non-Transparent Film",
+      priceChange: "+1.5"
     },
     {
-      type: "Matt",
-      grades: [
-        { name: "20 Micron", price: "147.0" },
-        { name: "25 Micron", price: "144.5" },
-        { name: "30 Micron", price: "142.0" },
-      ]
+      title: "20 Micron NTT (White)",
+      company: "Max Speciality Films",
+      subCategory: "Non-Transparent Film",
+      priceChange: "-0.5"
     },
     {
-      type: "Heat Sealable",
-      grades: [
-        { name: "18 Micron", price: "146.0" },
-        { name: "20 Micron", price: "144.0" },
-        { name: "25 Micron", price: "141.5" },
-      ]
+      title: "25 Micron NTT (White)",
+      company: "Cosmo Films Ltd.",
+      subCategory: "Non-Transparent Film",
+      priceChange: "+3.0"
+    },
+    {
+      title: "12 Micron Metalized",
+      company: "Uflex Limited",
+      subCategory: "Metalized Film",
+      priceChange: "+2.0"
+    },
+    {
+      title: "15 Micron Metalized",
+      company: "Polyplex Corporation",
+      subCategory: "Metalized Film",
+      priceChange: "-1.5"
+    },
+    {
+      title: "20 Micron Pearl",
+      company: "Jindal Poly Films",
+      subCategory: "Pearl Film",
+      priceChange: "+1.0"
     },
   ];
 
@@ -124,21 +130,27 @@ const BOPPFilm = () => {
             >
               <Card className="border-2 border-primary/10 shadow-lg hover:shadow-xl hover:border-primary/30 transition-all duration-300 overflow-hidden">
                 <CardContent className="p-0">
-                  <div className="bg-gradient-to-r from-primary via-primary to-primary/90 text-white px-5 py-4 text-center relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
-                    <h3 className="font-bold text-lg relative z-10 tracking-wide">{film.type}</h3>
+                  <div className="bg-gradient-to-r from-primary via-primary to-primary/90 text-white px-5 py-4 text-center">
+                    <h3 className="font-bold text-base">{film.title}</h3>
                   </div>
                   
-                  <div className="p-5 space-y-3 bg-gradient-to-b from-background to-muted/5">
-                    {film.grades.map((grade, idx) => (
-                      <div 
-                        key={idx} 
-                        className="flex justify-between items-center py-3 px-2 rounded-md hover:bg-primary/5 transition-colors border-b border-border/50 last:border-0"
-                      >
-                        <span className="text-sm font-medium text-foreground">{grade.name}</span>
-                        <span className="text-base font-bold text-primary">₹{grade.price}</span>
-                      </div>
-                    ))}
+                  <div className="p-6 space-y-4 bg-gradient-to-b from-background to-muted/5">
+                    <div>
+                      <p className="text-xs uppercase text-muted-foreground mb-1">Company</p>
+                      <p className="text-sm font-semibold text-foreground">{film.company}</p>
+                    </div>
+                    
+                    <div>
+                      <p className="text-xs uppercase text-muted-foreground mb-1">Sub Category</p>
+                      <p className="text-sm font-semibold text-foreground">{film.subCategory}</p>
+                    </div>
+                    
+                    <div>
+                      <p className="text-xs uppercase text-muted-foreground mb-1">Price Change</p>
+                      <p className={`text-lg font-bold ${film.priceChange.startsWith('+') ? 'text-green-600' : 'text-red-600'}`}>
+                        {film.priceChange}
+                      </p>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
