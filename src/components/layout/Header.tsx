@@ -118,30 +118,17 @@ const Header = () => {
     <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-white/95 backdrop-blur-md shadow-md">
       <div className="container flex h-20 items-center justify-between px-6">
         {/* Logo - Always visible and clickable to Home */}
-        <Link to="/" className="flex items-center" aria-label="Go to Polymer Bazaar home">
+        <Link to="/" className="flex items-center flex-shrink-0" aria-label="Go to Polymer Bazaar home">
           <img
-            src={logo}
+            src={logoNav}
             alt="Polymer Bazaar"
-            className="h-14 w-auto object-contain hover:scale-105 transition-transform duration-300"
+            className="h-12 w-auto object-contain hover:scale-105 transition-transform duration-300"
           />
         </Link>
 
         {/* Desktop Navigation - Modern and attractive */}
         {showNavigation && (
           <nav className="hidden lg:flex items-center justify-center flex-1 gap-1 mx-8">
-            {/* Logo before menu items */}
-            <Link
-              to="/"
-              className="mr-2 hover:opacity-80 transition-opacity"
-              aria-label="Go to home"
-            >
-              <img
-                src={logoNav}
-                alt="Polymer Bazaar"
-                className="h-12 w-auto object-contain"
-              />
-            </Link>
-
             {/* Buy & Sell */}
             <Link
               to="/buy-sell"
