@@ -128,14 +128,6 @@ const Header = () => {
         {/* Desktop Navigation - Modern and attractive */}
         {showNavigation && (
           <nav className="hidden lg:flex items-center justify-center flex-1 gap-1 mx-8">
-            {/* Home */}
-            <Link
-              to="/"
-              className="px-4 py-2.5 text-sm font-medium text-foreground rounded-lg hover:bg-primary/5 hover:text-primary transition-all duration-200"
-            >
-              Home
-            </Link>
-
             {/* Buy & Sell */}
             <Link
               to="/buy-sell"
