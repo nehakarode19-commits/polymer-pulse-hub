@@ -737,28 +737,41 @@ const Home = () => {
       </section>
 
       {/* Our Bazaar Insights Section */}
-      <section className="py-24 px-4 bg-gradient-to-br from-secondary via-background to-secondary/50 relative">
-        <div className="container max-w-7xl mx-auto">
+      <section className="py-24 px-4 bg-gradient-to-b from-background via-muted/20 to-background relative overflow-hidden">
+        {/* Decorative background elements */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-20 right-20 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-20 left-20 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
+        </div>
+
+        <div className="container max-w-7xl mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-16"
+            className="text-center mb-20"
           >
-            <Badge className="mb-4 bg-primary text-white border-primary shadow-md">
-              <TrendingUp className="w-4 h-4 mr-2" />
+            <Badge className="mb-6 bg-primary text-white border-primary shadow-lg px-6 py-2.5">
+              <TrendingUp className="w-5 h-5 mr-2" />
               Strategic Intelligence
             </Badge>
-            <h2 className="text-5xl font-bold mb-4">Our Bazaar Insights</h2>
+            <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent">
+              Our Bazaar Insights
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+              Transform complex market data into actionable intelligence for your business
+            </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-10">
+          <div className="grid md:grid-cols-3 gap-8">
             {[
               {
                 icon: TrendingUp,
                 title: "Turning Market Complexity into Business Clarity",
                 description: "We deliver polymer intelligence through intuitive channels—prices, forecasts, alerts—empowering procurement, trading, and strategy teams to make confident decisions in volatile markets.",
+                gradient: "from-blue-500/10 via-primary/10 to-purple-500/10",
+                iconBg: "from-blue-500 to-primary",
               },
               {
                 icon: BarChart3,
@@ -768,48 +781,85 @@ const Home = () => {
                   "Supplier performance tracking across Asia–Europe hubs",
                   "Alternative material analysis incl. sustainable rPET",
                 ],
+                gradient: "from-primary/10 via-red-500/10 to-orange-500/10",
+                iconBg: "from-primary to-red-500",
               },
               {
                 icon: Globe,
                 title: "Maximize Opportunities With Live Market Access",
                 description: "Stay ahead of arbitrage and risk via direct, transparent data streams. Our platform delivers instant notifications on price movements, helping you capitalize on market opportunities 24/7.",
+                gradient: "from-purple-500/10 via-primary/10 to-pink-500/10",
+                iconBg: "from-purple-500 to-primary",
               },
             ].map((item, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.2, duration: 0.5 }}
+                transition={{ delay: index * 0.15, duration: 0.6, type: "spring" }}
+                whileHover={{ y: -10 }}
               >
-                <Card className="hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 h-full border-2 hover:border-primary/30">
-                  <CardContent className="p-8">
-                  <motion.div
-                      className="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary via-primary to-primary/90 flex items-center justify-center mb-6 shadow-xl"
-                      whileHover={{ scale: 1.08, rotate: 3 }}
+                <Card className={`group relative overflow-hidden h-full border-2 border-border hover:border-primary/50 shadow-lg hover:shadow-2xl transition-all duration-500 bg-gradient-to-br ${item.gradient}`}>
+                  {/* Animated background effect on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/0 via-primary/0 to-primary/0 group-hover:from-primary/5 group-hover:via-primary/10 group-hover:to-primary/5 transition-all duration-500"></div>
+                  
+                  <CardContent className="p-8 relative z-10">
+                    {/* Icon with gradient background */}
+                    <motion.div
+                      className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${item.iconBg} flex items-center justify-center mb-6 shadow-xl relative overflow-hidden`}
+                      whileHover={{ scale: 1.1, rotate: 5 }}
                       transition={{ duration: 0.3 }}
                     >
-                      <item.icon className="h-10 w-10 text-white" strokeWidth={2.5} />
+                      {/* Shine effect */}
+                      <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+                      <item.icon className="h-10 w-10 text-white relative z-10" strokeWidth={2.5} />
                     </motion.div>
-                    <h3 className="text-2xl font-bold mb-5 leading-tight">{item.title}</h3>
+                    
+                    <h3 className="text-2xl font-bold mb-5 leading-tight group-hover:text-primary transition-colors duration-300">
+                      {item.title}
+                    </h3>
+                    
                     {item.description && (
-                      <p className="text-muted-foreground mb-6 leading-relaxed">{item.description}</p>
+                      <p className="text-muted-foreground mb-6 leading-relaxed text-base">
+                        {item.description}
+                      </p>
                     )}
+                    
                     {item.bullets && (
-                      <ul className="space-y-3 text-muted-foreground mb-6">
+                      <ul className="space-y-4 mb-6">
                         {item.bullets.map((bullet, i) => (
-                          <li key={i} className="flex items-start">
-                            <span className="text-primary mr-3 text-xl">•</span>
-                            <span className="leading-relaxed">{bullet}</span>
-                          </li>
+                          <motion.li 
+                            key={i} 
+                            className="flex items-start group/item"
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.1 * i }}
+                          >
+                            <div className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center mr-3 mt-0.5 group-hover/item:bg-primary/20 transition-colors">
+                              <CheckCircle2 className="w-4 h-4 text-primary" />
+                            </div>
+                            <span className="leading-relaxed text-muted-foreground text-sm">{bullet}</span>
+                          </motion.li>
                         ))}
                       </ul>
                     )}
-                    <Button variant="link" className="p-0 text-primary font-semibold group/btn">
-                      Read More
-                      <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                    
+                    <Button 
+                      variant="ghost" 
+                      className="p-0 h-auto text-primary font-semibold group/btn hover:bg-transparent relative overflow-hidden"
+                    >
+                      <span className="relative z-10 flex items-center">
+                        Explore More
+                        <ArrowRight className="ml-2 h-4 w-4 group-hover/btn:translate-x-2 transition-transform duration-300" />
+                      </span>
+                      <span className="absolute inset-0 w-0 bg-primary/5 group-hover/btn:w-full transition-all duration-300 rounded-md"></span>
                     </Button>
                   </CardContent>
+
+                  {/* Corner decoration */}
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-primary/10 to-transparent rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 </Card>
               </motion.div>
             ))}
