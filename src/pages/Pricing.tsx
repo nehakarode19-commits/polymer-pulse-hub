@@ -127,23 +127,23 @@ const Pricing = () => {
   };
 
   return (
-    <div className="min-h-screen py-20 px-4 bg-gradient-to-b from-background via-muted/20 to-background">
+    <div className="min-h-screen py-20 px-4 bg-background">
       <div className="container max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-16"
         >
-          <h1 className="text-5xl font-bold mb-6">
-            Subscribe to <span className="text-primary">PolymerBazaar</span>
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
+            Subscribe to PolymerBazaar
           </h1>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-base md:text-lg text-muted-foreground max-w-3xl mx-auto">
             Choose the perfect plan for your business needs. From individual access to corporate solutions, 
             we have packages designed to empower your polymer trading journey.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {plans.map((plan, index) => {
             const Icon = plan.icon;
             return (
@@ -153,31 +153,31 @@ const Pricing = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
               >
-                <Card className="h-full hover:shadow-lg transition-shadow">
-                  <CardHeader className="pb-4">
-                    <CardTitle className="text-xl font-bold flex items-center gap-2">
-                      <Icon className="h-5 w-5 text-primary" />
+                <Card className="h-full border border-border bg-card hover:shadow-lg transition-all duration-300">
+                  <CardHeader className="pb-3">
+                    <CardTitle className="text-lg font-bold flex items-center gap-2 text-foreground">
+                      <Icon className="h-5 w-5 text-foreground" />
                       {plan.name}
                     </CardTitle>
-                    <CardDescription className="text-sm mt-2">
+                    <CardDescription className="text-sm mt-2 text-muted-foreground">
                       {plan.description}
                     </CardDescription>
                   </CardHeader>
-                  <CardContent className="space-y-6">
+                  <CardContent className="space-y-4">
                     <div>
-                      <span className="text-3xl font-bold">{plan.price}</span>
-                      <span className="text-2xl text-muted-foreground">{plan.period}</span>
+                      <span className="text-3xl font-bold text-foreground">{plan.price}</span>
+                      <span className="text-xl text-muted-foreground">{plan.period}</span>
                     </div>
                     
                     <div>
-                      <p className="text-sm font-semibold mb-3 flex items-center gap-2">
+                      <p className="text-sm font-semibold mb-3 flex items-center gap-2 text-foreground">
                         <Zap className="h-4 w-4" />
                         Features Included:
                       </p>
                       <ul className="space-y-2">
                         {plan.features.map((feature, i) => (
-                          <li key={i} className="flex items-start gap-2 text-sm">
-                            <Check className="h-4 w-4 text-green-500 shrink-0 mt-0.5" />
+                          <li key={i} className="flex items-start gap-2 text-sm text-foreground">
+                            <Check className="h-4 w-4 text-success shrink-0 mt-0.5" />
                             <span>{feature}</span>
                           </li>
                         ))}
@@ -187,7 +187,7 @@ const Pricing = () => {
                     <Button
                       onClick={() => handleSubscribe(plan.id)}
                       disabled={loading === plan.id}
-                      className="w-full bg-[#8B1538] hover:bg-[#6B0E2A] text-white"
+                      className="w-full bg-accent-maroon hover:bg-accent-maroon/90 text-white font-semibold"
                       size="lg"
                     >
                       {loading === plan.id ? "Processing..." : "Proceed to Pay"}
@@ -203,9 +203,9 @@ const Pricing = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
-          className="text-center mt-16 text-sm text-muted-foreground"
+          className="text-center mt-12 text-sm text-muted-foreground"
         >
-          <p>All plans include 14-day money-back guarantee • Cancel anytime • No hidden fees</p>
+          <p>All plans come with full access • Secure payment • No hidden fees</p>
         </motion.div>
       </div>
     </div>
