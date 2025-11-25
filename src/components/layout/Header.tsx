@@ -159,6 +159,26 @@ const Header = () => {
                     About Us
                   </Link>
                 </DropdownMenuItem>
+                <DropdownMenuItem asChild className="rounded-md hover:bg-primary/5 focus:bg-primary/5 cursor-pointer">
+                  <Link to="/team" className="w-full px-3 py-2">
+                    Team
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild className="rounded-md hover:bg-primary/5 focus:bg-primary/5 cursor-pointer">
+                  <Link to="/timeline" className="w-full px-3 py-2">
+                    Timeline
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild className="rounded-md hover:bg-primary/5 focus:bg-primary/5 cursor-pointer">
+                  <Link to="/media" className="w-full px-3 py-2">
+                    Media
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild className="rounded-md hover:bg-primary/5 focus:bg-primary/5 cursor-pointer">
+                  <Link to="/press" className="w-full px-3 py-2">
+                    Press
+                  </Link>
+                </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
             
@@ -379,14 +399,45 @@ const Header = () => {
               Buy & Sell
             </Link>
 
-            {/* About */}
-            <Link
-              to="/about"
-              className="block px-4 py-3 text-sm font-medium text-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-all duration-200"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              About
-            </Link>
+            {/* About Submenu */}
+            <div className="space-y-1">
+              <div className="px-4 py-2 text-xs font-semibold text-muted-foreground">About</div>
+              <Link
+                to="/about"
+                className="block px-6 py-2.5 text-sm text-muted-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-all duration-200"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                About Us
+              </Link>
+              <Link
+                to="/team"
+                className="block px-6 py-2.5 text-sm text-muted-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-all duration-200"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Team
+              </Link>
+              <Link
+                to="/timeline"
+                className="block px-6 py-2.5 text-sm text-muted-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-all duration-200"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Timeline
+              </Link>
+              <Link
+                to="/media"
+                className="block px-6 py-2.5 text-sm text-muted-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-all duration-200"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Media
+              </Link>
+              <Link
+                to="/press"
+                className="block px-6 py-2.5 text-sm text-muted-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-all duration-200"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Press
+              </Link>
+            </div>
 
             {/* Career */}
             <Link
