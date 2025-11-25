@@ -84,13 +84,13 @@ const Career = () => {
       <div className="container max-w-7xl mx-auto py-12 px-4">
         {/* Popular Category */}
         <div className="mb-16">
-          <h2 className="text-3xl font-bold mb-8 border-l-4 border-maroon pl-4 text-maroon">Popular category</h2>
+          <h2 className="text-3xl font-bold mb-8 border-l-4 border-primary pl-4 text-primary">Popular category</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {categories.map((category, index) => (
-              <Card key={index} className="hover:shadow-lg transition-all cursor-pointer group border-2 hover:border-maroon">
+              <Card key={index} className="hover:shadow-lg transition-all cursor-pointer group border-2 hover:border-primary">
                 <CardContent className="p-6">
                   <div className="text-4xl mb-4">{category.icon}</div>
-                  <h3 className="font-bold text-lg mb-2 group-hover:text-maroon transition-colors">{category.name}</h3>
+                  <h3 className="font-bold text-lg mb-2 group-hover:text-primary transition-colors">{category.name}</h3>
                   <p className="text-sm text-muted-foreground">
                     {category.positions} Open position
                   </p>
@@ -102,11 +102,11 @@ const Career = () => {
 
         {/* Featured Job */}
         <div>
-          <h2 className="text-3xl font-bold mb-8 border-l-4 border-maroon pl-4 text-maroon">Featured job</h2>
+          <h2 className="text-3xl font-bold mb-8 border-l-4 border-primary pl-4 text-primary">Featured job</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {featuredJobs.map((job) => (
               <Link to={`/job/${job.id}`} key={job.id}>
-                <Card className="hover:shadow-lg transition-all border-2 hover:border-maroon h-full cursor-pointer">
+                <Card className="hover:shadow-lg transition-all border-2 hover:border-primary h-full cursor-pointer">
                   <CardContent className="p-6">
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex items-center gap-3">
@@ -138,7 +138,7 @@ const Career = () => {
                     </div>
 
                     <Button 
-                      className="w-full bg-maroon hover:bg-maroon/90"
+                      className="w-full bg-primary hover:bg-primary/90 text-white"
                     >
                       View Details
                     </Button>
