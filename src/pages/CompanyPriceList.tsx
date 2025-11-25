@@ -1,54 +1,67 @@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Building2 } from "lucide-react";
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { TrendingUp } from "lucide-react";
+import { motion } from "framer-motion";
 
 const CompanyPriceList = () => {
-  const [selectedMonth, setSelectedMonth] = useState("June");
+  const [selectedMonth, setSelectedMonth] = useState("April");
   const [selectedYear, setSelectedYear] = useState("2025");
 
   const companyData = [
     {
-      company: "test-rfl",
-      products: [
-        { name: "BOPP Film", date: "30-06-2025" },
-        { name: "Chunk", date: "24-10-2025" },
+      date: "Tues 19-04-2025",
+      company: "Supreme",
+      grades: [
+        { name: "C exsf Japan", priceChange: "-0.50" },
+        { name: "Blow Mid", priceChange: "Down by Rs.2/kg" },
+        { name: "Brent", priceChange: "Down by Rs.1/kg" },
+        { name: "Brent", priceChange: "+0.50" },
+        { name: "Brent", priceChange: "Up by Rs.2/Kg" },
       ]
     },
     {
-      company: "calycrat",
-      products: [
-        { name: "BOPP Film", date: "30-06-2025" },
-        { name: "Chunk", date: "24-10-2025" },
-      ]
-    },
-    {
-      company: "Reliance Industries",
-      products: [
-        { name: "PP Film", date: "15-06-2025" },
-        { name: "HDPE Blow", date: "15-06-2025" },
-      ]
-    },
-    {
+      date: "Mon 18-04-2025",
       company: "IOCL",
-      products: [
-        { name: "PP IM-HMEL", date: "20-06-2025" },
-        { name: "LDPE Film", date: "20-06-2025" },
+      grades: [
+        { name: "PP FILM", priceChange: "+2.5" },
+        { name: "PP IM-HMEL M 12 RR", priceChange: "Up by Rs.1/kg" },
+        { name: "HI110 MG", priceChange: "-1.0" },
       ]
     },
     {
+      date: "Fri 15-04-2025",
+      company: "Reliance Industries",
+      grades: [
+        { name: "HDPE BLOW", priceChange: "Down by Rs.3/kg" },
+        { name: "LLDPE INJ.MLDG", priceChange: "+3.0" },
+        { name: "LDPE LAMI", priceChange: "-0.5" },
+      ]
+    },
+    {
+      date: "Thu 14-04-2025",
       company: "Haldia Petrochemicals",
-      products: [
-        { name: "PVC Resin", date: "18-06-2025" },
-        { name: "Engineering Plastics", date: "18-06-2025" },
+      grades: [
+        { name: "PP FILM", priceChange: "+1.5" },
+        { name: "Engineering Material", priceChange: "Up by Rs.2.5/kg" },
       ]
     },
     {
+      date: "Wed 13-04-2025",
       company: "Gail India",
-      products: [
-        { name: "LLDPE", date: "22-06-2025" },
-        { name: "HDPE", date: "22-06-2025" },
+      grades: [
+        { name: "PP IM-HMEL", priceChange: "+1.5" },
+        { name: "HDPE", priceChange: "Down by Rs.1.5/kg" },
+        { name: "LLDPE", priceChange: "+2.0" },
+      ]
+    },
+    {
+      date: "Tue 12-04-2025",
+      company: "ONGC Petro",
+      grades: [
+        { name: "LDPE LAMI", priceChange: "-0.5" },
+        { name: "PP", priceChange: "Up by Rs.1/kg" },
       ]
     },
   ];
@@ -98,47 +111,64 @@ const CompanyPriceList = () => {
 
       {/* Content */}
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="space-y-12">
-          {companyData.map((company, companyIndex) => (
-            <div key={companyIndex} className="space-y-6">
-              {/* Company Name */}
-              <div className="text-center">
-                <h2 className="text-2xl font-bold text-primary">{company.company}</h2>
-              </div>
+        {/* Cards Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {companyData.map((company, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.05 }}
+            >
+              <Card className="border-2 border-border/50 shadow-lg hover:shadow-xl hover:border-primary/30 transition-all duration-300 overflow-hidden">
+                <CardContent className="p-0">
+                  {/* Date Header - Red */}
+                  <div className="bg-gradient-to-r from-primary via-primary to-primary/90 text-white px-5 py-3 text-center relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+                    <p className="font-bold text-sm relative z-10 tracking-wide">{company.date}</p>
+                  </div>
 
-              {/* Product Cards Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {company.products.map((product, productIndex) => (
-                  <Card key={productIndex} className="border-2 border-border shadow-md hover:shadow-lg transition-shadow">
-                    <CardContent className="p-6">
-                      <div className="space-y-4">
-                        {/* Product */}
-                        <div>
-                          <p className="text-xs uppercase text-muted-foreground font-semibold mb-2">PRODUCT</p>
-                          <p className="text-base font-semibold text-foreground">{product.name}</p>
+                  {/* Company Header */}
+                  <div className="bg-muted/30 px-5 py-3 border-b border-border">
+                    <div className="text-center">
+                      <p className="text-xs uppercase text-muted-foreground mb-1">COMPANY</p>
+                      <h3 className="font-bold text-base text-foreground">{company.company}</h3>
+                    </div>
+                  </div>
+                  
+                  {/* Grades List */}
+                  <div className="p-5 space-y-3 bg-gradient-to-b from-background to-muted/5">
+                    {company.grades.map((grade, idx) => (
+                      <div 
+                        key={idx} 
+                        className="flex justify-between items-start py-2 px-3 rounded-md hover:bg-primary/5 transition-colors border-b border-border/30 last:border-0"
+                      >
+                        <div className="flex-1">
+                          <p className="text-xs uppercase text-muted-foreground mb-1">GRADE</p>
+                          <p className="text-sm font-medium text-foreground">{grade.name}</p>
                         </div>
-
-                        {/* Date */}
-                        <div>
-                          <p className="text-xs uppercase text-muted-foreground font-semibold mb-2">DATE</p>
-                          <p className="text-base text-foreground">{product.date}</p>
-                        </div>
-
-                        {/* Price List Link Button */}
-                        <div className="pt-2">
-                          <Button 
-                            className="w-full bg-primary hover:bg-primary/90 text-white font-semibold"
-                            size="lg"
-                          >
-                            Price list link
-                          </Button>
+                        <div className="text-right ml-4">
+                          <p className="text-xs uppercase text-muted-foreground mb-1">PRICE CHANGE</p>
+                          <span className={`text-sm font-bold flex items-center justify-end gap-1 ${
+                            grade.priceChange.startsWith('+') || grade.priceChange.toLowerCase().includes('up') 
+                              ? 'text-green-600' 
+                              : 'text-red-600'
+                          }`}>
+                            {(grade.priceChange.startsWith('+') || grade.priceChange.toLowerCase().includes('up')) && (
+                              <TrendingUp className="h-3 w-3" />
+                            )}
+                            {(grade.priceChange.startsWith('-') || grade.priceChange.toLowerCase().includes('down')) && (
+                              <TrendingUp className="h-3 w-3 rotate-180" />
+                            )}
+                            {grade.priceChange}
+                          </span>
                         </div>
                       </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
         </div>
       </div>
