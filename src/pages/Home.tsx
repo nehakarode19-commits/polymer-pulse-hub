@@ -555,14 +555,14 @@ const Home = () => {
       {/* Global Market Coverage Section */}
       <section className="py-24 px-4 bg-background">
         <div className="container max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <div className="grid lg:grid-cols-5 gap-16 items-center">
             {/* Left Side - Text Content */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="space-y-6"
+              className="lg:col-span-2 space-y-6"
             >
               <h2 className="text-3xl md:text-4xl font-bold text-foreground leading-tight">
                 Polymer Bazaar: Serving the Global Polymer Market
@@ -583,13 +583,13 @@ const Home = () => {
               </div>
             </motion.div>
 
-            {/* Right Side - World Map with Pin Points */}
+            {/* Right Side - World Map with Pin Points (Larger) */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="relative"
+              className="lg:col-span-3 relative"
             >
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <img
