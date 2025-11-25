@@ -46,7 +46,7 @@ const JobDetail = () => {
                     <p className="text-lg text-muted-foreground mb-2">at Google Inc.</p>
                     <div className="flex flex-wrap gap-2 mb-3">
                       <Badge className="bg-green-100 text-green-800">PART-TIME</Badge>
-                      <Badge variant="outline" className="border-maroon text-maroon">Featured</Badge>
+                      <Badge variant="outline" className="border-primary text-primary">Featured</Badge>
                     </div>
                     <div className="flex items-center gap-2 text-muted-foreground">
                       <MapPin className="h-4 w-4" />
@@ -56,7 +56,7 @@ const JobDetail = () => {
                 </div>
 
                 <div className="mb-8">
-                  <h2 className="text-2xl font-bold mb-4 text-maroon">Job Description</h2>
+                  <h2 className="text-2xl font-bold mb-4 text-primary">Job Description</h2>
                   <p className="text-muted-foreground leading-relaxed mb-6">
                     Velstar is a Shopify Plus agency, and we partner with brands to help them grow, we also do the same with our people!
                   </p>
@@ -66,58 +66,58 @@ const JobDetail = () => {
                 </div>
 
                 <div className="mb-8">
-                  <h3 className="text-xl font-bold mb-4 text-maroon">Requirements</h3>
+                  <h3 className="text-xl font-bold mb-4 text-primary">Requirements</h3>
                   <ul className="space-y-3">
                     <li className="flex items-start">
-                      <span className="text-maroon mr-3 mt-1">•</span>
+                      <span className="text-primary mr-3 mt-1">•</span>
                       <span className="text-muted-foreground">Great troubleshooting and analytical skills combined with the desire to tackle challenges head-on</span>
                     </li>
                     <li className="flex items-start">
-                      <span className="text-maroon mr-3 mt-1">•</span>
+                      <span className="text-primary mr-3 mt-1">•</span>
                       <span className="text-muted-foreground">3+ years of experience in back-end development working either with multiple smaller or large scale applications</span>
                     </li>
                     <li className="flex items-start">
-                      <span className="text-maroon mr-3 mt-1">•</span>
+                      <span className="text-primary mr-3 mt-1">•</span>
                       <span className="text-muted-foreground">Experience with HTML, Javascript, CSS, PHP, Symphony and/or Laravel</span>
                     </li>
                     <li className="flex items-start">
-                      <span className="text-maroon mr-3 mt-1">•</span>
+                      <span className="text-primary mr-3 mt-1">•</span>
                       <span className="text-muted-foreground">Working regularly with APIs and Web Services (REST, GrapQL, SOAP, etc)</span>
                     </li>
                   </ul>
                 </div>
 
                 <div className="mb-8">
-                  <h3 className="text-xl font-bold mb-4 text-maroon">Desirable:</h3>
+                  <h3 className="text-xl font-bold mb-4 text-primary">Desirable:</h3>
                   <ul className="space-y-3">
                     <li className="flex items-start">
-                      <span className="text-maroon mr-3 mt-1">•</span>
+                      <span className="text-primary mr-3 mt-1">•</span>
                       <span className="text-muted-foreground">Working knowledge of eCommerce platforms, ideally Shopify but also others e.g. Magento, WooCommerce, BigCommerce, etc</span>
                     </li>
                     <li className="flex items-start">
-                      <span className="text-maroon mr-3 mt-1">•</span>
+                      <span className="text-primary mr-3 mt-1">•</span>
                       <span className="text-muted-foreground">Working knowledge of payment gateways</span>
                     </li>
                     <li className="flex items-start">
-                      <span className="text-maroon mr-3 mt-1">•</span>
+                      <span className="text-primary mr-3 mt-1">•</span>
                       <span className="text-muted-foreground">API platform experience / Building restful APIs</span>
                     </li>
                   </ul>
                 </div>
 
                 <div>
-                  <h3 className="text-xl font-bold mb-4 text-maroon">Benefits</h3>
+                  <h3 className="text-xl font-bold mb-4 text-primary">Benefits</h3>
                   <ul className="space-y-3">
                     <li className="flex items-start">
-                      <span className="text-maroon mr-3 mt-1">•</span>
+                      <span className="text-primary mr-3 mt-1">•</span>
                       <span className="text-muted-foreground">Early finish on Fridays for our end of week catch up (4:30 finish, and drink of your choice from the bar)</span>
                     </li>
                     <li className="flex items-start">
-                      <span className="text-maroon mr-3 mt-1">•</span>
+                      <span className="text-primary mr-3 mt-1">•</span>
                       <span className="text-muted-foreground">28 days holiday (including bank holidays) rising by 1 day per year PLUS an additional day off on your birthday</span>
                     </li>
                     <li className="flex items-start">
-                      <span className="text-maroon mr-3 mt-1">•</span>
+                      <span className="text-primary mr-3 mt-1">•</span>
                       <span className="text-muted-foreground">Generous annual bonus</span>
                     </li>
                   </ul>
@@ -130,10 +130,10 @@ const JobDetail = () => {
           <div className="space-y-6">
             <Card className="sticky top-20 border-2">
               <CardContent className="p-6">
-                <h3 className="text-xl font-bold mb-6 text-maroon">Job Overview</h3>
+                <h3 className="text-xl font-bold mb-6 text-primary">Job Overview</h3>
                 <div className="space-y-4">
                   <div className="flex items-start gap-3">
-                    <Calendar className="h-5 w-5 text-maroon mt-0.5" />
+                    <Calendar className="h-5 w-5 text-primary mt-0.5" />
                     <div>
                       <p className="text-sm text-muted-foreground">Job Posted:</p>
                       <p className="font-medium">14 Jun, 2021</p>
@@ -141,7 +141,7 @@ const JobDetail = () => {
                   </div>
 
                   <div className="flex items-start gap-3">
-                    <Clock className="h-5 w-5 text-maroon mt-0.5" />
+                    <Clock className="h-5 w-5 text-primary mt-0.5" />
                     <div>
                       <p className="text-sm text-muted-foreground">Job expire in:</p>
                       <p className="font-medium">14 Aug, 2021</p>
@@ -149,7 +149,7 @@ const JobDetail = () => {
                   </div>
 
                   <div className="flex items-start gap-3">
-                    <TrendingUp className="h-5 w-5 text-maroon mt-0.5" />
+                    <TrendingUp className="h-5 w-5 text-primary mt-0.5" />
                     <div>
                       <p className="text-sm text-muted-foreground">Job Level:</p>
                       <p className="font-medium">Entry Level</p>
@@ -157,7 +157,7 @@ const JobDetail = () => {
                   </div>
 
                   <div className="flex items-start gap-3">
-                    <DollarSign className="h-5 w-5 text-maroon mt-0.5" />
+                    <DollarSign className="h-5 w-5 text-primary mt-0.5" />
                     <div>
                       <p className="text-sm text-muted-foreground">Salary:</p>
                       <p className="font-medium">$20,000 - $25,000</p>
@@ -166,7 +166,7 @@ const JobDetail = () => {
                   </div>
 
                   <div className="flex items-start gap-3">
-                    <GraduationCap className="h-5 w-5 text-maroon mt-0.5" />
+                    <GraduationCap className="h-5 w-5 text-primary mt-0.5" />
                     <div>
                       <p className="text-sm text-muted-foreground">Education:</p>
                       <p className="font-medium">Graduation</p>
@@ -174,7 +174,7 @@ const JobDetail = () => {
                   </div>
 
                   <div className="flex items-start gap-3">
-                    <MapPin className="h-5 w-5 text-maroon mt-0.5" />
+                    <MapPin className="h-5 w-5 text-primary mt-0.5" />
                     <div>
                       <p className="text-sm text-muted-foreground">Job Location:</p>
                       <p className="font-medium">Dhaka, Bangladesh</p>
@@ -184,7 +184,7 @@ const JobDetail = () => {
 
                 <div className="mt-8 space-y-3">
                   <Button 
-                    className="w-full bg-maroon hover:bg-maroon/90" 
+                    className="w-full bg-primary hover:bg-primary/90 text-white" 
                     size="lg"
                     onClick={handleApplyNow}
                   >
