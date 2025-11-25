@@ -127,71 +127,108 @@ const Pricing = () => {
   };
 
   return (
-    <div className="min-h-screen py-20 px-4 bg-background">
+    <div className="min-h-screen py-20 px-4 bg-gradient-to-br from-background via-secondary/30 to-background">
       <div className="container max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className="text-center mb-16"
         >
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
-            Subscribe to PolymerBazaar
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.1 }}
+            className="inline-block mb-4"
+          >
+            <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold">
+              Subscription Plans
+            </span>
+          </motion.div>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-foreground">
+            Subscribe to <span className="bg-gradient-to-r from-primary to-primary-light bg-clip-text text-transparent">PolymerBazaar</span>
           </h1>
-          <p className="text-base md:text-lg text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-base md:text-lg text-muted-foreground max-w-3xl mx-auto leading-relaxed">
             Choose the perfect plan for your business needs. From individual access to corporate solutions, 
             we have packages designed to empower your polymer trading journey.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {plans.map((plan, index) => {
             const Icon = plan.icon;
             return (
               <motion.div
                 key={plan.id}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
+                transition={{ delay: index * 0.1, duration: 0.5 }}
+                className="h-full"
               >
-                <Card className="h-full border border-border bg-card hover:shadow-lg transition-all duration-300">
-                  <CardHeader className="pb-3">
-                    <CardTitle className="text-lg font-bold flex items-center gap-2 text-foreground">
-                      <Icon className="h-5 w-5 text-foreground" />
+                <Card className="pricing-card h-full flex flex-col border-2 border-border/50 bg-card hover:border-primary/30 hover:shadow-2xl transition-all duration-500 group relative overflow-hidden">
+                  {/* Decorative gradient overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+                  
+                  <CardHeader className="pb-4 relative z-10">
+                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                      <Icon className="h-6 w-6 text-primary" />
+                    </div>
+                    <CardTitle className="text-xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">
                       {plan.name}
                     </CardTitle>
-                    <CardDescription className="text-sm mt-2 text-muted-foreground">
+                    <CardDescription className="text-sm mt-2 text-muted-foreground min-h-[40px]">
                       {plan.description}
                     </CardDescription>
                   </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div>
-                      <span className="text-3xl font-bold text-foreground">{plan.price}</span>
-                      <span className="text-xl text-muted-foreground">{plan.period}</span>
+                  
+                  <CardContent className="flex-1 flex flex-col space-y-6 relative z-10">
+                    <div className="border-b border-border pb-4">
+                      <div className="flex items-baseline gap-1">
+                        <span className="text-4xl font-bold text-foreground">{plan.price}</span>
+                        <span className="text-xl text-muted-foreground">{plan.period}</span>
+                      </div>
+                      <p className="text-xs text-muted-foreground mt-1">per year</p>
                     </div>
                     
-                    <div>
-                      <p className="text-sm font-semibold mb-3 flex items-center gap-2 text-foreground">
-                        <Zap className="h-4 w-4" />
+                    <div className="flex-1">
+                      <p className="text-sm font-semibold mb-4 flex items-center gap-2 text-foreground">
+                        <Zap className="h-4 w-4 text-primary" />
                         Features Included:
                       </p>
-                      <ul className="space-y-2">
+                      <ul className="space-y-3">
                         {plan.features.map((feature, i) => (
-                          <li key={i} className="flex items-start gap-2 text-sm text-foreground">
-                            <Check className="h-4 w-4 text-success shrink-0 mt-0.5" />
+                          <motion.li 
+                            key={i} 
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: index * 0.1 + i * 0.05 }}
+                            className="flex items-start gap-3 text-sm text-foreground"
+                          >
+                            <div className="mt-0.5 w-5 h-5 rounded-full bg-success/10 flex items-center justify-center flex-shrink-0">
+                              <Check className="h-3 w-3 text-success" />
+                            </div>
                             <span>{feature}</span>
-                          </li>
+                          </motion.li>
                         ))}
                       </ul>
                     </div>
 
-                    <Button
-                      onClick={() => handleSubscribe(plan.id)}
-                      disabled={loading === plan.id}
-                      className="w-full bg-primary hover:bg-primary-dark text-primary-foreground font-semibold"
-                      size="lg"
-                    >
-                      {loading === plan.id ? "Processing..." : "Proceed to Pay"}
-                    </Button>
+                    {/* Fixed height button container for perfect alignment */}
+                    <div className="pt-6 mt-auto">
+                      <Button
+                        onClick={() => handleSubscribe(plan.id)}
+                        disabled={loading === plan.id}
+                        className="proceed-button w-full h-12 bg-primary hover:bg-primary-dark text-primary-foreground font-semibold text-base shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                      >
+                        {loading === plan.id ? (
+                          <span className="flex items-center gap-2">
+                            <div className="w-4 h-4 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
+                            Processing...
+                          </span>
+                        ) : (
+                          "Proceed to Pay"
+                        )}
+                      </Button>
+                    </div>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -202,10 +239,26 @@ const Pricing = () => {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-          className="text-center mt-12 text-sm text-muted-foreground"
+          transition={{ delay: 0.8 }}
+          className="text-center mt-16 space-y-4"
         >
-          <p>All plans come with full access • Secure payment • No hidden fees</p>
+          <div className="flex flex-wrap justify-center gap-6 text-sm text-muted-foreground">
+            <span className="flex items-center gap-2">
+              <Check className="h-4 w-4 text-success" />
+              Full Access to All Features
+            </span>
+            <span className="flex items-center gap-2">
+              <Check className="h-4 w-4 text-success" />
+              Secure Payment
+            </span>
+            <span className="flex items-center gap-2">
+              <Check className="h-4 w-4 text-success" />
+              No Hidden Fees
+            </span>
+          </div>
+          <p className="text-xs text-muted-foreground mt-2">
+            Need help choosing a plan? <button className="text-primary hover:underline font-semibold">Contact our sales team</button>
+          </p>
         </motion.div>
       </div>
     </div>
