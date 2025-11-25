@@ -26,6 +26,7 @@ import PressRelease from "./pages/PressRelease";
 import WhatsAppChatbot from "./pages/WhatsAppChatbot";
 import Career from "./pages/Career";
 import JobDetail from "./pages/JobDetail";
+import Partnerships from "./pages/Partnerships";
 import NotFound from "./pages/NotFound";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsConditions from "./pages/TermsConditions";
@@ -60,6 +61,7 @@ const App = () => (
           <Route path="/whatsapp-chatbot" element={<Layout><ProtectedRoute><WhatsAppChatbot /></ProtectedRoute></Layout>} />
           <Route path="/career" element={<Layout><ProtectedRoute><Career /></ProtectedRoute></Layout>} />
           <Route path="/job/:id" element={<Layout><ProtectedRoute><JobDetail /></ProtectedRoute></Layout>} />
+          <Route path="/partnerships" element={<Layout><ProtectedRoute><Partnerships /></ProtectedRoute></Layout>} />
           <Route path="/privacy-policy" element={<Layout><PrivacyPolicy /></Layout>} />
           <Route path="/terms-conditions" element={<Layout><TermsConditions /></Layout>} />
           

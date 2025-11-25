@@ -2,6 +2,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Briefcase, MapPin, DollarSign, Bookmark } from "lucide-react";
 import { Link } from "react-router-dom";
+import TeamGallery from "@/components/TeamGallery";
 
 const Career = () => {
   const categories = [
@@ -147,6 +148,9 @@ const Career = () => {
             ))}
           </div>
         </div>
+
+        {/* Team Photo Gallery */}
+        <TeamGallery />
       </div>
     </div>
   );
