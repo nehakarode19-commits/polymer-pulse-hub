@@ -172,22 +172,22 @@ const Header = () => {
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-64 bg-background/95 backdrop-blur-lg border border-border/50 shadow-xl z-[100] rounded-xl p-2 animate-in fade-in-0 zoom-in-95">
-                  <DropdownMenuItem asChild className="rounded-lg hover:bg-primary/5 focus:bg-primary/5 cursor-pointer transition-colors">
+                  <DropdownMenuItem asChild className="rounded-lg hover:bg-primary hover:text-white focus:bg-primary focus:text-white cursor-pointer transition-colors">
                     <Link to="/about" className="w-full px-3 py-2.5">
                       <span className="font-medium">About Us</span>
                     </Link>
                   </DropdownMenuItem>
-                  <DropdownMenuItem asChild className="rounded-lg hover:bg-primary/5 focus:bg-primary/5 cursor-pointer transition-colors">
+                  <DropdownMenuItem asChild className="rounded-lg hover:bg-primary hover:text-white focus:bg-primary focus:text-white cursor-pointer transition-colors">
                     <Link to="/our-methodology" className="w-full px-3 py-2.5">
                       <span className="font-medium">Our Methodology</span>
                     </Link>
                   </DropdownMenuItem>
-                  <DropdownMenuItem asChild className="rounded-lg hover:bg-primary/5 focus:bg-primary/5 cursor-pointer transition-colors">
+                  <DropdownMenuItem asChild className="rounded-lg hover:bg-primary hover:text-white focus:bg-primary focus:text-white cursor-pointer transition-colors">
                     <Link to="/partnerships" className="w-full px-3 py-2.5">
                       <span className="font-medium">Strategic Alliances & Delegations</span>
                     </Link>
                   </DropdownMenuItem>
-                  <DropdownMenuItem asChild className="rounded-lg hover:bg-primary/5 focus:bg-primary/5 cursor-pointer transition-colors">
+                  <DropdownMenuItem asChild className="rounded-lg hover:bg-primary hover:text-white focus:bg-primary focus:text-white cursor-pointer transition-colors">
                     <Link to="/careers-detailed" className="w-full px-3 py-2.5">
                       <span className="font-medium">Careers at Polymer Bazaar</span>
                     </Link>
@@ -208,7 +208,7 @@ const Header = () => {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-64 bg-background/95 backdrop-blur-lg border border-border/50 shadow-xl z-[100] rounded-xl p-2 max-h-80 overflow-y-auto animate-in fade-in-0 zoom-in-95">
                   {crudeFeedstockItems.map((item) => (
-                    <DropdownMenuItem key={item.label} asChild className="rounded-lg hover:bg-primary/5 focus:bg-primary/5 cursor-pointer transition-colors">
+                    <DropdownMenuItem key={item.label} asChild className="rounded-lg hover:bg-primary hover:text-white focus:bg-primary focus:text-white cursor-pointer transition-colors">
                       <Link to={item.path} className="w-full px-3 py-2.5">
                         <span className="font-medium">{item.label}</span>
                       </Link>
@@ -230,7 +230,7 @@ const Header = () => {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-64 bg-background/95 backdrop-blur-lg border border-border/50 shadow-xl z-[100] rounded-xl p-2 max-h-80 overflow-y-auto animate-in fade-in-0 zoom-in-95">
                   {globalBazaarItems.map((item) => (
-                    <DropdownMenuItem key={item.label} asChild className="rounded-lg hover:bg-primary/5 focus:bg-primary/5 cursor-pointer transition-colors">
+                    <DropdownMenuItem key={item.label} asChild className="rounded-lg hover:bg-primary hover:text-white focus:bg-primary focus:text-white cursor-pointer transition-colors">
                       <Link to={item.path} className="w-full px-3 py-2.5">
                         <span className="font-medium">{item.label}</span>
                       </Link>
@@ -252,7 +252,7 @@ const Header = () => {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-72 bg-background/95 backdrop-blur-lg border border-border/50 shadow-xl z-[100] rounded-xl p-2 animate-in fade-in-0 zoom-in-95">
                   {indianBazaarItems.map((item) => (
-                    <DropdownMenuItem key={item.label} asChild className="rounded-lg hover:bg-primary/5 focus:bg-primary/5 cursor-pointer transition-colors">
+                    <DropdownMenuItem key={item.label} asChild className="rounded-lg hover:bg-primary hover:text-white focus:bg-primary focus:text-white cursor-pointer transition-colors">
                       <Link to={item.path} className="w-full px-3 py-2.5">
                         <span className="font-medium">{item.label}</span>
                       </Link>
@@ -274,7 +274,7 @@ const Header = () => {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-56 bg-background/95 backdrop-blur-lg border border-border/50 shadow-xl z-[100] rounded-xl p-2 animate-in fade-in-0 zoom-in-95">
                   {historicalDataItems.map((item) => (
-                    <DropdownMenuItem key={item.label} asChild className="rounded-lg hover:bg-primary/5 focus:bg-primary/5 cursor-pointer transition-colors">
+                    <DropdownMenuItem key={item.label} asChild className="rounded-lg hover:bg-primary hover:text-white focus:bg-primary focus:text-white cursor-pointer transition-colors">
                       <Link to={item.path} className="w-full px-3 py-2.5">
                         <span className="font-medium">{item.label}</span>
                       </Link>
@@ -296,7 +296,7 @@ const Header = () => {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-64 bg-background/95 backdrop-blur-lg border border-border/50 shadow-xl z-[100] rounded-xl p-2 max-h-80 overflow-y-auto animate-in fade-in-0 zoom-in-95">
                   {futureTrendItems.map((item) => (
-                    <DropdownMenuItem key={item.label} asChild className="rounded-lg hover:bg-primary/5 focus:bg-primary/5 cursor-pointer transition-colors">
+                    <DropdownMenuItem key={item.label} asChild className="rounded-lg hover:bg-primary hover:text-white focus:bg-primary focus:text-white cursor-pointer transition-colors">
                       <Link to={item.path} className="w-full px-3 py-2.5">
                         <span className="font-medium">{item.label}</span>
                       </Link>
@@ -318,7 +318,7 @@ const Header = () => {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-56 bg-background/95 backdrop-blur-lg border border-border/50 shadow-xl z-[100] rounded-xl p-2 animate-in fade-in-0 zoom-in-95">
                   {servicesItems.map((item) => (
-                    <DropdownMenuItem key={item.label} asChild className="rounded-lg hover:bg-primary/5 focus:bg-primary/5 cursor-pointer transition-colors">
+                    <DropdownMenuItem key={item.label} asChild className="rounded-lg hover:bg-primary hover:text-white focus:bg-primary focus:text-white cursor-pointer transition-colors">
                       <Link to={item.path} className="w-full px-3 py-2.5">
                         <span className="font-medium">{item.label}</span>
                       </Link>
@@ -364,12 +364,12 @@ const Header = () => {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="w-56 bg-background/95 backdrop-blur-lg border border-border/50 shadow-xl z-[100] rounded-xl p-2 animate-in fade-in-0 zoom-in-95">
-                <DropdownMenuItem asChild className="rounded-lg hover:bg-primary/5 focus:bg-primary/5 cursor-pointer transition-colors">
+                <DropdownMenuItem asChild className="rounded-lg hover:bg-primary hover:text-white focus:bg-primary focus:text-white cursor-pointer transition-colors">
                   <Link to="/profile" className="w-full px-3 py-2.5">
                     <span className="font-medium">Profile</span>
                   </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem asChild className="rounded-lg hover:bg-primary/5 focus:bg-primary/5 cursor-pointer transition-colors">
+                <DropdownMenuItem asChild className="rounded-lg hover:bg-primary hover:text-white focus:bg-primary focus:text-white cursor-pointer transition-colors">
                   <Link to="/pricing" className="w-full px-3 py-2.5">
                     <span className="font-medium">Subscription</span>
                   </Link>
@@ -420,28 +420,28 @@ const Header = () => {
                   <div className="px-4 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wide">About</div>
                   <Link
                     to="/about"
-                    className="block px-6 py-2.5 text-sm text-muted-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-all duration-200"
+                    className="block px-6 py-2.5 text-sm text-muted-foreground hover:bg-primary hover:text-white rounded-lg transition-all duration-200"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     About Us
                   </Link>
                   <Link
                     to="/our-methodology"
-                    className="block px-6 py-2.5 text-sm text-muted-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-all duration-200"
+                    className="block px-6 py-2.5 text-sm text-muted-foreground hover:bg-primary hover:text-white rounded-lg transition-all duration-200"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     Our Methodology
                   </Link>
                   <Link
                     to="/partnerships"
-                    className="block px-6 py-2.5 text-sm text-muted-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-all duration-200"
+                    className="block px-6 py-2.5 text-sm text-muted-foreground hover:bg-primary hover:text-white rounded-lg transition-all duration-200"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     Strategic Alliances & Delegations
                   </Link>
                   <Link
                     to="/careers-detailed"
-                    className="block px-6 py-2.5 text-sm text-muted-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-all duration-200"
+                    className="block px-6 py-2.5 text-sm text-muted-foreground hover:bg-primary hover:text-white rounded-lg transition-all duration-200"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     Careers at Polymer Bazaar
@@ -457,7 +457,7 @@ const Header = () => {
                     <Link
                       key={item.label}
                       to={item.path}
-                      className="block px-6 py-2.5 text-sm text-muted-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-all duration-200"
+                      className="block px-6 py-2.5 text-sm text-muted-foreground hover:bg-primary hover:text-white rounded-lg transition-all duration-200"
                       onClick={() => setIsMenuOpen(false)}
                     >
                       {item.label}
@@ -468,7 +468,7 @@ const Header = () => {
                 {/* Career in Mobile */}
                 <Link
                   to="/career"
-                  className="block px-4 py-3 text-sm font-medium text-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-all duration-200 mt-2"
+                  className="block px-4 py-3 text-sm font-medium text-foreground hover:bg-primary hover:text-white rounded-lg transition-all duration-200 mt-2"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Career
