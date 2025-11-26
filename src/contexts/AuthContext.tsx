@@ -20,6 +20,7 @@ interface AuthContextType {
   signUp: (email: string, password: string, fullName: string, phone: string, city: string) => Promise<void>;
   signOut: () => Promise<void>;
   hasActiveSubscription: () => boolean;
+  refreshSubscription: () => Promise<void>;
   sendPhoneOTP: (phone: string) => Promise<void>;
   verifyPhoneOTP: (phone: string, otp: string) => Promise<{ isNewUser: boolean }>;
   completeSignup: (fullName: string, email: string) => Promise<void>;
@@ -149,6 +150,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       return new Date(subscription.end_date) > new Date();
     }
     return true;
+  };
+
+  const refreshSubscription = async () => {
+    if (user) {
+      await fetchSubscription(user.id);
+    }
   };
 
   const sendPhoneOTP = async (phone: string) => {
@@ -293,6 +300,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         signUp,
         signOut,
         hasActiveSubscription,
+        refreshSubscription,
         sendPhoneOTP,
         verifyPhoneOTP,
         completeSignup,
