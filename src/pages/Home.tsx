@@ -689,11 +689,11 @@ const Home = () => {
                 <img
                   src={worldMapLight}
                   alt="Global Market Coverage"
-                  className="w-full h-auto grayscale brightness-50 contrast-150 opacity-60 saturate-0"
-                  style={{ filter: 'grayscale(100%) brightness(0.5) contrast(1.5)' }}
+                  className="w-full h-auto grayscale brightness-75 contrast-125 opacity-50 saturate-0"
+                  style={{ filter: 'grayscale(100%) brightness(0.75) contrast(1.25) drop-shadow(0 0 20px rgba(150, 150, 150, 0.3))' }}
                 />
-                {/* Graphite grey overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-slate-700/30 via-slate-800/25 to-slate-900/30 pointer-events-none"></div>
+                {/* Metallic gray overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-gray-400/20 via-gray-500/15 to-gray-600/20 pointer-events-none"></div>
                 
                 {/* Interactive Pin Points */}
                 {[
