@@ -76,18 +76,38 @@ const OTPAuth = () => {
     try {
       const { isNewUser } = await verifyPhoneOTP(phone, otp);
       
-      if (isNewUser) {
-        setStep("signup");
-        toast({
-          title: "Signup OTP Verified Successfully!",
-          description: "Please complete your profile to continue.",
-        });
-      } else {
-        toast({
-          title: "Login Successful",
-          description: "Welcome back!",
-        });
-        navigate("/");
+      // Sign In mode - existing users only
+      if (mode === "signin") {
+        if (isNewUser) {
+          toast({
+            title: "Account Not Found",
+            description: "No account exists with this number. Please sign up first.",
+            variant: "destructive",
+          });
+        } else {
+          toast({
+            title: "Login Successful",
+            description: "Welcome back!",
+          });
+          navigate("/");
+        }
+      }
+      // Sign Up mode - new users only
+      else {
+        if (isNewUser) {
+          setStep("signup");
+          toast({
+            title: "OTP Verified!",
+            description: "Please complete your profile to continue.",
+          });
+        } else {
+          toast({
+            title: "Account Already Exists",
+            description: "This number is already registered. Please sign in instead.",
+            variant: "destructive",
+          });
+          setMode("signin");
+        }
       }
     } catch (error: any) {
       toast({
