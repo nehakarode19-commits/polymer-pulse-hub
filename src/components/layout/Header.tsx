@@ -158,7 +158,7 @@ const Header = () => {
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild className="rounded-md hover:bg-primary/5 focus:bg-primary/5 cursor-pointer">
                   <Link to="/career" className="w-full px-3 py-2">
-                    Careers
+                    Careers at Polymer Bazaar
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild className="rounded-md hover:bg-primary/5 focus:bg-primary/5 cursor-pointer">
@@ -401,7 +401,7 @@ const Header = () => {
                 className="block px-6 py-2.5 text-sm text-muted-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-all duration-200"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Careers
+                Careers at Polymer Bazaar
               </Link>
               <Link
                 to="/press"
