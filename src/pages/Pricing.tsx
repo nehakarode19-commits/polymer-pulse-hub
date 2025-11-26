@@ -106,9 +106,12 @@ const Pricing = () => {
 
       if (error) throw error;
 
+      // Get the plan name for display
+      const planName = plans.find(p => p.id === planType)?.name || planType;
+
       toast({
         title: "🎉 Subscription Activated!",
-        description: `Welcome to ${planType} plan! You now have full access to all features.`,
+        description: `Welcome to ${planName} plan! You now have full access to all features.`,
       });
 
       // Wait a moment for the toast, then redirect and reload to update subscription status
