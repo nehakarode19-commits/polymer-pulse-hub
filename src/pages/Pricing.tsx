@@ -94,6 +94,17 @@ const Pricing = () => {
     // Get the plan name for display
     const planName = plans.find(p => p.id === planType)?.name || planType;
 
+    // Store mock subscription in localStorage for demo mode
+    const mockSubscription = {
+      id: crypto.randomUUID(),
+      user_id: user.id,
+      plan_type: planType,
+      status: "active",
+      start_date: new Date().toISOString(),
+      end_date: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(), // 1 year from now
+    };
+    localStorage.setItem("demo_subscription", JSON.stringify(mockSubscription));
+
     // Show success message immediately (demo mode - no database operation)
     toast({
       title: "🎉 Subscription Activated!",

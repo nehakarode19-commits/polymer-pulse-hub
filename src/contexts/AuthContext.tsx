@@ -69,6 +69,16 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const fetchSubscription = async (userId: string) => {
     try {
+      // Check for demo subscription in localStorage first
+      const demoSubString = localStorage.getItem("demo_subscription");
+      if (demoSubString) {
+        const demoSub = JSON.parse(demoSubString);
+        if (demoSub.user_id === userId) {
+          setSubscription(demoSub);
+          return;
+        }
+      }
+
       const { data, error } = await supabase
         .from("subscriptions")
         .select("*")
@@ -127,6 +137,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const { error } = await supabase.auth.signOut();
     if (error) throw error;
     setSubscription(null);
+    // Clear demo subscription from localStorage
+    localStorage.removeItem("demo_subscription");
     navigate("/");
   };
 
