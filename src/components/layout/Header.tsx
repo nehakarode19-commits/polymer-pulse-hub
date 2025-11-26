@@ -283,6 +283,14 @@ const Header = () => {
               </DropdownMenuContent>
             </DropdownMenu>
 
+            {/* Career */}
+            <Link
+              to="/career"
+              className="px-4 py-2.5 text-sm font-medium text-foreground rounded-lg hover:bg-primary/5 hover:text-primary transition-all duration-200"
+            >
+              Career
+            </Link>
+
           </nav>
         )}
 
@@ -511,8 +519,17 @@ const Header = () => {
                 >
                   {item.label}
                 </Link>
-            ))}
-          </div>
+              ))}
+            </div>
+
+            {/* Career in Mobile */}
+            <Link
+              to="/career"
+              className="block px-4 py-3 text-sm font-medium text-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-all duration-200 mt-2"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Career
+            </Link>
           </nav>
         </div>
       )}
