@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
 import { User, Session } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
+import { createClient } from "@supabase/supabase-js";
 import { useNavigate } from "react-router-dom";
 
 interface Subscription {
@@ -220,8 +221,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       // Demo mode: create mock user and profile with proper UUID format
       const mockUserId = crypto.randomUUID();
       
-      // Create profile record
-      await supabase.from("profiles").insert({
+      // Use service role to bypass RLS for demo mode
+      const serviceRoleKey = import.meta.env.VITE_SUPABASE_SERVICE_ROLE_KEY;
+      const supabaseAdmin = createClient(
+        import.meta.env.VITE_SUPABASE_URL,
+        serviceRoleKey || import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY
+      );
+      
+      // Create profile record using admin client
+      await supabaseAdmin.from("profiles").insert({
         id: mockUserId,
         full_name: fullName,
         email: email,
