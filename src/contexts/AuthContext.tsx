@@ -19,6 +19,9 @@ interface AuthContextType {
   signUp: (email: string, password: string, fullName: string, phone: string, city: string) => Promise<void>;
   signOut: () => Promise<void>;
   hasActiveSubscription: () => boolean;
+  sendOTP: (phone: string) => Promise<void>;
+  verifyOTP: (phone: string, otp: string) => Promise<{ isNewUser: boolean }>;
+  completeSignup: (fullName: string, email: string) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -132,6 +135,56 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     return true;
   };
 
+  const sendOTP = async (phone: string) => {
+    const { error } = await supabase.auth.signInWithOtp({
+      phone,
+    });
+
+    if (error) throw error;
+  };
+
+  const verifyOTP = async (phone: string, otp: string) => {
+    const { data, error } = await supabase.auth.verifyOtp({
+      phone,
+      token: otp,
+      type: 'sms',
+    });
+
+    if (error) throw error;
+
+    // Check if this is a new user by looking for profile
+    if (data.user) {
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("full_name, email")
+        .eq("id", data.user.id)
+        .maybeSingle();
+
+      const isNewUser = !profile || !profile.full_name || !profile.email;
+      return { isNewUser };
+    }
+
+    return { isNewUser: false };
+  };
+
+  const completeSignup = async (fullName: string, email: string) => {
+    if (!user) throw new Error("No user found");
+
+    // Update profile with signup details
+    const { error } = await supabase
+      .from("profiles")
+      .update({ 
+        full_name: fullName,
+        email: email,
+      })
+      .eq("id", user.id);
+
+    if (error) throw error;
+
+    // Redirect to pricing page to choose a plan
+    navigate("/pricing");
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -143,6 +196,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         signUp,
         signOut,
         hasActiveSubscription,
+        sendOTP,
+        verifyOTP,
+        completeSignup,
       }}
     >
       {children}

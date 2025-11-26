@@ -11,6 +11,7 @@ import Layout from "./components/layout/Layout";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import OTPAuth from "./pages/OTPAuth";
 import Pricing from "./pages/Pricing";
 import Profile from "./pages/Profile";
 import About from "./pages/About";
@@ -55,6 +56,7 @@ const App = () => (
           {/* Public routes */}
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/auth" element={<OTPAuth />} />
           <Route path="/" element={<Layout><Home /></Layout>} />
           <Route path="/pricing" element={<Layout><Pricing /></Layout>} />
           
