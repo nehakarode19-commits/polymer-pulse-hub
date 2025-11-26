@@ -4,7 +4,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Check, Monitor, Smartphone, MessageCircle, Zap, Briefcase, Building2 } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { supabase } from "@/integrations/supabase/client";
-import { createClient } from "@supabase/supabase-js";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
 import { motion } from "framer-motion";
@@ -93,14 +92,8 @@ const Pricing = () => {
     setLoading(planType);
 
     try {
-      // Use service role for demo mode to bypass RLS
-      const serviceRoleKey = import.meta.env.VITE_SUPABASE_SERVICE_ROLE_KEY;
-      const supabaseClient = serviceRoleKey 
-        ? createClient(import.meta.env.VITE_SUPABASE_URL, serviceRoleKey)
-        : supabase;
-      
       // Create or update subscription for this user
-      const { error } = await supabaseClient.from("subscriptions").upsert(
+      const { error } = await supabase.from("subscriptions").upsert(
         {
           user_id: user.id,
           plan_type: planType,
