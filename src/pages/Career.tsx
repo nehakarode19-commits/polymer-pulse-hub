@@ -47,11 +47,11 @@ const Career = () => {
 
       <div className="container max-w-7xl mx-auto py-12 px-4">
         {/* Horizontal Navigation - Enhanced Design */}
-        <div className="bg-white rounded-2xl shadow-lg border border-border/30 p-2 mb-16 max-w-4xl mx-auto">
+        <div className="bg-white rounded-2xl shadow-lg border border-border/30 p-2 mb-16">
           <nav className="flex items-center justify-center gap-1 flex-wrap">
             <button
               onClick={() => scrollToSection("open-roles")}
-              className={`px-6 py-3 text-sm font-semibold rounded-xl transition-all duration-300 whitespace-nowrap ${
+              className={`flex-1 min-w-[140px] px-6 py-3 text-sm font-semibold rounded-xl transition-all duration-300 whitespace-nowrap ${
                 activeSection === "open-roles" 
                   ? "bg-primary text-white shadow-md scale-105" 
                   : "text-foreground hover:bg-muted/50"
@@ -61,7 +61,7 @@ const Career = () => {
             </button>
             <button
               onClick={() => scrollToSection("values")}
-              className={`px-6 py-3 text-sm font-semibold rounded-xl transition-all duration-300 whitespace-nowrap ${
+              className={`flex-1 min-w-[140px] px-6 py-3 text-sm font-semibold rounded-xl transition-all duration-300 whitespace-nowrap ${
                 activeSection === "values" 
                   ? "bg-primary text-white shadow-md scale-105" 
                   : "text-foreground hover:bg-muted/50"
@@ -71,7 +71,7 @@ const Career = () => {
             </button>
             <button
               onClick={() => scrollToSection("growth")}
-              className={`px-6 py-3 text-sm font-semibold rounded-xl transition-all duration-300 whitespace-nowrap ${
+              className={`flex-1 min-w-[140px] px-6 py-3 text-sm font-semibold rounded-xl transition-all duration-300 whitespace-nowrap ${
                 activeSection === "growth" 
                   ? "bg-primary text-white shadow-md scale-105" 
                   : "text-foreground hover:bg-muted/50"
@@ -81,7 +81,7 @@ const Career = () => {
             </button>
             <button
               onClick={() => scrollToSection("team")}
-              className={`px-6 py-3 text-sm font-semibold rounded-xl transition-all duration-300 whitespace-nowrap ${
+              className={`flex-1 min-w-[140px] px-6 py-3 text-sm font-semibold rounded-xl transition-all duration-300 whitespace-nowrap ${
                 activeSection === "team" 
                   ? "bg-primary text-white shadow-md scale-105" 
                   : "text-foreground hover:bg-muted/50"
@@ -91,7 +91,7 @@ const Career = () => {
             </button>
             <button
               onClick={() => scrollToSection("alerts")}
-              className={`px-6 py-3 text-sm font-semibold rounded-xl transition-all duration-300 whitespace-nowrap ${
+              className={`flex-1 min-w-[140px] px-6 py-3 text-sm font-semibold rounded-xl transition-all duration-300 whitespace-nowrap ${
                 activeSection === "alerts" 
                   ? "bg-primary text-white shadow-md scale-105" 
                   : "text-foreground hover:bg-muted/50"
