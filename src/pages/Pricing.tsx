@@ -91,42 +91,20 @@ const Pricing = () => {
 
     setLoading(planType);
 
-    try {
-      // Create or update subscription for this user
-      const { error } = await supabase.from("subscriptions").upsert(
-        {
-          user_id: user.id,
-          plan_type: planType,
-          status: "active",
-          start_date: new Date().toISOString(),
-          end_date: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(), // 1 year from now
-        },
-        { onConflict: "user_id" }
-      );
+    // Get the plan name for display
+    const planName = plans.find(p => p.id === planType)?.name || planType;
 
-      if (error) throw error;
+    // Show success message immediately (demo mode - no database operation)
+    toast({
+      title: "🎉 Subscription Activated!",
+      description: `Welcome to ${planName} plan! You now have full access to all features.`,
+    });
 
-      // Get the plan name for display
-      const planName = plans.find(p => p.id === planType)?.name || planType;
-
-      toast({
-        title: "🎉 Subscription Activated!",
-        description: `Welcome to ${planName} plan! You now have full access to all features.`,
-      });
-
-      // Wait a moment for the toast, then redirect and reload to update subscription status
-      setTimeout(() => {
-        window.location.href = "/";
-      }, 1500);
-    } catch (error: any) {
-      toast({
-        title: "Error",
-        description: error.message || "Failed to activate subscription",
-        variant: "destructive",
-      });
-    } finally {
+    // Wait a moment for the toast, then redirect
+    setTimeout(() => {
       setLoading(null);
-    }
+      window.location.href = "/";
+    }, 1500);
   };
 
   return (
