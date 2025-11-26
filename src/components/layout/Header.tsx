@@ -206,7 +206,7 @@ const Header = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          {hasActiveSubscription && (
+          {hasActiveSubscription() && (
             <nav className="hidden lg:flex items-center space-x-1">
               {/* Buy & Sell */}
               <Link
@@ -453,7 +453,7 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         <AnimatePresence>
-          {isMenuOpen && hasActiveSubscription && (
+          {isMenuOpen && hasActiveSubscription() && (
             <motion.div
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
