@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ArrowRight, Calculator, TrendingUp, Globe, BarChart3, Users, ChevronLeft, ChevronRight, Sparkles, Award, Zap, Rocket, LineChart, Target, Star, CheckCircle2, Play, MapPin } from "lucide-react";
+import { ArrowRight, Calculator, TrendingUp, Globe, BarChart3, Users, ChevronLeft, ChevronRight, Sparkles, Award, Zap, Rocket, LineChart, Target, Star, CheckCircle2, Play, MapPin, Factory, Car, Recycle, Download, FileText, Shield, Handshake, Mic } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
@@ -741,9 +741,10 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Polymers We Cover Section */}
-      <section className="py-24 px-4">
+      {/* Polymers We Cover Section - Complete Professional Format */}
+      <section className="py-24 px-4 bg-gradient-to-b from-background via-muted/10 to-background">
         <div className="container max-w-7xl mx-auto">
+          {/* Header */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -751,85 +752,326 @@ const Home = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-16"
           >
-            <Badge className="mb-4 bg-primary text-white border-primary shadow-md">
-              <Zap className="w-4 h-4 mr-2" />
-              Product Coverage
+            <Badge className="mb-6 bg-primary text-white border-0 px-6 py-2.5 shadow-lg">
+              <Zap className="w-5 h-5 mr-2" />
+              Complete Market Intelligence
             </Badge>
-            <h2 className="text-5xl font-bold mb-4">Polymers We Cover</h2>
-            <p className="text-lg text-muted-foreground">
-              Complete bazaar intelligence across the polymer spectrum
+            <h2 className="text-5xl md:text-6xl font-bold mb-6">Polymers We Cover</h2>
+            <p className="text-xl text-muted-foreground mb-4">
+              Complete Bazaar Intelligence Across the Polymer Spectrum
+            </p>
+            <p className="text-base text-muted-foreground max-w-5xl mx-auto leading-relaxed">
+              From upstream production to downstream applications, Polymer Bazaar illuminates the global polymer markets through accurate price discovery, trend forecasts, and actionable insights for traders, manufacturers, and analysts. Stay informed on everything from HDPE volatility in Asia to PVC supply chains in Europe, delivered via daily reports, SMS alerts, and our trading platform—trusted by 10,000+ professionals worldwide.
             </p>
           </motion.div>
 
-          {/* Polymer Visual Gallery */}
+          {/* Commodity Polymers */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16"
+            className="mb-16"
           >
-            <div className="md:col-span-2 relative h-80 rounded-2xl overflow-hidden shadow-2xl group">
-              <img
-                src={whyPolymerModernImg}
-                alt="Polymer Manufacturing"
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex items-end p-8">
-                <div>
-                  <h3 className="text-white text-3xl font-bold mb-2">Premium Quality Polymers</h3>
-                  <p className="text-white/90 text-lg">State-of-the-art manufacturing facilities worldwide</p>
+            <Card className="overflow-hidden border-2 shadow-xl hover:shadow-2xl transition-all duration-500">
+              <div className="bg-gradient-to-r from-primary to-red-600 text-white p-8">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                    <Factory className="w-8 h-8" />
+                  </div>
+                  <div>
+                    <h3 className="text-3xl font-bold">Commodity Polymers</h3>
+                    <p className="text-white/90 text-lg">200+ grade-specific prices tracked daily across Asia, Europe, and beyond</p>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="relative h-80 rounded-2xl overflow-hidden shadow-2xl group">
-              <img
-                src={heroBackgroundMotionImg}
-                alt="Polymer Innovation"
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent flex items-end p-6">
-                <div>
-                  <h3 className="text-white text-2xl font-bold mb-2">Innovation & Quality</h3>
-                  <p className="text-white/90 text-sm">Leading the future of polymer markets</p>
+              <CardContent className="p-8">
+                <div className="grid md:grid-cols-3 gap-6 mb-6">
+                  <div>
+                    <h4 className="font-bold text-lg mb-3 text-primary">Polyolefins</h4>
+                    <ul className="space-y-2 text-muted-foreground">
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                        <span>PP, HDPE, LLDPE, LDPE—for packaging and films</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-lg mb-3 text-primary">Vinyls & Styrenics</h4>
+                    <ul className="space-y-2 text-muted-foreground">
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                        <span>PVC, PS, EPS—for construction and insulation</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-lg mb-3 text-primary">Polyesters</h4>
+                    <ul className="space-y-2 text-muted-foreground">
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                        <span>PET bottle grade, fiber grade—for bottling and textiles</span>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
-              </div>
-            </div>
+                <div className="bg-muted/30 rounded-lg p-4">
+                  <p className="text-sm font-semibold text-foreground">
+                    <span className="text-primary">Coverage:</span> Daily spot prices, contract assessments, regional differentials, and volatility alerts
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {polymers.map((polymer, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
-              >
-                <Card className="group shadow-xl hover:shadow-[0_25px_70px_-15px_rgba(229,57,53,0.5)] transition-all duration-500 hover:scale-105 hover:border-primary/50 overflow-hidden h-full bg-gradient-to-br from-card to-accent-pink/10 border-2">
-                  <div className="relative overflow-hidden">
-                    {/* Gradient Overlay on Image */}
-                    <div className="absolute inset-0 z-10 bg-gradient-to-br from-primary/60 via-accent-red/50 to-accent-orange/40 mix-blend-multiply"></div>
-                    <img 
-                      src={polymer.image} 
-                      alt={polymer.name}
-                      className="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                    {/* Polymer Code Badge */}
-                    <div className="absolute bottom-4 left-4 z-20">
-                      <Badge className="bg-white/90 text-primary text-lg px-4 py-2 font-bold shadow-lg">
-                        {polymer.code}
-                      </Badge>
+          {/* Engineering Polymers */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="mb-16"
+          >
+            <Card className="overflow-hidden border-2 shadow-xl hover:shadow-2xl transition-all duration-500">
+              <div className="bg-gradient-to-r from-blue-600 to-primary text-white p-8">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                    <Car className="w-8 h-8" />
+                  </div>
+                  <div>
+                    <h3 className="text-3xl font-bold">Engineering Polymers</h3>
+                    <p className="text-white/90 text-lg">Technical grade analysis with end-use focus</p>
+                  </div>
+                </div>
+              </div>
+              <CardContent className="p-8">
+                <div className="grid md:grid-cols-3 gap-6 mb-6">
+                  <div>
+                    <h4 className="font-bold text-lg mb-3 text-primary">Automotive Grade</h4>
+                    <ul className="space-y-2 text-muted-foreground">
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                        <span>ABS, PC, Nylon 6, Nylon 66—for lightweight components</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-lg mb-3 text-primary">Electrical & Electronic</h4>
+                    <ul className="space-y-2 text-muted-foreground">
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                        <span>PBT, POM, PMMA—for housings and connectors</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-lg mb-3 text-primary">Industrial Applications</h4>
+                    <ul className="space-y-2 text-muted-foreground">
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                        <span>SAN, PPS, PEEK—for high-performance machinery</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div className="bg-muted/30 rounded-lg p-4">
+                  <p className="text-sm font-semibold text-foreground">
+                    <span className="text-primary">Coverage:</span> Technical specifications, substitute analysis, innovation trends, and supply risk assessments
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+
+          {/* Specialty & Performance Materials */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mb-16"
+          >
+            <Card className="overflow-hidden border-2 shadow-xl hover:shadow-2xl transition-all duration-500">
+              <div className="bg-gradient-to-r from-purple-600 to-primary text-white p-8">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                    <Target className="w-8 h-8" />
+                  </div>
+                  <div>
+                    <h3 className="text-3xl font-bold">Specialty & Performance Materials</h3>
+                    <p className="text-white/90 text-lg">Niche market intelligence and emerging applications</p>
+                  </div>
+                </div>
+              </div>
+              <CardContent className="p-8">
+                <div className="grid md:grid-cols-3 gap-6 mb-6">
+                  <div>
+                    <h4 className="font-bold text-lg mb-3 text-primary">Films & Packaging</h4>
+                    <ul className="space-y-2 text-muted-foreground">
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                        <span>BOPP, BOPET, CPP—for flexible and barrier solutions</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-lg mb-3 text-primary">Adhesives & Coatings</h4>
+                    <ul className="space-y-2 text-muted-foreground">
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                        <span>EVA, EMA, EAA—for bonding and surface protection</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-lg mb-3 text-primary">Medical & Consumer</h4>
+                    <ul className="space-y-2 text-muted-foreground">
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                        <span>High-purity grades, compliance tracking—for healthcare and goods</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div className="bg-muted/30 rounded-lg p-4">
+                  <p className="text-sm font-semibold text-foreground">
+                    <span className="text-primary">Coverage:</span> Application-specific pricing, regulatory impacts, and customization forecasts
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+
+          {/* Sustainable Polymers */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="mb-16"
+          >
+            <Card className="overflow-hidden border-2 shadow-xl hover:shadow-2xl transition-all duration-500">
+              <div className="bg-gradient-to-r from-green-600 to-primary text-white p-8">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                    <Recycle className="w-8 h-8" />
+                  </div>
+                  <div>
+                    <h3 className="text-3xl font-bold">Sustainable Polymers</h3>
+                    <p className="text-white/90 text-lg">Circular economy and regulatory intelligence for the future</p>
+                  </div>
+                </div>
+              </div>
+              <CardContent className="p-8">
+                <div className="grid md:grid-cols-3 gap-6 mb-6">
+                  <div>
+                    <h4 className="font-bold text-lg mb-3 text-primary">Recycled Materials</h4>
+                    <ul className="space-y-2 text-muted-foreground">
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                        <span>rPP, rPE, rPET, rABS—for eco-friendly sourcing</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-lg mb-3 text-primary">Bio-based Polymers</h4>
+                    <ul className="space-y-2 text-muted-foreground">
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                        <span>PLA, PHA, bio-PE—for renewable alternatives</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-lg mb-3 text-primary">Regulatory Tracking</h4>
+                    <ul className="space-y-2 text-muted-foreground">
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                        <span>EPR mandates, recycling targets, carbon policies</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div className="bg-muted/30 rounded-lg p-4">
+                  <p className="text-sm font-semibold text-foreground">
+                    <span className="text-primary">Coverage:</span> Quality premiums, supply chain mapping, and compliance tools to meet global standards
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+
+          {/* Why Industry Leaders Trust Our Coverage */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="mb-12"
+          >
+            <Card className="bg-gradient-to-br from-muted/30 to-muted/10 border-2">
+              <CardContent className="p-8">
+                <h3 className="text-2xl font-bold mb-8 text-center">Why Industry Leaders Trust Our Coverage</h3>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <CheckCircle2 className="w-6 h-6 text-primary" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-lg mb-2">Comprehensive</h4>
+                      <p className="text-muted-foreground">15+ polymer families, 300+ specific grades for full-spectrum analysis</p>
                     </div>
                   </div>
-                  <CardContent className="p-6">
-                    <h3 className="font-bold text-xl mb-3 group-hover:text-primary transition-colors">{polymer.name}</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed whitespace-pre-line">{polymer.description}</p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <CheckCircle2 className="w-6 h-6 text-primary" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-lg mb-2">Accurate</h4>
+                      <p className="text-muted-foreground">Industry-leading assessment methodology with daily validation</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <CheckCircle2 className="w-6 h-6 text-primary" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-lg mb-2">Actionable</h4>
+                      <p className="text-muted-foreground">Real-time intelligence for immediate trading and decision-making</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <CheckCircle2 className="w-6 h-6 text-primary" />
+                    </div>
+                    <div>
+                      <h4 className="font-bold text-lg mb-2">Expert-Driven</h4>
+                      <p className="text-muted-foreground">Insights from seasoned polymer specialists with 18+ years in the field</p>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+
+          {/* CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="flex flex-col sm:flex-row gap-6 justify-center"
+          >
+            <Button size="lg" className="bg-primary hover:bg-primary/90 text-white shadow-xl text-lg px-8 py-6 group">
+              <FileText className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
+              View Polymer Coverage Details
+              <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-2 transition-transform" />
+            </Button>
+            <Button size="lg" variant="outline" className="border-2 border-primary text-primary hover:bg-primary hover:text-white shadow-xl text-lg px-8 py-6 group">
+              <Download className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
+              Download Complete Polymer List
+            </Button>
+          </motion.div>
         </div>
       </section>
 
