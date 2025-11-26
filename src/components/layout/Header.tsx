@@ -152,21 +152,6 @@ const Header = () => {
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild className="rounded-md hover:bg-primary/5 focus:bg-primary/5 cursor-pointer">
-                  <Link to="/team" className="w-full px-3 py-2">
-                    Team
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild className="rounded-md hover:bg-primary/5 focus:bg-primary/5 cursor-pointer">
-                  <Link to="/timeline" className="w-full px-3 py-2">
-                    Timeline
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild className="rounded-md hover:bg-primary/5 focus:bg-primary/5 cursor-pointer">
-                  <Link to="/media" className="w-full px-3 py-2">
-                    Media
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild className="rounded-md hover:bg-primary/5 focus:bg-primary/5 cursor-pointer">
                   <Link to="/press" className="w-full px-3 py-2">
                     Press
                   </Link>
@@ -400,27 +385,6 @@ const Header = () => {
                 onClick={() => setIsMenuOpen(false)}
               >
                 About Us
-              </Link>
-              <Link
-                to="/team"
-                className="block px-6 py-2.5 text-sm text-muted-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-all duration-200"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Team
-              </Link>
-              <Link
-                to="/timeline"
-                className="block px-6 py-2.5 text-sm text-muted-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-all duration-200"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Timeline
-              </Link>
-              <Link
-                to="/media"
-                className="block px-6 py-2.5 text-sm text-muted-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-all duration-200"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Media
               </Link>
               <Link
                 to="/press"
