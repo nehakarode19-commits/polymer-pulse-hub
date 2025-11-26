@@ -7,7 +7,7 @@ import { useState } from "react";
 
 const Career = () => {
   const [email, setEmail] = useState("");
-  const [activeSection, setActiveSection] = useState("open-roles");
+  const [activeSection, setActiveSection] = useState("popular-category");
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -50,8 +50,28 @@ const Career = () => {
         <div className="bg-white rounded-2xl shadow-lg border border-border/30 p-2 mb-16">
           <nav className="flex items-center justify-center gap-1 flex-wrap">
             <button
+              onClick={() => scrollToSection("popular-category")}
+              className={`flex-1 min-w-[130px] px-5 py-3 text-sm font-semibold rounded-xl transition-all duration-300 whitespace-nowrap ${
+                activeSection === "popular-category" 
+                  ? "bg-primary text-white shadow-md scale-105" 
+                  : "text-foreground hover:bg-muted/50"
+              }`}
+            >
+              Popular Category
+            </button>
+            <button
+              onClick={() => scrollToSection("featured-jobs")}
+              className={`flex-1 min-w-[130px] px-5 py-3 text-sm font-semibold rounded-xl transition-all duration-300 whitespace-nowrap ${
+                activeSection === "featured-jobs" 
+                  ? "bg-primary text-white shadow-md scale-105" 
+                  : "text-foreground hover:bg-muted/50"
+              }`}
+            >
+              Featured Jobs
+            </button>
+            <button
               onClick={() => scrollToSection("open-roles")}
-              className={`flex-1 min-w-[140px] px-6 py-3 text-sm font-semibold rounded-xl transition-all duration-300 whitespace-nowrap ${
+              className={`flex-1 min-w-[130px] px-5 py-3 text-sm font-semibold rounded-xl transition-all duration-300 whitespace-nowrap ${
                 activeSection === "open-roles" 
                   ? "bg-primary text-white shadow-md scale-105" 
                   : "text-foreground hover:bg-muted/50"
@@ -61,7 +81,7 @@ const Career = () => {
             </button>
             <button
               onClick={() => scrollToSection("values")}
-              className={`flex-1 min-w-[140px] px-6 py-3 text-sm font-semibold rounded-xl transition-all duration-300 whitespace-nowrap ${
+              className={`flex-1 min-w-[130px] px-5 py-3 text-sm font-semibold rounded-xl transition-all duration-300 whitespace-nowrap ${
                 activeSection === "values" 
                   ? "bg-primary text-white shadow-md scale-105" 
                   : "text-foreground hover:bg-muted/50"
@@ -71,7 +91,7 @@ const Career = () => {
             </button>
             <button
               onClick={() => scrollToSection("growth")}
-              className={`flex-1 min-w-[140px] px-6 py-3 text-sm font-semibold rounded-xl transition-all duration-300 whitespace-nowrap ${
+              className={`flex-1 min-w-[130px] px-5 py-3 text-sm font-semibold rounded-xl transition-all duration-300 whitespace-nowrap ${
                 activeSection === "growth" 
                   ? "bg-primary text-white shadow-md scale-105" 
                   : "text-foreground hover:bg-muted/50"
@@ -81,7 +101,7 @@ const Career = () => {
             </button>
             <button
               onClick={() => scrollToSection("team")}
-              className={`flex-1 min-w-[140px] px-6 py-3 text-sm font-semibold rounded-xl transition-all duration-300 whitespace-nowrap ${
+              className={`flex-1 min-w-[130px] px-5 py-3 text-sm font-semibold rounded-xl transition-all duration-300 whitespace-nowrap ${
                 activeSection === "team" 
                   ? "bg-primary text-white shadow-md scale-105" 
                   : "text-foreground hover:bg-muted/50"
@@ -91,7 +111,7 @@ const Career = () => {
             </button>
             <button
               onClick={() => scrollToSection("alerts")}
-              className={`flex-1 min-w-[140px] px-6 py-3 text-sm font-semibold rounded-xl transition-all duration-300 whitespace-nowrap ${
+              className={`flex-1 min-w-[130px] px-5 py-3 text-sm font-semibold rounded-xl transition-all duration-300 whitespace-nowrap ${
                 activeSection === "alerts" 
                   ? "bg-primary text-white shadow-md scale-105" 
                   : "text-foreground hover:bg-muted/50"
@@ -104,6 +124,132 @@ const Career = () => {
 
         {/* Main Content */}
         <div className="max-w-5xl mx-auto">
+            {/* Popular Category Section */}
+            <section id="popular-category" className="mb-16 scroll-mt-24">
+              <h2 className="text-4xl font-bold mb-8 text-primary border-l-4 border-primary pl-4">
+                Popular Category
+              </h2>
+              
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {[
+                  { name: "Graphics & Design", icon: "🎨", positions: 357 },
+                  { name: "Code & Programming", icon: "💻", positions: 312 },
+                  { name: "Digital Marketing", icon: "📱", positions: 297 },
+                  { name: "Video & Animation", icon: "🎬", positions: 247 },
+                  { name: "Music & Audio", icon: "🎵", positions: 204 },
+                  { name: "Account & Finance", icon: "💰", positions: 167 },
+                  { name: "Health & Care", icon: "🏥", positions: 125 },
+                  { name: "Data & Science", icon: "📊", positions: 57 },
+                ].map((category, index) => (
+                  <Card key={index} className="hover:shadow-lg transition-all cursor-pointer group border-2 hover:border-primary">
+                    <CardContent className="p-6">
+                      <div className="text-4xl mb-4">{category.icon}</div>
+                      <h3 className="font-bold text-lg mb-2 group-hover:text-primary transition-colors">{category.name}</h3>
+                      <p className="text-sm text-muted-foreground">
+                        {category.positions} Open position
+                      </p>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </section>
+
+            {/* Featured Jobs Section */}
+            <section id="featured-jobs" className="mb-16 scroll-mt-24">
+              <h2 className="text-4xl font-bold mb-8 text-primary border-l-4 border-primary pl-4">
+                Featured Jobs
+              </h2>
+              
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {[
+                  {
+                    title: "Technical Support Specialist",
+                    company: "Polymer Bazaar",
+                    location: "Mumbai, India",
+                    salary: "₹5,00,000 - ₹7,00,000",
+                    type: "PART-TIME",
+                    typeColor: "bg-green-100 text-green-800"
+                  },
+                  {
+                    title: "Senior UX Designer",
+                    company: "Polymer Bazaar",
+                    location: "Mumbai, India",
+                    salary: "₹8,00,000 - ₹12,00,000",
+                    type: "FULL-TIME",
+                    typeColor: "bg-blue-100 text-blue-800"
+                  },
+                  {
+                    title: "Marketing Officer",
+                    company: "Polymer Bazaar",
+                    location: "Mumbai, India",
+                    salary: "₹6,00,000 - ₹9,00,000",
+                    type: "FULL-TIME",
+                    typeColor: "bg-blue-100 text-blue-800"
+                  },
+                  {
+                    title: "Data Analyst",
+                    company: "Polymer Bazaar",
+                    location: "Mumbai, India",
+                    salary: "₹5,00,000 - ₹8,00,000",
+                    type: "INTERNSHIP",
+                    typeColor: "bg-orange-100 text-orange-800"
+                  },
+                  {
+                    title: "Business Development Manager",
+                    company: "Polymer Bazaar",
+                    location: "Mumbai, India",
+                    salary: "₹10,00,000 - ₹15,00,000",
+                    type: "FULL-TIME",
+                    typeColor: "bg-blue-100 text-blue-800"
+                  },
+                  {
+                    title: "Full Stack Developer",
+                    company: "Polymer Bazaar",
+                    location: "Mumbai, India",
+                    salary: "₹8,00,000 - ₹12,00,000",
+                    type: "FULL-TIME",
+                    typeColor: "bg-blue-100 text-blue-800"
+                  }
+                ].map((job, index) => (
+                  <Card key={index} className="hover:shadow-lg transition-all border-2 hover:border-primary h-full">
+                    <CardContent className="p-6">
+                      <div className="flex items-start justify-between mb-4">
+                        <div className="flex items-center gap-3">
+                          <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                            <span className="text-xl font-bold text-primary">PB</span>
+                          </div>
+                          <div>
+                            <h3 className="font-bold text-lg">{job.title}</h3>
+                            <p className="text-sm text-muted-foreground">{job.company}</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-2 mb-4">
+                        <span className={`px-3 py-1 rounded text-xs font-medium ${job.typeColor}`}>
+                          {job.type}
+                        </span>
+                      </div>
+
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
+                        <span>📍 {job.location}</span>
+                      </div>
+                      
+                      <div className="text-sm text-muted-foreground mb-4">
+                        💰 {job.salary}
+                      </div>
+
+                      <Button 
+                        className="w-full bg-primary hover:bg-primary/90 text-white"
+                      >
+                        Apply Now
+                      </Button>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </section>
+
             {/* Open Roles Section */}
             <section id="open-roles" className="mb-16 scroll-mt-24">
               <h2 className="text-4xl font-bold mb-8 text-primary border-l-4 border-primary pl-4">
