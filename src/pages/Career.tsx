@@ -46,49 +46,61 @@ const Career = () => {
       </section>
 
       <div className="container max-w-7xl mx-auto py-12 px-4">
-        {/* Horizontal Navigation */}
-        <nav className="flex items-center justify-center gap-2 mb-12 flex-wrap">
-          <button
-            onClick={() => scrollToSection("open-roles")}
-            className={`px-6 py-2.5 text-sm font-medium rounded-lg transition-colors ${
-              activeSection === "open-roles" ? "bg-primary text-white" : "bg-card hover:bg-muted"
-            }`}
-          >
-            Open Roles
-          </button>
-          <button
-            onClick={() => scrollToSection("values")}
-            className={`px-6 py-2.5 text-sm font-medium rounded-lg transition-colors ${
-              activeSection === "values" ? "bg-primary text-white" : "bg-card hover:bg-muted"
-            }`}
-          >
-            Values
-          </button>
-          <button
-            onClick={() => scrollToSection("growth")}
-            className={`px-6 py-2.5 text-sm font-medium rounded-lg transition-colors ${
-              activeSection === "growth" ? "bg-primary text-white" : "bg-card hover:bg-muted"
-            }`}
-          >
-            Growth
-          </button>
-          <button
-            onClick={() => scrollToSection("team")}
-            className={`px-6 py-2.5 text-sm font-medium rounded-lg transition-colors ${
-              activeSection === "team" ? "bg-primary text-white" : "bg-card hover:bg-muted"
-            }`}
-          >
-            Inside the Hub
-          </button>
-          <button
-            onClick={() => scrollToSection("alerts")}
-            className={`px-6 py-2.5 text-sm font-medium rounded-lg transition-colors ${
-              activeSection === "alerts" ? "bg-primary text-white" : "bg-card hover:bg-muted"
-            }`}
-          >
-            Job Alerts
-          </button>
-        </nav>
+        {/* Horizontal Navigation - Enhanced Design */}
+        <div className="bg-white rounded-2xl shadow-lg border border-border/30 p-2 mb-16 max-w-4xl mx-auto">
+          <nav className="flex items-center justify-center gap-1 flex-wrap">
+            <button
+              onClick={() => scrollToSection("open-roles")}
+              className={`px-6 py-3 text-sm font-semibold rounded-xl transition-all duration-300 whitespace-nowrap ${
+                activeSection === "open-roles" 
+                  ? "bg-primary text-white shadow-md scale-105" 
+                  : "text-foreground hover:bg-muted/50"
+              }`}
+            >
+              Open Roles
+            </button>
+            <button
+              onClick={() => scrollToSection("values")}
+              className={`px-6 py-3 text-sm font-semibold rounded-xl transition-all duration-300 whitespace-nowrap ${
+                activeSection === "values" 
+                  ? "bg-primary text-white shadow-md scale-105" 
+                  : "text-foreground hover:bg-muted/50"
+              }`}
+            >
+              Values
+            </button>
+            <button
+              onClick={() => scrollToSection("growth")}
+              className={`px-6 py-3 text-sm font-semibold rounded-xl transition-all duration-300 whitespace-nowrap ${
+                activeSection === "growth" 
+                  ? "bg-primary text-white shadow-md scale-105" 
+                  : "text-foreground hover:bg-muted/50"
+              }`}
+            >
+              Growth
+            </button>
+            <button
+              onClick={() => scrollToSection("team")}
+              className={`px-6 py-3 text-sm font-semibold rounded-xl transition-all duration-300 whitespace-nowrap ${
+                activeSection === "team" 
+                  ? "bg-primary text-white shadow-md scale-105" 
+                  : "text-foreground hover:bg-muted/50"
+              }`}
+            >
+              Inside the Hub
+            </button>
+            <button
+              onClick={() => scrollToSection("alerts")}
+              className={`px-6 py-3 text-sm font-semibold rounded-xl transition-all duration-300 whitespace-nowrap ${
+                activeSection === "alerts" 
+                  ? "bg-primary text-white shadow-md scale-105" 
+                  : "text-foreground hover:bg-muted/50"
+              }`}
+            >
+              Job Alerts
+            </button>
+          </nav>
+        </div>
 
         {/* Main Content */}
         <div className="max-w-5xl mx-auto">
