@@ -168,12 +168,12 @@ const OTPAuth = () => {
         {/* Phone Entry Step */}
         {step === "phone" && (
           <div className="space-y-6">
-            <div className="space-y-2">
+            <div className="space-y-3">
               <h1 className="text-[36px] font-bold text-foreground">
                 Welcome to Polymer Bazaar
               </h1>
-              <p className="text-[15px] text-muted-foreground">
-                Please fill in your details below.
+              <p className="text-[16px] text-muted-foreground">
+                Sign in or create a new account using your mobile number.
               </p>
             </div>
 
@@ -201,11 +201,10 @@ const OTPAuth = () => {
                 {loading ? "Sending OTP..." : "Send OTP"}
               </Button>
 
-              <p className="text-center text-[14px] text-muted-foreground">
-                Already have an account?{" "}
-                <span className="text-primary font-medium cursor-pointer hover:underline">
-                  Login
-                </span>
+              <p className="text-center text-[13px] text-muted-foreground mt-2">
+                This screen automatically handles both{" "}
+                <span className="font-semibold text-foreground">Login</span> and{" "}
+                <span className="font-semibold text-foreground">Signup</span>
               </p>
             </form>
           </div>
@@ -214,12 +213,12 @@ const OTPAuth = () => {
         {/* OTP Verification Step */}
         {step === "otp" && (
           <div className="space-y-6">
-            <div className="space-y-2">
+            <div className="space-y-3">
               <h1 className="text-[36px] font-bold text-foreground">
-                Welcome to Polymer Bazaar
+                Verify Your Number
               </h1>
-              <p className="text-[15px] text-muted-foreground">
-                Please fill in your details below.
+              <p className="text-[16px] text-muted-foreground">
+                Enter the 6-digit OTP sent to your mobile number.
               </p>
             </div>
 
@@ -278,11 +277,8 @@ const OTPAuth = () => {
                 </p>
               </div>
 
-              <p className="text-center text-[14px] text-muted-foreground">
-                Already have an account?{" "}
-                <span className="text-primary font-medium cursor-pointer hover:underline">
-                  Login
-                </span>
+              <p className="text-center text-[13px] text-muted-foreground mt-2">
+                After verification, we'll automatically detect if you're a new or existing user.
               </p>
             </div>
           </div>
@@ -291,12 +287,12 @@ const OTPAuth = () => {
         {/* Signup Completion Step */}
         {step === "signup" && (
           <div className="space-y-6">
-            <div className="space-y-2">
+            <div className="space-y-3">
               <h1 className="text-[36px] font-bold text-foreground">
-                Welcome to Polymer Bazaar
+                Complete Your Profile
               </h1>
-              <p className="text-[15px] text-muted-foreground">
-                Please fill in your details below.
+              <p className="text-[16px] text-muted-foreground">
+                You're new here! Let's complete your account setup.
               </p>
             </div>
 
@@ -355,11 +351,8 @@ const OTPAuth = () => {
                 {loading ? "Creating Account..." : "Sign up"}
               </Button>
 
-              <p className="text-center text-[14px] text-muted-foreground">
-                Already have an account?{" "}
-                <span className="text-primary font-medium cursor-pointer hover:underline">
-                  Login
-                </span>
+              <p className="text-center text-[13px] text-muted-foreground mt-2">
+                Once completed, you'll be directed to choose a membership plan.
               </p>
             </form>
           </div>
