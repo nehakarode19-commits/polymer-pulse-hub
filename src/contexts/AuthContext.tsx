@@ -27,11 +27,13 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 const USE_MOCK_OTP = true; // Demo-only: mock phone OTP without backend
+
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [subscription, setSubscription] = useState<Subscription | null>(null);
   const [loading, setLoading] = useState(true);
+  const [mockPhoneNumber, setMockPhoneNumber] = useState<string>("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -138,9 +140,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const sendPhoneOTP = async (phone: string) => {
     if (USE_MOCK_OTP) {
-      // Demo mode: simulate async OTP send without backend
+      // Demo mode: store phone and simulate async OTP send
+      setMockPhoneNumber(phone);
       await new Promise((resolve) => setTimeout(resolve, 500));
-      console.warn("Using mock phone OTP flow. Configure phone provider to enable real SMS.");
+      console.warn("Mock OTP: Any 6-digit code will work");
       return;
     }
 
@@ -156,10 +159,36 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const verifyPhoneOTP = async (phone: string, otp: string) => {
     if (USE_MOCK_OTP) {
-      // Accept any 6-digit OTP in demo mode
+      // Accept any 6-digit OTP in demo mode and check for existing user
       if (otp.length !== 6) {
         throw new Error("Please enter a 6-digit OTP");
       }
+      
+      // Check if user with this phone exists in profiles
+      const { data: existingProfile } = await supabase
+        .from("profiles")
+        .select("id, full_name, email")
+        .eq("phone", phone)
+        .maybeSingle();
+      
+      if (existingProfile && existingProfile.full_name && existingProfile.email) {
+        // Existing user - sign them in
+        const mockUser = {
+          id: existingProfile.id,
+          phone: phone,
+          email: existingProfile.email,
+          app_metadata: {},
+          user_metadata: { full_name: existingProfile.full_name },
+          aud: 'authenticated',
+          created_at: new Date().toISOString(),
+        } as User;
+        
+        setUser(mockUser);
+        setSession({ user: mockUser, access_token: 'mock-token', refresh_token: 'mock-refresh' } as any);
+        return { isNewUser: false };
+      }
+      
+      // New user - they'll need to complete signup
       return { isNewUser: true };
     }
 
@@ -188,7 +217,31 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const completeSignup = async (fullName: string, email: string) => {
     if (USE_MOCK_OTP) {
-      // Demo mode: just navigate to pricing without touching backend
+      // Demo mode: create mock user and profile
+      const mockUserId = `mock-${Date.now()}`;
+      
+      // Create profile record
+      await supabase.from("profiles").insert({
+        id: mockUserId,
+        full_name: fullName,
+        email: email,
+        phone: mockPhoneNumber,
+      });
+      
+      // Create mock user session
+      const mockUser = {
+        id: mockUserId,
+        phone: mockPhoneNumber,
+        email: email,
+        app_metadata: {},
+        user_metadata: { full_name: fullName },
+        aud: 'authenticated',
+        created_at: new Date().toISOString(),
+      } as User;
+      
+      setUser(mockUser);
+      setSession({ user: mockUser, access_token: 'mock-token', refresh_token: 'mock-refresh' } as any);
+      
       navigate("/pricing");
       return;
     }
