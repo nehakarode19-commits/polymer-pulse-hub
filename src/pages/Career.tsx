@@ -46,55 +46,52 @@ const Career = () => {
       </section>
 
       <div className="container max-w-7xl mx-auto py-12 px-4">
-        <div className="flex gap-8">
-          {/* Sticky Navigation */}
-          <aside className="hidden lg:block w-64 shrink-0">
-            <nav className="sticky top-24 space-y-2">
-              <button
-                onClick={() => scrollToSection("open-roles")}
-                className={`w-full text-left px-4 py-2 rounded transition-colors ${
-                  activeSection === "open-roles" ? "bg-primary text-white" : "hover:bg-muted"
-                }`}
-              >
-                Open Roles
-              </button>
-              <button
-                onClick={() => scrollToSection("values")}
-                className={`w-full text-left px-4 py-2 rounded transition-colors ${
-                  activeSection === "values" ? "bg-primary text-white" : "hover:bg-muted"
-                }`}
-              >
-                Values
-              </button>
-              <button
-                onClick={() => scrollToSection("growth")}
-                className={`w-full text-left px-4 py-2 rounded transition-colors ${
-                  activeSection === "growth" ? "bg-primary text-white" : "hover:bg-muted"
-                }`}
-              >
-                Growth
-              </button>
-              <button
-                onClick={() => scrollToSection("team")}
-                className={`w-full text-left px-4 py-2 rounded transition-colors ${
-                  activeSection === "team" ? "bg-primary text-white" : "hover:bg-muted"
-                }`}
-              >
-                Inside the Hub
-              </button>
-              <button
-                onClick={() => scrollToSection("alerts")}
-                className={`w-full text-left px-4 py-2 rounded transition-colors ${
-                  activeSection === "alerts" ? "bg-primary text-white" : "hover:bg-muted"
-                }`}
-              >
-                Job Alerts
-              </button>
-            </nav>
-          </aside>
+        {/* Horizontal Navigation */}
+        <nav className="flex items-center justify-center gap-2 mb-12 flex-wrap">
+          <button
+            onClick={() => scrollToSection("open-roles")}
+            className={`px-6 py-2.5 text-sm font-medium rounded-lg transition-colors ${
+              activeSection === "open-roles" ? "bg-primary text-white" : "bg-card hover:bg-muted"
+            }`}
+          >
+            Open Roles
+          </button>
+          <button
+            onClick={() => scrollToSection("values")}
+            className={`px-6 py-2.5 text-sm font-medium rounded-lg transition-colors ${
+              activeSection === "values" ? "bg-primary text-white" : "bg-card hover:bg-muted"
+            }`}
+          >
+            Values
+          </button>
+          <button
+            onClick={() => scrollToSection("growth")}
+            className={`px-6 py-2.5 text-sm font-medium rounded-lg transition-colors ${
+              activeSection === "growth" ? "bg-primary text-white" : "bg-card hover:bg-muted"
+            }`}
+          >
+            Growth
+          </button>
+          <button
+            onClick={() => scrollToSection("team")}
+            className={`px-6 py-2.5 text-sm font-medium rounded-lg transition-colors ${
+              activeSection === "team" ? "bg-primary text-white" : "bg-card hover:bg-muted"
+            }`}
+          >
+            Inside the Hub
+          </button>
+          <button
+            onClick={() => scrollToSection("alerts")}
+            className={`px-6 py-2.5 text-sm font-medium rounded-lg transition-colors ${
+              activeSection === "alerts" ? "bg-primary text-white" : "bg-card hover:bg-muted"
+            }`}
+          >
+            Job Alerts
+          </button>
+        </nav>
 
-          {/* Main Content */}
-          <div className="flex-1">
+        {/* Main Content */}
+        <div className="max-w-5xl mx-auto">
             {/* Open Roles Section */}
             <section id="open-roles" className="mb-16 scroll-mt-24">
               <h2 className="text-4xl font-bold mb-8 text-primary border-l-4 border-primary pl-4">
@@ -395,7 +392,6 @@ const Career = () => {
               </Card>
             </section>
           </div>
-        </div>
       </div>
     </div>
   );
