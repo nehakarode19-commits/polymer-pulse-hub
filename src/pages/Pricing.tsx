@@ -9,7 +9,7 @@ import { useToast } from "@/hooks/use-toast";
 import { motion } from "framer-motion";
 
 const Pricing = () => {
-  const { user } = useAuth();
+  const { user, refreshSubscription } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
   const [loading, setLoading] = useState<string | null>(null);
@@ -91,31 +91,44 @@ const Pricing = () => {
 
     setLoading(planType);
 
-    // Get the plan name for display
-    const planName = plans.find(p => p.id === planType)?.name || planType;
+    try {
+      // Get the plan name for display
+      const planName = plans.find(p => p.id === planType)?.name || planType;
 
-    // Store mock subscription in localStorage for demo mode
-    const mockSubscription = {
-      id: crypto.randomUUID(),
-      user_id: user.id,
-      plan_type: planType,
-      status: "active",
-      start_date: new Date().toISOString(),
-      end_date: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(), // 1 year from now
-    };
-    localStorage.setItem("demo_subscription", JSON.stringify(mockSubscription));
+      // Store mock subscription in localStorage for demo mode
+      const mockSubscription = {
+        id: crypto.randomUUID(),
+        user_id: user.id,
+        plan_type: planType,
+        status: "active",
+        start_date: new Date().toISOString(),
+        end_date: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toISOString(), // 1 year from now
+        created_at: new Date().toISOString(),
+      };
+      localStorage.setItem("demo_subscription", JSON.stringify(mockSubscription));
 
-    // Show success message immediately (demo mode - no database operation)
-    toast({
-      title: "🎉 Subscription Activated!",
-      description: `Welcome to ${planName} plan! You now have full access to all features.`,
-    });
+      // Immediately refresh subscription in AuthContext to update access
+      await refreshSubscription();
 
-    // Wait a moment for the toast, then redirect
-    setTimeout(() => {
+      // Show success message
+      toast({
+        title: "🎉 Subscription Activated!",
+        description: `Welcome to ${planName} plan! You now have full access to all features.`,
+      });
+
+      // Wait a moment for the toast, then navigate to home
+      setTimeout(() => {
+        setLoading(null);
+        navigate("/");
+      }, 1500);
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: error.message || "Failed to activate subscription",
+        variant: "destructive",
+      });
       setLoading(null);
-      window.location.href = "/";
-    }, 1500);
+    }
   };
 
   return (
