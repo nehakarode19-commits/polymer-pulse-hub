@@ -217,8 +217,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const completeSignup = async (fullName: string, email: string) => {
     if (USE_MOCK_OTP) {
-      // Demo mode: create mock user and profile
-      const mockUserId = `mock-${Date.now()}`;
+      // Demo mode: create mock user and profile with proper UUID format
+      const mockUserId = crypto.randomUUID();
       
       // Create profile record
       await supabase.from("profiles").insert({
