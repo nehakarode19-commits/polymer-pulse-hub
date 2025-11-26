@@ -689,8 +689,10 @@ const Home = () => {
                 <img
                   src={worldMapLight}
                   alt="Global Market Coverage"
-                  className="w-full h-auto"
+                  className="w-full h-auto grayscale brightness-110 contrast-75 opacity-40"
                 />
+                {/* Light grey overlay for subtle map appearance */}
+                <div className="absolute inset-0 bg-muted/30 pointer-events-none"></div>
                 
                 {/* Interactive Pin Points */}
                 {[
