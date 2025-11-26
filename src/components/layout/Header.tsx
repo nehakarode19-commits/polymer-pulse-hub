@@ -9,11 +9,11 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Menu, User, ChevronDown } from "lucide-react";
+import { Menu, User, ChevronDown, X, Shield } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { SubscriptionModal } from "@/components/SubscriptionModal";
 import { useUserRole } from "@/hooks/useUserRole";
-import { Shield } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -99,446 +99,391 @@ const Header = () => {
   const servicesItems = [
     { label: "Events", path: "/events" },
     { label: "Press Release", path: "/press-release" },
-    { label: "Whatsapp Chatbot", path: "/whatsapp-chatbot" },
+    { label: "WhatsApp Chatbot", path: "/whatsapp-chatbot" },
   ];
 
-  // Show subscription modal when non-subscribed user tries to access content
-  const handleRestrictedAccess = () => {
-    if (!user) {
-      navigate("/login");
-    } else {
-      setShowSubscriptionModal(true);
-    }
+  const handleSignOut = async () => {
+    await signOut();
+    navigate("/login");
   };
 
-  // Only show navigation items if user has active subscription
-  const showNavigation = user && hasActiveSubscription();
+  if (!user || !hasActiveSubscription) {
+    return (
+      <>
+        <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+          <div className="container flex h-20 items-center justify-between px-4">
+            <Link to="/" className="flex items-center space-x-2 transition-transform hover:scale-105">
+              <img src={logo} alt="Polymer Bazaar" className="h-12 w-auto" />
+            </Link>
+            <div className="flex items-center gap-4">
+              <Link to="/pricing">
+                <Button 
+                  variant="outline" 
+                  className="border-primary/50 hover:border-primary hover:bg-primary/5 transition-all duration-300"
+                >
+                  View Plans
+                </Button>
+              </Link>
+              <Link to="/login">
+                <Button className="bg-primary hover:bg-primary-dark shadow-md hover:shadow-lg transition-all duration-300">
+                  Sign In
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </header>
+        <SubscriptionModal 
+          open={showSubscriptionModal} 
+          onOpenChange={setShowSubscriptionModal} 
+        />
+      </>
+    );
+  }
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/50 bg-white/95 backdrop-blur-md shadow-md">
-      <div className="container flex h-16 sm:h-20 items-center justify-between px-4 sm:px-6">
-        {/* Logo - Always visible and clickable to Home */}
-        <Link to="/" className="flex items-center flex-shrink-0" aria-label="Go to Polymer Bazaar home">
-          <img
-            src={logoNav}
-            alt="Polymer Bazaar"
-            className="h-10 sm:h-12 w-auto object-contain hover:scale-105 transition-transform duration-300"
-          />
-        </Link>
+    <>
+      <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur-md supports-[backdrop-filter]:bg-background/80 shadow-sm">
+        <div className="container flex h-20 items-center justify-between px-4">
+          {/* Logo */}
+          <Link to="/" className="flex items-center space-x-2 transition-transform hover:scale-105 duration-300">
+            <img src={logoNav} alt="Polymer Bazaar" className="h-10 w-auto" />
+          </Link>
 
-        {/* Desktop Navigation - Modern and attractive */}
-        {showNavigation && (
-          <nav className="hidden lg:flex items-center justify-center flex-1 gap-1 mx-4 xl:mx-8">
-            {/* Buy & Sell */}
-            <Link
-              to="/buy-sell"
-              className="px-4 py-2.5 text-sm font-medium text-foreground rounded-lg hover:bg-primary/5 hover:text-primary transition-all duration-200 whitespace-nowrap"
-            >
-              Buy & Sell
-            </Link>
+          {/* Desktop Navigation */}
+          {hasActiveSubscription && (
+            <nav className="hidden lg:flex items-center space-x-1">
+              {/* Buy & Sell */}
+              <Link
+                to="/buy-sell"
+                className="px-4 py-2 text-sm font-medium text-foreground rounded-lg hover:bg-primary/5 hover:text-primary transition-all duration-200"
+              >
+                Buy & Sell
+              </Link>
 
-            {/* About Dropdown */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="px-4 py-2.5 text-sm font-medium text-foreground rounded-lg hover:bg-primary/5 hover:text-primary transition-all duration-200 h-auto">
-                  About
-                  <ChevronDown className="ml-1.5 h-4 w-4 transition-transform group-hover:rotate-180" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56 bg-white border border-border/50 shadow-xl z-[100] rounded-lg p-2">
-                <DropdownMenuItem asChild className="rounded-md hover:bg-primary/5 focus:bg-primary/5 cursor-pointer">
-                  <Link to="/about" className="w-full px-3 py-2">
-                    About Us
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild className="rounded-md hover:bg-primary/5 focus:bg-primary/5 cursor-pointer">
-                  <Link to="/our-methodology" className="w-full px-3 py-2">
-                    Our Methodology
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild className="rounded-md hover:bg-primary/5 focus:bg-primary/5 cursor-pointer">
-                  <Link to="/partnerships" className="w-full px-3 py-2">
-                    Strategic Alliances & Delegations
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild className="rounded-md hover:bg-primary/5 focus:bg-primary/5 cursor-pointer">
-                  <Link to="/careers-detailed" className="w-full px-3 py-2">
-                    Careers at Polymer Bazaar
-                  </Link>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-            
-            {/* Crude & Feedstock Dropdown */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="px-4 py-2.5 text-sm font-medium text-foreground rounded-lg hover:bg-primary/5 hover:text-primary transition-all duration-200 h-auto">
-                  Crude & Feedstock
-                  <ChevronDown className="ml-1.5 h-4 w-4 transition-transform group-hover:rotate-180" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56 bg-white border border-border/50 shadow-xl z-[100] rounded-lg p-2 max-h-80 overflow-y-auto">
-                {crudeFeedstockItems.map((item) => (
-                  <DropdownMenuItem key={item.label} asChild className="rounded-md hover:bg-primary/5 focus:bg-primary/5 cursor-pointer">
-                    <Link to={item.path} className="w-full px-3 py-2">
-                      {item.label}
-                    </Link>
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
-
-            {/* Global Bazaar Dropdown */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="px-4 py-2.5 text-sm font-medium text-foreground rounded-lg hover:bg-primary/5 hover:text-primary transition-all duration-200 h-auto">
-                  Global Bazaar
-                  <ChevronDown className="ml-1.5 h-4 w-4 transition-transform group-hover:rotate-180" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56 bg-white border border-border/50 shadow-xl z-[100] rounded-lg p-2 max-h-80 overflow-y-auto">
-                {globalBazaarItems.map((item) => (
-                  <DropdownMenuItem key={item.label} asChild className="rounded-md hover:bg-primary/5 focus:bg-primary/5 cursor-pointer">
-                    <Link to={item.path} className="w-full px-3 py-2">
-                      {item.label}
-                    </Link>
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
-
-            {/* Indian Bazaar Dropdown */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="px-4 py-2.5 text-sm font-medium text-foreground rounded-lg hover:bg-primary/5 hover:text-primary transition-all duration-200 h-auto">
-                  Indian Bazaar
-                  <ChevronDown className="ml-1.5 h-4 w-4 transition-transform group-hover:rotate-180" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56 bg-white border border-border/50 shadow-xl z-[100] rounded-lg p-2 max-h-80 overflow-y-auto">
-                {indianBazaarItems.map((item) => (
-                  <DropdownMenuItem key={item.label} asChild className="rounded-md hover:bg-primary/5 focus:bg-primary/5 cursor-pointer">
-                    <Link to={item.path} className="w-full px-3 py-2">
-                      {item.label}
-                    </Link>
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
-
-            {/* Historical Data Dropdown */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="px-4 py-2.5 text-sm font-medium text-foreground rounded-lg hover:bg-primary/5 hover:text-primary transition-all duration-200 h-auto">
-                  Historical Data
-                  <ChevronDown className="ml-1.5 h-4 w-4 transition-transform group-hover:rotate-180" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56 bg-white border border-border/50 shadow-xl z-[100] rounded-lg p-2">
-                {historicalDataItems.map((item) => (
-                  <DropdownMenuItem key={item.label} asChild className="rounded-md hover:bg-primary/5 focus:bg-primary/5 cursor-pointer">
-                    <Link to={item.path} className="w-full px-3 py-2">
-                      {item.label}
-                    </Link>
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
-
-            {/* Future Trend Dropdown */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="px-4 py-2.5 text-sm font-medium text-foreground rounded-lg hover:bg-primary/5 hover:text-primary transition-all duration-200 h-auto">
-                  Future Trend
-                  <ChevronDown className="ml-1.5 h-4 w-4 transition-transform group-hover:rotate-180" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56 bg-white border border-border/50 shadow-xl z-[100] rounded-lg p-2 max-h-96 overflow-y-auto">
-                {futureTrendItems.map((item) => (
-                  <DropdownMenuItem key={item.label} asChild className="rounded-md hover:bg-primary/5 focus:bg-primary/5 cursor-pointer">
-                    <Link to={item.path} className="w-full px-3 py-2">
-                      {item.label}
-                    </Link>
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
-
-            {/* Services Dropdown */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="px-4 py-2.5 text-sm font-medium text-foreground rounded-lg hover:bg-primary/5 hover:text-primary transition-all duration-200 h-auto">
-                  Services
-                  <ChevronDown className="ml-1.5 h-4 w-4 transition-transform group-hover:rotate-180" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56 bg-white border border-border/50 shadow-xl z-[100] rounded-lg p-2">
-                {servicesItems.map((item) => (
-                  <DropdownMenuItem key={item.label} asChild className="rounded-md hover:bg-primary/5 focus:bg-primary/5 cursor-pointer">
-                    <Link to={item.path} className="w-full px-3 py-2">
-                      {item.label}
-                    </Link>
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
-
-            {/* Career */}
-            <Link
-              to="/career"
-              className="px-4 py-2.5 text-sm font-medium text-foreground rounded-lg hover:bg-primary/5 hover:text-primary transition-all duration-200"
-            >
-              Career
-            </Link>
-
-          </nav>
-        )}
-
-        {/* Right Side Actions */}
-        <div className="flex items-center gap-2 sm:gap-3">
-          {user ? (
-            <>
-              {/* Admin Button - Only visible to admins */}
-              {isAdmin && (
-                <Button asChild variant="outline" size="sm" className="hidden sm:flex border-primary/30 text-primary hover:bg-primary hover:text-white hover:border-primary transition-all duration-200">
-                  <Link to="/admin">
-                    <Shield className="h-4 w-4 sm:mr-2" />
-                    <span className="hidden sm:inline">Admin</span>
-                  </Link>
-                </Button>
-              )}
-              
+              {/* About Dropdown */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="flex items-center gap-2 rounded-lg hover:bg-primary/5 transition-all duration-200 h-9 sm:h-10 px-2 sm:px-3">
-                    <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-primary/10 flex items-center justify-center">
-                      <User className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-primary" />
-                    </div>
-                    <span className="hidden md:inline font-medium text-sm">{user.email?.split('@')[0]}</span>
-                    <ChevronDown className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+                  <Button 
+                    variant="ghost" 
+                    className="px-4 py-2 text-sm font-medium text-foreground rounded-lg hover:bg-primary/5 hover:text-primary transition-all duration-200 h-auto group"
+                  >
+                    About
+                    <ChevronDown className="ml-1.5 h-4 w-4 transition-transform duration-200 group-data-[state=open]:rotate-180" />
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-56 bg-white border border-border/50 shadow-xl z-[100] rounded-lg p-2">
-                  <DropdownMenuItem asChild className="rounded-md hover:bg-primary/5 focus:bg-primary/5 cursor-pointer">
-                    <Link to="/profile" className="w-full px-3 py-2">
-                      <User className="h-4 w-4 mr-2 inline" />
-                      My Profile
+                <DropdownMenuContent className="w-64 bg-background/95 backdrop-blur-lg border border-border/50 shadow-xl z-[100] rounded-xl p-2 animate-in fade-in-0 zoom-in-95">
+                  <DropdownMenuItem asChild className="rounded-lg hover:bg-primary/5 focus:bg-primary/5 cursor-pointer transition-colors">
+                    <Link to="/about" className="w-full px-3 py-2.5">
+                      <span className="font-medium">About Us</span>
                     </Link>
                   </DropdownMenuItem>
-                  <DropdownMenuItem asChild className="rounded-md hover:bg-primary/5 focus:bg-primary/5 cursor-pointer">
-                    <Link to="/pricing" className="w-full px-3 py-2">
-                      <Shield className="h-4 w-4 mr-2 inline" />
-                      My Subscription
+                  <DropdownMenuItem asChild className="rounded-lg hover:bg-primary/5 focus:bg-primary/5 cursor-pointer transition-colors">
+                    <Link to="/our-methodology" className="w-full px-3 py-2.5">
+                      <span className="font-medium">Our Methodology</span>
                     </Link>
                   </DropdownMenuItem>
-                  <div className="h-px bg-border/50 my-1" />
-                  <DropdownMenuItem onClick={signOut} className="rounded-md hover:bg-destructive/10 focus:bg-destructive/10 cursor-pointer text-destructive px-3 py-2">
-                    Logout
+                  <DropdownMenuItem asChild className="rounded-lg hover:bg-primary/5 focus:bg-primary/5 cursor-pointer transition-colors">
+                    <Link to="/partnerships" className="w-full px-3 py-2.5">
+                      <span className="font-medium">Strategic Alliances & Delegations</span>
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild className="rounded-lg hover:bg-primary/5 focus:bg-primary/5 cursor-pointer transition-colors">
+                    <Link to="/careers-detailed" className="w-full px-3 py-2.5">
+                      <span className="font-medium">Careers at Polymer Bazaar</span>
+                    </Link>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
-            </>
-          ) : (
-            <>
-              {isAdmin && (
-                <Button asChild variant="outline" size="sm" className="hidden sm:flex border-primary/30 text-primary hover:bg-primary hover:text-white transition-all duration-200">
-                  <Link to="/admin">
-                    <Shield className="h-4 w-4" />
-                  </Link>
-                </Button>
-              )}
-              <Button asChild size="sm" className="bg-primary hover:bg-primary-dark shadow-sm hover:shadow-md transition-all duration-200 h-9 text-sm">
-                <Link to="/login">Login</Link>
-              </Button>
-            </>
+
+              {/* Crude & Feedstock Dropdown */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button 
+                    variant="ghost" 
+                    className="px-4 py-2 text-sm font-medium text-foreground rounded-lg hover:bg-primary/5 hover:text-primary transition-all duration-200 h-auto group"
+                  >
+                    Crude & Feedstock
+                    <ChevronDown className="ml-1.5 h-4 w-4 transition-transform duration-200 group-data-[state=open]:rotate-180" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-64 bg-background/95 backdrop-blur-lg border border-border/50 shadow-xl z-[100] rounded-xl p-2 max-h-80 overflow-y-auto animate-in fade-in-0 zoom-in-95">
+                  {crudeFeedstockItems.map((item) => (
+                    <DropdownMenuItem key={item.label} asChild className="rounded-lg hover:bg-primary/5 focus:bg-primary/5 cursor-pointer transition-colors">
+                      <Link to={item.path} className="w-full px-3 py-2.5">
+                        <span className="font-medium">{item.label}</span>
+                      </Link>
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+
+              {/* Global Bazaar Dropdown */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button 
+                    variant="ghost" 
+                    className="px-4 py-2 text-sm font-medium text-foreground rounded-lg hover:bg-primary/5 hover:text-primary transition-all duration-200 h-auto group"
+                  >
+                    Global Bazaar
+                    <ChevronDown className="ml-1.5 h-4 w-4 transition-transform duration-200 group-data-[state=open]:rotate-180" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-64 bg-background/95 backdrop-blur-lg border border-border/50 shadow-xl z-[100] rounded-xl p-2 max-h-80 overflow-y-auto animate-in fade-in-0 zoom-in-95">
+                  {globalBazaarItems.map((item) => (
+                    <DropdownMenuItem key={item.label} asChild className="rounded-lg hover:bg-primary/5 focus:bg-primary/5 cursor-pointer transition-colors">
+                      <Link to={item.path} className="w-full px-3 py-2.5">
+                        <span className="font-medium">{item.label}</span>
+                      </Link>
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+
+              {/* Indian Bazaar Dropdown */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button 
+                    variant="ghost" 
+                    className="px-4 py-2 text-sm font-medium text-foreground rounded-lg hover:bg-primary/5 hover:text-primary transition-all duration-200 h-auto group"
+                  >
+                    Indian Bazaar
+                    <ChevronDown className="ml-1.5 h-4 w-4 transition-transform duration-200 group-data-[state=open]:rotate-180" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-72 bg-background/95 backdrop-blur-lg border border-border/50 shadow-xl z-[100] rounded-xl p-2 animate-in fade-in-0 zoom-in-95">
+                  {indianBazaarItems.map((item) => (
+                    <DropdownMenuItem key={item.label} asChild className="rounded-lg hover:bg-primary/5 focus:bg-primary/5 cursor-pointer transition-colors">
+                      <Link to={item.path} className="w-full px-3 py-2.5">
+                        <span className="font-medium">{item.label}</span>
+                      </Link>
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+
+              {/* Historical Data Dropdown */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button 
+                    variant="ghost" 
+                    className="px-4 py-2 text-sm font-medium text-foreground rounded-lg hover:bg-primary/5 hover:text-primary transition-all duration-200 h-auto group"
+                  >
+                    Historical Data
+                    <ChevronDown className="ml-1.5 h-4 w-4 transition-transform duration-200 group-data-[state=open]:rotate-180" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-56 bg-background/95 backdrop-blur-lg border border-border/50 shadow-xl z-[100] rounded-xl p-2 animate-in fade-in-0 zoom-in-95">
+                  {historicalDataItems.map((item) => (
+                    <DropdownMenuItem key={item.label} asChild className="rounded-lg hover:bg-primary/5 focus:bg-primary/5 cursor-pointer transition-colors">
+                      <Link to={item.path} className="w-full px-3 py-2.5">
+                        <span className="font-medium">{item.label}</span>
+                      </Link>
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+
+              {/* Future Trend Dropdown */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button 
+                    variant="ghost" 
+                    className="px-4 py-2 text-sm font-medium text-foreground rounded-lg hover:bg-primary/5 hover:text-primary transition-all duration-200 h-auto group"
+                  >
+                    Future Trend
+                    <ChevronDown className="ml-1.5 h-4 w-4 transition-transform duration-200 group-data-[state=open]:rotate-180" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-64 bg-background/95 backdrop-blur-lg border border-border/50 shadow-xl z-[100] rounded-xl p-2 max-h-80 overflow-y-auto animate-in fade-in-0 zoom-in-95">
+                  {futureTrendItems.map((item) => (
+                    <DropdownMenuItem key={item.label} asChild className="rounded-lg hover:bg-primary/5 focus:bg-primary/5 cursor-pointer transition-colors">
+                      <Link to={item.path} className="w-full px-3 py-2.5">
+                        <span className="font-medium">{item.label}</span>
+                      </Link>
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+
+              {/* Services Dropdown */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button 
+                    variant="ghost" 
+                    className="px-4 py-2 text-sm font-medium text-foreground rounded-lg hover:bg-primary/5 hover:text-primary transition-all duration-200 h-auto group"
+                  >
+                    Services
+                    <ChevronDown className="ml-1.5 h-4 w-4 transition-transform duration-200 group-data-[state=open]:rotate-180" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-56 bg-background/95 backdrop-blur-lg border border-border/50 shadow-xl z-[100] rounded-xl p-2 animate-in fade-in-0 zoom-in-95">
+                  {servicesItems.map((item) => (
+                    <DropdownMenuItem key={item.label} asChild className="rounded-lg hover:bg-primary/5 focus:bg-primary/5 cursor-pointer transition-colors">
+                      <Link to={item.path} className="w-full px-3 py-2.5">
+                        <span className="font-medium">{item.label}</span>
+                      </Link>
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+
+              {/* Career */}
+              <Link
+                to="/career"
+                className="px-4 py-2 text-sm font-medium text-foreground rounded-lg hover:bg-primary/5 hover:text-primary transition-all duration-200"
+              >
+                Career
+              </Link>
+            </nav>
           )}
 
-          {/* Mobile Menu Toggle */}
-          <Button
-            variant="ghost"
-            size="icon"
-            className="lg:hidden hover:bg-primary/5 transition-all duration-200"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            <Menu className="h-6 w-6" />
-          </Button>
+          {/* Right Side Actions */}
+          <div className="flex items-center gap-3">
+            {isAdmin && (
+              <Link to="/admin">
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className="hidden lg:flex items-center gap-2 border-primary/30 hover:border-primary hover:bg-primary/5 transition-all duration-300"
+                >
+                  <Shield className="h-4 w-4" />
+                  <span>Admin</span>
+                </Button>
+              </Link>
+            )}
+
+            {/* User Dropdown */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button 
+                  variant="outline" 
+                  size="icon" 
+                  className="rounded-full border-primary/30 hover:border-primary hover:bg-primary/5 transition-all duration-300"
+                >
+                  <User className="h-5 w-5" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56 bg-background/95 backdrop-blur-lg border border-border/50 shadow-xl z-[100] rounded-xl p-2 animate-in fade-in-0 zoom-in-95">
+                <DropdownMenuItem asChild className="rounded-lg hover:bg-primary/5 focus:bg-primary/5 cursor-pointer transition-colors">
+                  <Link to="/profile" className="w-full px-3 py-2.5">
+                    <span className="font-medium">Profile</span>
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild className="rounded-lg hover:bg-primary/5 focus:bg-primary/5 cursor-pointer transition-colors">
+                  <Link to="/pricing" className="w-full px-3 py-2.5">
+                    <span className="font-medium">Subscription</span>
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem 
+                  onClick={handleSignOut}
+                  className="rounded-lg hover:bg-destructive/10 focus:bg-destructive/10 cursor-pointer text-destructive transition-colors"
+                >
+                  <span className="w-full px-3 py-2.5 font-medium">Sign Out</span>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            {/* Mobile Menu Button */}
+            <Button
+              variant="ghost"
+              size="icon"
+              className="lg:hidden rounded-full hover:bg-primary/5 transition-all duration-300"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </Button>
+          </div>
         </div>
-      </div>
 
-      {/* Mobile Menu */}
-      {isMenuOpen && showNavigation && (
-        <div className="lg:hidden border-t border-border/50 bg-white/95 backdrop-blur-md shadow-lg">
-          <nav className="container px-4 py-4 space-y-1">
-            {/* Home */}
-            <Link
-              to="/"
-              className="block px-4 py-3 text-sm font-medium text-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-all duration-200"
-              onClick={() => setIsMenuOpen(false)}
+        {/* Mobile Navigation */}
+        <AnimatePresence>
+          {isMenuOpen && hasActiveSubscription && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="lg:hidden border-t border-border/40 bg-background/98 backdrop-blur-lg"
             >
-              Home
-            </Link>
-
-            {/* Buy & Sell */}
-            <Link
-              to="/buy-sell"
-              className="block px-4 py-3 text-sm font-medium text-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-all duration-200 whitespace-nowrap"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Buy & Sell
-            </Link>
-
-            {/* About Submenu */}
-            <div className="space-y-1">
-              <div className="px-4 py-2 text-xs font-semibold text-muted-foreground">About</div>
-              <Link
-                to="/about"
-                className="block px-6 py-2.5 text-sm text-muted-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-all duration-200"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                About Us
-              </Link>
-              <Link
-                to="/our-methodology"
-                className="block px-6 py-2.5 text-sm text-muted-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-all duration-200"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Our Methodology
-              </Link>
-              <Link
-                to="/partnerships"
-                className="block px-6 py-2.5 text-sm text-muted-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-all duration-200"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Strategic Alliances & Delegations
-              </Link>
-              <Link
-                to="/careers-detailed"
-                className="block px-6 py-2.5 text-sm text-muted-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-all duration-200"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Careers at Polymer Bazaar
-              </Link>
-            </div>
-
-            {/* Crude & Feedstock in Mobile */}
-            <div className="space-y-1 mt-2">
-              <div className="px-4 py-2 text-sm font-bold text-foreground/80 uppercase tracking-wide">
-                Crude & Feedstock
-              </div>
-              {crudeFeedstockItems.map((item) => (
+              <nav className="container px-4 py-6 space-y-2 max-h-[calc(100vh-5rem)] overflow-y-auto">
+                {/* Buy & Sell */}
                 <Link
-                  key={item.label}
-                  to={item.path}
-                  className="block px-8 py-2.5 text-sm text-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-all duration-200"
+                  to="/buy-sell"
+                  className="block px-4 py-3 text-sm font-medium text-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-all duration-200"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  {item.label}
+                  Buy & Sell
                 </Link>
-              ))}
-            </div>
 
-            {/* Global Bazaar in Mobile */}
-            <div className="space-y-1 mt-2">
-              <div className="px-4 py-2 text-sm font-bold text-foreground/80 uppercase tracking-wide">
-                Global Bazaar
-              </div>
-              {globalBazaarItems.map((item) => (
+                {/* About Submenu */}
+                <div className="space-y-1">
+                  <div className="px-4 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wide">About</div>
+                  <Link
+                    to="/about"
+                    className="block px-6 py-2.5 text-sm text-muted-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-all duration-200"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    About Us
+                  </Link>
+                  <Link
+                    to="/our-methodology"
+                    className="block px-6 py-2.5 text-sm text-muted-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-all duration-200"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Our Methodology
+                  </Link>
+                  <Link
+                    to="/partnerships"
+                    className="block px-6 py-2.5 text-sm text-muted-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-all duration-200"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Strategic Alliances & Delegations
+                  </Link>
+                  <Link
+                    to="/careers-detailed"
+                    className="block px-6 py-2.5 text-sm text-muted-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-all duration-200"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    Careers at Polymer Bazaar
+                  </Link>
+                </div>
+
+                {/* Crude & Feedstock */}
+                <div className="space-y-1 mt-2">
+                  <div className="px-4 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wide">
+                    Crude & Feedstock
+                  </div>
+                  {crudeFeedstockItems.slice(0, 5).map((item) => (
+                    <Link
+                      key={item.label}
+                      to={item.path}
+                      className="block px-6 py-2.5 text-sm text-muted-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-all duration-200"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+
+                {/* Career in Mobile */}
                 <Link
-                  key={item.label}
-                  to={item.path}
-                  className="block px-8 py-2.5 text-sm text-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-all duration-200"
+                  to="/career"
+                  className="block px-4 py-3 text-sm font-medium text-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-all duration-200 mt-2"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  {item.label}
+                  Career
                 </Link>
-              ))}
-            </div>
-
-            {/* Indian Bazaar in Mobile */}
-            <div className="space-y-1 mt-2">
-              <div className="px-4 py-2 text-sm font-bold text-foreground/80 uppercase tracking-wide">
-                Indian Bazaar
-              </div>
-              {indianBazaarItems.map((item) => (
-                <Link
-                  key={item.label}
-                  to={item.path}
-                  className="block px-8 py-2.5 text-sm text-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-all duration-200"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </div>
-
-            {/* Historical Data in Mobile */}
-            <div className="space-y-1 mt-2">
-              <div className="px-4 py-2 text-sm font-bold text-foreground/80 uppercase tracking-wide">
-                Historical Data
-              </div>
-              {historicalDataItems.map((item) => (
-                <Link
-                  key={item.label}
-                  to={item.path}
-                  className="block px-8 py-2.5 text-sm text-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-all duration-200"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </div>
-
-            {/* Future Trend in Mobile */}
-            <div className="space-y-1 mt-2">
-              <div className="px-4 py-2 text-sm font-bold text-foreground/80 uppercase tracking-wide">
-                Future Trend
-              </div>
-              {futureTrendItems.map((item) => (
-                <Link
-                  key={item.label}
-                  to={item.path}
-                  className="block px-8 py-2.5 text-sm text-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-all duration-200"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </div>
-
-            {/* Services in Mobile */}
-            <div className="space-y-1 mt-2">
-              <div className="px-4 py-2 text-sm font-bold text-foreground/80 uppercase tracking-wide">
-                Services
-              </div>
-              {servicesItems.map((item) => (
-                <Link
-                  key={item.label}
-                  to={item.path}
-                  className="block px-8 py-2.5 text-sm text-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-all duration-200"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </div>
-
-            {/* Career in Mobile */}
-            <Link
-              to="/career"
-              className="block px-4 py-3 text-sm font-medium text-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-all duration-200 mt-2"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Career
-            </Link>
-          </nav>
-        </div>
-      )}
+              </nav>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </header>
 
       <SubscriptionModal 
         open={showSubscriptionModal} 
         onOpenChange={setShowSubscriptionModal} 
       />
-    </header>
+    </>
   );
 };
 
