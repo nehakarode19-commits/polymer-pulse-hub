@@ -283,27 +283,13 @@ const Header = () => {
               </DropdownMenuContent>
             </DropdownMenu>
 
-            {/* Career Dropdown */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="px-4 py-2.5 text-sm font-medium text-foreground rounded-lg hover:bg-primary/5 hover:text-primary transition-all duration-200 h-auto">
-                  Career
-                  <ChevronDown className="ml-1.5 h-4 w-4 transition-transform group-hover:rotate-180" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56 bg-white border border-border/50 shadow-xl z-[100] rounded-lg p-2">
-                <DropdownMenuItem asChild className="rounded-md hover:bg-primary/5 focus:bg-primary/5 cursor-pointer">
-                  <Link to="/career#popular-category" className="w-full px-3 py-2">
-                    Popular Category
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild className="rounded-md hover:bg-primary/5 focus:bg-primary/5 cursor-pointer">
-                  <Link to="/career#featured-jobs" className="w-full px-3 py-2">
-                    Featured Jobs
-                  </Link>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            {/* Career */}
+            <Link
+              to="/career"
+              className="px-4 py-2.5 text-sm font-medium text-foreground rounded-lg hover:bg-primary/5 hover:text-primary transition-all duration-200"
+            >
+              Career
+            </Link>
 
           </nav>
         )}
@@ -537,25 +523,13 @@ const Header = () => {
             </div>
 
             {/* Career in Mobile */}
-            <div className="space-y-1 mt-2">
-              <div className="px-4 py-2 text-sm font-bold text-foreground/80 uppercase tracking-wide">
-                Career
-              </div>
-              <Link
-                to="/career#popular-category"
-                className="block px-8 py-2.5 text-sm text-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-all duration-200"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Popular Category
-              </Link>
-              <Link
-                to="/career#featured-jobs"
-                className="block px-8 py-2.5 text-sm text-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-all duration-200"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Featured Jobs
-              </Link>
-            </div>
+            <Link
+              to="/career"
+              className="block px-4 py-3 text-sm font-medium text-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-all duration-200 mt-2"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Career
+            </Link>
           </nav>
         </div>
       )}
