@@ -14,6 +14,7 @@ import Signup from "./pages/Signup";
 import Pricing from "./pages/Pricing";
 import Profile from "./pages/Profile";
 import About from "./pages/About";
+import OurMethodology from "./pages/OurMethodology";
 import Team from "./pages/Team";
 import Timeline from "./pages/Timeline";
 import Media from "./pages/Media";
@@ -60,6 +61,7 @@ const App = () => (
           {/* Protected routes - require active subscription */}
           <Route path="/profile" element={<Layout><ProtectedRoute><Profile /></ProtectedRoute></Layout>} />
           <Route path="/about" element={<Layout><ProtectedRoute><About /></ProtectedRoute></Layout>} />
+          <Route path="/our-methodology" element={<Layout><ProtectedRoute><OurMethodology /></ProtectedRoute></Layout>} />
           <Route path="/team" element={<Layout><ProtectedRoute><Team /></ProtectedRoute></Layout>} />
           <Route path="/timeline" element={<Layout><ProtectedRoute><Timeline /></ProtectedRoute></Layout>} />
           <Route path="/media" element={<Layout><ProtectedRoute><Media /></ProtectedRoute></Layout>} />
