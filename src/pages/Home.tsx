@@ -25,7 +25,7 @@ import polymerWhy1Img from "@/assets/polymer-why-1.jpg";
 import polymerWhy2Img from "@/assets/polymer-why-2.jpg";
 import polymerWhy3Img from "@/assets/polymer-why-3.jpg";
 import heroBackgroundMotionImg from "@/assets/hero-background-motion.jpg";
-import worldMapDark from "@/assets/world-map-dark.png";
+import worldMapLight from "@/assets/world-map-light.png";
 import globalCoverageModernImg from "@/assets/global-coverage-modern.jpg";
 import consultationModernImg from "@/assets/consultation-modern.jpg";
 import whyPolymerModernImg from "@/assets/why-polymer-modern.jpg";
@@ -687,7 +687,7 @@ const Home = () => {
             >
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <img
-                  src={worldMapDark}
+                  src={worldMapLight}
                   alt="Global Market Coverage"
                   className="w-full h-auto"
                 />
