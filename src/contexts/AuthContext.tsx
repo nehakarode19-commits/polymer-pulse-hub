@@ -19,9 +19,9 @@ interface AuthContextType {
   signUp: (email: string, password: string, fullName: string, phone: string, city: string) => Promise<void>;
   signOut: () => Promise<void>;
   hasActiveSubscription: () => boolean;
-  sendOTP: (phone: string) => Promise<void>;
-  verifyOTP: (phone: string, otp: string) => Promise<{ isNewUser: boolean }>;
-  completeSignup: (fullName: string, email: string) => Promise<void>;
+  sendEmailOTP: (email: string) => Promise<void>;
+  verifyEmailOTP: (email: string, otp: string) => Promise<{ isNewUser: boolean }>;
+  completeSignup: (fullName: string, phone: string) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -135,19 +135,22 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     return true;
   };
 
-  const sendOTP = async (phone: string) => {
+  const sendEmailOTP = async (email: string) => {
     const { error } = await supabase.auth.signInWithOtp({
-      phone,
+      email,
+      options: {
+        shouldCreateUser: true,
+      },
     });
 
     if (error) throw error;
   };
 
-  const verifyOTP = async (phone: string, otp: string) => {
+  const verifyEmailOTP = async (email: string, otp: string) => {
     const { data, error } = await supabase.auth.verifyOtp({
-      phone,
+      email,
       token: otp,
-      type: 'sms',
+      type: 'email',
     });
 
     if (error) throw error;
@@ -156,18 +159,18 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     if (data.user) {
       const { data: profile } = await supabase
         .from("profiles")
-        .select("full_name, email")
+        .select("full_name, phone")
         .eq("id", data.user.id)
         .maybeSingle();
 
-      const isNewUser = !profile || !profile.full_name || !profile.email;
+      const isNewUser = !profile || !profile.full_name || !profile.phone;
       return { isNewUser };
     }
 
     return { isNewUser: false };
   };
 
-  const completeSignup = async (fullName: string, email: string) => {
+  const completeSignup = async (fullName: string, phone: string) => {
     if (!user) throw new Error("No user found");
 
     // Update profile with signup details
@@ -175,7 +178,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       .from("profiles")
       .update({ 
         full_name: fullName,
-        email: email,
+        phone: phone,
       })
       .eq("id", user.id);
 
@@ -196,8 +199,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         signUp,
         signOut,
         hasActiveSubscription,
-        sendOTP,
-        verifyOTP,
+        sendEmailOTP,
+        verifyEmailOTP,
         completeSignup,
       }}
     >
