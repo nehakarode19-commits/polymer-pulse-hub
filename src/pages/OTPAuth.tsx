@@ -6,6 +6,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
 
 type Step = "phone" | "otp" | "signup";
+type Mode = "signin" | "signup";
 
 const OTPAuth = () => {
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ const OTPAuth = () => {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const [step, setStep] = useState<Step>("phone");
+  const [mode, setMode] = useState<Mode>("signin");
   const [phone, setPhone] = useState("");
   const [otp, setOtp] = useState("");
   const [resendTimer, setResendTimer] = useState(0);
@@ -175,12 +177,40 @@ const OTPAuth = () => {
         {/* Phone Entry Step */}
         {step === "phone" && (
           <div className="space-y-6">
+            {/* Sign In / Sign Up Toggle */}
+            <div className="flex gap-2 p-1 bg-muted/50 rounded-lg">
+              <button
+                type="button"
+                onClick={() => setMode("signin")}
+                className={`flex-1 py-2.5 text-[15px] font-semibold rounded-md transition-all ${
+                  mode === "signin"
+                    ? "bg-background text-foreground shadow-sm"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                Sign In
+              </button>
+              <button
+                type="button"
+                onClick={() => setMode("signup")}
+                className={`flex-1 py-2.5 text-[15px] font-semibold rounded-md transition-all ${
+                  mode === "signup"
+                    ? "bg-background text-foreground shadow-sm"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                Sign Up
+              </button>
+            </div>
+
             <div className="text-center space-y-2">
               <h2 className="text-[28px] font-bold text-foreground">
-                Welcome Back
+                {mode === "signin" ? "Welcome Back" : "Create Account"}
               </h2>
               <p className="text-[14px] text-muted-foreground">
-                Please fill in your details below to continue
+                {mode === "signin" 
+                  ? "Please fill in your details below to continue"
+                  : "Sign up to access polymer market insights"}
               </p>
             </div>
 
@@ -205,17 +235,8 @@ const OTPAuth = () => {
                 disabled={loading || !phone}
                 className="w-full h-12 text-[16px] font-semibold bg-primary hover:bg-primary/90 text-primary-foreground rounded-lg"
               >
-                {loading ? "Sending OTP..." : "Send OTP"}
+                {loading ? "Sending OTP..." : mode === "signin" ? "Sign In" : "Sign Up"}
               </Button>
-
-              <div className="text-center">
-                <p className="text-[14px] text-muted-foreground">
-                  Don't have an account?{" "}
-                  <span className="text-primary font-semibold cursor-pointer hover:underline">
-                    Sign Up
-                  </span>
-                </p>
-              </div>
 
               <p className="text-center text-[13px] text-muted-foreground/80 pt-2">
                 Unlock valuable insights into polymer pricing and market trends
