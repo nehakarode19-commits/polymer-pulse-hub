@@ -6,23 +6,23 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
 import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/hooks/use-toast";
-import { Phone, ArrowLeft } from "lucide-react";
+import { Mail, ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-type Step = "phone" | "otp" | "signup";
+type Step = "email" | "otp" | "signup";
 
 const OTPAuth = () => {
   const navigate = useNavigate();
-  const { sendOTP, verifyOTP, completeSignup } = useAuth();
+  const { sendEmailOTP, verifyEmailOTP, completeSignup } = useAuth();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
-  const [step, setStep] = useState<Step>("phone");
-  const [phone, setPhone] = useState("");
+  const [step, setStep] = useState<Step>("email");
+  const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
   const [resendTimer, setResendTimer] = useState(0);
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
+    phone: "",
   });
 
   const startResendTimer = () => {
@@ -43,12 +43,12 @@ const OTPAuth = () => {
     setLoading(true);
 
     try {
-      await sendOTP(phone);
+      await sendEmailOTP(email);
       setStep("otp");
       startResendTimer();
       toast({
         title: "OTP Sent",
-        description: "Please check your phone for the verification code.",
+        description: "Please check your email for the verification code.",
       });
     } catch (error: any) {
       toast({
@@ -62,10 +62,10 @@ const OTPAuth = () => {
   };
 
   const handleVerifyOTP = async () => {
-    if (otp.length !== 4) {
+    if (otp.length !== 6) {
       toast({
         title: "Invalid OTP",
-        description: "Please enter the 4-digit OTP",
+        description: "Please enter the 6-digit OTP",
         variant: "destructive",
       });
       return;
@@ -74,7 +74,7 @@ const OTPAuth = () => {
     setLoading(true);
 
     try {
-      const { isNewUser } = await verifyOTP(phone, otp);
+      const { isNewUser } = await verifyEmailOTP(email, otp);
       
       if (isNewUser) {
         setStep("signup");
@@ -105,7 +105,7 @@ const OTPAuth = () => {
     setLoading(true);
 
     try {
-      await completeSignup(formData.name, formData.email);
+      await completeSignup(formData.name, formData.phone);
       toast({
         title: "Account Created!",
         description: "Please choose a membership plan to continue.",
@@ -126,7 +126,7 @@ const OTPAuth = () => {
     
     setLoading(true);
     try {
-      await sendOTP(phone);
+      await sendEmailOTP(email);
       startResendTimer();
       toast({
         title: "OTP Resent",
@@ -145,7 +145,7 @@ const OTPAuth = () => {
 
   const handleBack = () => {
     if (step === "otp") {
-      setStep("phone");
+      setStep("email");
       setOtp("");
     } else if (step === "signup") {
       setStep("otp");
@@ -154,76 +154,91 @@ const OTPAuth = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 py-12 bg-gradient-to-br from-background via-background to-primary/5">
-      <Card className="w-full max-w-md shadow-lg">
-        <CardHeader className="text-center space-y-3">
+      <Card className="w-full max-w-md shadow-lg border-border/50">
+        <CardHeader className="text-center space-y-3 pb-6">
           <div className="mx-auto w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center">
-            <Phone className="w-8 h-8 text-primary" />
+            <Mail className="w-8 h-8 text-primary" />
           </div>
           <CardTitle className="text-2xl font-bold">
-            {step === "phone" && "Enter Mobile Number"}
+            {step === "email" && "Enter Email Address"}
             {step === "otp" && "Verify OTP"}
             {step === "signup" && "Complete Your Profile"}
           </CardTitle>
-          <CardDescription>
-            {step === "phone" && "We'll send you a verification code"}
-            {step === "otp" && `Code sent to ${phone}`}
+          <CardDescription className="text-base">
+            {step === "email" && "We'll send you a verification code"}
+            {step === "otp" && `Code sent to ${email}`}
             {step === "signup" && "Just a few more details to get started"}
           </CardDescription>
         </CardHeader>
 
-        <CardContent>
-          {step !== "phone" && (
+        <CardContent className="space-y-6">
+          {step !== "email" && (
             <Button
               variant="ghost"
               size="sm"
               onClick={handleBack}
-              className="mb-4 -mt-2"
+              className="mb-2 -mt-2 hover:bg-primary hover:text-white"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back
             </Button>
           )}
 
-          {step === "phone" && (
-            <form onSubmit={handleSendOTP} className="space-y-4">
+          {step === "email" && (
+            <form onSubmit={handleSendOTP} className="space-y-5">
               <div className="space-y-2">
-                <Label htmlFor="phone">Mobile Number</Label>
+                <Label htmlFor="email" className="text-sm font-medium">Email Address</Label>
                 <Input
-                  id="phone"
-                  type="tel"
-                  placeholder="+91 9876543210"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
+                  id="email"
+                  type="email"
+                  placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="text-base"
+                  className="h-11 text-base"
                 />
               </div>
 
               <Button
                 type="submit"
-                disabled={loading || !phone}
-                className="w-full"
+                disabled={loading || !email}
+                className="w-full h-11 text-base font-semibold"
               >
                 {loading ? "Sending..." : "Send OTP"}
               </Button>
+
+              <p className="text-xs text-center text-muted-foreground pt-2">
+                By continuing, you agree to our{" "}
+                <a href="/terms-conditions" className="text-primary hover:underline">
+                  Terms & Conditions
+                </a>{" "}
+                and{" "}
+                <a href="/privacy-policy" className="text-primary hover:underline">
+                  Privacy Policy
+                </a>
+              </p>
             </form>
           )}
 
           {step === "otp" && (
             <div className="space-y-6">
-              <div className="space-y-3">
-                <Label className="text-center block">Enter 4-Digit OTP</Label>
+              <div className="space-y-4">
+                <Label className="text-center block text-sm font-medium">
+                  Enter 6-Digit OTP
+                </Label>
                 <div className="flex justify-center">
                   <InputOTP
-                    maxLength={4}
+                    maxLength={6}
                     value={otp}
                     onChange={setOtp}
                   >
-                    <InputOTPGroup>
-                      <InputOTPSlot index={0} className="w-14 h-14 text-xl" />
-                      <InputOTPSlot index={1} className="w-14 h-14 text-xl" />
-                      <InputOTPSlot index={2} className="w-14 h-14 text-xl" />
-                      <InputOTPSlot index={3} className="w-14 h-14 text-xl" />
+                    <InputOTPGroup className="gap-2">
+                      <InputOTPSlot index={0} className="w-12 h-12 text-lg" />
+                      <InputOTPSlot index={1} className="w-12 h-12 text-lg" />
+                      <InputOTPSlot index={2} className="w-12 h-12 text-lg" />
+                      <InputOTPSlot index={3} className="w-12 h-12 text-lg" />
+                      <InputOTPSlot index={4} className="w-12 h-12 text-lg" />
+                      <InputOTPSlot index={5} className="w-12 h-12 text-lg" />
                     </InputOTPGroup>
                   </InputOTP>
                 </div>
@@ -231,8 +246,8 @@ const OTPAuth = () => {
 
               <Button
                 onClick={handleVerifyOTP}
-                disabled={loading || otp.length !== 4}
-                className="w-full"
+                disabled={loading || otp.length !== 6}
+                className="w-full h-11 text-base font-semibold"
               >
                 {loading ? "Verifying..." : "Verify & Continue"}
               </Button>
@@ -242,20 +257,22 @@ const OTPAuth = () => {
                   type="button"
                   onClick={handleResendOTP}
                   disabled={resendTimer > 0 || loading}
-                  className="text-sm text-muted-foreground hover:text-primary disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="text-sm text-muted-foreground hover:text-primary disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                 >
                   {resendTimer > 0
                     ? `Resend OTP in ${resendTimer}s`
-                    : "Resend OTP"}
+                    : "Didn't receive code? Resend OTP"}
                 </button>
               </div>
             </div>
           )}
 
           {step === "signup" && (
-            <form onSubmit={handleCompleteSignup} className="space-y-4">
+            <form onSubmit={handleCompleteSignup} className="space-y-5">
               <div className="space-y-2">
-                <Label htmlFor="name">Full Name *</Label>
+                <Label htmlFor="name" className="text-sm font-medium">
+                  Full Name *
+                </Label>
                 <Input
                   id="name"
                   placeholder="Enter your full name"
@@ -264,36 +281,36 @@ const OTPAuth = () => {
                     setFormData({ ...formData, name: e.target.value })
                   }
                   required
+                  className="h-11"
                 />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="email">Email Address *</Label>
+                <Label htmlFor="phone" className="text-sm font-medium">
+                  Phone Number *
+                </Label>
                 <Input
-                  id="email"
-                  type="email"
-                  placeholder="Enter your email"
-                  value={formData.email}
+                  id="phone"
+                  type="tel"
+                  placeholder="+91 9876543210"
+                  value={formData.phone}
                   onChange={(e) =>
-                    setFormData({ ...formData, email: e.target.value })
+                    setFormData({ ...formData, phone: e.target.value })
                   }
                   required
+                  className="h-11"
                 />
               </div>
 
               <Button
                 type="submit"
                 disabled={loading}
-                className="w-full"
+                className="w-full h-11 text-base font-semibold"
               >
                 {loading ? "Creating Account..." : "Complete Signup"}
               </Button>
             </form>
           )}
-
-          <p className="text-xs text-center text-muted-foreground mt-6">
-            By continuing, you agree to our Terms & Conditions and Privacy Policy
-          </p>
         </CardContent>
       </Card>
     </div>
