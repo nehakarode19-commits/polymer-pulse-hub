@@ -107,7 +107,8 @@ const Header = () => {
     navigate("/login");
   };
 
-  if (!user || !hasActiveSubscription) {
+  if (!user) {
+    // Not logged in - show login/signup buttons
     return (
       <>
         <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -129,6 +130,61 @@ const Header = () => {
                   Sign In
                 </Button>
               </Link>
+            </div>
+          </div>
+        </header>
+        <SubscriptionModal 
+          open={showSubscriptionModal} 
+          onOpenChange={setShowSubscriptionModal} 
+        />
+      </>
+    );
+  }
+
+  if (!hasActiveSubscription()) {
+    // Logged in but no subscription - show limited header with user menu
+    return (
+      <>
+        <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+          <div className="container flex h-20 items-center justify-between px-4">
+            <Link to="/" className="flex items-center space-x-2 transition-transform hover:scale-105">
+              <img src={logo} alt="Polymer Bazaar" className="h-12 w-auto" />
+            </Link>
+            <div className="flex items-center gap-4">
+              <Link to="/pricing">
+                <Button 
+                  className="bg-primary hover:bg-primary/90 shadow-md hover:shadow-lg transition-all duration-300"
+                >
+                  Subscribe Now
+                </Button>
+              </Link>
+              
+              {/* User Dropdown for logged-in users */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button 
+                    variant="outline" 
+                    size="icon" 
+                    className="rounded-full h-10 w-10 border-border/60 hover:border-primary/60 hover:bg-primary/5 transition-all duration-300"
+                  >
+                    <User className="h-5 w-5" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56 bg-background/95 backdrop-blur-lg border border-border/50 shadow-xl rounded-xl p-2 animate-in fade-in-0 zoom-in-95">
+                  <DropdownMenuItem asChild className="rounded-lg hover:bg-primary hover:text-white focus:bg-primary focus:text-white cursor-pointer transition-colors">
+                    <Link to="/profile" className="w-full px-3 py-2.5">
+                      <User className="mr-2 h-4 w-4" />
+                      <span className="font-medium">Profile</span>
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem 
+                    onClick={handleSignOut}
+                    className="rounded-lg hover:bg-primary hover:text-white focus:bg-primary focus:text-white cursor-pointer transition-colors px-3 py-2.5"
+                  >
+                    <span className="font-medium">Sign Out</span>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
             </div>
           </div>
         </header>
