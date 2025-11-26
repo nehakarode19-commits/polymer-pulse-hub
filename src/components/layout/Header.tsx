@@ -152,14 +152,6 @@ const Header = () => {
           {/* Desktop Navigation */}
           {hasActiveSubscription && (
             <nav className="hidden lg:flex items-center space-x-1">
-              {/* Buy & Sell */}
-              <Link
-                to="/buy-sell"
-                className="px-4 py-2 text-sm font-medium text-foreground rounded-lg hover:bg-primary/5 hover:text-primary transition-all duration-200"
-              >
-                Buy & Sell
-              </Link>
-
               {/* About Dropdown */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -194,6 +186,14 @@ const Header = () => {
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
+
+              {/* Buy & Sell */}
+              <Link
+                to="/buy-sell"
+                className="px-4 py-2 text-sm font-medium text-foreground rounded-lg hover:bg-primary hover:text-white transition-all duration-200"
+              >
+                Buy & Sell
+              </Link>
 
               {/* Crude & Feedstock Dropdown */}
               <DropdownMenu>
@@ -406,15 +406,6 @@ const Header = () => {
               className="lg:hidden border-t border-border/40 bg-background/98 backdrop-blur-lg"
             >
               <nav className="container px-4 py-6 space-y-2 max-h-[calc(100vh-5rem)] overflow-y-auto">
-                {/* Buy & Sell */}
-                <Link
-                  to="/buy-sell"
-                  className="block px-4 py-3 text-sm font-medium text-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-all duration-200"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Buy & Sell
-                </Link>
-
                 {/* About Submenu */}
                 <div className="space-y-1">
                   <div className="px-4 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wide">About</div>
@@ -447,6 +438,15 @@ const Header = () => {
                     Careers at Polymer Bazaar
                   </Link>
                 </div>
+
+                {/* Buy & Sell */}
+                <Link
+                  to="/buy-sell"
+                  className="block px-4 py-3 text-sm font-medium text-foreground hover:bg-primary hover:text-white rounded-lg transition-all duration-200 mt-2"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Buy & Sell
+                </Link>
 
                 {/* Crude & Feedstock */}
                 <div className="space-y-1 mt-2">
