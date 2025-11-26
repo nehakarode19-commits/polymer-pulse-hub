@@ -141,7 +141,7 @@ const CrudeFeedstock = () => {
 
                     {/* Timeframe Buttons */}
                     <div className="flex gap-2 justify-center mb-8">
-                      {["1W", "1M", "1Y", "ALL"].map((period) => (
+                      {["1M", "6M", "1Y", "ALL"].map((period) => (
                         <Button
                           key={period}
                           variant={timeframe === period ? "default" : "outline"}
