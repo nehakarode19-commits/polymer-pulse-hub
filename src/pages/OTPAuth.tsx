@@ -163,26 +163,23 @@ const OTPAuth = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-start justify-start px-8 py-16 bg-white">
-      <div className="w-full max-w-[540px]">
+    <div className="min-h-screen flex items-center justify-center px-4 py-16 bg-background">
+      <div className="w-full max-w-[500px]">
         {/* Phone Entry Step */}
         {step === "phone" && (
           <div className="space-y-6">
-            <div className="space-y-1">
-              <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                Login / Signup
-              </p>
-              <h1 className="text-[32px] font-bold text-foreground">
-                Sign in with Mobile OTP
+            <div className="space-y-2">
+              <h1 className="text-[36px] font-bold text-foreground">
+                Welcome to Polymer Bazaar
               </h1>
-              <p className="text-[14px] text-muted-foreground">
-                Enter your mobile number to receive a one-time password.
+              <p className="text-[15px] text-muted-foreground">
+                Please fill in your details below.
               </p>
             </div>
 
-            <form onSubmit={handleSendOTP} className="space-y-5">
+            <form onSubmit={handleSendOTP} className="space-y-6">
               <div className="space-y-2">
-                <label htmlFor="phone" className="text-[14px] text-foreground">
+                <label htmlFor="phone" className="text-[14px] font-medium text-foreground">
                   Mobile Number
                 </label>
                 <Input
@@ -192,21 +189,23 @@ const OTPAuth = () => {
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   required
-                  className="h-12 text-[15px] bg-muted border-border rounded-md"
+                  className="h-12 text-[15px] bg-background border-input rounded-md"
                 />
               </div>
 
               <Button
                 type="submit"
                 disabled={loading || !phone}
-                className="w-full h-12 text-[16px] font-semibold"
+                className="w-full h-12 text-[16px] font-semibold bg-primary hover:bg-primary/90 text-primary-foreground"
               >
                 {loading ? "Sending OTP..." : "Send OTP"}
               </Button>
 
               <p className="text-center text-[14px] text-muted-foreground">
-                Use this screen for both <span className="font-semibold">login</span> and
-                <span className="font-semibold"> signup</span>—we'll detect it automatically.
+                Already have an account?{" "}
+                <span className="text-primary font-medium cursor-pointer hover:underline">
+                  Login
+                </span>
               </p>
             </form>
           </div>
@@ -215,32 +214,29 @@ const OTPAuth = () => {
         {/* OTP Verification Step */}
         {step === "otp" && (
           <div className="space-y-6">
-            <div className="space-y-1">
-              <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                Step 2 of 3
-              </p>
-              <h1 className="text-[32px] font-bold text-foreground">
-                Verify OTP
+            <div className="space-y-2">
+              <h1 className="text-[36px] font-bold text-foreground">
+                Welcome to Polymer Bazaar
               </h1>
-              <p className="text-[14px] text-muted-foreground">
-                Enter the 6-digit code we sent to your mobile number.
+              <p className="text-[15px] text-muted-foreground">
+                Please fill in your details below.
               </p>
             </div>
 
-            <div className="space-y-5">
+            <div className="space-y-6">
               <div className="space-y-2">
-                <label className="text-[14px] text-foreground">
+                <label className="text-[14px] font-medium text-foreground">
                   Mobile Number
                 </label>
                 <Input
                   type="tel"
                   value={phone}
                   disabled
-                  className="h-12 text-[15px] bg-muted border-border rounded-md"
+                  className="h-12 text-[15px] bg-muted/50 border-input rounded-md"
                 />
               </div>
 
-              <div className="flex gap-3">
+              <div className="flex gap-3 justify-center">
                 {[0, 1, 2, 3, 4, 5].map((index) => (
                   <input
                     key={index}
@@ -251,7 +247,7 @@ const OTPAuth = () => {
                     value={otp[index] || ""}
                     onChange={(e) => handleOtpChange(index, e.target.value)}
                     onKeyDown={(e) => handleOtpKeyDown(index, e)}
-                    className="w-14 h-14 text-center text-[20px] font-medium border-2 border-border rounded-md focus:border-primary focus:outline-none bg-background"
+                    className="w-12 h-12 text-center text-[20px] font-semibold border-2 border-input rounded-md focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none bg-background transition-all"
                   />
                 ))}
               </div>
@@ -259,9 +255,9 @@ const OTPAuth = () => {
               <Button
                 onClick={handleVerifyOTP}
                 disabled={loading || otp.length !== 6}
-                className="w-full h-12 text-[16px] font-semibold"
+                className="w-full h-12 text-[16px] font-semibold bg-primary hover:bg-primary/90 text-primary-foreground"
               >
-                {loading ? "Verifying..." : "Verify & Continue"}
+                {loading ? "Verifying..." : "Verify OTP"}
               </Button>
 
               <div className="text-center">
@@ -283,7 +279,10 @@ const OTPAuth = () => {
               </div>
 
               <p className="text-center text-[14px] text-muted-foreground">
-                This OTP screen works for both existing users (login) and new users (signup).
+                Already have an account?{" "}
+                <span className="text-primary font-medium cursor-pointer hover:underline">
+                  Login
+                </span>
               </p>
             </div>
           </div>
@@ -292,21 +291,18 @@ const OTPAuth = () => {
         {/* Signup Completion Step */}
         {step === "signup" && (
           <div className="space-y-6">
-            <div className="space-y-1">
-              <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                Step 3 of 3
-              </p>
-              <h1 className="text-[32px] font-bold text-foreground">
-                Complete your signup
+            <div className="space-y-2">
+              <h1 className="text-[36px] font-bold text-foreground">
+                Welcome to Polymer Bazaar
               </h1>
-              <p className="text-[14px] text-muted-foreground">
-                Add your basic details to finish creating your account.
+              <p className="text-[15px] text-muted-foreground">
+                Please fill in your details below.
               </p>
             </div>
 
-            <form onSubmit={handleCompleteSignup} className="space-y-5">
+            <form onSubmit={handleCompleteSignup} className="space-y-6">
               <div className="space-y-2">
-                <label htmlFor="name" className="text-[14px] text-foreground">
+                <label htmlFor="name" className="text-[14px] font-medium text-foreground">
                   Name <span className="text-primary">*</span>
                 </label>
                 <Input
@@ -317,12 +313,12 @@ const OTPAuth = () => {
                     setFormData({ ...formData, name: e.target.value })
                   }
                   required
-                  className="h-12 text-[15px] bg-muted border-border rounded-md"
+                  className="h-12 text-[15px] bg-background border-input rounded-md"
                 />
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="phone-signup" className="text-[14px] text-foreground">
+                <label htmlFor="phone-signup" className="text-[14px] font-medium text-foreground">
                   Mobile Number
                 </label>
                 <Input
@@ -330,12 +326,12 @@ const OTPAuth = () => {
                   type="tel"
                   value={phone}
                   disabled
-                  className="h-12 text-[15px] bg-muted border-border rounded-md"
+                  className="h-12 text-[15px] bg-muted/50 border-input rounded-md"
                 />
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="email" className="text-[14px] text-foreground">
+                <label htmlFor="email" className="text-[14px] font-medium text-foreground">
                   Email <span className="text-primary">*</span>
                 </label>
                 <Input
@@ -347,20 +343,23 @@ const OTPAuth = () => {
                     setFormData({ ...formData, email: e.target.value })
                   }
                   required
-                  className="h-12 text-[15px] bg-muted border-border rounded-md"
+                  className="h-12 text-[15px] bg-background border-input rounded-md"
                 />
               </div>
 
               <Button
                 type="submit"
                 disabled={loading}
-                className="w-full h-12 text-[16px] font-semibold"
+                className="w-full h-12 text-[16px] font-semibold bg-primary hover:bg-primary/90 text-primary-foreground"
               >
-                {loading ? "Creating Account..." : "Create Account & Continue"}
+                {loading ? "Creating Account..." : "Sign up"}
               </Button>
 
               <p className="text-center text-[14px] text-muted-foreground">
-                Already have an account? This OTP flow also works as your login.
+                Already have an account?{" "}
+                <span className="text-primary font-medium cursor-pointer hover:underline">
+                  Login
+                </span>
               </p>
             </form>
           </div>
