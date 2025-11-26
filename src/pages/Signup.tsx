@@ -6,7 +6,7 @@ const Signup = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
 
-  // Redirect to OTP auth or pricing if logged in
+  // Redirect to /auth for OTP login/signup flow
   useEffect(() => {
     if (user) {
       navigate("/pricing");
