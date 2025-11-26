@@ -1,150 +1,399 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Briefcase, MapPin, DollarSign, Bookmark } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Input } from "@/components/ui/input";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import TeamGallery from "@/components/TeamGallery";
+import { useState } from "react";
 
 const Career = () => {
-  const categories = [
-    { name: "Graphics & Design", icon: "🎨", positions: 357 },
-    { name: "Code & Programing", icon: "💻", positions: 312 },
-    { name: "Digital Marketing", icon: "📱", positions: 297 },
-    { name: "Video & Animation", icon: "🎬", positions: 247 },
-    { name: "Music & Audio", icon: "🎵", positions: 204 },
-    { name: "Account & Finance", icon: "💰", positions: 167 },
-    { name: "Health & Care", icon: "🏥", positions: 125 },
-    { name: "Data & Science", icon: "📊", positions: 57 },
-  ];
+  const [email, setEmail] = useState("");
+  const [activeSection, setActiveSection] = useState("open-roles");
 
-  const featuredJobs = [
-    {
-      id: 1,
-      title: "Technical Support Specialist",
-      company: "Google Inc.",
-      location: "Dhaka, Bangladesh",
-      salary: "$20,000 - $25,000",
-      type: "PART-TIME",
-      typeColor: "bg-green-100 text-green-800"
-    },
-    {
-      id: 2,
-      title: "Senior UX Designer",
-      company: "Google Inc.",
-      location: "Dhaka, Bangladesh",
-      salary: "$20,000 - $25,000",
-      type: "FULL-TIME",
-      typeColor: "bg-blue-100 text-blue-800"
-    },
-    {
-      id: 3,
-      title: "Marketing Officer",
-      company: "Google Inc.",
-      location: "Dhaka, Bangladesh",
-      salary: "$20,000 - $25,000",
-      type: "INTERNSHIP",
-      typeColor: "bg-orange-100 text-orange-800"
-    },
-    {
-      id: 4,
-      title: "Junior Graphic Designer",
-      company: "Google Inc.",
-      location: "Dhaka, Bangladesh",
-      salary: "$20,000 - $25,000",
-      type: "INTERNSHIP",
-      typeColor: "bg-orange-100 text-orange-800"
-    },
-    {
-      id: 5,
-      title: "Interaction Designer",
-      company: "Google Inc.",
-      location: "Dhaka, Bangladesh",
-      salary: "$20,000 - $25,000",
-      type: "PART-TIME",
-      typeColor: "bg-green-100 text-green-800"
-    },
-    {
-      id: 6,
-      title: "Project Manager",
-      company: "Google Inc.",
-      location: "Dhaka, Bangladesh",
-      salary: "$20,000 - $25,000",
-      type: "FULL-TIME",
-      typeColor: "bg-blue-100 text-blue-800"
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+      setActiveSection(id);
     }
-  ];
+  };
+
+  const handleJobAlert = () => {
+    console.log("Job alert signup:", email);
+    setEmail("");
+  };
 
   return (
     <div className="min-h-screen">
-      <section className="gradient-hero text-white py-20 px-4">
-        <div className="container max-w-4xl mx-auto text-center">
-          <h1 className="text-5xl font-bold mb-6">Career</h1>
+      {/* Hero Section */}
+      <section className="bg-primary text-white py-20 px-4">
+        <div className="container max-w-5xl mx-auto">
+          <h1 className="text-5xl md:text-6xl font-bold mb-6">Careers at Polymer Bazaar</h1>
+          <h2 className="text-3xl md:text-4xl font-semibold mb-6">
+            Orchestrating the Future of the Global Polymer Trade
+          </h2>
+          <p className="text-lg md:text-xl mb-4">
+            We're not just reporting on the industry - we're building its digital future.
+          </p>
+          <p className="text-base md:text-lg leading-relaxed">
+            Polymer Bazaar is evolving from a premier intelligence provider into a Global Strategic Ecosystem. 
+            Our mission is to become the single source of truth and execution for the entire polymer value chain. 
+            We are building a world where information, procurement, technology, and strategy converge.
+          </p>
+          <p className="text-base md:text-lg mt-4 font-medium">
+            If you are a problem solver who wants to build the Global Operating System for the polymer trade, you belong here.
+          </p>
         </div>
       </section>
 
       <div className="container max-w-7xl mx-auto py-12 px-4">
-        {/* Popular Category */}
-        <div className="mb-16">
-          <h2 className="text-3xl font-bold mb-8 border-l-4 border-primary pl-4 text-primary">Popular category</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {categories.map((category, index) => (
-              <Card key={index} className="hover:shadow-lg transition-all cursor-pointer group border-2 hover:border-primary">
+        <div className="flex gap-8">
+          {/* Sticky Navigation */}
+          <aside className="hidden lg:block w-64 shrink-0">
+            <nav className="sticky top-24 space-y-2">
+              <button
+                onClick={() => scrollToSection("open-roles")}
+                className={`w-full text-left px-4 py-2 rounded transition-colors ${
+                  activeSection === "open-roles" ? "bg-primary text-white" : "hover:bg-muted"
+                }`}
+              >
+                Open Roles
+              </button>
+              <button
+                onClick={() => scrollToSection("values")}
+                className={`w-full text-left px-4 py-2 rounded transition-colors ${
+                  activeSection === "values" ? "bg-primary text-white" : "hover:bg-muted"
+                }`}
+              >
+                Values
+              </button>
+              <button
+                onClick={() => scrollToSection("growth")}
+                className={`w-full text-left px-4 py-2 rounded transition-colors ${
+                  activeSection === "growth" ? "bg-primary text-white" : "hover:bg-muted"
+                }`}
+              >
+                Growth
+              </button>
+              <button
+                onClick={() => scrollToSection("team")}
+                className={`w-full text-left px-4 py-2 rounded transition-colors ${
+                  activeSection === "team" ? "bg-primary text-white" : "hover:bg-muted"
+                }`}
+              >
+                Inside the Hub
+              </button>
+              <button
+                onClick={() => scrollToSection("alerts")}
+                className={`w-full text-left px-4 py-2 rounded transition-colors ${
+                  activeSection === "alerts" ? "bg-primary text-white" : "hover:bg-muted"
+                }`}
+              >
+                Job Alerts
+              </button>
+            </nav>
+          </aside>
+
+          {/* Main Content */}
+          <div className="flex-1">
+            {/* Open Roles Section */}
+            <section id="open-roles" className="mb-16 scroll-mt-24">
+              <h2 className="text-4xl font-bold mb-8 text-primary border-l-4 border-primary pl-4">
+                📂 OPEN STRATEGIC POSITIONS
+              </h2>
+              
+              <Accordion type="single" collapsible className="space-y-4">
+                <AccordionItem value="orchestrators" className="border rounded-lg px-6">
+                  <AccordionTrigger className="text-xl font-bold hover:text-primary">
+                    1. The Strategic Orchestrators (Advisory & Solutions)
+                  </AccordionTrigger>
+                  <AccordionContent className="space-y-4 pt-4">
+                    <p className="text-muted-foreground mb-4">
+                      Help clients navigate the complex Bazaar with end-to-end solutions.
+                    </p>
+                    <div className="space-y-6">
+                      <div>
+                        <h4 className="font-bold text-lg mb-2">Supply Chain Strategist</h4>
+                        <p className="text-muted-foreground">
+                          Design resilient, cost-efficient supply chains that withstand global shocks. 
+                          Optimize the flow of material for our clients.
+                        </p>
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-lg mb-2">Strategic Procurement Advisor</h4>
+                        <p className="text-muted-foreground">
+                          Act as the external "Chief Procurement Officer." Guide clients on hedging, 
+                          inventory timing, and supplier negotiation.
+                        </p>
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-lg mb-2">Enterprise Tech & ERP Integrator</h4>
+                        <p className="text-muted-foreground">
+                          Eliminate friction. Connect Polymer Bazaar's live API data directly into 
+                          client ERPs (SAP, Oracle) for automated decision-making.
+                        </p>
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-lg mb-2">Global Trade & Compliance Specialist</h4>
+                        <p className="text-muted-foreground">
+                          Guide clients through customs, BIS standards, and sustainability regulations 
+                          to ensure safe, legal commerce.
+                        </p>
+                      </div>
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem value="intelligence" className="border rounded-lg px-6">
+                  <AccordionTrigger className="text-xl font-bold hover:text-primary">
+                    2. The Intelligence Core (Bazaar & Data)
+                  </AccordionTrigger>
+                  <AccordionContent className="space-y-4 pt-4">
+                    <p className="text-muted-foreground mb-4">
+                      Build the "Global Standard" for accuracy and speed.
+                    </p>
+                    <div className="space-y-6">
+                      <div>
+                        <h4 className="font-bold text-lg mb-2">AI & Quantitative Researcher</h4>
+                        <p className="text-muted-foreground">
+                          Develop proprietary algorithms that predict price trends before they happen. 
+                          Build our "unfair advantage."
+                        </p>
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-lg mb-2">Senior Bazaar Analyst</h4>
+                        <p className="text-muted-foreground">
+                          Deep-dive experts for specific chains (PVC, PP, PE) who verify algorithmic 
+                          data with real-world "Bazaar" insights.
+                        </p>
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-lg mb-2">Price Discovery Specialist</h4>
+                        <p className="text-muted-foreground">
+                          The front-line scouts who gather, verify, and standardize daily price 
+                          assessments from the market.
+                        </p>
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-lg mb-2">Compliance & Methodology Manager</h4>
+                        <p className="text-muted-foreground">
+                          Ensure our pricing methods are auditable and legally sound. You protect the 
+                          integrity that makes us a trusted global benchmark.
+                        </p>
+                      </div>
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem value="platform" className="border rounded-lg px-6">
+                  <AccordionTrigger className="text-xl font-bold hover:text-primary">
+                    3. The Platform Builders (Tech & Product)
+                  </AccordionTrigger>
+                  <AccordionContent className="space-y-4 pt-4">
+                    <p className="text-muted-foreground mb-4">
+                      We are a tech company at heart.
+                    </p>
+                    <div className="space-y-6">
+                      <div>
+                        <h4 className="font-bold text-lg mb-2">UX/UI Product Designer</h4>
+                        <p className="text-muted-foreground">
+                          Ensure our data is visualized beautifully. Make the "Bazaar" as intuitive 
+                          as a modern consumer app.
+                        </p>
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-lg mb-2">Full-Stack Engineer</h4>
+                        <p className="text-muted-foreground">
+                          Build the robust, low-latency infrastructure that delivers critical alerts 
+                          instantly to thousands of users.
+                        </p>
+                      </div>
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+
+                <AccordionItem value="growth" className="border rounded-lg px-6">
+                  <AccordionTrigger className="text-xl font-bold hover:text-primary">
+                    4. The Growth Engine (Sales & Strategy)
+                  </AccordionTrigger>
+                  <AccordionContent className="space-y-4 pt-4">
+                    <p className="text-muted-foreground mb-4">
+                      Expand from a National Leader to a Global Giant.
+                    </p>
+                    <div className="space-y-6">
+                      <div>
+                        <h4 className="font-bold text-lg mb-2">Global Business Development Manager</h4>
+                        <p className="text-muted-foreground">
+                          Open new territories (Middle East, Europe, Vietnam). Build bridges connecting 
+                          local markets to our global hub.
+                        </p>
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-lg mb-2">Enterprise Sales Representative</h4>
+                        <p className="text-muted-foreground">
+                          Close high-value contracts with multinational petrochemical giants and 
+                          large-scale processors.
+                        </p>
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-lg mb-2">Corporate Strategy Lead</h4>
+                        <p className="text-muted-foreground">
+                          Identify the next big market shift (Recycled PET, Futures Trading) and 
+                          define our roadmap to dominate it.
+                        </p>
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-lg mb-2">Customer Success Manager (CSM)</h4>
+                        <p className="text-muted-foreground">
+                          Ensure clients actually use our data and succeed. You turn subscriptions 
+                          into long-term partnerships.
+                        </p>
+                      </div>
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+            </section>
+
+            {/* Values Section */}
+            <section id="values" className="mb-16 scroll-mt-24">
+              <h2 className="text-4xl font-bold mb-8 text-primary border-l-4 border-primary pl-4">
+                🧬 The Bazaar Code (Our Values)
+              </h2>
+              <p className="text-xl mb-8 text-muted-foreground">
+                Why we are different from the corporate giants.
+              </p>
+              
+              <div className="grid md:grid-cols-2 gap-6">
+                <Card>
+                  <CardContent className="p-6">
+                    <h3 className="text-xl font-bold mb-3">⚡ Speed with Precision</h3>
+                    <p className="text-muted-foreground">
+                      The bazaar moves instantly. We react in seconds, but never at the cost of accuracy.
+                    </p>
+                  </CardContent>
+                </Card>
+                
+                <Card>
+                  <CardContent className="p-6">
+                    <h3 className="text-xl font-bold mb-3">🥾 Boots on the Ground</h3>
+                    <p className="text-muted-foreground">
+                      We value real-world insight over ivory-tower theory. We're at the ports, in the 
+                      factories, and on the trading floor.
+                    </p>
+                  </CardContent>
+                </Card>
+                
+                <Card>
+                  <CardContent className="p-6">
+                    <h3 className="text-xl font-bold mb-3">🤝 Client Obsession</h3>
+                    <p className="text-muted-foreground">
+                      We don't just sell data. We don't rest until the client has solved their problem.
+                    </p>
+                  </CardContent>
+                </Card>
+                
+                <Card>
+                  <CardContent className="p-6">
+                    <h3 className="text-xl font-bold mb-3">🔓 Radical Transparency</h3>
+                    <p className="text-muted-foreground">
+                      We operate with an open book - honest pricing, honest feedback, honest culture.
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
+            </section>
+
+            {/* Growth Section */}
+            <section id="growth" className="mb-16 scroll-mt-24">
+              <h2 className="text-4xl font-bold mb-8 text-primary border-l-4 border-primary pl-4">
+                🚀 Your Growth Trajectory
+              </h2>
+              <p className="text-xl mb-8 text-muted-foreground">What's in it for you?</p>
+              
+              <div className="space-y-6">
+                <Card>
+                  <CardContent className="p-6">
+                    <h3 className="text-xl font-bold mb-3">Build the Engine</h3>
+                    <p className="text-muted-foreground">
+                      You aren't just a cog in a legacy machine. You're building the infrastructure 
+                      that will define the next decade of global trade.
+                    </p>
+                  </CardContent>
+                </Card>
+                
+                <Card>
+                  <CardContent className="p-6">
+                    <h3 className="text-xl font-bold mb-3">Global Exposure</h3>
+                    <p className="text-muted-foreground">
+                      One day analyzing data from China, the next strategizing for a client in Dubai. 
+                      The world is your office.
+                    </p>
+                  </CardContent>
+                </Card>
+                
+                <Card>
+                  <CardContent className="p-6">
+                    <h3 className="text-xl font-bold mb-3">Master the Intersection</h3>
+                    <p className="text-muted-foreground">
+                      Learn to operate where Supply Chain, Commodities, and Artificial Intelligence meet.
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
+            </section>
+
+            {/* Team Section */}
+            <section id="team" className="mb-16 scroll-mt-24">
+              <h2 className="text-4xl font-bold mb-8 text-primary border-l-4 border-primary pl-4">
+                📸 Inside the Hub
+              </h2>
+              <p className="text-xl mb-8 text-muted-foreground">Life at Polymer Bazaar</p>
+              
+              <Card className="mb-8">
                 <CardContent className="p-6">
-                  <div className="text-4xl mb-4">{category.icon}</div>
-                  <h3 className="font-bold text-lg mb-2 group-hover:text-primary transition-colors">{category.name}</h3>
-                  <p className="text-sm text-muted-foreground">
-                    {category.positions} Open position
+                  <p className="text-lg leading-relaxed">
+                    We operate with the energy of a live trading floor, not a quiet library. 
+                    We're collaborative, high-paced, and tech-forward. No red tape. If you have 
+                    an idea that helps a client, you build it today.
                   </p>
                 </CardContent>
               </Card>
-            ))}
-          </div>
-        </div>
 
-        {/* Featured Job */}
-        <div id="open-roles">
-          <h2 className="text-3xl font-bold mb-8 border-l-4 border-primary pl-4 text-primary">Featured job</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {featuredJobs.map((job) => (
-              <Link to={`/job/${job.id}`} key={job.id}>
-                <Card className="hover:shadow-lg transition-all border-2 hover:border-primary h-full cursor-pointer">
-                  <CardContent className="p-6">
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="flex items-center gap-3">
-                        <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                          <span className="text-xl font-bold text-primary">G</span>
-                        </div>
-                        <div>
-                          <h3 className="font-bold text-lg">{job.title}</h3>
-                          <p className="text-sm text-muted-foreground">{job.company}</p>
-                        </div>
-                      </div>
-                      <Button variant="ghost" size="icon">
-                        <Bookmark className="h-4 w-4" />
-                      </Button>
-                    </div>
+              <TeamGallery />
+            </section>
 
-                    <div className="flex items-center gap-2 mb-4">
-                      <span className={`px-3 py-1 rounded text-xs font-medium ${job.typeColor}`}>
-                        {job.type}
-                      </span>
-                      <span className="text-sm text-muted-foreground">
-                        Salary: {job.salary}
-                      </span>
-                    </div>
-
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
-                      <MapPin className="h-4 w-4" />
-                      <span>{job.location}</span>
-                    </div>
-
+            {/* Job Alerts Section */}
+            <section id="alerts" className="scroll-mt-24">
+              <h2 className="text-4xl font-bold mb-8 text-primary border-l-4 border-primary pl-4">
+                🔔 Job Alerts
+              </h2>
+              <p className="text-xl mb-8 text-muted-foreground">Don't miss the revolution.</p>
+              
+              <Card>
+                <CardContent className="p-8">
+                  <p className="text-lg mb-6">
+                    New strategic roles in AI, Advisory, and Analysis open frequently. 
+                    Sign up to get notified when your perfect role appears.
+                  </p>
+                  
+                  <div className="flex gap-4 max-w-xl">
+                    <Input
+                      type="email"
+                      placeholder="Enter Email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="flex-1"
+                    />
                     <Button 
-                      className="w-full bg-primary hover:bg-primary/90 text-white"
+                      onClick={handleJobAlert}
+                      className="bg-primary hover:bg-primary/90 text-white px-8"
                     >
-                      View Details
+                      Notify Me
                     </Button>
-                  </CardContent>
-                </Card>
-              </Link>
-            ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </section>
           </div>
         </div>
       </div>

@@ -157,6 +157,11 @@ const Header = () => {
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild className="rounded-md hover:bg-primary/5 focus:bg-primary/5 cursor-pointer">
+                  <Link to="/career" className="w-full px-3 py-2">
+                    Careers
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild className="rounded-md hover:bg-primary/5 focus:bg-primary/5 cursor-pointer">
                   <Link to="/press" className="w-full px-3 py-2">
                     Press
                   </Link>
@@ -278,13 +283,6 @@ const Header = () => {
               </DropdownMenuContent>
             </DropdownMenu>
 
-            {/* Career */}
-            <Link
-              to="/career"
-              className="px-4 py-2.5 text-sm font-medium text-foreground rounded-lg hover:bg-primary/5 hover:text-primary transition-all duration-200"
-            >
-              Career
-            </Link>
           </nav>
         )}
 
@@ -399,6 +397,13 @@ const Header = () => {
                 Strategic Alliances & Delegations
               </Link>
               <Link
+                to="/career"
+                className="block px-6 py-2.5 text-sm text-muted-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-all duration-200"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Careers
+              </Link>
+              <Link
                 to="/press"
                 className="block px-6 py-2.5 text-sm text-muted-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-all duration-200"
                 onClick={() => setIsMenuOpen(false)}
@@ -407,15 +412,6 @@ const Header = () => {
               </Link>
             </div>
 
-            {/* Career */}
-            <Link
-              to="/career"
-              className="block px-4 py-3 text-sm font-medium text-foreground hover:bg-primary/5 hover:text-primary rounded-lg transition-all duration-200"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Career
-            </Link>
-                
             {/* Crude & Feedstock in Mobile */}
             <div className="space-y-1 mt-2">
               <div className="px-4 py-2 text-sm font-bold text-foreground/80 uppercase tracking-wide">
