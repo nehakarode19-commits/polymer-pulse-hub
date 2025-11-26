@@ -20,6 +20,7 @@ const OTPAuth = () => {
   const [phone, setPhone] = useState("");
   const [otp, setOtp] = useState("");
   const [resendTimer, setResendTimer] = useState(0);
+  const [error, setError] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -41,6 +42,7 @@ const OTPAuth = () => {
   const handleSendOTP = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setError("");
 
     try {
       await sendPhoneOTP(phone);
@@ -51,11 +53,7 @@ const OTPAuth = () => {
         description: "Please check your phone for the verification code.",
       });
     } catch (error: any) {
-      toast({
-        title: "Error",
-        description: error.message || "Failed to send OTP",
-        variant: "destructive",
-      });
+      setError(error.message || "Failed to send OTP");
     } finally {
       setLoading(false);
     }
@@ -63,15 +61,12 @@ const OTPAuth = () => {
 
   const handleVerifyOTP = async () => {
     if (otp.length !== 6) {
-      toast({
-        title: "Invalid OTP",
-        description: "Please enter the 6-digit OTP",
-        variant: "destructive",
-      });
+      setError("Please enter the complete 6-digit OTP");
       return;
     }
 
     setLoading(true);
+    setError("");
 
     try {
       const { isNewUser } = await verifyPhoneOTP(phone, otp);
@@ -79,11 +74,7 @@ const OTPAuth = () => {
       // Sign In mode - existing users only
       if (mode === "signin") {
         if (isNewUser) {
-          toast({
-            title: "Account Not Found",
-            description: "No account exists with this number. Please sign up first.",
-            variant: "destructive",
-          });
+          setError("Account not found. No account exists with this number. Please sign up first.");
         } else {
           toast({
             title: "Login Successful",
@@ -101,20 +92,12 @@ const OTPAuth = () => {
             description: "Please complete your profile to continue.",
           });
         } else {
-          toast({
-            title: "Account Already Exists",
-            description: "This number is already registered. Please sign in instead.",
-            variant: "destructive",
-          });
+          setError("Account already exists. This number is already registered. Please sign in instead.");
           setMode("signin");
         }
       }
     } catch (error: any) {
-      toast({
-        title: "Verification Failed",
-        description: error.message || "Invalid OTP. Please try again.",
-        variant: "destructive",
-      });
+      setError(error.message || "Invalid OTP. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -146,6 +129,7 @@ const OTPAuth = () => {
   const handleCompleteSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setError("");
 
     try {
       await completeSignup(formData.name, formData.email);
@@ -154,11 +138,7 @@ const OTPAuth = () => {
         description: "Please choose a membership plan to continue.",
       });
     } catch (error: any) {
-      toast({
-        title: "Signup Failed",
-        description: error.message || "Failed to complete signup",
-        variant: "destructive",
-      });
+      setError(error.message || "Failed to complete signup");
     } finally {
       setLoading(false);
     }
@@ -168,6 +148,7 @@ const OTPAuth = () => {
     if (resendTimer > 0) return;
     
     setLoading(true);
+    setError("");
     try {
       await sendPhoneOTP(phone);
       startResendTimer();
@@ -176,11 +157,7 @@ const OTPAuth = () => {
         description: "A new verification code has been sent.",
       });
     } catch (error: any) {
-      toast({
-        title: "Error",
-        description: error.message || "Failed to resend OTP",
-        variant: "destructive",
-      });
+      setError(error.message || "Failed to resend OTP");
     } finally {
       setLoading(false);
     }
@@ -276,6 +253,19 @@ const OTPAuth = () => {
               </motion.div>
 
               <form onSubmit={handleSendOTP} className="space-y-6 mt-8">
+                {error && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="bg-destructive/10 border border-destructive/30 rounded-xl p-4 flex items-start gap-3"
+                  >
+                    <div className="flex-shrink-0 w-5 h-5 rounded-full bg-destructive/20 flex items-center justify-center mt-0.5">
+                      <span className="text-destructive text-sm font-bold">!</span>
+                    </div>
+                    <p className="text-sm text-destructive font-medium">{error}</p>
+                  </motion.div>
+                )}
+                
                 <div className="space-y-2">
                   <label htmlFor="phone" className="text-sm font-semibold text-foreground flex items-center gap-2">
                     <Phone className="w-4 h-4 text-primary" />
@@ -287,7 +277,10 @@ const OTPAuth = () => {
                       type="tel"
                       placeholder="+91 98765 43210"
                       value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
+                      onChange={(e) => {
+                        setPhone(e.target.value);
+                        setError("");
+                      }}
                       required
                       className="h-14 text-base bg-background/50 border-2 border-input hover:border-primary/50 focus:border-primary rounded-xl pl-4 pr-12 transition-all"
                     />
@@ -348,6 +341,19 @@ const OTPAuth = () => {
               </div>
 
               <div className="space-y-8 mt-8">
+                {error && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="bg-destructive/10 border border-destructive/30 rounded-xl p-4 flex items-start gap-3"
+                  >
+                    <div className="flex-shrink-0 w-5 h-5 rounded-full bg-destructive/20 flex items-center justify-center mt-0.5">
+                      <span className="text-destructive text-sm font-bold">!</span>
+                    </div>
+                    <p className="text-sm text-destructive font-medium">{error}</p>
+                  </motion.div>
+                )}
+                
                 <div className="space-y-4">
                   <label className="text-sm font-semibold text-foreground block text-center">
                     Enter Verification Code
@@ -364,7 +370,10 @@ const OTPAuth = () => {
                         inputMode="numeric"
                         maxLength={1}
                         value={otp[index] || ""}
-                        onChange={(e) => handleOtpChange(index, e.target.value)}
+                        onChange={(e) => {
+                          handleOtpChange(index, e.target.value);
+                          setError("");
+                        }}
                         onKeyDown={(e) => handleOtpKeyDown(index, e)}
                         className="w-12 h-14 md:w-14 md:h-16 text-center text-2xl font-bold border-2 border-input rounded-xl focus:border-primary focus:ring-4 focus:ring-primary/20 focus:outline-none bg-background/50 transition-all hover:border-primary/50"
                       />
@@ -448,6 +457,19 @@ const OTPAuth = () => {
               </div>
 
               <form onSubmit={handleCompleteSignup} className="space-y-5 mt-8">
+                {error && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="bg-destructive/10 border border-destructive/30 rounded-xl p-4 flex items-start gap-3"
+                  >
+                    <div className="flex-shrink-0 w-5 h-5 rounded-full bg-destructive/20 flex items-center justify-center mt-0.5">
+                      <span className="text-destructive text-sm font-bold">!</span>
+                    </div>
+                    <p className="text-sm text-destructive font-medium">{error}</p>
+                  </motion.div>
+                )}
+                
                 <div className="space-y-2">
                   <label htmlFor="name" className="text-sm font-semibold text-foreground flex items-center gap-2">
                     <User className="w-4 h-4 text-primary" />
@@ -458,9 +480,10 @@ const OTPAuth = () => {
                       id="name"
                       placeholder="John Doe"
                       value={formData.name}
-                      onChange={(e) =>
-                        setFormData({ ...formData, name: e.target.value })
-                      }
+                      onChange={(e) => {
+                        setFormData({ ...formData, name: e.target.value });
+                        setError("");
+                      }}
                       required
                       className="h-14 text-base bg-background/50 border-2 border-input hover:border-primary/50 focus:border-primary rounded-xl pl-4 pr-12 transition-all"
                     />
@@ -493,9 +516,10 @@ const OTPAuth = () => {
                       type="email"
                       placeholder="john@example.com"
                       value={formData.email}
-                      onChange={(e) =>
-                        setFormData({ ...formData, email: e.target.value })
-                      }
+                      onChange={(e) => {
+                        setFormData({ ...formData, email: e.target.value });
+                        setError("");
+                      }}
                       required
                       className="h-14 text-base bg-background/50 border-2 border-input hover:border-primary/50 focus:border-primary rounded-xl pl-4 pr-12 transition-all"
                     />
