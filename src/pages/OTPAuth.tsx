@@ -1,11 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
 import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/hooks/use-toast";
-import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 type Step = "phone" | "otp" | "signup";
@@ -24,17 +21,17 @@ const OTPAuth = () => {
     email: "",
   });
 
+  useEffect(() => {
+    if (resendTimer > 0) {
+      const interval = setInterval(() => {
+        setResendTimer((prev) => (prev > 0 ? prev - 1 : 0));
+      }, 1000);
+      return () => clearInterval(interval);
+    }
+  }, [resendTimer]);
+
   const startResendTimer = () => {
     setResendTimer(30);
-    const interval = setInterval(() => {
-      setResendTimer((prev) => {
-        if (prev <= 1) {
-          clearInterval(interval);
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
   };
 
   const handleSendOTP = async (e: React.FormEvent) => {
@@ -78,7 +75,7 @@ const OTPAuth = () => {
       if (isNewUser) {
         setStep("signup");
         toast({
-          title: "Welcome!",
+          title: "Signup OTP Verified Successfully!",
           description: "Please complete your profile to continue.",
         });
       } else {
@@ -96,6 +93,29 @@ const OTPAuth = () => {
       });
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleOtpChange = (index: number, value: string) => {
+    if (value.length > 1) {
+      value = value[0];
+    }
+    
+    const newOtp = otp.split("");
+    newOtp[index] = value;
+    setOtp(newOtp.join(""));
+
+    // Auto-focus next input
+    if (value && index < 5) {
+      const nextInput = document.getElementById(`otp-${index + 1}`);
+      nextInput?.focus();
+    }
+  };
+
+  const handleOtpKeyDown = (index: number, e: React.KeyboardEvent) => {
+    if (e.key === "Backspace" && !otp[index] && index > 0) {
+      const prevInput = document.getElementById(`otp-${index - 1}`);
+      prevInput?.focus();
     }
   };
 
@@ -142,46 +162,26 @@ const OTPAuth = () => {
     }
   };
 
-  const handleBack = () => {
-    if (step === "otp") {
-      setStep("phone");
-      setOtp("");
-    } else if (step === "signup") {
-      setStep("otp");
-    }
-  };
-
   return (
-    <div className="min-h-screen flex items-center justify-center px-6 py-12 bg-background">
-      <div className="w-full max-w-xl">
-        {/* Back Button */}
-        {step !== "phone" && (
-          <button
-            onClick={handleBack}
-            className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground mb-8 transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back
-          </button>
-        )}
-
+    <div className="min-h-screen flex items-start justify-start px-8 py-16 bg-white">
+      <div className="w-full max-w-[540px]">
         {/* Phone Entry Step */}
         {step === "phone" && (
-          <div className="space-y-8">
-            <div className="space-y-3">
-              <h1 className="text-4xl font-bold text-foreground">
+          <div className="space-y-6">
+            <div className="space-y-2">
+              <h1 className="text-[32px] font-bold text-[#1a1a1a]">
                 Welcome to Polymer Bazaar
               </h1>
-              <p className="text-base text-muted-foreground">
+              <p className="text-[15px] text-[#666666]">
                 Please fill in your details below.
               </p>
             </div>
 
-            <form onSubmit={handleSendOTP} className="space-y-6">
-              <div className="space-y-3">
-                <Label htmlFor="phone" className="text-sm font-medium text-foreground">
+            <form onSubmit={handleSendOTP} className="space-y-5">
+              <div className="space-y-2">
+                <label htmlFor="phone" className="text-[14px] text-[#4a4a4a]">
                   Mobile Number
-                </Label>
+                </label>
                 <Input
                   id="phone"
                   type="tel"
@@ -189,27 +189,23 @@ const OTPAuth = () => {
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   required
-                  className="h-12 text-base bg-secondary/50 border-border"
+                  className="h-12 text-[15px] bg-[#f5f5f5] border-[#e0e0e0] rounded-md"
                 />
               </div>
 
               <Button
                 type="submit"
                 disabled={loading || !phone}
-                className="w-full h-12 text-base font-semibold bg-primary hover:bg-primary/90"
+                className="w-full h-12 text-[16px] font-semibold bg-[#c62828] hover:bg-[#b71c1c] text-white rounded-md"
               >
                 {loading ? "Sending..." : "Send OTP"}
               </Button>
 
-              <p className="text-center text-sm text-muted-foreground">
+              <p className="text-center text-[14px] text-[#666666]">
                 Already have an account?{" "}
-                <button
-                  type="button"
-                  onClick={() => setStep("phone")}
-                  className="text-primary font-medium hover:underline"
-                >
+                <span className="text-[#c62828] font-medium cursor-pointer hover:underline">
                   Login
-                </button>
+                </span>
               </p>
             </form>
           </div>
@@ -217,126 +213,153 @@ const OTPAuth = () => {
 
         {/* OTP Verification Step */}
         {step === "otp" && (
-          <div className="space-y-8">
-            <div className="space-y-3">
-              <h1 className="text-4xl font-bold text-foreground">
-                Verify OTP
+          <div className="space-y-6">
+            <div className="space-y-2">
+              <h1 className="text-[32px] font-bold text-[#1a1a1a]">
+                Welcome to Polymer Bazaar
               </h1>
-              <p className="text-base text-muted-foreground">
-                Enter the 6-digit code sent to {phone}
+              <p className="text-[15px] text-[#666666]">
+                Please fill in your details below.
               </p>
             </div>
 
-            <div className="space-y-6">
-              <div className="space-y-4">
-                <Label className="text-sm font-medium text-foreground">
-                  Enter OTP
-                </Label>
-                <div className="flex justify-start">
-                  <InputOTP
-                    maxLength={6}
-                    value={otp}
-                    onChange={setOtp}
-                  >
-                    <InputOTPGroup className="gap-3">
-                      <InputOTPSlot index={0} className="w-14 h-14 text-xl border-border" />
-                      <InputOTPSlot index={1} className="w-14 h-14 text-xl border-border" />
-                      <InputOTPSlot index={2} className="w-14 h-14 text-xl border-border" />
-                      <InputOTPSlot index={3} className="w-14 h-14 text-xl border-border" />
-                      <InputOTPSlot index={4} className="w-14 h-14 text-xl border-border" />
-                      <InputOTPSlot index={5} className="w-14 h-14 text-xl border-border" />
-                    </InputOTPGroup>
-                  </InputOTP>
-                </div>
+            <div className="space-y-5">
+              <div className="space-y-2">
+                <label className="text-[14px] text-[#4a4a4a]">
+                  Mobile Number
+                </label>
+                <Input
+                  type="tel"
+                  value={phone}
+                  disabled
+                  className="h-12 text-[15px] bg-[#f5f5f5] border-[#e0e0e0] rounded-md"
+                />
+              </div>
+
+              <div className="flex gap-3">
+                {[0, 1, 2, 3, 4, 5].map((index) => (
+                  <input
+                    key={index}
+                    id={`otp-${index}`}
+                    type="text"
+                    inputMode="numeric"
+                    maxLength={1}
+                    value={otp[index] || ""}
+                    onChange={(e) => handleOtpChange(index, e.target.value)}
+                    onKeyDown={(e) => handleOtpKeyDown(index, e)}
+                    className="w-14 h-14 text-center text-[20px] font-medium border-2 border-[#e0e0e0] rounded-md focus:border-[#c62828] focus:outline-none bg-white"
+                  />
+                ))}
               </div>
 
               <Button
                 onClick={handleVerifyOTP}
                 disabled={loading || otp.length !== 6}
-                className="w-full h-12 text-base font-semibold bg-primary hover:bg-primary/90"
+                className="w-full h-12 text-[16px] font-semibold bg-[#c62828] hover:bg-[#b71c1c] text-white rounded-md"
               >
-                {loading ? "Verifying..." : "Verify & Continue"}
+                {loading ? "Verifying..." : "Verify OTP"}
               </Button>
 
               <div className="text-center">
-                <button
-                  type="button"
-                  onClick={handleResendOTP}
-                  disabled={resendTimer > 0 || loading}
-                  className="text-sm text-muted-foreground hover:text-primary disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                >
-                  {resendTimer > 0
-                    ? `Resend OTP in ${resendTimer}s`
-                    : "Didn't receive code? Resend OTP"}
-                </button>
+                <p className="text-[14px] text-[#666666]">
+                  Don't receive the OTP?{" "}
+                  {resendTimer > 0 ? (
+                    <span className="text-[#c62828] font-medium">{resendTimer}s</span>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={handleResendOTP}
+                      disabled={loading}
+                      className="text-[#c62828] font-medium hover:underline disabled:opacity-50"
+                    >
+                      Resend
+                    </button>
+                  )}
+                </p>
               </div>
+
+              <p className="text-center text-[14px] text-[#666666]">
+                Already have an account?{" "}
+                <span className="text-[#c62828] font-medium cursor-pointer hover:underline">
+                  Login
+                </span>
+              </p>
             </div>
           </div>
         )}
 
         {/* Signup Completion Step */}
         {step === "signup" && (
-          <div className="space-y-8">
-            <div className="space-y-3">
-              <h1 className="text-4xl font-bold text-foreground">
-                Complete Your Profile
+          <div className="space-y-6">
+            <div className="space-y-2">
+              <h1 className="text-[32px] font-bold text-[#1a1a1a]">
+                Welcome to Polymer Bazaar
               </h1>
-              <p className="text-base text-muted-foreground">
-                Just a few more details to get started.
+              <p className="text-[15px] text-[#666666]">
+                Please fill in your details below.
               </p>
             </div>
 
-            <form onSubmit={handleCompleteSignup} className="space-y-6">
-              <div className="space-y-3">
-                <Label htmlFor="name" className="text-sm font-medium text-foreground">
-                  Full Name *
-                </Label>
+            <form onSubmit={handleCompleteSignup} className="space-y-5">
+              <div className="space-y-2">
+                <label htmlFor="name" className="text-[14px] text-[#4a4a4a]">
+                  Name <span className="text-[#c62828]">*</span>
+                </label>
                 <Input
                   id="name"
-                  placeholder="Enter your full name"
+                  placeholder="Enter your name"
                   value={formData.name}
                   onChange={(e) =>
                     setFormData({ ...formData, name: e.target.value })
                   }
                   required
-                  className="h-12 text-base bg-secondary/50 border-border"
+                  className="h-12 text-[15px] bg-[#f5f5f5] border-[#e0e0e0] rounded-md"
                 />
               </div>
 
-              <div className="space-y-3">
-                <Label htmlFor="email" className="text-sm font-medium text-foreground">
-                  Email Address *
-                </Label>
+              <div className="space-y-2">
+                <label htmlFor="phone-signup" className="text-[14px] text-[#4a4a4a]">
+                  Mobile Number
+                </label>
+                <Input
+                  id="phone-signup"
+                  type="tel"
+                  value={phone}
+                  disabled
+                  className="h-12 text-[15px] bg-[#f5f5f5] border-[#e0e0e0] rounded-md"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label htmlFor="email" className="text-[14px] text-[#4a4a4a]">
+                  Email <span className="text-[#c62828]">*</span>
+                </label>
                 <Input
                   id="email"
                   type="email"
-                  placeholder="Enter your email"
+                  placeholder="Please enter your email"
                   value={formData.email}
                   onChange={(e) =>
                     setFormData({ ...formData, email: e.target.value })
                   }
                   required
-                  className="h-12 text-base bg-secondary/50 border-border"
+                  className="h-12 text-[15px] bg-[#f5f5f5] border-[#e0e0e0] rounded-md"
                 />
               </div>
 
               <Button
                 type="submit"
                 disabled={loading}
-                className="w-full h-12 text-base font-semibold bg-primary hover:bg-primary/90"
+                className="w-full h-12 text-[16px] font-semibold bg-[#c62828] hover:bg-[#b71c1c] text-white rounded-md"
               >
-                {loading ? "Creating Account..." : "Complete Signup"}
+                {loading ? "Creating Account..." : "Sign up"}
               </Button>
 
-              <p className="text-xs text-center text-muted-foreground">
-                By continuing, you agree to our{" "}
-                <a href="/terms-conditions" className="text-primary hover:underline">
-                  Terms & Conditions
-                </a>{" "}
-                and{" "}
-                <a href="/privacy-policy" className="text-primary hover:underline">
-                  Privacy Policy
-                </a>
+              <p className="text-center text-[14px] text-[#666666]">
+                I already have an account{" "}
+                <span className="text-[#c62828] font-medium cursor-pointer hover:underline">
+                  Login
+                </span>
               </p>
             </form>
           </div>
