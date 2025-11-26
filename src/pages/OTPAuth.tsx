@@ -168,18 +168,21 @@ const OTPAuth = () => {
         {/* Phone Entry Step */}
         {step === "phone" && (
           <div className="space-y-6">
-            <div className="space-y-2">
-              <h1 className="text-[32px] font-bold text-[#1a1a1a]">
-                Welcome to Polymer Bazaar
+            <div className="space-y-1">
+              <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                Login / Signup
+              </p>
+              <h1 className="text-[32px] font-bold text-foreground">
+                Sign in with Mobile OTP
               </h1>
-              <p className="text-[15px] text-[#666666]">
-                Please fill in your details below.
+              <p className="text-[14px] text-muted-foreground">
+                Enter your mobile number to receive a one-time password.
               </p>
             </div>
 
             <form onSubmit={handleSendOTP} className="space-y-5">
               <div className="space-y-2">
-                <label htmlFor="phone" className="text-[14px] text-[#4a4a4a]">
+                <label htmlFor="phone" className="text-[14px] text-foreground">
                   Mobile Number
                 </label>
                 <Input
@@ -189,23 +192,21 @@ const OTPAuth = () => {
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   required
-                  className="h-12 text-[15px] bg-[#f5f5f5] border-[#e0e0e0] rounded-md"
+                  className="h-12 text-[15px] bg-muted border-border rounded-md"
                 />
               </div>
 
               <Button
                 type="submit"
                 disabled={loading || !phone}
-                className="w-full h-12 text-[16px] font-semibold bg-[#c62828] hover:bg-[#b71c1c] text-white rounded-md"
+                className="w-full h-12 text-[16px] font-semibold"
               >
-                {loading ? "Sending..." : "Send OTP"}
+                {loading ? "Sending OTP..." : "Send OTP"}
               </Button>
 
-              <p className="text-center text-[14px] text-[#666666]">
-                Already have an account?{" "}
-                <span className="text-[#c62828] font-medium cursor-pointer hover:underline">
-                  Login
-                </span>
+              <p className="text-center text-[14px] text-muted-foreground">
+                Use this screen for both <span className="font-semibold">login</span> and
+                <span className="font-semibold"> signup</span>—we'll detect it automatically.
               </p>
             </form>
           </div>
@@ -214,25 +215,28 @@ const OTPAuth = () => {
         {/* OTP Verification Step */}
         {step === "otp" && (
           <div className="space-y-6">
-            <div className="space-y-2">
-              <h1 className="text-[32px] font-bold text-[#1a1a1a]">
-                Welcome to Polymer Bazaar
+            <div className="space-y-1">
+              <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                Step 2 of 3
+              </p>
+              <h1 className="text-[32px] font-bold text-foreground">
+                Verify OTP
               </h1>
-              <p className="text-[15px] text-[#666666]">
-                Please fill in your details below.
+              <p className="text-[14px] text-muted-foreground">
+                Enter the 6-digit code we sent to your mobile number.
               </p>
             </div>
 
             <div className="space-y-5">
               <div className="space-y-2">
-                <label className="text-[14px] text-[#4a4a4a]">
+                <label className="text-[14px] text-foreground">
                   Mobile Number
                 </label>
                 <Input
                   type="tel"
                   value={phone}
                   disabled
-                  className="h-12 text-[15px] bg-[#f5f5f5] border-[#e0e0e0] rounded-md"
+                  className="h-12 text-[15px] bg-muted border-border rounded-md"
                 />
               </div>
 
@@ -247,7 +251,7 @@ const OTPAuth = () => {
                     value={otp[index] || ""}
                     onChange={(e) => handleOtpChange(index, e.target.value)}
                     onKeyDown={(e) => handleOtpKeyDown(index, e)}
-                    className="w-14 h-14 text-center text-[20px] font-medium border-2 border-[#e0e0e0] rounded-md focus:border-[#c62828] focus:outline-none bg-white"
+                    className="w-14 h-14 text-center text-[20px] font-medium border-2 border-border rounded-md focus:border-primary focus:outline-none bg-background"
                   />
                 ))}
               </div>
@@ -255,34 +259,31 @@ const OTPAuth = () => {
               <Button
                 onClick={handleVerifyOTP}
                 disabled={loading || otp.length !== 6}
-                className="w-full h-12 text-[16px] font-semibold bg-[#c62828] hover:bg-[#b71c1c] text-white rounded-md"
+                className="w-full h-12 text-[16px] font-semibold"
               >
-                {loading ? "Verifying..." : "Verify OTP"}
+                {loading ? "Verifying..." : "Verify & Continue"}
               </Button>
 
               <div className="text-center">
-                <p className="text-[14px] text-[#666666]">
-                  Don't receive the OTP?{" "}
+                <p className="text-[14px] text-muted-foreground">
+                  Didn't receive the OTP?{" "}
                   {resendTimer > 0 ? (
-                    <span className="text-[#c62828] font-medium">{resendTimer}s</span>
+                    <span className="text-primary font-medium">{resendTimer}s</span>
                   ) : (
                     <button
                       type="button"
                       onClick={handleResendOTP}
                       disabled={loading}
-                      className="text-[#c62828] font-medium hover:underline disabled:opacity-50"
+                      className="text-primary font-medium hover:underline disabled:opacity-50"
                     >
-                      Resend
+                      Resend OTP
                     </button>
                   )}
                 </p>
               </div>
 
-              <p className="text-center text-[14px] text-[#666666]">
-                Already have an account?{" "}
-                <span className="text-[#c62828] font-medium cursor-pointer hover:underline">
-                  Login
-                </span>
+              <p className="text-center text-[14px] text-muted-foreground">
+                This OTP screen works for both existing users (login) and new users (signup).
               </p>
             </div>
           </div>
@@ -291,19 +292,22 @@ const OTPAuth = () => {
         {/* Signup Completion Step */}
         {step === "signup" && (
           <div className="space-y-6">
-            <div className="space-y-2">
-              <h1 className="text-[32px] font-bold text-[#1a1a1a]">
-                Welcome to Polymer Bazaar
+            <div className="space-y-1">
+              <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                Step 3 of 3
+              </p>
+              <h1 className="text-[32px] font-bold text-foreground">
+                Complete your signup
               </h1>
-              <p className="text-[15px] text-[#666666]">
-                Please fill in your details below.
+              <p className="text-[14px] text-muted-foreground">
+                Add your basic details to finish creating your account.
               </p>
             </div>
 
             <form onSubmit={handleCompleteSignup} className="space-y-5">
               <div className="space-y-2">
-                <label htmlFor="name" className="text-[14px] text-[#4a4a4a]">
-                  Name <span className="text-[#c62828]">*</span>
+                <label htmlFor="name" className="text-[14px] text-foreground">
+                  Name <span className="text-primary">*</span>
                 </label>
                 <Input
                   id="name"
@@ -313,12 +317,12 @@ const OTPAuth = () => {
                     setFormData({ ...formData, name: e.target.value })
                   }
                   required
-                  className="h-12 text-[15px] bg-[#f5f5f5] border-[#e0e0e0] rounded-md"
+                  className="h-12 text-[15px] bg-muted border-border rounded-md"
                 />
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="phone-signup" className="text-[14px] text-[#4a4a4a]">
+                <label htmlFor="phone-signup" className="text-[14px] text-foreground">
                   Mobile Number
                 </label>
                 <Input
@@ -326,13 +330,13 @@ const OTPAuth = () => {
                   type="tel"
                   value={phone}
                   disabled
-                  className="h-12 text-[15px] bg-[#f5f5f5] border-[#e0e0e0] rounded-md"
+                  className="h-12 text-[15px] bg-muted border-border rounded-md"
                 />
               </div>
 
               <div className="space-y-2">
-                <label htmlFor="email" className="text-[14px] text-[#4a4a4a]">
-                  Email <span className="text-[#c62828]">*</span>
+                <label htmlFor="email" className="text-[14px] text-foreground">
+                  Email <span className="text-primary">*</span>
                 </label>
                 <Input
                   id="email"
@@ -343,23 +347,20 @@ const OTPAuth = () => {
                     setFormData({ ...formData, email: e.target.value })
                   }
                   required
-                  className="h-12 text-[15px] bg-[#f5f5f5] border-[#e0e0e0] rounded-md"
+                  className="h-12 text-[15px] bg-muted border-border rounded-md"
                 />
               </div>
 
               <Button
                 type="submit"
                 disabled={loading}
-                className="w-full h-12 text-[16px] font-semibold bg-[#c62828] hover:bg-[#b71c1c] text-white rounded-md"
+                className="w-full h-12 text-[16px] font-semibold"
               >
-                {loading ? "Creating Account..." : "Sign up"}
+                {loading ? "Creating Account..." : "Create Account & Continue"}
               </Button>
 
-              <p className="text-center text-[14px] text-[#666666]">
-                I already have an account{" "}
-                <span className="text-[#c62828] font-medium cursor-pointer hover:underline">
-                  Login
-                </span>
+              <p className="text-center text-[14px] text-muted-foreground">
+                Already have an account? This OTP flow also works as your login.
               </p>
             </form>
           </div>
