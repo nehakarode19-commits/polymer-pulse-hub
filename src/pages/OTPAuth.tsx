@@ -6,23 +6,23 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "@/components/ui/input-otp";
 import { useAuth } from "@/contexts/AuthContext";
 import { useToast } from "@/hooks/use-toast";
-import { Mail, ArrowLeft } from "lucide-react";
+import { Phone, ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-type Step = "email" | "otp" | "signup";
+type Step = "phone" | "otp" | "signup";
 
 const OTPAuth = () => {
   const navigate = useNavigate();
-  const { sendEmailOTP, verifyEmailOTP, completeSignup } = useAuth();
+  const { sendPhoneOTP, verifyPhoneOTP, completeSignup } = useAuth();
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
-  const [step, setStep] = useState<Step>("email");
-  const [email, setEmail] = useState("");
+  const [step, setStep] = useState<Step>("phone");
+  const [phone, setPhone] = useState("");
   const [otp, setOtp] = useState("");
   const [resendTimer, setResendTimer] = useState(0);
   const [formData, setFormData] = useState({
     name: "",
-    phone: "",
+    email: "",
   });
 
   const startResendTimer = () => {
@@ -43,17 +43,17 @@ const OTPAuth = () => {
     setLoading(true);
 
     try {
-      await sendEmailOTP(email);
+      await sendPhoneOTP(phone);
       setStep("otp");
       startResendTimer();
       toast({
         title: "OTP Sent",
-        description: "Please check your email for the verification code.",
+        description: "Please check your phone for the verification code.",
       });
     } catch (error: any) {
       toast({
         title: "Error",
-        description: error.message || "Failed to send OTP",
+        description: error.message || "Failed to send OTP. Please configure phone authentication in backend settings.",
         variant: "destructive",
       });
     } finally {
@@ -74,7 +74,7 @@ const OTPAuth = () => {
     setLoading(true);
 
     try {
-      const { isNewUser } = await verifyEmailOTP(email, otp);
+      const { isNewUser } = await verifyPhoneOTP(phone, otp);
       
       if (isNewUser) {
         setStep("signup");
@@ -105,7 +105,7 @@ const OTPAuth = () => {
     setLoading(true);
 
     try {
-      await completeSignup(formData.name, formData.phone);
+      await completeSignup(formData.name, formData.email);
       toast({
         title: "Account Created!",
         description: "Please choose a membership plan to continue.",
@@ -126,7 +126,7 @@ const OTPAuth = () => {
     
     setLoading(true);
     try {
-      await sendEmailOTP(email);
+      await sendPhoneOTP(phone);
       startResendTimer();
       toast({
         title: "OTP Resent",
@@ -145,7 +145,7 @@ const OTPAuth = () => {
 
   const handleBack = () => {
     if (step === "otp") {
-      setStep("email");
+      setStep("phone");
       setOtp("");
     } else if (step === "signup") {
       setStep("otp");
@@ -157,22 +157,22 @@ const OTPAuth = () => {
       <Card className="w-full max-w-md shadow-lg border-border/50">
         <CardHeader className="text-center space-y-3 pb-6">
           <div className="mx-auto w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center">
-            <Mail className="w-8 h-8 text-primary" />
+            <Phone className="w-8 h-8 text-primary" />
           </div>
           <CardTitle className="text-2xl font-bold">
-            {step === "email" && "Enter Email Address"}
+            {step === "phone" && "Enter Mobile Number"}
             {step === "otp" && "Verify OTP"}
             {step === "signup" && "Complete Your Profile"}
           </CardTitle>
           <CardDescription className="text-base">
-            {step === "email" && "We'll send you a verification code"}
-            {step === "otp" && `Code sent to ${email}`}
+            {step === "phone" && "We'll send you a verification code"}
+            {step === "otp" && `Code sent to ${phone}`}
             {step === "signup" && "Just a few more details to get started"}
           </CardDescription>
         </CardHeader>
 
         <CardContent className="space-y-6">
-          {step !== "email" && (
+          {step !== "phone" && (
             <Button
               variant="ghost"
               size="sm"
@@ -184,16 +184,16 @@ const OTPAuth = () => {
             </Button>
           )}
 
-          {step === "email" && (
+          {step === "phone" && (
             <form onSubmit={handleSendOTP} className="space-y-5">
               <div className="space-y-2">
-                <Label htmlFor="email" className="text-sm font-medium">Email Address</Label>
+                <Label htmlFor="phone" className="text-sm font-medium">Mobile Number</Label>
                 <Input
-                  id="email"
-                  type="email"
-                  placeholder="Enter your email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  id="phone"
+                  type="tel"
+                  placeholder="+91 9876543210"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
                   required
                   className="h-11 text-base"
                 />
@@ -201,7 +201,7 @@ const OTPAuth = () => {
 
               <Button
                 type="submit"
-                disabled={loading || !email}
+                disabled={loading || !phone}
                 className="w-full h-11 text-base font-semibold"
               >
                 {loading ? "Sending..." : "Send OTP"}
@@ -286,16 +286,16 @@ const OTPAuth = () => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="phone" className="text-sm font-medium">
-                  Phone Number *
+                <Label htmlFor="email" className="text-sm font-medium">
+                  Email Address *
                 </Label>
                 <Input
-                  id="phone"
-                  type="tel"
-                  placeholder="+91 9876543210"
-                  value={formData.phone}
+                  id="email"
+                  type="email"
+                  placeholder="Enter your email"
+                  value={formData.email}
                   onChange={(e) =>
-                    setFormData({ ...formData, phone: e.target.value })
+                    setFormData({ ...formData, email: e.target.value })
                   }
                   required
                   className="h-11"
