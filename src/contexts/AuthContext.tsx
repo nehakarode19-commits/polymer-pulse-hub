@@ -26,6 +26,7 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+const USE_MOCK_OTP = true; // Demo-only: mock phone OTP without backend
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
@@ -136,6 +137,13 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const sendPhoneOTP = async (phone: string) => {
+    if (USE_MOCK_OTP) {
+      // Demo mode: simulate async OTP send without backend
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      console.warn("Using mock phone OTP flow. Configure phone provider to enable real SMS.");
+      return;
+    }
+
     const { error } = await supabase.auth.signInWithOtp({
       phone,
       options: {
@@ -147,6 +155,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const verifyPhoneOTP = async (phone: string, otp: string) => {
+    if (USE_MOCK_OTP) {
+      // Accept any 6-digit OTP in demo mode
+      if (otp.length !== 6) {
+        throw new Error("Please enter a 6-digit OTP");
+      }
+      return { isNewUser: true };
+    }
+
     const { data, error } = await supabase.auth.verifyOtp({
       phone,
       token: otp,
@@ -171,6 +187,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const completeSignup = async (fullName: string, email: string) => {
+    if (USE_MOCK_OTP) {
+      // Demo mode: just navigate to pricing without touching backend
+      navigate("/pricing");
+      return;
+    }
+
     if (!user) throw new Error("No user found");
 
     // Update profile with signup details
@@ -187,7 +209,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     // Redirect to pricing page to choose a plan
     navigate("/pricing");
   };
-
   return (
     <AuthContext.Provider
       value={{
