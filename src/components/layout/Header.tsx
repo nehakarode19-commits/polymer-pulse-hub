@@ -111,28 +111,37 @@ const Header = () => {
     // Not logged in - show login/signup buttons
     return (
       <>
-        <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <motion.header 
+          initial={{ y: -100 }}
+          animate={{ y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60"
+        >
           <div className="container flex h-20 items-center justify-between px-4">
-            <Link to="/" className="flex items-center space-x-2 transition-transform hover:scale-105">
+            <Link to="/" className="flex items-center space-x-2 transition-transform hover:scale-105 duration-300">
               <img src={logo} alt="Polymer Bazaar" className="h-12 w-auto" />
             </Link>
             <div className="flex items-center gap-4">
               <Link to="/pricing">
-                <Button 
-                  variant="outline" 
-                  className="border-primary/50 hover:border-primary hover:bg-primary/5 transition-all duration-300"
-                >
-                  View Plans
-                </Button>
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <Button 
+                    variant="outline" 
+                    className="border-primary/50 hover:border-primary hover:bg-primary/5 transition-all duration-300"
+                  >
+                    View Plans
+                  </Button>
+                </motion.div>
               </Link>
               <Link to="/login">
-                <Button className="bg-primary hover:bg-primary-dark shadow-md hover:shadow-lg transition-all duration-300">
-                  Sign In
-                </Button>
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <Button className="bg-primary hover:bg-primary-dark shadow-md hover:shadow-lg transition-all duration-300">
+                    Sign In
+                  </Button>
+                </motion.div>
               </Link>
             </div>
           </div>
-        </header>
+        </motion.header>
         <SubscriptionModal 
           open={showSubscriptionModal} 
           onOpenChange={setShowSubscriptionModal} 
@@ -198,11 +207,21 @@ const Header = () => {
 
   return (
     <>
-      <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur-md supports-[backdrop-filter]:bg-background/80 shadow-sm">
+      <motion.header 
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur-md supports-[backdrop-filter]:bg-background/80 shadow-sm"
+      >
         <div className="container flex h-20 items-center justify-between px-4">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2 transition-transform hover:scale-105 duration-300">
-            <img src={logoNav} alt="Polymer Bazaar" className="h-10 w-auto" />
+            <motion.img 
+              whileHover={{ scale: 1.05 }}
+              src={logoNav} 
+              alt="Polymer Bazaar" 
+              className="h-10 w-auto" 
+            />
           </Link>
 
           {/* Desktop Navigation */}
@@ -533,7 +552,7 @@ const Header = () => {
             </motion.div>
           )}
         </AnimatePresence>
-      </header>
+      </motion.header>
 
       <SubscriptionModal 
         open={showSubscriptionModal} 
